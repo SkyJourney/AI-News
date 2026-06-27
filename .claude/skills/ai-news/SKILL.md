@@ -76,9 +76,20 @@ Phase 0 dry-run @ 2026-06-27
 > "抓取信息源 openai-rss（url=https://openai.com/news/rss.xml, notes=官方一手）。按你的 system prompt 输出 JSON。"
 
 ### 软失败处理
-- 任一 subagent 返回 `error` 字段非空 → 记入本次失败列表（**不阻断其他源**）
-- 同一源在最近 2 次跑（包括本次）都失败 → 在 Phase 5 Log 里 append 建议"将该源 reliability 改为 degraded"
-- 60s 内未返回 → 视为超时，归入失败列表
+- 任一 subagent 返回 `error` 字段非空 → 先标记为 first-fail，进入 retry（见下）
+- 60s 内未返回 → 视为超时，标记为 first-fail，进入 retry
+- 同一源在最近 2 次**完整跑**（不是单跑内 retry）都失败 → 在 Phase 5 Log 里 append 建议"将该源 reliability 改为 degraded"
+
+### Phase 1 retry 机制
+
+收到所有 Phase 1 输出后，对每个 first-fail 的 source：
+- **若 error 字段是 "unknown api source" 或类似不可恢复错误** → 不重试，直接进 failures
+- **若是 WebFetch/timeout/parse 类可能偶发的错误** → **重 spawn 一次同类型 subagent**（同 prompt、同 source 描述）
+- 同时只对**少量**（≤3 个）first-fail 源做 retry，避免雪崩；超过 3 个失败说明可能是系统性问题（如网络），不 retry 直接进 failures 并在 Phase 5 Log 标"考虑暂停本次跑"
+- retry 仍 error → 进入 failures（最终失败）
+- retry 成功 → entries 用 retry 结果，在 Phase 5 Log 标"该源首次失败 retry 成功，原因：<retry 前 error>"
+
+注意：**retry 不针对 `entry_count: 0`**（那是源真没新内容，不是失败），仅针对 `error` 字段非空。
 
 ### Phase 1 收尾
 

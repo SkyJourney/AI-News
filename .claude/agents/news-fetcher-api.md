@@ -39,13 +39,19 @@ python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fetch.py -
 ```
 
 ### huggingface-daily-papers
-WebFetch `https://huggingface.co/api/daily_papers?date=$(date +%F)`（今天），prompt："Return the raw JSON verbatim, do not summarize"。
-解析 JSON 数组，最多取前 20 个，每条提取：
+
+**日期回退策略**（HF Daily Papers 在周末/早晨常空回）：
+
+1. **试今天**：用 `Bash` 算出 `TODAY=$(date +%F)`，然后 WebFetch `https://huggingface.co/api/daily_papers?date=$TODAY`，prompt: "Return the raw JSON verbatim, do not summarize"
+2. **若今天返回空数组 `[]`** → 算出 `YESTERDAY=$(date -v-1d +%F)`（macOS）或 `$(date -d 'yesterday' +%F)`（Linux），WebFetch `?date=$YESTERDAY`
+3. **若昨天也空** → 不再继续回退，返回 `entry_count: 0` 并在 `entries` 留空，**不算错误**
+
+解析非空 JSON 数组，最多取前 20 个，每条提取：
 - `title` ← `paper.title`
 - `url` ← `https://huggingface.co/papers/<paper.id>`
 - `published` ← `publishedAt` 或 `submittedOnDailyAt`
 - `raw_summary` ← `paper.summary` 前 500 字
-- `extra.upvotes` ← `paper.upvotes`、`extra.arxiv_id` ← `paper.id`
+- `extra.upvotes` ← `paper.upvotes`、`extra.arxiv_id` ← `paper.id`、`extra.fetched_date` ← 实际成功的日期（today / yesterday，便于 Daily 标注"取自前一日榜单"）
 
 按 §"统一输出格式" 包装。
 

@@ -45,9 +45,18 @@ notes: 无官方 RSS
 
 ## 错误处理
 
-- WebFetch 失败 → `{"source_name":"...","error":"<reason>","entry_count":0,"entries":[]}`
-- 解析回的不是合法 JSON → `{"source_name":"...","error":"unparseable webfetch result","entry_count":0,"entries":[]}`
-- 0 条结果（页面无更新或被反爬空白）→ 不算错误，正常返回 `entry_count:0`
+- WebFetch 工具真正失败（404/500/timeout/redirect to unrelated host）→ `{"source_name":"...","error":"<具体 HTTP 或 redirect 原因>","entry_count":0,"entries":[]}`
+- 解析回的不是合法 JSON 且 markdown 中也无可识别 entries → `{"source_name":"...","error":"unparseable webfetch result","entry_count":0,"entries":[]}`
+- 0 条结果（页面真无更新或反爬空白）→ 不算错误，正常返回 `entry_count:0, entries:[]`
+
+### ❌ 不要因为这些原因主观返回 error
+
+WebFetch 是 Claude Code 的官方工具，它能访问 anthropic.com / openai.com / arxiv.org 这些常见域名。**不要**因为以下幻觉性顾虑返回 error：
+- "WebFetch unable to access domain" / "network restrictions" / "enterprise security policies"——你没有任何证据支持这些；只有 WebFetch 工具实际返回了错误码或超时才算
+- "the response is just markdown summary, not raw HTML"——markdown 摘要恰恰是 WebFetch 的预期输出；从中抽 entries 就是 happy path
+- "I'm not sure if this is the right structure"——不要替调用方做信心判断；按你能识别的部分输出，标 `low_confidence: true` 让下游处理
+
+先认真尝试一次 WebFetch + markdown 解析，确实没有任何 entry 可识别再返回 error。
 
 ## 特殊源注意事项
 

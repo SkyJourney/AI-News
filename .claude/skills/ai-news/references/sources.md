@@ -103,10 +103,10 @@
   perspective: research
   fetch_method: webfetch
   url: https://ai.meta.com/blog/
-  reliability: alive
+  reliability: degraded
   fallback: true
   last_verified: 2026-06-27
-  notes: 无 RSS 且更新慢；arXiv 兜底
+  notes: 无 RSS 且更新极慢（2026-06-27 实测最新内容仍是 2026-04-08，80+ 天无新文）；filter 会按 stale 全弃；保留入清单仅为偶发更新；arXiv 兜底
 
 - name: the-batch
   tier: 3
@@ -127,6 +127,29 @@
   fallback: true
   last_verified: 2026-06-27
   notes: 机器之心微信镜像；需双兜底；可考虑 RSSHub 备份
+
+# === Tier 3 投资 / 市场视角（⚠️ 偏 VC / 仅事件锁集）===
+
+- name: a16z-news-content
+  tier: 3
+  perspective: investor
+  bias: VC
+  fetch_method: webfetch
+  url: https://a16z.com/news-content/
+  reliability: alive
+  fallback: true
+  last_verified: 2026-06-27
+  notes: 经典 a16z RSS feed/ 已死约 2 年（见 blacklist.md）；此 URL 是替代 webfetch 路径；强 VC 叙事偏向，filter 阶段需对"AI 必将颠覆一切"类口号格外严格
+
+- name: state-of-ai
+  tier: 3
+  perspective: investor
+  fetch_method: webfetch
+  url: https://www.stateof.ai
+  reliability: alive
+  fallback: true
+  last_verified: 2026-06-27
+  notes: 年度 State of AI Report 锚点（每年约 10 月发布 PDF/Slides）。本体系仅检测引页面是否更新（fetcher 看 "Read the report" / 最新年份链接），不解析 PDF。平日 entry_count 通常 0；发布日才有 1 条"YYYY State of AI Report" 条目
 ```
 
 ---
