@@ -12,11 +12,11 @@ AInews = 把 `/Volumes/Projects/AInews` 做成「AI 资讯」的 Obsidian vault 
 - **明确否决**：① 不把 RSS 当"统一拉取基础设施"（RSS 只是数据格式之一，不挂 vault 内 RSS 插件做管道）；② 不依赖第三方 MCP server。
 - **产出形态**：**双层**——`10-Daily/` 每日简报（汇总层）+ `50-Zettel/` 原子概念卡（可双链复用）。
 - **触发方式**：**定时自动**（scheduled agent / cron）；但先做手动 skill `/ai-news`，调稳后再包一层定时。
-- **目录结构**：AI 资讯定制版 `00-Inbox / 10-Daily / 20-Topics / 30-Sources / 40-Deep-Dives / 50-Zettel / 90-Archive / 99-Log`。
+- **目录结构（v2，已落盘）**：vault 内 7 个目录 `00-Inbox / 10-Daily / 20-Topics / 40-Deep-Dives / 50-Zettel / 90-Archive / 99-Log`。⚠️ 砍掉了 v1 的 vault 内 `30-Sources/`——信息源完整登记（tier/perspective/fetch_method/url/reliability/last_verified）+ 死源黑名单单一权威归 `.claude/skills/ai-news/references/{sources,blacklist}.md`，**vault 不再持有信息源元数据**。
 - **可复用基建**：编排可复用环境内已有的 `deep-research` skill 与 `Workflow` 多 agent 工具（AI 资讯聚合 ≈ 周期性的轻量 deep-research + 落盘）。
 
-**实施分两阶段（均尚未执行）**：
-- 阶段一 = vault 骨架落盘：建目录 + `SCHEMA.md` + `30-Sources/` 信息源登记 + `.gitignore`（.obsidian 共享配置入库、忽略 workspace*.json/缓存/.trash）+ `README.md` + 首次 git 提交。计划已经用户批准，但用户选择**新开会话执行**。
-- 阶段二 = 采集管道（skill + subagent），待阶段一落地后单独规划。
+**实施分两阶段**：
+- ✅ **阶段一已完成（2026-06-27，commit `8b063c0`）** = vault 极简骨架：7 目录 + 各放 `.gitkeep` + `SCHEMA.md`（vault 根 AI 协议）+ `README.md` + `.gitignore`（.obsidian 共享配置入库、忽略 workspace*.json/缓存/.trash）+ 首次 git 提交。**信息源登记不在 vault 内**，挪到阶段二 skill `references/`。
+- 阶段二（待执行） = 采集管道：`.claude/skills/ai-news/{SKILL.md, references/, scripts/}` + `.claude/agents/` 6 个原生 subagent（news-fetcher-rss/api/webfetch + news-filter + news-cluster + news-writer）。基于 Claude 官方 [skills](https://code.claude.com/docs/en/skills) 与 [sub-agents](https://code.claude.com/docs/en/sub-agents) 文档；编排不用 Workflow 工具，SKILL.md 文字指引主会话 spawn subagent。调度暂缓（V2 首选 Desktop scheduled tasks，PASS Cloud Routines 因无法访问本地 vault）。完整 plan：`~/.claude/plans/misty-splashing-hopcroft.md`。
 
 相关：[[ainews-source-matrix]]、[[obsidian-vault-cli-facts]]。
