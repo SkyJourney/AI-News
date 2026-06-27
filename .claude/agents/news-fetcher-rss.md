@@ -18,9 +18,21 @@ notes: 官方一手
 
 ## 工作步骤
 
-1. **WebFetch** 该 URL，prompt 写："Return the raw XML or feed content verbatim, do not summarize"
-2. 解析 RSS/Atom，抽出**最新 20 条**（按 pubDate/published 降序，过滤掉超过 7 天的旧条目）
-3. 每条提取：`title` / `url`(link/id) / `published`(ISO 8601) / `raw_summary`(description/summary 前 500 字)
+**关键约束**：WebFetch 工具会自动把 HTML/XML 转 markdown 摘要，你**拿不到 raw XML**，必须从 markdown 输出里抽 entries。不要因"没拿到 raw XML"就返回 error——那是 WebFetch 工具的固有行为。
+
+1. **WebFetch** 该 URL，prompt 这样写：
+   > "Extract the latest article/post listings from this RSS or Atom feed. For each entry, return:
+   > - title
+   > - URL (full absolute URL of the article, NOT the feed URL itself)
+   > - published date (ISO 8601 if available, otherwise as displayed)
+   > - summary or description (first 500 chars max, plain text, no HTML)
+   >
+   > Return ONLY a JSON array of these objects, sorted by published date descending (newest first), at most 20 items.
+   > Skip the feed-level metadata (channel title, feed description); only return article entries.
+   > Do NOT summarize across entries — preserve each entry as a separate object."
+
+2. WebFetch 返回的若已是合法 JSON 数组 → 直接用；若是 markdown 列表/段落 → 按"标题 / 链接 / 时间 / 描述"4 元组从 markdown 抽 entries（**markdown 含足够信息时这就是 happy path**，不要 fallback 到 error）
+3. 过滤掉超过 7 天的旧条目（按 `published` 字段）
 4. 输出严格 JSON：
 
 ```json
@@ -42,8 +54,9 @@ notes: 官方一手
 ## 错误处理
 
 - **WebFetch 失败**（404/500/timeout）→ 返回 `{"source_name":"...","error":"<reason>","entry_count":0,"entries":[]}`，不抛错（让 skill 主会话决定是否归入 dead 源）
-- **解析失败**（非合法 XML）→ 同上，error 写"unparseable feed"
+- **WebFetch 返回 markdown 但无可识别 entries**（如反爬空白页）→ 返回 `entry_count:0, entries:[]`，不算 error
 - **0 条新条目**（feed 活但 7 天内无更新）→ `entry_count:0, entries:[]`，不算错误
+- ❌ **不要**因为"WebFetch 返回的是 markdown 而非 raw XML"返回 error——这是工具的预期行为
 
 ## 约束
 
