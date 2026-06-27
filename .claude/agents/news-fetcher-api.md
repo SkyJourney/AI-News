@@ -65,9 +65,16 @@ python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fetch.py -
   "source_name": "...",
   "fetched_at": "2026-06-27T18:00:00+08:00",
   "entry_count": N,
-  "entries": [...]
+  "entries": [
+    { "title": "...", "url": "...", "published": "...", "raw_summary": "...", "low_confidence": false, "extra": {...} }
+  ]
 }
 ```
+
+**`low_confidence` 字段每条都要带**。标 true 的条件（任一为真即标）：
+- arXiv：摘要过短（< 200 字）暗示可能未完整抓取
+- HF：`paper.upvotes` 为 null 或缺失（社区策展信号缺失）；fetched_date 是 yesterday 而非 today（取自前一日榜单）
+- 通用：title 或 url 缺失关键字段；published 时间无法解析
 
 ## 错误处理
 

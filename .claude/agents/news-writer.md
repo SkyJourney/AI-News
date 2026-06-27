@@ -17,7 +17,8 @@ color: pink
 ## 工作步骤
 
 1. **Read** `/Volumes/Projects/AInews/.claude/skills/ai-news/references/vault-schema.md` 全文，作为落盘准绳
-2. 按顺序写盘：
+2. **Read** `/Volumes/Projects/AInews/.claude/skills/ai-news/references/filter-criteria.md` **§5 Tags 打标策略**，作为 frontmatter `tags` 字段的依据
+3. 按顺序写盘：
 
 ### 2.1 写 Zettel（每个 zettel_worthy=true 的 entry）
 
@@ -60,13 +61,23 @@ color: pink
 ### 2.3 写 Daily 简报
 
 文件路径 `10-Daily/<target_date>.md`：
-- frontmatter 按 vault-schema §3 Daily 段
+- frontmatter 按 vault-schema §3 Daily 段（含 `previous_daily` 字段，见下）
+- 写之前：用 `Bash` 算出 `YESTERDAY=$(date -v-1d -j -f %F <target_date> +%F)`（macOS）或 `$(date -d "<target_date> -1 day" +%F)`（Linux），然后 `Glob 10-Daily/${YESTERDAY}.md` 看是否存在
+- 若存在 → 把昨日 Daily 文件路径写入 frontmatter `previous_daily: YYYY-MM-DD`，并 Read 它的 TL;DR + 主题列表
 - 正文结构：
   ```
   # AI 资讯日报 <target_date>
 
   ## TL;DR
   <3-5 条关键事件 bullet，每条 wikilink 到 Zettel 或 Topic>
+
+  ## 📍 昨日回顾 [[<YESTERDAY>]]
+  <若昨日 Daily 存在，写 1-3 行：>
+  - **延续**：[[<昨日 Zettel/Topic>]] 今日新增 [[<今日 Zettel>]]（说明延续点）
+  - **反差**：昨日 X 今日 Y（如有对比价值）
+  - **完成**：昨日"待观察"的 [[<旧 Zettel>]] 今日有结论（如有）
+  
+  （若昨日 Daily 不存在或本身只是 placeholder，写"无昨日 Daily 可对照"即可；不要硬凑）
 
   ## 按主题
 
@@ -82,6 +93,7 @@ color: pink
   - 抓取源：N alive / M dead
   - 候选条目：X → 去重 Y → 过滤 Z 留 W
   - 新增 Zettel：N 张
+  - 昨日延续主题：<list>（若昨日 Daily 存在）
   ```
 
 ## 错误处理

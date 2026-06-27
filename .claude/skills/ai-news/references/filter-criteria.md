@@ -88,3 +88,52 @@
 **升级数控制**：
 - 一次跑 Zettel 总数建议 3–10 张；超过 10 张说明 filter 不够严，回头检查
 - 全部条目都不达标也 OK（罕见的"低产日"），Daily 写一句"今日无原子卡级洞察"
+
+---
+
+## 5. Tags 打标策略（news-writer 必读）
+
+writer 给 Daily / Zettel / Topic 的 frontmatter `tags` 数组打标。Tag 让 Obsidian tag pane + Bases 视图按维度切片。
+
+### 分类轴（每条 entry 应有 ≥ 2 个、≤ 5 个 tag）
+
+| 轴 | tag 形式 | 例子 | 取自哪里 |
+|---|---|---|---|
+| **技术领域** | 单词小写 | `llm` `multimodal` `agent` `rlhf` `safety` `cv` `nlp` `rl` `interpretability` `inference` `training` `eval` | 内容判断 |
+| **产品/公司** | 公司名小写 | `openai` `anthropic` `google` `meta` `nvidia` `deepmind` `zai` `cursor` | title/summary 提到 |
+| **事件类型** | 行为词 | `release` `paper` `funding` `policy` `partnership` `personnel` `opensource` | 与 topic slug 同步 |
+| **来源 tier 标签**（仅在 source 是 fallback / degraded / VC 时打） | `tier3` `degraded` `vc-bias` | sources.md 字段 | frontmatter |
+
+### 命名规则
+- 全小写、kebab-case（多词用连字符）
+- 不用中文（Obsidian tag pane 对中文支持但不利搜索）
+- 公司名用常用简称（`openai` 不是 `open-ai`、`zai` 不是 `z-ai`）
+- 不要把 topic slug 重复成 tag（topic 已经是 wikilink，tag 用更细粒度的技术词）
+
+### 示例
+
+GPT-5.6 Sol 发布的 Zettel：
+```yaml
+tags: [llm, release, openai, safety, coding]
+```
+
+arXiv 67 模型 co-failure ceiling 论文的 Zettel：
+```yaml
+tags: [llm, paper, eval, agent, opensource]
+```
+
+a16z VC 评论的 Zettel（如果有）：
+```yaml
+tags: [policy, vc-bias, tier3]
+```
+
+Daily 简报 frontmatter（聚合）：
+```yaml
+tags: [daily-digest, <当日主要技术领域 tag 各 1>]   # 如 [daily-digest, llm, safety, agent]
+```
+
+### 禁忌
+
+- ❌ 不要 invent 新 tag（除非 ≥ 3 条 entries 都该共享某个新轴，否则用现有轴）
+- ❌ 不要给低质量条目（low_confidence + 未升级 Zettel）打超过 2 个 tag——避免污染 tag pane
+- ❌ 不要打 `#ai` `#ml` 这种过宽的 tag——全 vault 都该有，无信息量

@@ -36,12 +36,19 @@ notes: 无官方 RSS
   "fetched_at": "2026-06-27T18:00:00+08:00",
   "entry_count": N,
   "entries": [
-    { "title": "...", "url": "https://...", "published": "...", "raw_summary": "..." }
+    { "title": "...", "url": "https://...", "published": "...", "raw_summary": "...", "low_confidence": false }
   ]
 }
 ```
 
 3. **URL 规范化**：若 raw URL 是相对路径（如 `/news/xxx`），补全为绝对 URL（`https://www.anthropic.com/news/xxx`）
+
+4. **给每条 entry 评估 low_confidence**（任一为真即标 `low_confidence: true`）：
+   - HTML 结构歧义（多个候选标题或链接）让你不确定主标题
+   - 摘要严重缺失（< 50 字或空字符串）
+   - 发布日期无法 ISO 8601 化（只有"yesterday"/"2 days ago"这类相对时间）
+   - URL 不是文章直链（如 sogou.com 搜索入口、跳转中间页）
+   - 反爬使页面只返回部分内容（疑似截断）
 
 ## 错误处理
 

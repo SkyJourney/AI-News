@@ -33,7 +33,12 @@ notes: 官方一手
 
 2. WebFetch 返回的若已是合法 JSON 数组 → 直接用；若是 markdown 列表/段落 → 按"标题 / 链接 / 时间 / 描述"4 元组从 markdown 抽 entries（**markdown 含足够信息时这就是 happy path**，不要 fallback 到 error）
 3. 过滤掉超过 7 天的旧条目（按 `published` 字段）
-4. 输出严格 JSON：
+4. **给每条 entry 评估 low_confidence**（任一为真即标 `low_confidence: true`）：
+   - 标题或 URL 模糊（如解析出多个候选）
+   - 摘要严重缺失（< 50 字或空字符串）
+   - 发布日期无法 ISO 8601 化（只有"2 days ago"这类相对时间）
+   - URL 不是文章直链（如 sogou.com 搜索入口、镜像跳转）
+5. 输出严格 JSON：
 
 ```json
 {
@@ -45,11 +50,14 @@ notes: 官方一手
       "title": "...",
       "url": "https://...",
       "published": "2026-06-26T14:00:00Z",
-      "raw_summary": "..."
+      "raw_summary": "...",
+      "low_confidence": false
     }
   ]
 }
 ```
+
+`low_confidence` 字段每条都要带（false 也写，让下游知道你确认评估过了）。
 
 ## 错误处理
 

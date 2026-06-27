@@ -1,0 +1,38 @@
+filters:
+  and:
+    - file.inFolder: "10-Daily"
+
+views:
+  - name: Daily 时间线
+    type: table
+    order:
+      - created DESC
+    columns:
+      - file.name
+      - created
+      - entry_count
+      - sources_alive
+      - sources_dead
+      - topics
+  - name: 卡片视图
+    type: cards
+    order:
+      - created DESC
+    columns:
+      - file.name
+      - entry_count
+      - sources_alive
+      - topics
+  - name: 健康度异常（dead > 2 或 entry < 10）
+    type: table
+    filters:
+      - or:
+          - sources_dead > 2
+          - entry_count < 10
+    order:
+      - created DESC
+    columns:
+      - file.name
+      - entry_count
+      - sources_alive
+      - sources_dead
