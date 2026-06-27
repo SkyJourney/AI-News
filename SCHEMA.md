@@ -61,6 +61,7 @@ tags: [llm, multimodal]               # 自由标签，便于 Obsidian 检索
 - **跨目录引用 Zettel** → 一律用时间戳 ID：`[[202606271430-gpt5-multimodal]]`，不要用文件名/标题
 - **引用 Topic** → 用 slug：`[[model-releases]]`
 - **引用 Daily** → 用日期：`[[2026-06-27]]`
+- **引用 MOC** → `[[MOC]]`（vault 总览入口）
 - **不在 vault 内的资源**（信息源登记、采集脚本）→ 用相对路径 Markdown 链接，不用 wikilink：`[sources.md](.claude/skills/ai-news/references/sources.md)`
 
 ---

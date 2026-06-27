@@ -48,6 +48,8 @@ entry_count: 12          # 当日纳入条目数
 sources_alive: 10        # 成功抓的源数
 sources_dead: 2          # 死掉的源数
 topics: [model-releases, safety, opensource]
+tags: [daily-digest, llm, safety]    # daily-digest + 当日主要技术领域 tag（详见 filter-criteria §5）
+previous_daily: 2026-06-26           # 若昨日 Daily 存在则填，便于反向跳转
 ---
 ```
 
