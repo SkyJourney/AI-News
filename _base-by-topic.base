@@ -1,36 +1,29 @@
 filters:
   and:
-    - file.inFolder: "50-Zettel"
-
+    - file.inFolder("50-Zettel")
 views:
-  - name: 按主题分组
-    type: table
+  - type: table
+    name: 按主题分组
     order:
-      - topic ASC
-      - created DESC
-    columns:
-      - file.name
       - topic
-      - source
       - created
+      - file.name
+      - source
       - status
-      - tags
-  - name: 高优 draft
-    type: table
+  - type: table
+    name: 高优 draft
     filters:
-      - status: draft
+      and:
+        - status == "draft"
     order:
-      - created DESC
-    columns:
+      - created
       - file.name
       - topic
       - source
-      - created
-  - name: 卡片视图
-    type: cards
+  - type: cards
+    name: 卡片视图
     order:
-      - created DESC
-    columns:
+      - created
       - file.name
       - topic
       - source

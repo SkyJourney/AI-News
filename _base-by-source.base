@@ -1,52 +1,46 @@
 filters:
   or:
-    - file.inFolder: "50-Zettel"
-    - file.inFolder: "10-Daily"
-    - file.inFolder: "20-Topics"
-
+    - file.inFolder("50-Zettel")
+    - file.inFolder("10-Daily")
+    - file.inFolder("20-Topics")
 views:
-  - name: 按 source 看条目
-    type: table
+  - type: table
+    name: 按 source 看条目
     filters:
-      - source != null
+      and:
+        - source != null
     order:
-      - source ASC
-      - created DESC
-    columns:
-      - file.name
       - source
-      - topic
       - created
-      - tags
-  - name: 一手源（OpenAI/Anthropic/DeepMind）
-    type: table
-    filters:
-      - source: ["openai-rss", "anthropic-news", "deepmind-rss"]
-    order:
-      - created DESC
-    columns:
       - file.name
-      - source
       - topic
+  - type: table
+    name: 一手源（OpenAI/Anthropic/DeepMind）
+    filters:
+      and:
+        - source == "openai-rss" || source == "anthropic-news" || source == "deepmind-rss"
+    order:
       - created
-  - name: 学术（arXiv + HF）
-    type: table
-    filters:
-      - source: ["arxiv-api", "huggingface-daily-papers"]
-    order:
-      - created DESC
-    columns:
       - file.name
       - source
       - topic
-      - tags
-  - name: 投资视角
-    type: table
+  - type: table
+    name: 学术（arXiv + HF）
     filters:
-      - source: ["air-street-press", "a16z-news-content", "state-of-ai"]
+      and:
+        - source == "arxiv-api" || source == "huggingface-daily-papers"
     order:
-      - created DESC
-    columns:
+      - created
+      - file.name
+      - source
+      - topic
+  - type: table
+    name: 投资视角
+    filters:
+      and:
+        - source == "air-street-press" || source == "a16z-news-content" || source == "state-of-ai"
+    order:
+      - created
       - file.name
       - source
       - topic

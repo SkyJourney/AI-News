@@ -6,7 +6,6 @@ description: |
 disable-model-invocation: true
 allowed-tools: Bash, Read, WebFetch, Agent
 argument-hint: "[--date=YYYY-MM-DD] [--dry-run]"
-paths: /Volumes/Projects/AInews/**
 ---
 
 # /ai-news — AI 资讯聚合管道
@@ -143,7 +142,7 @@ subagent 会 Read vault-schema.md 后写盘到 `10-Daily/`、`20-Topics/`、`50-
 
 ```markdown
 ---
-created: <ISO 8601 +08:00>
+created: <YYYY-MM-DD HH:mm:ss>
 run_duration_seconds: <Phase 0 → Phase 4 总耗时>
 sources_attempted: <Phase 0 alive 源数>
 sources_alive: <Phase 1 成功源数>
@@ -183,25 +182,112 @@ zettel_written: <Phase 4 zettel_count>
 
 ---
 
+## Phase 6 — Git Sync（主会话内联）
+
+**前置条件**——以下全部满足才执行：
+- Phase 0–4 均无异常抛出
+- Phase 4 writer 返回 `errors: []`
+- Phase 5 Log 已写盘且 `partial: false`
+
+任一不满足 → 跳过本 phase，在 Log 末尾追加 `git_sync: skipped (reason=...)`，不报错。
+
+### 6.1 校验 remote
+
+```bash
+git -C /Volumes/Projects/AInews remote get-url origin
+```
+
+- 无 origin → 跳过本 phase，Log 标 `git_sync: skipped (no origin)`
+- URL ≠ `git@github.com:SkyJourney/AI-News.git` → 仅警告不擅自改，继续 push（用户可能换了 remote）
+
+### 6.2 add + commit
+
+只 add 本次跑产出的 4 类目录（不动 `.claude/` `SCHEMA.md` `_base-*.base` 等基础设施改动；那些应该由人工 commit）：
+
+```bash
+git -C /Volumes/Projects/AInews add \
+  "10-Daily/${TARGET_DATE}.md" \
+  "20-Topics/" \
+  "50-Zettel/" \
+  "99-Log/${TARGET_DATE}-run.md"
+```
+
+检查是否真有 staged 改动（catch-up 情况下可能跑两次同日跑出同一份内容）：
+
+```bash
+if git -C /Volumes/Projects/AInews diff --cached --quiet; then
+  # 无改动 → 跳过 commit，仍尝试 push（可能上次有未推 commit）
+  COMMIT_SHA="(no changes)"
+else
+  git -C /Volumes/Projects/AInews commit -m "$(cat <<EOF
+chore(ai-news): ${TARGET_DATE} 自动跑 — ${ZETTEL_COUNT} 张 Zettel / ${TOPICS_TOTAL} Topic
+
+抓取 ${ENTRIES_FETCHED} → 去重 ${ENTRIES_AFTER_DEDUP} → 过滤后 ${ENTRIES_AFTER_FILTER}
+失败源: ${FAILED_SOURCES:-无}
+EOF
+)"
+  COMMIT_SHA=$(git -C /Volumes/Projects/AInews rev-parse --short HEAD)
+fi
+```
+
+### 6.3 push
+
+```bash
+git -C /Volumes/Projects/AInews push origin main 2>&1
+```
+
+失败处理（**不重试不强推**）：
+- 网络 / 认证错误 → Log 标 `push_failed: <error>`，本地 commit 保留
+- `rejected (non-fast-forward)` → Log 标 `push_rejected: pull required`，依赖人工 `git pull --rebase`
+- push 成功 → Log 标 `push: success`
+
+### 6.4 在 Phase 5 Log 末尾追加
+
+```markdown
+## Git 同步
+- commit: <COMMIT_SHA>
+- pushed: success | skipped | failed (reason)
+- remote: <origin url>
+```
+
+---
+
 ## 失败兜底
 
-- 任一 Phase 异常死掉 → 立刻写 Phase 5 Log（标 `partial: true`）后报错给用户，**不静默吞掉**
+- 任一 Phase 异常死掉 → 立刻写 Phase 5 Log（标 `partial: true`）后报错给用户，**不静默吞掉**；Phase 6 不执行
 - 不要"为了凑数"伪造条目；宁可在 Daily 里写"今日有效条目过少（N 条），可能上游源批量故障"
 - subagent 长时间无响应（> 60s）→ 视为超时，跳过该 subagent 不阻断其他
 
 ---
 
-## 调度说明（V2 候选，未实施）
+## 调度配置（Desktop Scheduled Task — 已就绪）
 
-本 skill 是手动触发（`disable-model-invocation: true`）。V2 自动化推荐 Claude Code **Desktop scheduled tasks**：
+本 skill 由 Claude Code **Desktop Scheduled Tasks** 自动触发，也支持手动 `/ai-news`。
 
-- 路径：Claude Code Desktop GUI → Scheduled Tasks → New
-- prompt：`/ai-news`
-- 推荐 cadence：每天 9:03 local（cron `3 9 * * *`；避开整点 jitter）
-- ❌ 不用 Cloud Routines：云端 fresh clone，无法访问本地 /Volumes/Projects/AInews vault
-- ❌ 不用 `/loop` 长期跑：7 天会自动过期，仅适合调试期连续观察
+| 字段 | 值 |
+|---|---|
+| Task ID | `ai-news-daily` |
+| Cron | `0 9 * * *`（每天 09:00 本地时间）|
+| Folder | `/Volumes/Projects/AInews` |
+| Model | `claude-opus-4-7` |
+| Permission Mode | `bypassPermissions`（自动化必需，否则会卡权限提示）|
+| SKILL.md | `~/Claude/Scheduled/ai-news-daily/SKILL.md` 内容仅 `/ai-news` |
+| Jitter | 启用（避开整点拥堵，自动延后几分钟）|
 
-待手动跑稳后再切换。
+**前置条件**（持续保持）：
+- macOS Desktop app 始终开启 + Settings → Desktop app → General 启用 "Keep computer awake"
+- vault 目录可写、`git remote get-url origin` 可达（Phase 6 依赖）
+- 首次 Run now 时把所有权限选 "always allow" 教 task 学权限
+
+**手动触发模式**：
+- `/ai-news` — 跑今天
+- `/ai-news --date=YYYY-MM-DD` — 跑指定日期（catch-up / 回填）
+- `/ai-news --dry-run` — 仅 Phase 0 健康检查
+
+**不用以下方案**（已评估）：
+- ❌ Cloud Routines（云端 fresh clone，无法访问本地 vault；且 fetch 内容写到云端 vault 再回推流程过重）
+- ❌ `/loop` 长期跑（7 天会自动过期，仅适合调试期连续观察）
+- ❌ launchd / cron + headless CLI（CLI 不原生支持 skill slash command 调用）
 
 ---
 

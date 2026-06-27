@@ -43,8 +43,8 @@
 
 ```yaml
 ---
-created: 2026-06-27T14:30:00+08:00   # ISO 8601 with local tz
-updated: 2026-06-27T14:30:00+08:00
+created: 2026-06-27 14:30:00   # ISO 8601 with local tz
+updated: 2026-06-27 14:30:00
 status: draft | published | archived
 source: openai-rss                    # 引用 .claude/skills/ai-news/references/sources.md 的 name
 topic: model-releases                 # 引用或创建 20-Topics/<slug>.md
