@@ -1,8 +1,9 @@
 ---
 name: obsidian-vault-cli-facts
-description: AInews vault 注册现状 + Obsidian 官方 CLI 的能力边界（无法注册新 vault，须 GUI 首开）
-metadata:
-  type: reference
+description: AInews vault 标识 + Obsidian 官方 CLI 的能力边界（无法注册新 vault，须 GUI 首开）
+type: reference
+last_updated: 2026-06-27
+commit: 8756e50
 ---
 
 **Obsidian 官方 CLI（1.12.7+，`/usr/local/bin/obsidian` → `/Applications/Obsidian.app/Contents/MacOS/obsidian-cli`）的能力边界**：

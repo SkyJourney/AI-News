@@ -1,13 +1,14 @@
 ---
 name: ainews-project-architecture
-description: AInews 项目当前架构与状态——已落地的核心决策，跨会话必读
-metadata:
-  type: project
+description: AInews 项目当前架构与状态——已落地核心决策、文件分布、14 源摘要、脆弱点、基础设施
+type: project
+last_updated: 2026-06-27
+commit: 8756e50
 ---
 
 AInews = `/Volumes/Projects/AInews` 作为 AI 资讯的 Obsidian vault + 本地 git。
 
-## 已落地架构（8 commit，2026-06-27）
+## 已落地架构（11 commit，2026-06-27）
 
 - **分层**：采集 = Claude Code skill + subagent；vault = 纯落盘知识库。管道与仓库解耦。
 - **采集**：内置 WebFetch / Bash + arXiv/HF 官方 API + curl 健康检查。**不依赖第三方 MCP**（用户明确否决）。
@@ -41,11 +42,20 @@ AInews = `/Volumes/Projects/AInews` 作为 AI 资讯的 Obsidian vault + 本地 
 - **retry 机制**：SKILL.md Phase 1 有 first-fail 自动 retry 1 次；雪崩保护 > 3 个失败不 retry。
 - **Zettel 时间戳冲突**：writer 用本地时区分钟级 ID；同分钟多卡顺延 1 分钟。多次跑同日时要注意不撞 ID。
 
+## 基础设施增强（Tier 2-3，commit fb0e170 + 8756e50）
+
+- **3 个 Obsidian Bases 视图**（vault 根 `_base-*.base`）：按主题 / 按 source / Daily 时间线+健康度监控。frontmatter 即数据，无需 Dataview。
+- **scripts/test-fetcher.sh**：单源调试入口 `bash test-fetcher.sh <source_name>`——显示元数据 + 活性 + 内容采样 + spawn 命令模板。已修 bash 3.2 中文符号紧跟变量名 unbound variable 坑（用 `${var}` brace + 中文换 ASCII）。
+- **fetcher 三类全加 `low_confidence` 字段**：fetcher-rss/api/webfetch 每条 entry 都要带；触发条件含模糊 URL/严重缺摘要/非直链等。下游 filter/cluster/writer 用该字段决策严格度。
+- **filter-criteria.md §5 Tags 规范**：writer 给 Daily/Zettel/Topic 打 4 类 tag（技术领域/公司/事件类型/来源 tier）；小写 kebab-case、不用中文、2-5 个/条。
+- **vault 根 MOC.md**：Map of Content 总览入口；动静分离设计（静态结构人维护、动态内容交给 Bases）。
+- **writer Daily 加"📍 昨日回顾"段**：写 Daily 前 Glob 昨日文件 + Read TL;DR，列延续/反差/完成三类跨日链；frontmatter 加 `previous_daily` 字段。
+
 ## 演进路径（计划中）
 
 1. 跑稳几天后启用 Desktop scheduled tasks（每日 9:03 local）
-2. Obsidian Bases 数据库视图给 vault 加结构化导航
-3. 跨多日 Log 趋势统计脚本（>= 7 天数据后）
+2. 跨多日 Log 趋势统计脚本（>= 7 天数据后）
+3. 视情况按多日使用感受调整 Zettel 原子化粒度
 
 ## 相关记忆
 
