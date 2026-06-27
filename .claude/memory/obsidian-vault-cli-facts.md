@@ -11,6 +11,6 @@ metadata:
 - 生成 `.obsidian/`、把目录登记为 vault 只能由 **Obsidian 应用本体首次"以文件夹打开为 vault"** 完成（GUI 操作，或 `open "obsidian://open?path=<dir>"` 触发后人工点确认弹窗）。
 - 命令语法 `obsidian <command> [key=value ...]`；`file=` 按 wikilink 名解析、`path=` 按精确路径；agent 输出建议 `format=json`。
 
-**AInews vault 注册现状（2026-06-27）**：已通过 GUI 成功注册——`.obsidian/` 已生成（`app.json` / `appearance.json` / `core-plugins.json` / `workspace.json`），CLI 已打通可用。vault `name=AInews`、`id=5a3c69ef6e15d242`、`path=/Volumes/Projects/AInews`、active=true。git 已 `init` 但**尚无首次提交**，工作区仅有 `CLAUDE.md`（106 字节）。
+**AInews vault 标识（首次注册 2026-06-27）**：vault `name=AInews`、`id=5a3c69ef6e15d242`、`path=/Volumes/Projects/AInews`、active=true。`.obsidian/` 中入库共享配置 = `app.json` / `appearance.json` / `core-plugins.json`（其余如 `workspace*.json` 被 `.gitignore` 忽略）。
 
 相关：[[ainews-project-architecture]]。
