@@ -2,8 +2,8 @@
 name: decisions
 description: AInews 关键架构决策与理由——避免重复讨论已决事项，新会话基于既定路径继续
 type: project
-last_updated: 2026-06-27
-commit: d729cc9
+last_updated: 2026-06-28
+commit: 1fed1ab
 ---
 
 # AInews 关键决策
@@ -176,6 +176,25 @@ commit: d729cc9
 - 新增记忆条目 → 优先 append 到对应核心文件
 - 单文件超过 ~300 行或主题混杂 → 拆出 `feedback_<topic>.md` / `synthesis_<topic>.md`
 - 一次性调研结果落地到 skill 后 → 归档到 `_archive/<topic>-snapshot-<date>.md`
+
+---
+
+## D12：v2 流程上线 — Phase 5 Digest 集成 + 00-Inbox 缓存层
+
+**决策**（2026-06-28）：在 Write 与 Log 之间插入 Phase 5 Digest，原 Phase 5/6 顺延为 6/7；激活 `00-Inbox/` 作为 fetch JSON 缓存层；预留 `40-Deep-Dives/` 给 v2 weekly digester。
+
+**Why**：
+- **Daily 是 vault 内部档案，Digest 是给外人看的**——10-Daily/ 含 wikilink/Zettel ID/Bases 字段，没 Obsidian 看不全；30-Digests/ 去链接、URL 展开、章节自包含，可独立分享/打印
+- **digester 必须与 writer 并列消费 cluster 输出，不能从 Daily 二次解析**——writer 渲染 Daily 时会漏 URL（"未升级 Zettel"条目只标 source_name 不挂链接），digester 从 Daily 反推会信息有损；v1 试跑就出现 GPT-5 免疫学 source 张冠李戴、合成"AI 行业人才流动监测"元条目等 6 类问题
+- **00-Inbox 激活解决重跑/调试成本**——纯内存流意味着调试 filter/cluster/writer/digester 时必须重 fetch（~25 分钟）；落盘 inbox JSON + `--from-cache` flag 后，下次跑同日只需 ~15 分钟
+- **40-Deep-Dives 不删而预留**——周报/月报需要 ≥7 天 30-Digests/ 历史数据才有意义，当前还不到时候；显式标注预留比保留为空目录更清晰
+
+**How to apply**：
+- 新加 Phase 必须**同时**改 SKILL.md（编排）+ subagent system prompt（执行）+ SCHEMA.md/vault-schema.md（约定），三处双向同步
+- 给"分享版"渲染层（digester / 未来 weekly）输入设计原则：**接 cluster 这一层的结构化数据，不接已渲染层**——避免渲染层之间互相依赖造成信息有损
+- 新增 digester 类 subagent system prompt 必含"事实性硬约束"段（禁止合成 / source_name 严格 / URL 必填 / 去重自检 / 字数上限），v1 试跑暴露这些是 LLM 总结类任务的共性失败模式
+- 调试任何下游 phase → 先用 `/ai-news --from-cache=<inbox.json>` 跳过 Phase 1，对上游源友好
+- 周报启用阈值：积累 ≥7 天 30-Digests/ 后写 news-weekly-digester subagent + SKILL.md 加 Phase 5.5（或 Phase 8）
 
 ---
 

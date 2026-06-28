@@ -1,0 +1,144 @@
+{
+  "batch_id": "2026-06-28-11:00",
+  "target_date": "2026-06-28",
+  "fetched_at": "2026-06-28T03:00:49Z",
+  "schema_version": 1,
+  "fetchers": [
+    {
+      "source_name": "openai-rss",
+      "entries": [
+        {"title": "Previewing GPT-5.6 Sol: a next-generation model", "url": "https://openai.com/index/previewing-gpt-5-6-sol", "published": "2026-06-26T10:00:00Z", "raw_summary": "OpenAI previews GPT-5.6 Sol, a next-generation model with stronger capabilities in coding, science, and cybersecurity, paired with its most advanced safety stack.", "low_confidence": false},
+        {"title": "How agents are transforming work", "url": "https://openai.com/index/how-agents-are-transforming-work", "published": "2026-06-25T02:00:00Z", "raw_summary": "A new OpenAI research paper shows how AI agents are transforming work, enabling longer, more complex tasks and expanding productivity across roles.", "low_confidence": false},
+        {"title": "OpenAI and Broadcom unveil LLM-optimized inference chip", "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip", "published": "2026-06-24T06:00:00Z", "raw_summary": "OpenAI and Broadcom introduce Jalapeño, a custom AI chip built for LLM inference to improve performance, efficiency, and scale across AI systems.", "low_confidence": false},
+        {"title": "Helping build shared standards for advanced AI", "url": "https://openai.com/index/helping-build-shared-standards-for-advanced-ai", "published": "2026-06-23T13:00:00Z", "raw_summary": "OpenAI helps build shared standards for advanced AI, supporting evaluation frameworks, safety practices, and global cooperation through the Appia Foundation.", "low_confidence": false},
+        {"title": "How GPT-5 helped immunologist Derya Unutmaz solve a 3-year-old mystery", "url": "https://openai.com/index/gpt-5-immunology-mystery", "published": "2026-06-23T17:00:00Z", "raw_summary": "GPT-5 Pro helped solve a 3-year-old immunology mystery, offering insights into T cell behavior. The breakthrough could support cancer and autoimmune research.", "low_confidence": false},
+        {"title": "How Omio is building the future of conversational travel", "url": "https://openai.com/index/omio", "published": "2026-06-23T00:00:00Z", "raw_summary": "Discover how Omio uses OpenAI to power conversational travel experiences, accelerate product development, and transform into an AI-native company.", "low_confidence": false},
+        {"title": "Patch the Planet: a Daybreak initiative to support open source maintainers", "url": "https://openai.com/index/patch-the-planet", "published": "2026-06-22T10:00:00Z", "raw_summary": "OpenAI introduces Patch the Planet, a Daybreak initiative helping open-source maintainers find, validate, and fix vulnerabilities with AI and expert review.", "low_confidence": false},
+        {"title": "Daybreak: Tools for securing every organization in the world", "url": "https://openai.com/index/daybreak-securing-the-world", "published": "2026-06-22T10:00:00Z", "raw_summary": "OpenAI introduces new Daybreak tools, including Codex Security and GPT-5.5-Cyber, to help organizations find, validate, and patch vulnerabilities at scale.", "low_confidence": false},
+        {"title": "Codex-maxxing for long-running work", "url": "https://openai.com/index/codex-maxxing-long-running-work", "published": "2026-06-22T00:00:00Z", "raw_summary": "Learn how Jason Liu uses Codex to preserve context, manage complex projects, and help work continue beyond a single prompt.", "low_confidence": false},
+        {"title": "Samsung Electronics brings ChatGPT and Codex to employees", "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment", "published": "2026-06-21T23:00:00Z", "raw_summary": "Samsung Electronics deploys ChatGPT Enterprise and Codex to employees worldwide, marking one of OpenAI's largest enterprise AI rollouts.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "deepmind-rss",
+      "entries": [
+        {"title": "Introducing computer use in Gemini 3.5 Flash", "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/", "published": "2026-06-24T16:30:01Z", "raw_summary": "", "low_confidence": true}
+      ]
+    },
+    {"source_name": "arxiv-api", "entries": []},
+    {"source_name": "huggingface-daily-papers", "entries": []},
+    {
+      "source_name": "import-ai",
+      "entries": [
+        {"title": "Import AI 462: Superpersuasion; self-sustaining AI; paths to ASI", "url": "https://importai.substack.com/p/import-ai-462-superpersuasion-self", "published": "2026-06-22T12:31:45Z", "raw_summary": "AI systems are reliably more persuasive than expert humans at changing minds on policy and donations. Research shows AI outperformed professional fundraisers by 3x at raising money. The newsletter also covers self-sustaining AI timelines and DeepMind's analysis of paths to superintelligence.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "interconnects",
+      "entries": [
+        {"title": "GLM-5.2 is the step change for open agents", "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open", "published": "2026-06-22T14:52:45Z", "raw_summary": "Z.ai's GLM-5.2 represents a significant capability leap for open-weight models, matching proprietary systems in coding and reasoning tasks. The release follows Claude Fable 5's ban and demonstrates that frontier-class performance is achievable by open labs with fewer resources, raising important questions about AI regulation and open model accessibility.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "qbitai",
+      "entries": [
+        {"title": "BrowserBC：克隆人类点击，让一次网页操作转化为所有Agent的能力", "url": "https://www.qbitai.com/2026/06/439393.html", "published": "2026-06-27T12:29:33Z", "raw_summary": "人类一次录制，Agent就能模拟", "low_confidence": true},
+        {"title": "第一批一人公司，现在怎么样了？", "url": "https://www.qbitai.com/2026/06/439237.html", "published": "2026-06-27T12:23:29Z", "raw_summary": "我们跟一群OPC创业者聊了聊", "low_confidence": true},
+        {"title": "CVPR 2026最热方向，被一家杭州团队率先跑进了端侧！", "url": "https://www.qbitai.com/2026/06/439236.html", "published": "2026-06-27T12:19:42Z", "raw_summary": "VLM-R1之后再次出手！全球首个端侧流式多模态来了！", "low_confidence": true},
+        {"title": "微软年度AI职场报告：员工已经准备好了，公司还没有", "url": "https://www.qbitai.com/2026/06/439032.html", "published": "2026-06-27T04:48:02Z", "raw_summary": "28页干货爆炸", "low_confidence": true},
+        {"title": "GPT-5.6突然发布！Fable5痛失最强基模王座", "url": "https://www.qbitai.com/2026/06/438895.html", "published": "2026-06-27T01:53:27Z", "raw_summary": "一口气端出三款GPT 5.6系列模型", "low_confidence": true},
+        {"title": "两个月连获两轮数亿元融资 深度机智以全栈自主路线加速国产物理AI基座模型落地", "url": "https://www.qbitai.com/2026/06/438887.html", "published": "2026-06-26T15:45:43Z", "raw_summary": "", "low_confidence": true},
+        {"title": "谷歌「推理之王」也跑路Meta了，当年还是李飞飞挖来的", "url": "https://www.qbitai.com/2026/06/438848.html", "published": "2026-06-26T08:05:07Z", "raw_summary": "Coding为王", "low_confidence": true},
+        {"title": "Claude Fable 5分批重新上线！GPT-5.6秒跟", "url": "https://www.qbitai.com/2026/06/438789.html", "published": "2026-06-26T06:55:20Z", "raw_summary": "这不能是营销计划的一部分吧？", "low_confidence": true},
+        {"title": "从需求到设计到代码，一个软件全搞定！TRAE Work Design实测来了", "url": "https://www.qbitai.com/2026/06/438750.html", "published": "2026-06-26T05:12:46Z", "raw_summary": "精准识别设计系统", "low_confidence": true},
+        {"title": "华勤技术与正行创新达成战略合作，加速机器人走进工厂、走上产线", "url": "https://www.qbitai.com/2026/06/438741.html", "published": "2026-06-26T04:00:59Z", "raw_summary": "共建工业物理智能数据底座与智能大脑", "low_confidence": true}
+      ]
+    },
+    {
+      "source_name": "air-street-press",
+      "entries": [
+        {"title": "STARK raises €500M to build Europe's next defense prime", "url": "https://press.airstreet.com/p/stark-500m", "published": "2026-06-26T13:37:24Z", "raw_summary": "German defense company STARK secured €500 million funding to manufacture unmanned strike systems. The capital will fund production lines across Germany, UK, and Ukraine, with focus on affordable, software-defined autonomous platforms like Virtus loitering munitions that can be assembled in minutes.", "low_confidence": false},
+        {"title": "How Revolut runs AI at scale", "url": "https://press.airstreet.com/p/nikolay-donets-revolut", "published": "2026-06-25T13:06:16Z", "raw_summary": "Revolut's machine learning engineering leader discusses operating AI systems across 70 million customers in 40+ countries. The fintech manages generative AI through a single gateway with unified governance, fallback chains, cost controls, and mandatory human oversight for critical decisions affecting users.", "low_confidence": false},
+        {"title": "Odyssey raises $310M Series B for world models", "url": "https://press.airstreet.com/p/odyssey-series-b", "published": "2026-06-23T13:10:03Z", "raw_summary": "Odyssey announced $310M Series B at $1.45B valuation for developing interactive world models. The company launched Starchild-1 for real-time multimodal generation, Agora-1 for shared multi-agent environments, and PROWL for self-directed model improvement through reinforcement learning.", "low_confidence": false},
+        {"title": "Macrodata: Robots need a data refinery", "url": "https://press.airstreet.com/p/macrodata-pre-seed", "published": "2026-06-22T13:14:55Z", "raw_summary": "Macrodata, founded by creators of FineWeb dataset, raised $4M pre-seed to build data infrastructure for robotics. The company's Refiner tool processes multimodal physical data from diverse robot formats and sensors into training-ready datasets, supporting the scaling of embodied AI systems.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "anthropic-news",
+      "entries": [
+        {"title": "Introducing Claude Tag", "url": "https://anthropic.com/news/introducing-claude-tag", "published": "2026-06-23", "raw_summary": "Claude Tag is a new way for teams to work with Claude.", "low_confidence": false},
+        {"title": "Anthropic opens Seoul office and announces new partnerships across the Korean AI ecosystem", "url": "https://anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem", "published": "2026-06-17", "raw_summary": "Anthropic expands its presence with a new Seoul office and strategic partnerships in Korea's AI sector.", "low_confidence": false},
+        {"title": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5", "url": "https://anthropic.com/news/fable-mythos-access", "published": "2026-06-12", "raw_summary": "The US government has issued an export control directive to suspend all access to Fable 5 and Mythos 5.", "low_confidence": false},
+        {"title": "Results from the first Anthropic Public Record", "url": "https://anthropic.com/news/anthropic-public-record", "published": "2026-06-12", "raw_summary": "Findings from Anthropic's inaugural public record initiative.", "low_confidence": false},
+        {"title": "TCS and Anthropic partner to bring Claude to regulated industries", "url": "https://anthropic.com/news/tcs-anthropic-partnership", "published": "2026-06-12", "raw_summary": "Strategic partnership to deploy Claude solutions in regulated industry sectors.", "low_confidence": false},
+        {"title": "DXC will integrate Claude into the systems banks, airlines, and other regulated industries rely on", "url": "https://anthropic.com/news/dxc-anthropic-alliance", "published": "2026-06-11", "raw_summary": "DXC partners with Anthropic to embed Claude into critical infrastructure systems.", "low_confidence": false},
+        {"title": "Introducing Claude Corps", "url": "https://anthropic.com/news/claude-corps", "published": "2026-06-11", "raw_summary": "A national fellowship program for early-career professionals passionate about extending AI benefits across America.", "low_confidence": false},
+        {"title": "Claude Fable 5 and Claude Mythos 5", "url": "https://anthropic.com/news/claude-fable-5-mythos-5", "published": "2026-06-09", "raw_summary": "Release announcement for Fable 5 and Mythos 5 model variants.", "low_confidence": false},
+        {"title": "Introducing the Services Track and Partner Hub of the Claude Partner Network", "url": "https://anthropic.com/news/services-track-partner-hub", "published": "2026-06-03", "raw_summary": "New partnership programs and resources for Claude service providers.", "low_confidence": false},
+        {"title": "What we learned mapping a year's worth of AI-enabled cyber threats", "url": "https://anthropic.com/news/AI-enabled-cyber-threats-mitre-attack", "published": "2026-06-03", "raw_summary": "Research findings on emerging cyber security threats powered by AI technologies.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "meta-ai-blog",
+      "entries": [
+        {"title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence", "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/", "published": "2026-04-08", "raw_summary": "Meta's latest advancement in AI capabilities, focusing on scaling personal AI systems toward superintelligence.", "low_confidence": false},
+        {"title": "Scaling How We Build and Test Our Most Advanced AI", "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/", "published": "2026-04-08", "raw_summary": "Research article detailing Meta's methodology for building, testing, and scaling their most advanced AI systems.", "low_confidence": false},
+        {"title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet", "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/", "published": "2026-04-06", "raw_summary": "Case study demonstrating practical application of Meta's Segment Anything technology in fashion tech.", "low_confidence": false},
+        {"title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning", "url": "https://ai.meta.com/blog/segment-anything-model-3/", "published": "2026-03-27", "raw_summary": "Latest version of Segment Anything Model featuring improved speed and accessibility for video analysis tasks.", "low_confidence": false},
+        {"title": "Four MTIA Chips in Two Years: Scaling AI Experiences for Billions", "url": "https://ai.meta.com/blog/meta-mtia-scale-ai-chips-for-billions/", "published": "2026-03-11", "raw_summary": "Meta's progress on custom AI chips designed to serve AI experiences at massive scale.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "the-batch",
+      "entries": [
+        {"title": "A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems", "url": "https://deeplearning.ai/the-batch/issue-359", "published": "2026-06-26", "raw_summary": "Loop engineering emerges as a hot buzzphrase after Boris Cherney and Peter Steinberger discussed it on social media.", "low_confidence": false},
+        {"title": "Testing Mythos and Fable, Moving Beyond SWE-bench, Nvidia's Open Contender", "url": "https://deeplearning.ai/the-batch/issue-358", "published": "2026-06-19", "raw_summary": "The U.S. Government and Anthropic demonstrated their influence by restricting access to frontier AI models in significant recent actions.", "low_confidence": false},
+        {"title": "Mythos Begets Fable, Cursor's Composer 2.5, Agents Building Agents", "url": "https://deeplearning.ai/the-batch/issue-357", "published": "2026-06-12", "raw_summary": "Exploration of AI agents performing work on desktop computers, moving beyond traditional chat interactions.", "low_confidence": false},
+        {"title": "Qwen3.7-Max Challenges Google for Third Place, AI Saves Whales, Fine-Tuning Breaks Copyright Alignment", "url": "https://deeplearning.ai/the-batch/issue-356", "published": "2026-06-05", "raw_summary": "Discussion of regulatory capture efforts and open-source suppression lobbying in AI governance landscapes.", "low_confidence": false},
+        {"title": "Gemini Flash Gets Pricey, AI Act Delays, Agents Drive Online Traffic", "url": "https://deeplearning.ai/the-batch/issue-355", "published": "2026-05-29", "raw_summary": "The emergence of AI Forward Deployed Engineers as a new Silicon Valley role focused on customizing agentic workflows for clients.", "low_confidence": false},
+        {"title": "Hermes vs. OpenClaw, Cybersecurity Alarms Ring, More-Interactive Conversations, Can Agents Do Human Work?", "url": "https://deeplearning.ai/the-batch/issue-354", "published": "2026-05-22", "raw_summary": "Harvard University limits undergraduate A grades to approximately 20% of each class.", "low_confidence": false},
+        {"title": "China Thwarts Meta's Agentic Ambition, U.S. Evaluates Upcoming Models, AI Diagnoses Mammograms", "url": "https://deeplearning.ai/the-batch/issue-353", "published": "2026-05-15", "raw_summary": "Development of AI Andrew, an AI companion shaped by Andrew Ng's personality.", "low_confidence": false},
+        {"title": "Seedance Makes A Splash, Nvidia's AI-Guided Chip Designs, Helping Robots Not Forget", "url": "https://deeplearning.ai/the-batch/issue-352", "published": "2026-05-08", "raw_summary": "Analysis demonstrating that there will be no AI jobpocalypse despite widespread concerns about automation.", "low_confidence": false},
+        {"title": "GPT-5.5 Outperforms (and Hallucinates), Kimi K2.6 Leads Open LLMs, AI Strains Climate Pledges, Strategic Thinking in LLMs vs. Humans", "url": "https://deeplearning.ai/the-batch/issue-351", "published": "2026-05-01", "raw_summary": "Prompting methods for AI have evolved significantly since ChatGPT's 2022 launch through 2026.", "low_confidence": false},
+        {"title": "GLM 5.1 Thinks Strategically, Data-Center Revolt Intensifies, When Helpful LLMs Turn Unhelpful, Humanoid Robots Get to Work", "url": "https://deeplearning.ai/the-batch/issue-350", "published": "2026-04-24", "raw_summary": "Coding agents accelerate various software development tasks at different rates.", "low_confidence": false},
+        {"title": "Meta Pivots From Open Weights, Big Pharma Bets On AI, Regulatory Patchwork, Simulating Human Cohorts", "url": "https://deeplearning.ai/the-batch/issue-349", "published": "2026-04-17", "raw_summary": "AI-native software engineering teams operate with fundamentally different structures than traditional development teams.", "low_confidence": false},
+        {"title": "Anthropic's Claude Mythos Problem, Dark DNA Unveiled, Pitfalls for Assistive Models, Simulating Fluid Dynamics", "url": "https://deeplearning.ai/the-batch/issue-348", "published": "2026-04-10", "raw_summary": "Examination of how AI agents accelerate coding and shape the future of software engineering practices.", "low_confidence": false},
+        {"title": "Claude Code's Source Leaks, OpenAI Exits Video Generation, Gemini Adds Music Generation, LLMs Learn at Inference", "url": "https://deeplearning.ai/the-batch/issue-347", "published": "2026-04-03", "raw_summary": "Voice-based AI interfaces are improving rapidly and will become increasingly pervasive.", "low_confidence": false},
+        {"title": "Nvidia's Open Salvo, OpenAI's Amazon Deal, Grok Cuts Video Prices, Recursive Language Models", "url": "https://deeplearning.ai/the-batch/issue-346", "published": "2026-03-27", "raw_summary": "Anti-AI coalitions continue strategic efforts to discover arguments for slowing AI progress.", "low_confidence": false},
+        {"title": "Attacks On Data Centers, Qwen3.5 In All Sizes, DeepSeek's Huawei Play, Apple's Multimodal Tokenizer", "url": "https://deeplearning.ai/the-batch/issue-345", "published": "2026-03-20", "raw_summary": "Widespread job insecurity concerns reported across organizational levels regarding AI-driven automation.", "low_confidence": false}
+      ]
+    },
+    {
+      "source_name": "jiqizhixin",
+      "entries": [
+        {"title": "刚刚，DeepSeek V4更新DSpark，推理速度提升80%", "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E5%88%9A%E5%88%9A%EF%BC%8CDeepSeek%20V4%E6%9B%B4%E6%96%B0DSpark", "published": "2026-06-27T15:57:00+08:00", "raw_summary": "DeepSeek V4推出了投机解码框架DSpark，同步开源了全栈推测性解码框架DeepSpec。DSpark已部署在真实线上流量中，大幅加速了大语言模型推理速度，与前一代部署相比，生成速度分别提升60%-85%（Flash模型）和57%-78%（Pro模型）。", "low_confidence": true},
+        {"title": "ECCV 2026 | 视频生成模型真的会推理吗？303道题全面揭示世界模型的推理短板", "url": "http://weixin.sogou.com/weixin?type=2&query=ECCV+2026", "published": "2026-06-27T12:30:00+08:00", "raw_summary": "MME-CoF-Pro基准包含303个图像-文字-视频推理样本，涵盖16个推理类别。研究发现主流视频生成模型推理能力普遍不强，最强的Veo也仅56分，推理能力与生成质量几乎完全解耦。文字提示是双刃剑，虽提升推理分数却损害一致性。", "low_confidence": true},
+        {"title": "陈天奇新书上线：面向ML系统的现代GPU编程", "url": "http://weixin.sogou.com/weixin?type=2&query=%E9%99%88%E5%A4%A9%E5%A5%87%E6%96%B0%E4%B9%A6%E4%B8%8A%E7%BA%BF", "published": "2026-06-27T12:30:00+08:00", "raw_summary": "CMU助理教授陈天奇发布免费在线书籍《Modern GPU Programming For MLSys》。内容聚焦高性能GPU kernel编写，主线围绕Blackwell架构展开，以矩阵乘法和FlashAttention为实战案例。", "low_confidence": true},
+        {"title": "大神Karpathy用Claude的方式，原来是这样的？", "url": "http://weixin.sogou.com/weixin?type=2&query=%E5%A4%A7%E7%A5%9EKarpathy%E7%94%A8Claude", "published": "2026-06-27T12:30:00+08:00", "raw_summary": "社区流传了一份据称是Andrej Karpathy实际使用的CLAUDE.md文件。该文档强调在编写新代码前应先阅读现有代码库，理解项目风格和模式，避免生成与项目不符的代码。核心原则包括保持简单、进行外科手术式修改和充分验证。", "low_confidence": true}
+      ]
+    },
+    {
+      "source_name": "a16z-news-content",
+      "entries": [
+        {"title": "Investing in Netris", "url": "https://a16z.com/announcement/investing-in-netris/", "published": "2026", "raw_summary": "Infrastructure investment announcement by Guido Appenzeller, Raghu Raghuram, and Jason Cui focusing on Netris technology.", "low_confidence": true},
+        {"title": "Investing in Mirendil", "url": "https://a16z.com/announcement/investing-in-mirendil/", "published": "2026", "raw_summary": "Infrastructure sector investment led by Matt Bornstein and Malika Aubakirova into Mirendil.", "low_confidence": true},
+        {"title": "The World-Building Doors Are Open, Again.", "url": "https://a16z.com/the-world-building-doors-are-open-again/", "published": "2026", "raw_summary": "Consumer-focused article by Josh Elman exploring emerging opportunities in world-building and digital experiences.", "low_confidence": true},
+        {"title": "Investing in Probook", "url": "https://a16z.com/announcement/investing-in-probook/", "published": "2026", "raw_summary": "Enterprise investment announcement by Alex Rampell, David Haber, Olivia Moore, and Seema Amble.", "low_confidence": true},
+        {"title": "How to Win a Space War", "url": "https://a16z.com/how-to-win-a-space-war/", "published": "2026", "raw_summary": "American Dynamism analysis by Christian Keil and Alex Oliver examining strategic considerations in space technology.", "low_confidence": true},
+        {"title": "Investing in Prosper AI", "url": "https://a16z.com/announcement/investing-in-prosper-ai/", "published": "2026", "raw_summary": "General investment announcement by Jay Rughani and Jane Rhee regarding Prosper AI.", "low_confidence": true},
+        {"title": "New Media, One Year In", "url": "https://a16z.com/what-is-new-media-in-2026/", "published": "2026", "raw_summary": "Comprehensive analysis by Erik Torenberg, Alex Danco, and team examining evolving media landscape developments.", "low_confidence": true},
+        {"title": "Investing in Telepatia", "url": "https://a16z.com/announcement/investing-in-telepatia/", "published": "2026", "raw_summary": "Bio + Health sector investment by Daisy Wolf, Gabriel Vasquez, and Eva Steinman.", "low_confidence": true},
+        {"title": "Investing in Convey", "url": "https://a16z.com/announcement/investing-in-convey/", "published": "2026", "raw_summary": "Enterprise investment announcement by Joe Schmidt and Olivia Moore into Convey.", "low_confidence": true},
+        {"title": "Late Stage Venture Is About Late Stage Founders", "url": "https://a16z.com/late-stage-venture-is-about-late-stage-founders/", "published": "2026", "raw_summary": "Growth-focused perspective by David George analyzing dynamics of later-stage venture investments.", "low_confidence": true}
+      ]
+    },
+    {
+      "source_name": "state-of-ai",
+      "entries": [
+        {"title": "State of AI Report 2025", "url": "https://www.stateof.ai/", "published": "2025", "raw_summary": "Annual analysis of key AI developments across research, industry, politics, and safety. Key findings include OpenAI's continued frontier lead, China's DeepSeek emergence as credible #2, reasoning breakthroughs, scientific AI collaboration, and mainstream adoption with 44% of U.S. businesses now paying for AI tools.", "low_confidence": true},
+        {"title": "2025 Report Launch Blog Post", "url": "https://www.stateof.ai/2025-report-launch", "published": "2025", "raw_summary": "Detailed blog post covering the State of AI Report 2025 findings, including insights on industrial-era AI infrastructure, political shifts toward 'America-first AI', and the transition of safety research toward pragmatic concerns around reliability and governance.", "low_confidence": true}
+      ]
+    }
+  ],
+  "failures": []
+}

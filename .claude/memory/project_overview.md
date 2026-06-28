@@ -2,8 +2,8 @@
 name: project_overview
 description: AInews 项目定位、技术栈、目录结构、核心组件——新会话 1 分钟建立全局认知
 type: project
-last_updated: 2026-06-27
-commit: d729cc9
+last_updated: 2026-06-28
+commit: 1fed1ab
 ---
 
 # AInews 项目总览
@@ -35,10 +35,11 @@ commit: d729cc9
 
 ```
 /Volumes/Projects/AInews/
-├── 00-Inbox/              # 原始抓取缓冲（v1 未启用）
-├── 10-Daily/              # 每日简报，writer 写
+├── 00-Inbox/              # Phase 1 fetch JSON 缓存（v2 激活，配套 --from-cache flag）
+├── 10-Daily/              # 每日简报（vault 双链版），writer 写
 ├── 20-Topics/             # 主题汇聚（append 模式），cluster + 人手维护
-├── 40-Deep-Dives/         # 人工专题深度研究
+├── 30-Digests/            # 每日分享/打印版（去 wikilink、URL 展开），digester 写
+├── 40-Deep-Dives/         # v2 weekly/monthly digester 预留（≥7 天历史后启用） + 人工专题
 ├── 50-Zettel/             # 原子卡，时间戳 ID（YYYYMMDDHHmm-slug）
 ├── 90-Archive/            # 人工归档
 ├── 99-Log/                # 运行日志，每次 /ai-news 写一份
@@ -57,23 +58,24 @@ commit: d729cc9
 ```
 .claude/
 ├── skills/ai-news/
-│   ├── SKILL.md                       # 5 phase 编排（Preflight→Fetch→Filter→Cluster→Write→Log）
+│   ├── SKILL.md                       # 7 phase 编排（Preflight→Fetch→Filter→Cluster→Write→Digest→Log→Git Sync）
 │   ├── references/
 │   │   ├── sources.md                 # 14 源单一权威清单
 │   │   ├── blacklist.md               # 死源黑名单（防"想当然"加回）
-│   │   ├── vault-schema.md            # writer 镜像参考（与 vault/SCHEMA.md 同步）
+│   │   ├── vault-schema.md            # writer/digester 镜像参考（与 vault/SCHEMA.md 同步）
 │   │   └── filter-criteria.md         # 过滤/聚类/打标准则
 │   └── scripts/
 │       ├── source-health.sh           # 全源活性检查（curl 并发）
 │       ├── arxiv-fetch.py             # arXiv API 封装（3 秒限流）
 │       └── test-fetcher.sh            # 单源调试入口
-├── agents/                            # 6 个原生 subagent
+├── agents/                            # 7 个原生 subagent
 │   ├── news-fetcher-rss.md
 │   ├── news-fetcher-api.md
 │   ├── news-fetcher-webfetch.md
 │   ├── news-filter.md
 │   ├── news-cluster.md
-│   └── news-writer.md
+│   ├── news-writer.md
+│   └── news-digester.md               # v2 新增：cluster topics → 30-Digests 分享版
 └── memory/                            # 本目录，跨会话持久化
 ```
 
@@ -81,11 +83,12 @@ commit: d729cc9
 
 | 组件 | 职责 | 关键约束 |
 |---|---|---|
-| `/ai-news` skill | 5 阶段总编排，参数解析、Phase 0 健康门、Phase 1 并发 + retry | 仅手动触发；alive 源 < 3 暂停问用户 |
+| `/ai-news` skill | 7 阶段总编排，参数解析、Phase 0 健康门、Phase 1 并发 + retry + inbox 缓存 | 仅手动触发；alive 源 < 3 暂停问用户；支持 `--from-cache` |
 | `news-fetcher-rss/api/webfetch` | 抓单源、输出 entry JSON | 必带 `low_confidence` 字段；不主观拒绝 |
 | `news-filter` | 去重 + 信噪过滤 | 读 `filter-criteria.md` 决策 |
 | `news-cluster` | 主题分桶，标 `zettel_worthy` | ≥ 2 条才独立成桶；自动创建新 topic |
-| `news-writer` | 写 Daily / Topic / Zettel | frontmatter 必齐；Daily 写"昨日回顾"段 |
+| `news-writer` | 写 Daily / Topic / Zettel（vault 双链版） | frontmatter 必齐；Daily 写"昨日回顾"段 |
+| `news-digester` | 写 30-Digests 分享版（去 wikilink、URL 展开） | 与 writer 并列消费 cluster topics；含事实性硬约束自检 |
 | Obsidian Bases | 动态视图（按主题 / source / 时间线） | frontmatter 即数据源 |
 
 ## 信息源池（14 个，1 个 degraded）

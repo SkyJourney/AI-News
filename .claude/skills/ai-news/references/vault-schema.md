@@ -11,13 +11,16 @@
 
 | 目录 | `/ai-news` 谁写 | 写什么 |
 |---|---|---|
-| `00-Inbox/` | (暂不写) | 流水线缓冲，v1 直接跳过，writer 直接写 10-Daily/50-Zettel |
-| `10-Daily/` | news-writer | 当日简报，一天一文件 |
+| `00-Inbox/` | 主会话 Phase 1 | fetcher 输出的原始 JSON 缓存（一跑一文件），供 `--from-cache` 调试 / 同日重跑跳过 fetch |
+| `10-Daily/` | news-writer | 当日简报，一天一文件（含 wikilink，vault 内部档案） |
 | `20-Topics/` | news-cluster + news-writer | 主题文件（append 模式） |
-| `40-Deep-Dives/` | (不写) | 人工领域，skill 不动 |
+| `30-Digests/` | news-digester | 当日分享/打印版（去 wikilink、URL 展开），一天一文件 |
+| `40-Deep-Dives/` | (v2 weekly digester 预留) | 预留给 v2 周报/月报；当前不写，等 ≥7 天 30-Digests/ 历史 |
 | `50-Zettel/` | news-writer | 原子卡，一题一卡 |
 | `90-Archive/` | (不写) | 人工归档 |
-| `99-Log/` | 主会话（Phase 5） + Phase 0 死链报告 | 运行日志 |
+| `99-Log/` | 主会话（Phase 6） + Phase 0 死链报告 | 运行日志 |
+
+⚠️ **10-Daily 与 30-Digests 是同一份 cluster 输出的两个渲染视图**——writer 与 digester 并列消费 Phase 3 的 `topics` JSON，互不派生。前者面向 vault 内部 PKM（双链、概念回溯），后者面向外部分享（自包含、可印）。
 
 ---
 
@@ -25,9 +28,11 @@
 
 | 类型 | 模式 | 示例 |
 |---|---|---|
+| Fetch 缓存 | `00-Inbox/YYYY-MM-DD-HHMM-fetch.json` | `00-Inbox/2026-06-27-0900-fetch.json` |
 | Daily 简报 | `10-Daily/YYYY-MM-DD.md` | `10-Daily/2026-06-27.md` |
 | Zettel 原子卡 | `50-Zettel/YYYYMMDDHHmm-<slug>.md` | `50-Zettel/202606271430-gpt5-multimodal.md` |
 | Topic 主题 | `20-Topics/<slug>.md` | `20-Topics/model-releases.md` |
+| Digest 分享版 | `30-Digests/YYYY-MM-DD-digest.md` | `30-Digests/2026-06-27-digest.md` |
 | 运行日志 | `99-Log/YYYY-MM-DD-run.md` | `99-Log/2026-06-27-run.md` |
 | 死链报告 | `99-Log/YYYY-MM-DD-source-deadcheck.md` | `99-Log/2026-06-27-source-deadcheck.md` |
 

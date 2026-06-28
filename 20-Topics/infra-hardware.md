@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:37:00
-updated: 2026-06-27 14:38:00
-entry_total: 2
+updated: 2026-06-28 12:30:00
+entry_total: 6
 ---
 
 # 基础设施 & 硬件 (infra-hardware)
@@ -17,3 +17,21 @@ entry_total: 2
 - **DeepSeek V4 DSpark speculative decoding** ([[202606271438-dspark-speculative-decoding]])
   DSpark 投机解码实现 60–85% 推理提速，配套 DeepSpec 框架开源供社区复现。
   源：`jiqizhixin`
+
+## 2026-06-28
+
+- **OpenAI × Broadcom Jalapeño 推理芯片** ([[202606271437-jalapeno-inference-chip]])
+  28 日批次延续，Jalapeño 自研芯片路线作为重大历史节点持续关注。
+  源：`openai-rss`
+
+- **DeepSeek V4 DSpark 投机解码** ([[202606271438-dspark-speculative-decoding]])
+  Flash 提速 60–85% / Pro 提速 57–78% 的实测数据在 28 日批次再次出现。
+  源：`jiqizhixin`
+
+- **陈天奇《Modern GPU Programming For MLSys》书稿公开**（未升级 Zettel，低置信度）
+  CMU 陈天奇免费在线书，主线 Blackwell 架构，案例含矩阵乘法 + FlashAttention。
+  源：`jiqizhixin`
+
+- **The Batch Issue 359: Apple 端侧模型配方 + GLM-5.2**（未升级 Zettel，低置信度）
+  Andrew Ng 点评 Apple 端侧模型效率方案与 GLM-5.2 开放 agent 意义。
+  源：`the-batch`

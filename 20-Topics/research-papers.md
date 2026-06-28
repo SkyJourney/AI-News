@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:35:00
-updated: 2026-06-27 14:36:00
-entry_total: 2
+updated: 2026-06-28 12:29:00
+entry_total: 5
 ---
 
 # 研究论文 (research-papers)
@@ -17,3 +17,17 @@ entry_total: 2
 - **MME-CoF-Pro: 303 sample video reasoning benchmark (ECCV 2026)** ([[202606271436-mme-cof-pro-video-reasoning]])
   专注视频链式推理的新基准被 ECCV 2026 采纳；Veo 56 / Sora 50，视频推理仍有大空间。
   源：`jiqizhixin`
+
+## 2026-06-28
+
+- **MME-CoF-Pro（延续）** ([[202606271436-mme-cof-pro-video-reasoning]])
+  28 日批次再次抓到，视频推理能力与生成质量解耦的结论持续传播。
+  源：`jiqizhixin`
+
+- **微软年度 AI 职场报告 2026**（未升级 Zettel，低置信度）
+  28 页报告指出员工已准备好使用 AI 但企业流程尚未适配；具体数据待核实。
+  源：`qbitai`
+
+- **The Batch Issue 358: Testing Mythos and Fable**（未升级 Zettel，低置信度）
+  The Batch 评测 Mythos / Fable，并讨论超越 SWE-bench 的下一代 coding 基准方向。
+  源：`the-batch`
