@@ -22,8 +22,14 @@ notes: 无官方 RSS
    > "Extract the latest article listings from this page. For each article, return:
    > - title
    > - URL (full absolute URL, resolve relative paths)
-   > - published date (ISO 8601 if available, otherwise as displayed)
+   > - published date — **VERY IMPORTANT, read 'Date precedence rules' below**
    > - short summary or first paragraph (first 500 chars max)
+   >
+   > **Date precedence rules** (apply IN ORDER):
+   > 1. If the article card shows a **relative date** ('Xd ago', 'X hours ago', 'X minutes ago', or a 'new'/'NEW' badge without explicit date) AND there is **also** an absolute date (e.g. schema.org datePublished) → **prefer the relative date** and convert it to ISO 8601 using today's date as anchor. Reason: the relative date reflects when the article was surfaced to the front page (latest activity); the absolute datePublished may be the original announcement date months earlier and is misleading for a 'latest news' feed.
+   > 2. If only an absolute date exists → use it.
+   > 3. If only a relative date exists → convert it (Xd ago = today − X days; 'new' badge with no quantifier = today).
+   > 4. If neither exists → return null and let the consumer mark low_confidence.
    >
    > Return ONLY a JSON array of these objects, sorted by published date descending (newest first), at most 15 items.
    > Do NOT include navigation links, footer links, or non-article items."
@@ -43,10 +49,16 @@ notes: 无官方 RSS
 
 3. **URL 规范化**：若 raw URL 是相对路径（如 `/news/xxx`），补全为绝对 URL（`https://www.anthropic.com/news/xxx`）
 
-4. **给每条 entry 评估 low_confidence**（任一为真即标 `low_confidence: true`）：
+4. **日期二次校验**——WebFetch 回来的 `published` 字段你要 sanity-check 一遍：
+   - 若 published 是绝对日期，且与 `fetched_at` 差 ≥ 60 天 → 可能是 schema.org datePublished 而非首页 surfaced 日期，**降级到 `low_confidence: true`** 并在 raw_summary 里标 `[date_suspicious: <原值> vs today]`
+   - 若 published 是 ISO 但日期格式异常（如 `2025` 单年份而非完整日期）→ low_confidence: true
+   - 若 WebFetch 已按 Date precedence rules 做过相对日期转换 → 保留并视为可信
+
+5. **给每条 entry 评估 low_confidence**（任一为真即标 `low_confidence: true`）：
    - HTML 结构歧义（多个候选标题或链接）让你不确定主标题
    - 摘要严重缺失（< 50 字或空字符串）
-   - 发布日期无法 ISO 8601 化（只有"yesterday"/"2 days ago"这类相对时间）
+   - 发布日期无法 ISO 8601 化（只有"yesterday"/"2 days ago"且 WebFetch 没给你转）
+   - 发布日期 ≥ 60 天前（见步骤 4 的二次校验）
    - URL 不是文章直链（如 sogou.com 搜索入口、跳转中间页）
    - 反爬使页面只返回部分内容（疑似截断）
 
@@ -70,6 +82,8 @@ WebFetch 是 Claude Code 的官方工具，它能访问 anthropic.com / openai.c
 - **anthropic-news / meta-ai-blog**：英文，纯文本提取通常可靠
 - **the-batch**：吴恩达周评，每条往往是长文，`raw_summary` 取 500 字截断够用
 - **jiqizhixin**：中文，URL 是微信镜像格式，`https://mp.weixin.qq.com/...` 类直接保留
+- **a16z-news-content**：The Latest 卡片角标用相对日期（"Xd ago"、`new`），文章页 schema.org 可能有不同的 `datePublished`（投资公告原始日期，可能几个月前）——**永远优先角标相对日期**。若只看到 schema.org 日期 → low_confidence: true 并标 `date_suspicious`
+- **state-of-ai**：年度 PDF 报告锚点（每年 10 月），平日 entries 通常为空，发布日才有 1 条"YYYY State of AI Report"；其他日子返回 `entry_count: 0` 是正常的
 
 ## 约束
 

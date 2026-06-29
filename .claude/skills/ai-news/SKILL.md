@@ -17,9 +17,13 @@ argument-hint: "[--date=YYYY-MM-DD] [--dry-run] [--from-cache=<inbox-file>]"
 从 `$ARGUMENTS` 解析：
 - `--date=YYYY-MM-DD` → 目标日期（默认今天，用 `date +%F` 取本地日）
 - `--dry-run` → 只跑 Phase 0，不执行 Fetch/Filter/Cluster/Write/Digest
-- `--from-cache=<path>` → 跳过 Phase 1，从 `00-Inbox/<path>` 读取上次的 fetch JSON 直接进 Phase 2（调试 filter/cluster/writer/digester 时省时间，对上游源也友好）
+- `--from-cache=<filename>` → 跳过抓取/中间 phase，按文件后缀路由：
+  - `<date>-<hhmm>-fetch.json` → 跳过 Phase 1，从该 fetch 进 Phase 2
+  - `<date>-<hhmm>-filtered.json` → 跳过 Phase 1+2，从该 filtered 进 Phase 3
+  - `<date>-<hhmm>-cluster.json` → 跳过 Phase 1+2+3，从该 cluster 进 Phase 4+5
+  - filename 不含路径前缀，主会话拼接 `00-Inbox/`；HHMM 同跑必须一致（见 vault-schema §2）
 
-把解析结果记成 `TARGET_DATE`、`DRY_RUN`、`FROM_CACHE` 三个变量，后续 phase 用。
+把解析结果记成 `TARGET_DATE`、`DRY_RUN`、`FROM_CACHE` 三个变量，后续 phase 用。本次跑的 HHMM 在 Phase 1 落 fetch.json 时锁定到变量 `HHMM`（或 `--from-cache` 从文件名解析），三种 IPC 文件共用同一 HHMM。
 
 ---
 
@@ -107,63 +111,116 @@ Phase 0 dry-run @ 2026-06-27
 }
 ```
 
-### Phase 1 落盘到 00-Inbox（缓存层）
+### Phase 1 落盘到 00-Inbox（IPC 起点）
 
-写一份原始 fetch JSON 到 `00-Inbox/${TARGET_DATE}-<HHMM>-fetch.json`（HHMM = 当前本地时间），用 Bash + Write：
+锁定本跑次 HHMM，写一份原始 fetch JSON 到 `00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json`：
 
 ```bash
 mkdir -p /Volumes/Projects/AInews/00-Inbox
-INBOX_FILE="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-$(date +%H%M)-fetch.json"
+HHMM=$(date +%H%M)
+FETCH_PATH="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json"
 ```
 
-把 batch JSON 序列化 Write 到 `$INBOX_FILE`。这一步：
+把 batch JSON 序列化 Write 到 `$FETCH_PATH`。这一步：
 
-- **是 archive，不阻断流水线**——Write 失败只 log warning 不 abort
+- **是 Phase 2-5 的 IPC 起点**——下游所有 phase 都从这个文件衍生中间产物（`*-filtered.json`、`*-cluster.json` 共用同一 HHMM）
+- Write 失败不阻断 Phase 2（因为 filter 直接读 batch JSON 也行），但要在 Phase 6 Log 报警
 - 与同日多次跑不冲突（文件名含 HHMM）
-- 配套 `--from-cache=<filename>`：下次跑可指定缓存文件跳过 Phase 1（filename 不含路径前缀，主会话拼接 `00-Inbox/`）
+- 配套 `--from-cache=<filename>`：下次跑可指定 fetch/filtered/cluster 中任一文件，从对应 phase 起跑
 - **不要清理旧 inbox**——人工决定 retention（vault 是 git 仓库，inbox 文件会被一起追踪，体积失控时手动 archive 或 gitignore）
 
-若 `FROM_CACHE` 不为空 → 跳过 Phase 1.1-1.4 整个抓取段，直接 Read `00-Inbox/${FROM_CACHE}` 反序列化为 batch JSON 进 Phase 2，**且不再落盘 inbox**（避免重复）。
+若 `FROM_CACHE` 不为空 → 按文件后缀路由：
+- `*-fetch.json` → 跳过 Phase 1.1-1.4，直接设 `FETCH_PATH=00-Inbox/${FROM_CACHE}`，HHMM 从文件名解析，进 Phase 2
+- `*-filtered.json` → 跳过 Phase 1+2，设 `FILTERED_PATH=00-Inbox/${FROM_CACHE}`，进 Phase 3
+- `*-cluster.json` → 跳过 Phase 1+2+3，设 `CLUSTER_PATH=00-Inbox/${FROM_CACHE}`，进 Phase 4+5
+
+**所有 from-cache 模式下不再重复落盘**（避免污染缓存层）。
 
 ---
 
 ## Phase 2 — Filter
 
-起 1 个 `news-filter` subagent，把 Phase 1 的 batch JSON 作为输入。
+预计算 filtered path（HHMM 复用 Phase 1）：
 
-subagent 会先 Read filter-criteria.md，然后输出 `{kept[], discarded[], stats{}}`。直接把 kept 数组带入 Phase 3。
+```
+FILTERED_PATH=/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-filtered.json
+```
+
+起 1 个 `news-filter` subagent，prompt 传：
+
+- `fetch_path`: `$FETCH_PATH`（Phase 1 落盘的 fetch.json）
+- `out_path`: `$FILTERED_PATH`
+- `target_date`: `$TARGET_DATE`
+- `batch_id`: `${TARGET_DATE}-${HH:MM}`
+
+subagent 内部 Read filter-criteria.md + fetch.json → Write filtered.json → 主输出**仅**返回 `{filtered_path, stats, errors}`（不再回完整 kept/discarded 数组，规避 32k token 上限）。
+
+主会话只读 stats 用于 Phase 6 Log；带 `FILTERED_PATH` 进入 Phase 3。
+
+### Filter 错误处理
+- `errors` 非空 → 不阻断，但 Phase 6 Log 完整列出
+- 若 filtered.json Write 失败 → 检查 `out_path` 父目录可写性；失败重 spawn 一次，仍失败则 abort
 
 ---
 
 ## Phase 3 — Cluster
 
-起 1 个 `news-cluster` subagent，输入 Phase 2 的 `kept` 数组 + `batch_id`。
+预计算 cluster path（HHMM 复用）：
 
-subagent 输出 `{topics[]}`，每个 topic 含 `slug` / `is_new` / `entries[]`（每条标了 `zettel_worthy` 与 `rationale`）。带入 Phase 4。
+```
+CLUSTER_PATH=/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-cluster.json
+```
+
+**注入 vault 现状**（修复 cluster 历史上 `is_new` 误判）：
+
+```bash
+EXISTING_TOPICS=$(ls /Volumes/Projects/AInews/20-Topics/*.md 2>/dev/null | \
+  xargs -n1 basename | sed 's/\.md$//' | grep -v '^agents$' | sort)
+```
+
+> `agents.md` 是 vault 内的 AI 行为约定文档，不是 topic 笔记，要排除。其他 `*.md` 都是 cluster 视野内的"已存在 topic"。
+
+把数组化的 EXISTING_TOPICS 作为参数注入 cluster prompt——cluster 严格按"slug 在数组里 → is_new=false；不在 → is_new=true"判定。**不再让 cluster 凭印象推断**。
+
+起 1 个 `news-cluster` subagent，prompt 传：
+- `filtered_path`: `$FILTERED_PATH`
+- `out_path`: `$CLUSTER_PATH`
+- `existing_topics`: `[...]`（上面 ls 拿到的数组）
+- `target_date`: `$TARGET_DATE`
+- `batch_id`: `${TARGET_DATE}-${HH:MM}`
+
+subagent Read filtered.json + filter-criteria §3 → Write cluster.json → 主输出**仅**返回 `{cluster_path, stats, topics_summary, errors}`（不再回完整 topics 数组）。
+
+主会话读 stats + topics_summary 用于 Phase 6 Log；带 `CLUSTER_PATH` 进入 Phase 4 和 Phase 5（两者并列消费）。
 
 ---
 
 ## Phase 4 — Write
 
-起 1 个 `news-writer` subagent，输入 Phase 3 的 `topics` + `target_date=${TARGET_DATE}`。
+起 1 个 `news-writer` subagent，prompt 传：
 
-subagent 会 Read vault-schema.md 后写盘到 `10-Daily/`、`20-Topics/`、`50-Zettel/`，返回 `{daily_path, zettel_paths, topic_paths, topics_created, topics_appended, zettel_count, errors}`。
+- `cluster_path`: `$CLUSTER_PATH`
+- `target_date`: `$TARGET_DATE`
+
+subagent Read cluster.json + vault-schema.md + filter-criteria §5 → 写盘到 `10-Daily/`、`20-Topics/`、`50-Zettel/`，返回 `{daily_path, zettel_paths, topic_paths, topics_created, topics_appended, zettel_count, errors}`。
 
 ### Writer 错误处理
 - `errors` 非空 → 不阻断，但要在 Phase 6 Log 里完整列出
-- 若 `zettel_count == 0` 但 input 有 zettel_worthy 条目 → 异常，报警让用户检查
+- 若 `zettel_count == 0` 但 cluster 内有 `zettel_worthy: true` 条目 → 异常，报警让用户检查
+- 若 errors 含 `cluster_is_new_mismatch:<slug>` → 在 Phase 6 Log 标"cluster `is_new` 与 vault 现状不一致：<slug>"（虽然 writer 已自动兜底纠正，但仍是 cluster 行为退化信号）
 
 ---
 
 ## Phase 5 — Digest
 
-起 1 个 `news-digester` subagent，输入：
-- **`topics`**：Phase 3 cluster 的完整输出（主输入，digest 的事实基底）
-- `target_date=${TARGET_DATE}`
-- `zettel_paths`：Phase 4 writer 返回的（可选辅助，用来取 Zettel 内"关键洞察"丰富第 3 句）
-- `daily_path`：Phase 4 writer 返回的（可选辅助，仅取 TL;DR 段判断重点）
+起 1 个 `news-digester` subagent，prompt 传：
 
-**关键设计**：digester 与 writer **并列消费同一份 cluster 输出**——不是从 writer 渲染的 Daily 二次解析（信息有损）。URL / source_name 等元数据直接从 cluster 的 `topics[].entries[]` 字段原样使用。
+- `cluster_path`: `$CLUSTER_PATH`（**主输入**，与 writer 同源消费 cluster.json）
+- `target_date`: `$TARGET_DATE`
+- `zettel_paths`: Phase 4 writer 返回的（可选辅助，取"关键洞察"丰富第 3 句）
+- `daily_path`: Phase 4 writer 返回的（可选辅助，仅取 TL;DR 段判断重点）
+
+**关键设计**：digester 与 writer **并列消费同一份 cluster.json**——不是从 writer 渲染的 Daily 二次解析（信息有损）。URL / source_name 等元数据直接从 cluster.json 的 `topics[].entries[]` 字段原样使用。
 
 subagent 写盘到 `30-Digests/<target_date>-digest.md`（去 wikilink、URL 展开的可分享/可打印版本），返回 `{digest_path, items_summarized, zettel_read, topic_count, self_check, errors}`。
 

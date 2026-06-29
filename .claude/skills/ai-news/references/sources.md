@@ -138,8 +138,11 @@
   url: https://a16z.com/news-content/
   reliability: alive
   fallback: true
-  last_verified: 2026-06-27
-  notes: 经典 a16z RSS feed/ 已死约 2 年（见 blacklist.md）；此 URL 是替代 webfetch 路径；强 VC 叙事偏向，filter 阶段需对"AI 必将颠覆一切"类口号格外严格
+  last_verified: 2026-06-29
+  notes: |
+    经典 a16z RSS feed/ 已死约 2 年（见 blacklist.md）；此 URL 是替代 webfetch 路径；强 VC 叙事偏向，filter 阶段需对"AI 必将颠覆一切"类口号格外严格。
+    【2026-06-29 调研】a16z 站点在更新（最新条目 2026-06-27 标 "2d ago"），看起来"陈旧"是 fetcher 误读相对日期：The Latest 卡片用 "Xd ago" / `new` 标记表示推到首页时间，文章页 schema.org 的 datePublished 可能是几个月前的投资公告原始日期。news-fetcher-webfetch v2.1 起 Date precedence rules 优先取相对日期，本源**不入黑名单**，作为低频但高质量监测源保留。
+    若 fetcher 再次拉回半年前日期 → 不是源停更，是 fetcher 又退化到取 datePublished，先排查 agent system prompt。
 
 - name: state-of-ai
   tier: 3

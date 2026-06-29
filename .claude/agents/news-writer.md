@@ -1,6 +1,6 @@
 ---
 name: news-writer
-description: 输入 news-cluster 的 topics 输出，写盘到 vault 的 10-Daily/、20-Topics/、50-Zettel/。由 /ai-news skill Phase 4 调用，一次跑只起 1 个。
+description: 输入 Phase 3 cluster.json 路径，写盘到 vault 的 10-Daily/、20-Topics/、50-Zettel/。由 /ai-news skill Phase 4 调用，一次跑只起 1 个。
 tools: Read, Write, Edit, Bash, Glob
 model: sonnet
 color: pink
@@ -11,14 +11,17 @@ color: pink
 ## 输入
 
 调用方传入：
-- news-cluster 的输出 JSON（含 `topics[]`，每个 topic 有 entries 与 zettel_worthy 标记）
+- `cluster_path`：Phase 3 落盘的 cluster.json 绝对路径（如 `/Volumes/Projects/AInews/00-Inbox/2026-06-29-0816-cluster.json`）
 - `target_date`（一般是今天，格式 `YYYY-MM-DD`）
+
+> **设计原因**：v2.1 起 writer 接 cluster.json 路径而非完整 JSON——规避 subagent 输入截断，同时与 digester 并列从同一份 cluster.json 消费（writer 和 digester 是同源双视图）。完整 cluster.json schema 见 vault-schema §6.3。
 
 ## 工作步骤
 
 1. **Read** `/Volumes/Projects/AInews/.claude/skills/ai-news/references/vault-schema.md` 全文，作为落盘准绳
 2. **Read** `/Volumes/Projects/AInews/.claude/skills/ai-news/references/filter-criteria.md` **§5 Tags 打标策略**，作为 frontmatter `tags` 字段的依据
-3. 按顺序写盘：
+3. **Read** 调用方给的 `cluster_path`，反序列化为 cluster JSON（含 topics / existing_topics_snapshot / stats）
+4. 按顺序写盘：
 
 ### 2.1 写 Zettel（每个 zettel_worthy=true 的 entry）
 
@@ -48,8 +51,13 @@ color: pink
 ### 2.2 写 / 追加 Topic（每个 topic）
 
 文件路径 `20-Topics/<slug>.md`：
-- 若文件不存在 → Write，按 vault-schema §3 Topic 段写 frontmatter + 首段总览
-- 若文件已存在 → **Edit append**（不重写整文件！会丢历史）。追加格式：
+- **以实际文件系统状态为准**（Glob/Read 真去看），cluster 给的 `is_new` 是参考但**不**作为唯一依据：
+  - cluster `is_new: true` + 文件不存在 → Write 创建
+  - cluster `is_new: true` + 文件已存在（cluster 误判） → 改走 Edit append，不要覆盖；在 errors 数组里记 `cluster_is_new_mismatch: <slug>`
+  - cluster `is_new: false` + 文件存在 → Edit append（正常路径）
+  - cluster `is_new: false` + 文件不存在（cluster 误判反向） → 改走 Write 创建；在 errors 数组里记 `cluster_is_new_mismatch: <slug>`
+- 新建时按 vault-schema §3 Topic 段写 frontmatter + 首段总览
+- 追加时**绝不重写整文件**（会丢历史），追加格式：
   ```
   ## YYYY-MM-DD
   - **<title>** ([[<Zettel-ID>]] 或纯文本)

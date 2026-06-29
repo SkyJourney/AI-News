@@ -1,6 +1,6 @@
 ---
 name: news-digester
-description: 输入 news-writer 的产出（daily + zettel + topics），归纳为不带双链的可分享/可打印版本，写到 vault 的 30-Digests/。由 /ai-news skill Phase 5 调用，一次跑只起 1 个。
+description: 输入 Phase 3 cluster.json 路径（与 writer 同源消费），归纳为不带双链的可分享/可打印版本，写到 vault 的 30-Digests/。由 /ai-news skill Phase 5 调用，一次跑只起 1 个。
 tools: Read, Write, Bash, Glob
 model: sonnet
 color: cyan
@@ -26,10 +26,10 @@ color: cyan
 
 调用方传入：
 - `target_date`：YYYY-MM-DD（**必填**）
-- `topics`：news-cluster 的完整 topics JSON（**必填，digest 的事实基底**）
-  - 每个 topic 含 `slug` / `entries[]`
-  - 每个 entry 含完整字段：`title` / `url` / `source_name` / `raw_summary` / `published` / `low_confidence` / 可选 `also_reported_by`
-  - **这是你写每条 entry 的唯一权威来源**——URL、source_name、raw_summary 全部按 topics 字段原样使用
+- `cluster_path`：Phase 3 落盘的 cluster.json 绝对路径（**必填，digest 的事实基底**）
+  - schema 见 vault-schema §6.3
+  - `topics[]` 内每个 entry 含完整字段：`title` / `url` / `source_name` / `raw_summary` / `published` / `low_confidence` / 可选 `also_reported_by`
+  - **这是你写每条 entry 的唯一权威来源**——URL、source_name、raw_summary 全部按 cluster.json 字段原样使用
 - `zettel_paths`（可选）：本日 Daily 引用的所有 Zettel 绝对路径数组
   - 用途：为升级为 Zettel 的概念取"关键洞察" bullet，丰富对应 entry 的第 3 句
   - 不读 Zettel 也能完成 digest——只是少了延伸意义
@@ -37,9 +37,11 @@ color: cyan
   - 用途：取 TL;DR 段判断哪些是当日重点；取"昨日回顾"段做章节序的微调
   - **绝不**从 daily 解析 entries（信息有损：daily 渲染时可能漏 URL）
 
+> **设计原因**：v2.1 起 digester 与 writer 并列消费同一份 cluster.json——同源双视图，避免任一从对方派生导致的信息有损。
+
 ## 工作步骤
 
-1. **以 `topics` 为唯一 entry 基底**：列出每个 topic 下所有 entries，记录 (title, url, source_name, raw_summary) 四元组
+1. **Read** 调用方给的 `cluster_path`，取 `topics` 数组作为唯一 entry 基底：列出每个 topic 下所有 entries，记录 (title, url, source_name, raw_summary) 四元组
 2. 若提供 `zettel_paths`：并行 Read 全部，建立 `source_url → 关键洞察` 映射，供第 3 句润色
 3. 若提供 `daily_path`：Read 取 TL;DR 段（标重点条目），不解析按主题段
 4. 按 `topics` 数组顺序组织章节（与 Daily 一致，方便对照）

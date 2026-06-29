@@ -3,7 +3,7 @@
 > 任何 AI agent 在本 vault 内**写文件之前必读本文件**。这是 vault 的根公约。
 > 与本文件配套但角色不同：`.claude/skills/ai-news/references/vault-schema.md` 是 `/ai-news` 采集管道内部 subagent 的镜像参考；本文件是给"路过 vault 的所有 AI"看的根约定。两者内容一致，更新时需同步。
 
-最后更新：2026-06-27
+最后更新：2026-06-29
 
 ---
 
@@ -11,7 +11,7 @@
 
 | 目录 | 用途 | 谁写 |
 |---|---|---|
-| `00-Inbox/` | **Phase 1 fetcher 输出的原始 JSON 缓存**——每跑落盘一份，供 `--from-cache` 调试 / 同日重跑跳过 fetch / 断点恢复 | `/ai-news` Phase 1（主会话写） |
+| `00-Inbox/` | **Phase 间 IPC 中间产物**：fetch.json / filtered.json / cluster.json，一跑一组（共用同一 HHMM）。subagent 输出大 JSON 直接 Write 到这里，主会话只传文件路径，规避 32k token 输出上限。也供 `--from-cache=<filename>` 跨跑调试/断点恢复 | `/ai-news` Phase 1 主会话 + Phase 2 filter + Phase 3 cluster |
 | `10-Daily/` | 每日简报（汇总层），一天一文件，**含 wikilink / Zettel ID / Bases 字段**，是 vault 内部档案 | `/ai-news` writer |
 | `20-Topics/` | 主题汇聚笔记（如"模型发布""安全对齐"）；同一主题文件持续 append | `/ai-news` cluster + 人手维护 |
 | `30-Digests/` | **可分享/可打印的纯文本汇总版**——基于同日 cluster 输出生成，去 wikilink、URL 完整展开、章节自包含；读者无 Obsidian 也能完整阅读 | `/ai-news` digester |
@@ -30,15 +30,19 @@
 
 | 类型 | 模式 | 示例 |
 |---|---|---|
-| Fetch 缓存 | `00-Inbox/YYYY-MM-DD-HHMM-fetch.json`（一跑一文件） | `00-Inbox/2026-06-27-0900-fetch.json` |
-| Daily 简报 | `10-Daily/YYYY-MM-DD.md` | `10-Daily/2026-06-27.md` |
-| Zettel 原子卡 | `50-Zettel/YYYYMMDDHHmm-<slug>.md` | `50-Zettel/202606271430-gpt5-multimodal.md` |
+| Phase 1 Fetch 缓存 | `00-Inbox/YYYY-MM-DD-HHMM-fetch.json` | `00-Inbox/2026-06-29-0816-fetch.json` |
+| Phase 2 Filter 中间产物 | `00-Inbox/YYYY-MM-DD-HHMM-filtered.json` | `00-Inbox/2026-06-29-0816-filtered.json` |
+| Phase 3 Cluster 中间产物 | `00-Inbox/YYYY-MM-DD-HHMM-cluster.json` | `00-Inbox/2026-06-29-0816-cluster.json` |
+| Daily 简报 | `10-Daily/YYYY-MM-DD.md` | `10-Daily/2026-06-29.md` |
+| Zettel 原子卡 | `50-Zettel/YYYYMMDDHHmm-<slug>.md` | `50-Zettel/202606291430-gpt5-multimodal.md` |
 | Topic 主题笔记 | `20-Topics/<slug>.md`（小写连字符） | `20-Topics/model-releases.md` |
-| Digest 分享版 | `30-Digests/YYYY-MM-DD-digest.md`（一天一文件） | `30-Digests/2026-06-27-digest.md` |
+| Digest 分享版 | `30-Digests/YYYY-MM-DD-digest.md`（一天一文件） | `30-Digests/2026-06-29-digest.md` |
 | Deep Dive / Weekly | `40-Deep-Dives/YYYY-MM-<slug>.md` 或 `40-Deep-Dives/YYYY-Www-weekly.md` | `40-Deep-Dives/2026-W26-weekly.md` |
-| 运行日志 | `99-Log/YYYY-MM-DD-<run-type>.md` | `99-Log/2026-06-27-run.md`、`99-Log/2026-06-27-source-deadcheck.md` |
+| 运行日志 | `99-Log/YYYY-MM-DD-<run-type>.md` | `99-Log/2026-06-29-run.md`、`99-Log/2026-06-29-source-deadcheck.md` |
 
 **Zettel 的时间戳 ID（`YYYYMMDDHHmm-`）是强约定**：用于跨目录 wikilink 时防重名失链。
+
+**IPC 文件 HHMM 同跑绑定**：同一跑次产生的 `fetch.json / filtered.json / cluster.json` 三个 IPC 文件**必须共用同一 HHMM**——这是 Phase 链跨阶段定位中间产物的唯一锚。主会话 Phase 1 落 fetch.json 时锁定 HHMM，传给后续所有 phase。`--from-cache=<filename>` 接受三种文件中的任意一种，从对应 phase 起跑。
 
 ---
 

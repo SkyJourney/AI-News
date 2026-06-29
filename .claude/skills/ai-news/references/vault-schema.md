@@ -3,7 +3,7 @@
 > 本文件是 `/ai-news` 内 fetcher/cluster/writer subagent 的**自包含落盘约定**——因为 subagent 启动时不读 vault 根的 `SCHEMA.md`，所以这里完整镜像一份。
 > 与 vault 根 `/Volumes/Projects/AInews/SCHEMA.md` 同步维护：改一处必须改另一处。
 
-最后同步：2026-06-27
+最后同步：2026-06-29
 
 ---
 
@@ -11,7 +11,7 @@
 
 | 目录 | `/ai-news` 谁写 | 写什么 |
 |---|---|---|
-| `00-Inbox/` | 主会话 Phase 1 | fetcher 输出的原始 JSON 缓存（一跑一文件），供 `--from-cache` 调试 / 同日重跑跳过 fetch |
+| `00-Inbox/` | 主会话 Phase 1 + news-filter + news-cluster | **Phase 间 IPC 中间产物**：fetch.json / filtered.json / cluster.json，一跑一组。subagent 输出大 JSON 直接 Write 到这里，主会话只传文件路径，规避 subagent 32k token 输出上限 |
 | `10-Daily/` | news-writer | 当日简报，一天一文件（含 wikilink，vault 内部档案） |
 | `20-Topics/` | news-cluster + news-writer | 主题文件（append 模式） |
 | `30-Digests/` | news-digester | 当日分享/打印版（去 wikilink、URL 展开），一天一文件 |
@@ -19,6 +19,20 @@
 | `50-Zettel/` | news-writer | 原子卡，一题一卡 |
 | `90-Archive/` | (不写) | 人工归档 |
 | `99-Log/` | 主会话（Phase 6） + Phase 0 死链报告 | 运行日志 |
+
+### Phase 间 IPC 流（v2.1 文件契约）
+
+```
+Phase 1 fetcher × N → 合并 batch JSON → 主会话 Write 00-Inbox/<date>-<hhmm>-fetch.json
+Phase 2 news-filter   → Read fetch.json → Write 00-Inbox/<date>-<hhmm>-filtered.json → 主输出 {filtered_path, stats}
+Phase 3 news-cluster  → Read filtered.json + existing_topics 列表 → Write 00-Inbox/<date>-<hhmm>-cluster.json → 主输出 {cluster_path, stats}
+Phase 4 news-writer   → Read cluster.json → 写 10-Daily/20-Topics/50-Zettel → 主输出 {daily_path, zettel_paths, topic_paths, ...}
+Phase 5 news-digester → Read cluster.json (+ 可选 zettel/daily) → 写 30-Digests/ → 主输出 {digest_path, ...}
+```
+
+- 三种 IPC 文件 HHMM 相同（绑定到同一跑次）
+- 失败可人工读 inbox 中间文件 debug
+- `--from-cache=<filename>` 模式：filename 可指任意一种（`*-fetch.json` 跳过 Phase 1；`*-filtered.json` 跳过 Phase 1+2；`*-cluster.json` 跳过 Phase 1+2+3）
 
 ⚠️ **10-Daily 与 30-Digests 是同一份 cluster 输出的两个渲染视图**——writer 与 digester 并列消费 Phase 3 的 `topics` JSON，互不派生。前者面向 vault 内部 PKM（双链、概念回溯），后者面向外部分享（自包含、可印）。
 
@@ -28,13 +42,17 @@
 
 | 类型 | 模式 | 示例 |
 |---|---|---|
-| Fetch 缓存 | `00-Inbox/YYYY-MM-DD-HHMM-fetch.json` | `00-Inbox/2026-06-27-0900-fetch.json` |
-| Daily 简报 | `10-Daily/YYYY-MM-DD.md` | `10-Daily/2026-06-27.md` |
-| Zettel 原子卡 | `50-Zettel/YYYYMMDDHHmm-<slug>.md` | `50-Zettel/202606271430-gpt5-multimodal.md` |
+| Phase 1 Fetch 缓存 | `00-Inbox/YYYY-MM-DD-HHMM-fetch.json` | `00-Inbox/2026-06-29-0816-fetch.json` |
+| Phase 2 Filter 中间产物 | `00-Inbox/YYYY-MM-DD-HHMM-filtered.json` | `00-Inbox/2026-06-29-0816-filtered.json` |
+| Phase 3 Cluster 中间产物 | `00-Inbox/YYYY-MM-DD-HHMM-cluster.json` | `00-Inbox/2026-06-29-0816-cluster.json` |
+| Daily 简报 | `10-Daily/YYYY-MM-DD.md` | `10-Daily/2026-06-29.md` |
+| Zettel 原子卡 | `50-Zettel/YYYYMMDDHHmm-<slug>.md` | `50-Zettel/202606291430-gpt5-multimodal.md` |
 | Topic 主题 | `20-Topics/<slug>.md` | `20-Topics/model-releases.md` |
-| Digest 分享版 | `30-Digests/YYYY-MM-DD-digest.md` | `30-Digests/2026-06-27-digest.md` |
-| 运行日志 | `99-Log/YYYY-MM-DD-run.md` | `99-Log/2026-06-27-run.md` |
-| 死链报告 | `99-Log/YYYY-MM-DD-source-deadcheck.md` | `99-Log/2026-06-27-source-deadcheck.md` |
+| Digest 分享版 | `30-Digests/YYYY-MM-DD-digest.md` | `30-Digests/2026-06-29-digest.md` |
+| 运行日志 | `99-Log/YYYY-MM-DD-run.md` | `99-Log/2026-06-29-run.md` |
+| 死链报告 | `99-Log/YYYY-MM-DD-source-deadcheck.md` | `99-Log/2026-06-29-source-deadcheck.md` |
+
+**HHMM 同跑绑定原则**：同一跑次产生的 `fetch.json / filtered.json / cluster.json` 三个 IPC 文件**必须共用同一 HHMM**——这是 Phase 链跨阶段定位中间产物的唯一锚。主会话 Phase 1 落 fetch.json 时锁定 HHMM，传给后续所有 phase。
 
 **Zettel 时间戳 ID 规则**：`YYYYMMDDHHmm`（12 位，分钟级），用本地时区（Asia/Shanghai）。多张卡同分钟时往后顺延 1 分钟。
 
@@ -127,3 +145,65 @@ zettel_written: 8
 6. Topic 文件首次创建用 Write、后续 append 用 Edit（**绝不重写 Topic 文件**，会丢历史）
 
 任何一项不满足，停下不写，把问题写入 99-Log。
+
+---
+
+## 6. IPC 中间文件 JSON Schema（v2.1）
+
+### 6.1 `fetch.json`（Phase 1 输出 / Phase 2 输入）
+
+```json
+{
+  "batch_id": "YYYY-MM-DD-HH:MM",
+  "target_date": "YYYY-MM-DD",
+  "fetched_at": "ISO 8601 with tz",
+  "fetchers": [
+    { "source_name": "...", "tier": 1, "perspective": "research", "entry_count": N, "entries": [...] }
+  ],
+  "failures": [{ "source_name": "...", "error": "..." }],
+  "retries": [{ "source_name": "...", "original_error": "...", "retry_status": "success|fail" }],
+  "stats": { "sources_attempted": N, "sources_with_data": N, "sources_empty": N, "sources_failed": N, "entries_total": N, "first_fail_retried": N, "retry_success": N }
+}
+```
+
+### 6.2 `filtered.json`（Phase 2 输出 / Phase 3 输入）
+
+```json
+{
+  "batch_id": "YYYY-MM-DD-HH:MM",
+  "target_date": "YYYY-MM-DD",
+  "kept": [
+    { "title": "...", "url": "...", "published": "...", "raw_summary": "...", "source_name": "...", "low_confidence": false, "also_reported_by": ["..."], "language": "en|zh" }
+  ],
+  "discarded": [
+    { "title": "...", "url": "...", "source_name": "...", "reason": "..." }
+  ],
+  "stats": { "input_count": N, "after_dedup": N, "after_filter": N, "discarded_count": N }
+}
+```
+
+### 6.3 `cluster.json`（Phase 3 输出 / Phase 4+5 输入）
+
+```json
+{
+  "batch_id": "YYYY-MM-DD-HH:MM",
+  "target_date": "YYYY-MM-DD",
+  "existing_topics_snapshot": ["model-releases", "..."],  // 主会话注入的 vault 现状快照
+  "topics": [
+    {
+      "slug": "model-releases",
+      "is_new": false,
+      "entry_count": N,
+      "entries": [
+        { "title": "...", "url": "...", "source_name": "...", "published": "...", "raw_summary": "...", "low_confidence": false, "also_reported_by": [...], "zettel_worthy": true, "rationale": "..." }
+      ]
+    }
+  ],
+  "stats": { "input_count": N, "topic_count": N, "new_topic_count": N, "zettel_worthy_count": N }
+}
+```
+
+**契约关键点**：
+- 三种文件**保留完整字段**（不裁剪），下游 phase 直接消费，无需主会话回填
+- `existing_topics_snapshot` 由主会话在 Phase 3 起 cluster 前注入（`ls 20-Topics/*.md`），cluster 用它判定 `is_new = !snapshot.includes(slug)`
+- subagent Write 后**只**返回 `{filtered_path|cluster_path, stats, errors}` 三件套，主会话不再传 JSON 内容
