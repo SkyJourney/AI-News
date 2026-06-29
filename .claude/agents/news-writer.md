@@ -12,9 +12,10 @@ color: pink
 
 调用方传入：
 - `cluster_path`：Phase 3 落盘的 cluster.json 绝对路径（如 `/Volumes/Projects/AInews/00-Inbox/2026-06-29-0816-cluster.json`）
+- `seen_urls_path`：跨日去重索引路径（如 `/Volumes/Projects/AInews/00-Inbox/_seen-urls.json`）—— Phase 4 完成后**仅回填** `zettel_id` 字段，不动 first_seen_date / kept_in_daily 等其他字段（那是 filter 的责任）
 - `target_date`（一般是今天，格式 `YYYY-MM-DD`）
 
-> **设计原因**：v2.1 起 writer 接 cluster.json 路径而非完整 JSON——规避 subagent 输入截断，同时与 digester 并列从同一份 cluster.json 消费（writer 和 digester 是同源双视图）。完整 cluster.json schema 见 vault-schema §6.3。
+> **设计原因**：v2.1 起 writer 接 cluster.json 路径而非完整 JSON——规避 subagent 输入截断，同时与 digester 并列从同一份 cluster.json 消费（writer 和 digester 是同源双视图）。v2.2 起 writer 还负责把刚写的 Zettel ID 回填到 _seen-urls.json，让明天 filter 跑跨日去重时能拿到旧 Zettel 反查。完整 cluster.json schema 见 vault-schema §6.3，_seen-urls.json schema 见 §6.4。
 
 ## 工作步骤
 
@@ -28,7 +29,8 @@ color: pink
 文件路径 `50-Zettel/YYYYMMDDHHmm-<slug>.md`：
 - 时间戳 ID：用本地时区（Asia/Shanghai）当前分钟；同分钟冲突时往后顺延 1 分钟
 - slug：从 title 取关键词，小写连字符 ≤ 50 字符
-- Glob `50-Zettel/*-<slug-prefix>*.md` 检查是否已存在同概念 Zettel；若存在 → 不重建，直接复用旧文件路径
+- **优先**查 _seen-urls.json：若 entry.url 在索引里有 `zettel_id` 字段 → 直接复用该 Zettel ID，不创建新 Zettel
+- 若 _seen-urls 没记录或 zettel_id 为空 → Glob `50-Zettel/*-<slug-prefix>*.md` 检查是否已存在同概念 Zettel；若存在 → 不重建，直接复用旧文件路径
 - frontmatter 按 vault-schema §3 Zettel 段
 - 正文结构：
   ```
@@ -93,6 +95,9 @@ color: pink
   - **<title>** ([[Zettel-ID]])
     <事件描述 2 句话>
     源：[原文](<url>) — `<source_name>`
+  - 🔄 [复盘] **<title>** ([[旧 Zettel-ID]])
+    <re_coverage 条目用 🔄 前缀，标"复盘"；wikilink 指向 _seen-urls 中已记录的 zettel_id 或 Glob 找到的旧 Zettel>
+    源：[原文](<url>) — `<source_name>` · 首记于 [[<previously_kept_in_daily>]]
 
   ### 🛡️ 安全 / 对齐 [[safety-alignment]]
   ...
@@ -104,11 +109,35 @@ color: pink
   - 昨日延续主题：<list>（若昨日 Daily 存在）
   ```
 
+### 2.4 回填 _seen-urls.json（v2.2 新增）
+
+写完 Daily / Topic / Zettel 后，对每个本跑次涉及的 entry URL，按下规则用 **Edit** 更新 `_seen-urls.json`（**绝不整体覆盖**，避免破坏 filter 写入的 first_seen 等字段）。
+
+**找节点的策略**（处理 URL 规范化漂移）：
+1. 先按 entry.url 原值精确查 _seen-urls.urls
+2. 找不到 → 对 entry.url 与 _seen-urls 内每个 key 都按 filter-criteria §1.5 顶部的 normalize 规则做归一化，匹配 normalize 后相等的 key
+3. 还找不到 → 视为节点缺失，errors 记 `seen_urls_missing_url: <url>`，不阻断
+
+**`zettel_id` 回填规则**：
+
+| entry 类型 | 操作 |
+|---|---|
+| 新建 Zettel | 找到对应 URL 节点，Edit 把 `zettel_id` 字段值改为新 Zettel 时间戳 ID |
+| 复用旧 Zettel（_seen-urls 已有 zettel_id） | 不动 |
+| 复用旧 Zettel（Glob 找到但 _seen-urls 未记录） | Edit 把 `zettel_id` 字段值补为找到的旧 ID |
+| 仅在 Daily 列出但未升级 Zettel | 不动 zettel_id（保持空）|
+
+**重要**：
+- Edit 必须用精确 JSON path 替换——单个字段值，不要重写整个节点
+- 若文件被 filter 写后已有 `last_updated`，写完仍保持 filter 写入的值（writer 不算"更新源"，只是补字段）
+- 若 _seen-urls 不存在对应 URL 节点（filter 应该刚写过，理论上不会发生）→ 在 errors 数组记 `seen_urls_missing_url: <url>`，不阻断
+
 ## 错误处理
 
 - Bash `date` 失败 → 用 target_date 作为兜底（Phase 0 已提供）
 - Write 文件已存在 → 立刻报错给调用方（理论上不会发生，因为日期文件一天只写一次；若重跑同一天需调用方先决定覆盖策略）
 - Glob 查重 Zettel 没结果 → 视为新概念，正常创建
+- _seen-urls.json Edit 失败 → 不阻断主流程，errors 数组记 `seen_urls_backfill_failed: <reason>`
 
 ## 输出
 
@@ -122,9 +151,14 @@ color: pink
   "topics_created": ["..."],
   "topics_appended": ["..."],
   "zettel_count": 8,
+  "zettel_reused": ["202606271430-gpt5-6-sol", "..."],
+  "re_coverage_count": 2,
+  "seen_urls_backfilled": 5,
   "errors": []
 }
 ```
+
+`zettel_reused` 列出本跑次因 _seen-urls 命中或 Glob 命中而复用的旧 Zettel ID；`re_coverage_count` 是 Daily 中带 🔄 标识的条目数；`seen_urls_backfilled` 是本跑次回填 zettel_id 字段的 URL 数。
 
 ## 约束
 

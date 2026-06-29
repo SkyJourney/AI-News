@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:35:00
-updated: 2026-06-29 14:00:00
-entry_total: 11
+updated: 2026-06-28 12:29:00
+entry_total: 5
 ---
 
 # 研究论文 (research-papers)
@@ -30,30 +30,4 @@ entry_total: 11
 
 - **The Batch Issue 358: Testing Mythos and Fable**（未升级 Zettel，低置信度）
   The Batch 评测 Mythos / Fable，并讨论超越 SWE-bench 的下一代 coding 基准方向。
-  源：`the-batch`
-
-## 2026-06-29
-
-- **ICML 2026 Oral：机理数据归因** ([[202606291402-icml-mechanistic-data-attribution]])
-  北大 & 智源发现驱动归纳头等关键机制的是 XML/LaTeX 重复结构，而非高质量语料——颠覆数据清洗直觉。
-  源：`jiqizhixin`
-
-- **Dwarkesh Patel："可磨性任务"与发布后学习写回权重** ([[202606291403-rlvr-grindable-tasks-postdeployment]])
-  RLVR 下一阶段：从可验证任务扩展到可磨性任务；发布后持续学习写回权重将重塑模型生命周期。
-  源：`jiqizhixin`
-
-- **How agents are transforming work**（未升级 Zettel）
-  OpenAI 量化 agent 对任务时长与复杂度上限的扩展效应；具体数据待阅原文后核定。
-  源：`openai-rss`
-
-- **梁文锋署名 DSpark：系统工程精髓**（未升级 Zettel，低置信度）
-  DSpark 解读，核心在极强系统工程设计；raw_summary 仅 11 字，需核实原论文。
-  源：`qbitai`
-
-- **CVPR 2026 最热方向：杭州团队端侧流式多模态**（未升级 Zettel，低置信度）
-  全球首个端侧实时流式多模态声称，VLM-R1 团队出手；技术细节待核实。
-  源：`qbitai`
-
-- **The Batch Issue 359: Loop engineering, Apple 端侧, GLM5.2**（未升级 Zettel）
-  DeepLearning.AI 周刊汇总 loop engineering 新兴概念、Apple 端侧优化、GLM5.2 能力。
   源：`the-batch`

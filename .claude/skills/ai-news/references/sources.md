@@ -134,15 +134,17 @@
   tier: 3
   perspective: investor
   bias: VC
-  fetch_method: webfetch
+  fetch_method: script
+  script: a16z-fetch.py
   url: https://a16z.com/news-content/
   reliability: alive
   fallback: true
   last_verified: 2026-06-29
   notes: |
-    经典 a16z RSS feed/ 已死约 2 年（见 blacklist.md）；此 URL 是替代 webfetch 路径；强 VC 叙事偏向，filter 阶段需对"AI 必将颠覆一切"类口号格外严格。
-    【2026-06-29 调研】a16z 站点在更新（最新条目 2026-06-27 标 "2d ago"），看起来"陈旧"是 fetcher 误读相对日期：The Latest 卡片用 "Xd ago" / `new` 标记表示推到首页时间，文章页 schema.org 的 datePublished 可能是几个月前的投资公告原始日期。news-fetcher-webfetch v2.1 起 Date precedence rules 优先取相对日期，本源**不入黑名单**，作为低频但高质量监测源保留。
-    若 fetcher 再次拉回半年前日期 → 不是源停更，是 fetcher 又退化到取 datePublished，先排查 agent system prompt。
+    经典 a16z RSS feed/ 已死约 2 年（见 blacklist.md）；此 URL 是替代抓取路径；强 VC 叙事偏向，filter 阶段需对"AI 必将颠覆一切"类口号格外严格。
+    【2026-06-29 v2.2 调研】WebFetch 工具拿不到 entry 自身日期——列表页 HTML 本身就缺日期（只有 CSS class `bg-tag-new` 标识最新一批），entry 真实日期藏在每个 announcement 详情页的 schema.org datePublished。v2.1 webfetch agent prompt 改了"优先相对日期"也无效，因为页面根本没"Xd ago"文本。
+    解决方案：fetch_method 改 `script`，专用 a16z-fetch.py 列表页解析 + 详情页串行 datePublished 抓取（含 0.5s 礼仪间隔）。实测一周发 3-4 条，6-04 ~ 6-25 都有真实更新，不是停更。
+    若 a16z-fetch.py 再次拉回半年前日期 → 检查 a16z 是否换了 HTML 结构（卡片类名 `data-feed-item` / `bg-tag-new` / `<a href="..."` 是否仍稳定）。
 
 - name: state-of-ai
   tier: 3
@@ -164,7 +166,8 @@
 | `name` | kebab-case 唯一 | fetcher subagent 接收此参数；vault frontmatter `source:` 字段引用此值 |
 | `tier` | 1 / 2 / 3 | 1=一手+学术、2=聚合分析、3=降级 webfetch |
 | `perspective` | research / product / investor | 视角偏向，用于 filter / cluster |
-| `fetch_method` | rss / api / webfetch | 路由到 news-fetcher-{rss,api,webfetch} subagent |
+| `fetch_method` | rss / api / webfetch / script | 路由到 news-fetcher-{rss,api,webfetch,script} subagent |
+| `script` | `<filename>.py` 文件名，仅 fetch_method=script 时填 | scripts/ 目录下脚本名，由 news-fetcher-script 调用 |
 | `url` | 完整 URL | scripts/source-health.sh 用 grep `^\s+url:` 抽取 |
 | `reliability` | alive / degraded / dead | dead 不抓；degraded 仍抓但 filter 阶段加权降低 |
 | `fallback` | true（可省） | 仅 tier 3 标，提示 fetcher 用更宽容的解析策略 |

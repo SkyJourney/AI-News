@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:39:00
-updated: 2026-06-29 14:00:00
-entry_total: 10
+updated: 2026-06-28 12:30:00
+entry_total: 5
 ---
 
 # 应用案例 (applications)
@@ -31,25 +31,3 @@ entry_total: 10
 - **Karpathy 的 CLAUDE.md 使用方式**（未升级 Zettel，低置信度）
   社区流传 Karpathy CLAUDE.md 配置：先读现有代码、保持简单、外科手术式修改、充分验证，是 AI 辅助编码实践的参考范例。
   源：`jiqizhixin`
-
-## 2026-06-29
-
-- **GPT-5 Pro 解开免疫学家三年谜题**（未升级 Zettel）
-  T 细胞行为关键突破，AI 科研加速典型案例，可能惠及癌症与自免疫研究方向。
-  源：`openai-rss`
-
-- **Codex-maxxing for long-running work**（未升级 Zettel）
-  Jason Liu 实战分享：Codex 跨提示上下文保持与复杂长期项目管理方法。
-  源：`openai-rss`
-
-- **微软年度 AI 职场报告：员工已准备好，公司还没有**（未升级 Zettel，低置信度）
-  28 页报告核心发现：员工接受度超前于企业流程适配速度；原始数据待核实。
-  源：`qbitai`
-
-- **第一批一人公司（OPC）现状调查**（未升级 Zettel，低置信度）
-  AI 赋能一人创业者趋势调查，raw_summary 过短，背景色彩条目。
-  源：`qbitai`
-
-- **Introducing Claude Tag**（未升级 Zettel）
-  Anthropic 面向团队的新协作标注功能，技术细节待补充后评估重要性。
-  源：`anthropic-news`

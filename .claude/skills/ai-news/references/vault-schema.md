@@ -45,6 +45,7 @@ Phase 5 news-digester → Read cluster.json (+ 可选 zettel/daily) → 写 30-D
 | Phase 1 Fetch 缓存 | `00-Inbox/YYYY-MM-DD-HHMM-fetch.json` | `00-Inbox/2026-06-29-0816-fetch.json` |
 | Phase 2 Filter 中间产物 | `00-Inbox/YYYY-MM-DD-HHMM-filtered.json` | `00-Inbox/2026-06-29-0816-filtered.json` |
 | Phase 3 Cluster 中间产物 | `00-Inbox/YYYY-MM-DD-HHMM-cluster.json` | `00-Inbox/2026-06-29-0816-cluster.json` |
+| 跨日去重索引 | `00-Inbox/_seen-urls.json`（单例，跨跑维护） | 见 §6.4 |
 | Daily 简报 | `10-Daily/YYYY-MM-DD.md` | `10-Daily/2026-06-29.md` |
 | Zettel 原子卡 | `50-Zettel/YYYYMMDDHHmm-<slug>.md` | `50-Zettel/202606291430-gpt5-multimodal.md` |
 | Topic 主题 | `20-Topics/<slug>.md` | `20-Topics/model-releases.md` |
@@ -207,3 +208,50 @@ zettel_written: 8
 - 三种文件**保留完整字段**（不裁剪），下游 phase 直接消费，无需主会话回填
 - `existing_topics_snapshot` 由主会话在 Phase 3 起 cluster 前注入（`ls 20-Topics/*.md`），cluster 用它判定 `is_new = !snapshot.includes(slug)`
 - subagent Write 后**只**返回 `{filtered_path|cluster_path, stats, errors}` 三件套，主会话不再传 JSON 内容
+
+### 6.4 `_seen-urls.json`（跨日去重索引，单例 / 跨跑维护）
+
+由 news-filter Phase 2 读 + 写，news-writer Phase 4 完成后回填 `zettel_id` / `daily_date`。**滚动窗口 30 天**——超出窗口的 URL 在 filter 读入时清理（删除节点），防文件膨胀。
+
+```json
+{
+  "schema_version": "1",
+  "last_updated": "2026-06-29 14:00:00",
+  "window_days": 30,
+  "urls": {
+    "https://openai.com/index/previewing-gpt-5-6-sol": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-1530",
+      "title": "Previewing GPT-5.6 Sol",
+      "source_name": "openai-rss",
+      "kept_in_daily": "2026-06-27",
+      "zettel_id": "202606271430-gpt5-6-sol",
+      "raw_summary_excerpt": "OpenAI previews GPT-5.6 Sol, a next-generation model with stronger capabilities in coding, science, and cybersecurity..."
+    }
+  }
+}
+```
+
+**字段说明**：
+
+| 字段 | 由谁写 | 用途 |
+|---|---|---|
+| `first_seen_date` / `first_seen_run` | filter（首次进 kept 时） | 距 target_date 比较，超 7 天则不再视为重复 |
+| `title` / `source_name` | filter | 跨日 debug 时辨识 |
+| `kept_in_daily` | filter | 标记"这条曾被某天 Daily 收录"——用于 writer 在新 Daily 写"延续主题"时反查 |
+| `zettel_id` | writer（Phase 4 完成回填） | 写新 Daily 时可直接 wikilink 旧 Zettel |
+| `raw_summary_excerpt` | filter | 前 200 字截断，方案 Y 词汇重叠豁免比对用 |
+
+**filter 的跨日去重决策表**（详见 `filter-criteria.md §1.5`）：
+
+| 命中 _seen-urls 的 URL | 距今天数 | 决策 |
+|---|---|---|
+| 同一 URL 完全相同 | ≤ 7 天 | 默认 `discarded`，reason: `seen-on-<first_seen_date>` |
+| 同一 URL 完全相同 | ≤ 7 天 + 词汇重叠 ≤ 0.6 | **保留**并标 `language` 或 `re_coverage: true`（方案 Y 豁免） |
+| 同一 URL 完全相同 | > 7 天 | 视为新条目正常入 kept |
+| 同事件不同 URL（标题 ≥ 0.85 相似） | ≤ 7 天 | 同 URL 一致：默认丢，词汇重叠 ≤ 0.6 触发豁免保留 |
+
+**重要约束**：
+- `_seen-urls.json` 是 vault 共享状态，**绝不能**被 cluster / writer / digester 写入（避免竞态）；只允许 filter（读写）+ writer Phase 4 回填 `zettel_id` 字段
+- writer 回填 `zettel_id` 时用 Edit 精确替换该 URL 对应节点的 `zettel_id` 字段，不整体覆盖文件
+- 若文件不存在（首次跑或被人工删除）→ filter 自动创建空 schema 后继续

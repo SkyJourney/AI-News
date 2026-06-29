@@ -70,11 +70,12 @@ Phase 0 dry-run @ 2026-06-27
 
 按每个 alive 源的 `fetch_method` 路由到对应 subagent。**在一条消息内并发起多个 Agent 调用**（同时 spawn，不要串行 await）：
 
-| fetch_method | subagent | 一次调用范围 |
-|---|---|---|
-| `rss` | `news-fetcher-rss` | 一个源一个 Agent 实例 |
-| `api` | `news-fetcher-api` | 一个源一个 Agent 实例 |
-| `webfetch` | `news-fetcher-webfetch` | 一个源一个 Agent 实例 |
+| fetch_method | subagent | 一次调用范围 | 备注 |
+|---|---|---|---|
+| `rss` | `news-fetcher-rss` | 一个源一个 Agent 实例 | RSS/Atom 标准 feed |
+| `api` | `news-fetcher-api` | 一个源一个 Agent 实例 | JSON API（含 arxiv-fetch.py 限流脚本封装） |
+| `webfetch` | `news-fetcher-webfetch` | 一个源一个 Agent 实例 | 无 RSS 的 HTML 列表页，且 WebFetch 工具能拿到所有关键字段 |
+| `script` | `news-fetcher-script` | 一个源一个 Agent 实例 | WebFetch 拿不到关键字段（如 a16z 列表页缺日期）→ 走 scripts/ 下专用 Python 脚本；sources.md 须填 `script: <filename>` |
 
 调用时传入该源的 frontmatter（name / url / notes / fetch_method）作为 prompt 输入，例如：
 > "抓取信息源 openai-rss（url=https://openai.com/news/rss.xml, notes=官方一手）。按你的 system prompt 输出 JSON。"
@@ -140,26 +141,30 @@ FETCH_PATH="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json"
 
 ## Phase 2 — Filter
 
-预计算 filtered path（HHMM 复用 Phase 1）：
+预计算 filtered path（HHMM 复用 Phase 1）+ 固定 seen-urls 路径（单例）：
 
 ```
 FILTERED_PATH=/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-filtered.json
+SEEN_URLS_PATH=/Volumes/Projects/AInews/00-Inbox/_seen-urls.json
 ```
 
 起 1 个 `news-filter` subagent，prompt 传：
 
 - `fetch_path`: `$FETCH_PATH`（Phase 1 落盘的 fetch.json）
 - `out_path`: `$FILTERED_PATH`
+- `seen_urls_path`: `$SEEN_URLS_PATH`（跨日去重索引，filter 会读 + 写）
 - `target_date`: `$TARGET_DATE`
 - `batch_id`: `${TARGET_DATE}-${HH:MM}`
 
-subagent 内部 Read filter-criteria.md + fetch.json → Write filtered.json → 主输出**仅**返回 `{filtered_path, stats, errors}`（不再回完整 kept/discarded 数组，规避 32k token 上限）。
+subagent 内部 Read filter-criteria.md + fetch.json + _seen-urls.json → §1.1 同跑去重 → §2 信噪过滤 → §1.5 跨日去重（方案 Y 词汇重叠豁免）→ Write filtered.json + Write _seen-urls.json → 主输出**仅**返回 `{filtered_path, seen_urls_path, stats, errors}`（不再回完整 kept/discarded 数组，规避 32k token 上限）。
 
-主会话只读 stats 用于 Phase 6 Log；带 `FILTERED_PATH` 进入 Phase 3。
+主会话只读 stats 用于 Phase 6 Log；带 `FILTERED_PATH` 进入 Phase 3，带 `SEEN_URLS_PATH` 留到 Phase 4 给 writer 回填。
 
 ### Filter 错误处理
 - `errors` 非空 → 不阻断，但 Phase 6 Log 完整列出
 - 若 filtered.json Write 失败 → 检查 `out_path` 父目录可写性；失败重 spawn 一次，仍失败则 abort
+- 若 _seen-urls.json 损坏 → filter 会备份原文件到 `<seen_urls_path>.broken-<timestamp>` 后用空 schema 继续，errors 数组会记 `seen_urls_corrupted`——本次跑过得去，下次跑 cross_day 失效（视为全新数据），人工排查恢复
+- `stats.cross_day_discarded > 0` 时不算错误，意味着跨日去重正在工作；Phase 6 Log 提示"今日跨日去掉 N 条，re_coverage 保留 M 条"
 
 ---
 
@@ -200,14 +205,17 @@ subagent Read filtered.json + filter-criteria §3 → Write cluster.json → 主
 起 1 个 `news-writer` subagent，prompt 传：
 
 - `cluster_path`: `$CLUSTER_PATH`
+- `seen_urls_path`: `$SEEN_URLS_PATH`（用于 Zettel 复用查找 + Phase 4 完后回填 zettel_id）
 - `target_date`: `$TARGET_DATE`
 
-subagent Read cluster.json + vault-schema.md + filter-criteria §5 → 写盘到 `10-Daily/`、`20-Topics/`、`50-Zettel/`，返回 `{daily_path, zettel_paths, topic_paths, topics_created, topics_appended, zettel_count, errors}`。
+subagent Read cluster.json + _seen-urls.json + vault-schema.md + filter-criteria §5 → 写盘到 `10-Daily/`、`20-Topics/`、`50-Zettel/` → 用 Edit 把新建 Zettel ID 回填到 _seen-urls.json → 返回 `{daily_path, zettel_paths, topic_paths, topics_created, topics_appended, zettel_count, zettel_reused, re_coverage_count, seen_urls_backfilled, errors}`。
 
 ### Writer 错误处理
 - `errors` 非空 → 不阻断，但要在 Phase 6 Log 里完整列出
 - 若 `zettel_count == 0` 但 cluster 内有 `zettel_worthy: true` 条目 → 异常，报警让用户检查
 - 若 errors 含 `cluster_is_new_mismatch:<slug>` → 在 Phase 6 Log 标"cluster `is_new` 与 vault 现状不一致：<slug>"（虽然 writer 已自动兜底纠正，但仍是 cluster 行为退化信号）
+- 若 errors 含 `seen_urls_backfill_failed:` → 不阻断（_seen-urls 回填失败不影响本日产出），但 Phase 6 Log 提示"今日 zettel_id 回填失败 N 条，下次 filter 仍会按 first_seen 时间窗判定（不会少做去重）"
+- 若 `re_coverage_count > 0` → 在 Phase 6 Log 标"今日复盘条目 N 条"，并列出对应 url（追踪复盘判定准确性）
 
 ---
 

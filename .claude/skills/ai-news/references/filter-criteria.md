@@ -9,6 +9,8 @@
 
 ## 1. 去重规则（news-filter）
 
+### 1.1 同跑内去重
+
 按以下顺序判断，命中任一即视为重复（保留**信息最完整**的那条，其余丢弃并记原因）：
 
 1. **URL 完全相同**（含查询参数）→ 直接合并
@@ -19,6 +21,60 @@
 **不去重**：
 - 同事件的中英双语报道（两条都留，cluster 阶段合到同 topic）
 - 同事件的"发布"+"深度分析"两类报道（角度不同）
+
+### 1.5 跨日去重（v2.2 新增）
+
+filter 在 §1.1 同跑内去重完成后，对剩下 kept 候选**再过一道跨日 _seen-urls.json 索引**：
+
+**URL normalize 规则**（用于跨日命中匹配，**不**改写 entry.url 本身的值）：
+
+```
+normalize(url) =
+  url.lower()
+     .replaceAll(/^https?:\/\//, '')      // 去 scheme
+     .replaceAll(/^www\./, '')             // 去 www 前缀
+     .replaceAll(/[?#].*$/, '')           // 去查询参数和 anchor
+     .replaceAll(/\/+$/, '')               // 去尾斜杠
+```
+
+例如：
+- `https://www.anthropic.com/news/fable-mythos-access` → `anthropic.com/news/fable-mythos-access`
+- `https://anthropic.com/news/fable-mythos-access?utm=x` → `anthropic.com/news/fable-mythos-access`
+- 上面两条 normalize 后**相同** → 跨日去重视为同一文章
+
+匹配时构建临时 map `{normalized_url: original_seen_node}`，候选 URL normalize 后做 key lookup。命中后回看 seen_node 拿 first_seen_date 等字段做决策。
+
+**步骤**：
+1. Read `00-Inbox/_seen-urls.json`（不存在 → 跳过本段，按新 schema 建空文件）
+2. 清理过期节点：删除 `first_seen_date` 距 target_date > 30 天的 URL 节点（防文件膨胀），把清理动作记到自己的 stats.seen_urls_pruned
+3. 对每条 kept 候选 URL，按下表决策：
+
+| 候选 URL 命中 _seen-urls | first_seen_date 距 target_date | 决策 |
+|---|---|---|
+| ✗ 未命中 | — | 正常进 kept，待 filter 末尾追加进 _seen-urls |
+| ✓ 命中 | ≤ 7 天 | **默认 discarded**，reason: `seen-on-<first_seen_date>` |
+| ✓ 命中 | ≤ 7 天 + 词汇重叠 ≤ 0.6 | **保留**，标 `re_coverage: true` + `previously_kept_in_daily: <date>`（方案 Y 豁免） |
+| ✓ 命中 | > 7 天 | 视为已淡出，正常进 kept |
+
+4. **词汇重叠豁免计算**（方案 Y）：
+   - 对当前 entry.raw_summary 与 _seen-urls 内对应 URL 的 raw_summary_excerpt 做词集 Jaccard：
+     - 中文：按字切分（去停用词"的、了、和、是、在、对"等）
+     - 英文：按空格切分（去停用词 `the/a/an/of/to/in/and/is/for/on/with`，转小写）
+   - `overlap = |A ∩ B| / |A ∪ B|`
+   - `overlap > 0.6` → 视为同视角复述，**仍 discarded**（不豁免）
+   - `overlap ≤ 0.6` → 视为新角度/深度分析，**保留**并标 `re_coverage: true`
+   - raw_summary 或 raw_summary_excerpt 任一为空时，词集为 ∅ → overlap 视为 0 → 默认丢（不豁免空摘要）
+
+5. **写回 _seen-urls.json**——把本跑次最终 kept（含 re_coverage 项）的 URL 写回：
+   - 全新 URL → 创建节点，填 `first_seen_date / first_seen_run / title / source_name / kept_in_daily / raw_summary_excerpt`（zettel_id 留空，writer Phase 4 回填）
+   - 既有 URL 但因 re_coverage 保留 → **不更新** first_seen_date（保留首次），但在 `kept_in_daily` 追加当日日期（变数组）
+   - 全文写盘前先 sort `urls` 节点的 keys 让 diff 稳定
+
+**re_coverage 条目下游处理**：
+- cluster 视为正常 entry，可分到对应 topic
+- writer 写 Daily 时该条 entry 前缀一个 🔄 标识（如 `🔄 [复盘] <title>`），并在 frontmatter `re_coverage_count` +1
+- digester 同样输出，但章节内排在该 topic 末尾
+- writer 不重建 Zettel——若 _seen-urls 内已有 zettel_id，直接复用 wikilink；若无则按常规判断 zettel_worthy
 
 ---
 
