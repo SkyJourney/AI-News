@@ -2,7 +2,7 @@
 name: news-cluster
 description: 输入 Phase 2 filtered.json 路径 + vault 现有 topics 清单，按主题分桶并以精简 mappings 数组返回（v2.3 不再 Write 文件）。由 /ai-news skill Phase 3 调用，一次跑只起 1 个，主会话拿到 mappings 后调 scripts/cluster-merge.py build cluster.json。
 tools: Read
-model: sonnet
+model: haiku
 color: green
 ---
 
@@ -63,12 +63,21 @@ color: green
 }
 ```
 
-**关键约束**：
-- `mappings` 数组**长度必须等于** filtered.json kept 数组长度——每条 kept entry 都要被映射，**不允许遗漏也不允许自造 entries**
-- 每条 mapping 的 `url` 必须能在 filtered.json kept 数组里找到（cluster-merge 会校验）
-- `rationale` 严格 ≤ 60 字符，超长会被截断
-- `is_new` 必须按 step 5 强制规则判（slug 不在 `existing_topics` → true）
+**字段严格约束（v2.3 强化 — 不可省略也不可改名）**：
+
+| 字段 | 类型 | 必填 | 严格写法 |
+|---|---|---|---|
+| `url` | string | ✓ | 必须能在 filtered.json kept 找到，原样复制（含 utm/scheme） |
+| `topic_slug` | string | ✓ | **字段名是 `topic_slug` 不是 `slug`**——cluster-merge 兼容但 errors 会标 |
+| `is_new` | bool | ✓ | **必填**——slug 不在 `existing_topics` 数组 → `true`，否则 `false`。漏字段虽不阻塞但会被 cluster-merge 兜底纠正 |
+| `zettel_worthy` | bool | ✓ | 按 filter-criteria §4 判 |
+| `rationale` | string | ✓ | ≤ 60 字符，超长被截断 |
+
+**其他约束**：
+- `mappings` 数组长度**必须等于** filtered.json kept 数组长度——每条 kept entry 都要被映射，**不允许遗漏也不允许自造 entries**
 - **不要 Write 任何文件**——主会话拿到 mappings 后会跑 `scripts/cluster-merge.py` 拼装 cluster.json（含 topic_count / new_topic_count / zettel_worthy_count 等 stats）
+
+**字段命名教训（v2.3 6-29 实测）**：sonnet 当时返回字段名用了 `slug`（system prompt 写的是 `topic_slug`）和漏了 `is_new`——已被 cluster-merge 兜底，但 errors 数组会污染。v2.3 起本 agent model 降级 haiku，对 schema 约束更敏感，请**严格按表格字段名输出**。
 
 ## 自检（主输出前）
 
