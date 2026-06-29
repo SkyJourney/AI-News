@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-28 12:30:00
-entry_total: 7
+updated: 2026-06-29 14:05:00
+entry_total: 14
 ---
 
 # 产业动态 (industry-moves)
@@ -37,3 +37,27 @@ entry_total: 7
 - **谷歌"推理之王"研究员跳槽 Meta**（未升级 Zettel，低置信度）
   Google DeepMind 头部推理研究员加入 Meta AI，折射两家在前沿推理领域的人才争夺。
   源：`qbitai`
+
+## 2026-06-29
+
+- **HP Inc. launches Frontier strategic partnership with OpenAI**（未升级 Zettel）
+  HP 将 OpenAI Frontier 合作伙伴关系规模化延伸至客户体验、软件开发与企业运营三条业务线。
+  源：`openai-rss`
+- **Patch the Planet: a Daybreak initiative**（未升级 Zettel）
+  OpenAI Daybreak 计划新增开源安全方向，AI 辅助开源维护者发现并修复漏洞。
+  源：`openai-rss`
+- **Anthropic opens Seoul office**（未升级 Zettel）
+  Anthropic 首尔办公室落地，宣布与韩国 AI 生态多家机构达成合作——国际化扩张提速。
+  源：`anthropic-news`
+- **State of AI Report 2025** ([[202606291405-state-of-ai-report-2025]])
+  第八届年度报告发布，覆盖研究/产业/政策/安全四大维度，配套 1,200+ 从业者调查。
+  源：`state-of-ai`
+- **State of AI Report 2025 - Full Slide Deck**（未升级 Zettel）
+  完整幻灯片版辅助参考，与主报告内容一致。
+  源：`state-of-ai`
+- **AI Practitioner Survey 2025**（未升级 Zettel）
+  首届大规模 AI 从业者调查，1,200+ 参与者。
+  源：`state-of-ai`
+- **State of AI Report 2025 Launch**（未升级 Zettel）
+  报告发布博客，与主报告内容重复。
+  源：`state-of-ai`

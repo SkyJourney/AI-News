@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:30:00
-updated: 2026-06-28 12:27:00
-entry_total: 10
+updated: 2026-06-29 14:05:00
+entry_total: 15
 ---
 
 # 模型发布 (model-releases)
@@ -51,3 +51,21 @@ entry_total: 10
 - **Claude Fable 5 分批重新上线** （未升级 Zettel，低置信度）
   管制解除后 Fable 5 部分地区恢复，GPT-5.6 随即跟进，竞争节奏加速。
   源：`qbitai`
+
+## 2026-06-29
+
+- **Latest open artifacts (#22): Zyphra, Cohere, and Poolside** ([[202606291408-open-model-artifacts-22]])
+  Interconnects 纵览 5 款开源新模型：Nemotron-3 Ultra / Command A+ / GLM-5.2 / ZAYA1 / Laguna-M.1，分析三类发布动机。
+  源：`interconnects`
+- **抱抱脸模型TOP榜，我现在只服yuxinlu1**（未升级 Zettel）
+  HF 模型榜单更新，个人研究者 yuxinlu1 杀入大厂包围圈。
+  源：`qbitai`
+- **GPT-5.6突然发布！Fable5痛失最强基模王座** ([[202606291409-gpt56-three-model-release]])
+  OpenAI 一口气发布三款 GPT-5.6 系列模型，被认为打破 Fable 5 最强基模地位。
+  源：`qbitai`
+- **Introducing Claude Tag**（未升级 Zettel）
+  Claude Tag 发布，为团队协作提供新的 Claude 接入方式。
+  源：`anthropic-news`
+- **The Batch #359: A New Generation Studies AI, Apple's Recipe for On-Device Models**（未升级 Zettel）
+  本期聚焦 GLM-5.2、Apple 端侧模型配方、loop engineering 术语崛起。
+  源：`the-batch`

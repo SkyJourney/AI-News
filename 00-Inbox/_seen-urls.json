@@ -1,0 +1,616 @@
+{
+  "schema_version": "1",
+  "last_updated": "2026-06-29 13:36:12",
+  "window_days": 30,
+  "urls": {
+    "http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2651041465&idx=3&sn=729dd9680448f8b94858d11d019b3a10": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271436-mme-cof-pro-video-reasoning",
+      "source_name": "jiqizhixin",
+      "kept_in_daily": [
+        "2026-06-27"
+      ],
+      "zettel_id": "202606271436",
+      "raw_summary_excerpt": ""
+    },
+    "http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2651041475&idx=1&sn=6056c7c9ec620b7302d01e3b1593efcc": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271438-dspark-speculative-decoding",
+      "source_name": "jiqizhixin",
+      "kept_in_daily": [
+        "2026-06-27"
+      ],
+      "zettel_id": "202606271438",
+      "raw_summary_excerpt": ""
+    },
+    "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+Dwarkesh+Patel": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Dwarkesh Patel：下一代AI，可能是干活干出来的",
+      "source_name": "jiqizhixin",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "硅谷科技播客主持人 Dwarkesh Patel 探讨 AI 下一代训练范式，提出 RLVR（可验证奖励强化学习）是关键，并指出真实世界任务需要 AI 从发布前训练走向发布后学习。"
+    },
+    "https://a16z.com/how-to-win-a-space-war": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "How to Win a Space War",
+      "source_name": "a16z-news-content",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://a16z.com/the-world-building-doors-are-open-again": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "The World-Building Doors Are Open, Again.",
+      "source_name": "a16z-news-content",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://a16z.com/what-is-new-media-in-2026": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "New Media, One Year In",
+      "source_name": "a16z-news-content",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://anthropic.com/news/anthropic-public-record": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "202606281229-anthropic-public-record",
+      "source_name": "anthropic-news",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": "202606281229",
+      "raw_summary_excerpt": ""
+    },
+    "https://anthropic.com/news/claude-fable-5-mythos-5": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "202606281228-claude-fable-5-mythos-5",
+      "source_name": "anthropic-news",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": "202606281228",
+      "raw_summary_excerpt": ""
+    },
+    "https://anthropic.com/news/fable-mythos-access": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "202606281230-fable-mythos-export-control",
+      "source_name": "anthropic-news",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": "202606281230",
+      "raw_summary_excerpt": ""
+    },
+    "https://anthropic.com/news/introducing-claude-tag": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Introducing Claude Tag",
+      "source_name": "anthropic-news",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Claude Tag is a new way for teams to work with Claude."
+    },
+    "https://anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Anthropic opens Seoul office and announces new partnerships across the Korean AI ecosystem",
+      "source_name": "anthropic-news",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271431-gemini-35-flash-computer-use",
+      "source_name": "deepmind-rss",
+      "kept_in_daily": [
+        "2026-06-27"
+      ],
+      "zettel_id": "202606271431",
+      "raw_summary_excerpt": ""
+    },
+    "https://docs.google.com/presentation/d/1xiLl0VdrlNMAei8pmaX4ojIOfej6lhvZbOIK7Z6C-Go/edit?usp=sharing": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "State of AI Report 2025 - Full Slide Deck",
+      "source_name": "state-of-ai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "[date_unavailable_on_page] Complete downloadable presentation of the 2025 State of AI Report."
+    },
+    "https://huggingface.co/papers/2026.06.formalizing-latent-thoughts": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Formalizing Latent Thoughts in LLMs",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Axiomatic representation of LLM internal thoughts; 1 upvote"
+    },
+    "https://huggingface.co/papers/2026.06.google-paper-assistant": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Google Paper Assistant: AI Tool for Scientific Paper Review",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "AI assistant for scientific paper peer review by Google; 0 upvotes"
+    },
+    "https://huggingface.co/papers/2026.06.ko-widesearch": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Ko-WideSearch: Korean Web Agent Benchmark",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Korean web agent benchmark; 2 upvotes"
+    },
+    "https://huggingface.co/papers/2026.06.normguard": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "NormGuard: Norm-Constrained Flow Matching RL",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Norm-constrained flow matching reinforcement learning; 0 upvotes"
+    },
+    "https://huggingface.co/papers/2026.06.physisforcing": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "PhysisForcing: Physics-Constrained World Models",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Physics-constrained world models; 3 upvotes"
+    },
+    "https://huggingface.co/papers/2026.06.qwen-image-2-rl": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Qwen-Image-2.0-RL: Reinforcement Learning for Image Generation",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "RL for image generation in Qwen-Image-2; 1 upvote"
+    },
+    "https://huggingface.co/papers/2026.06.simfoundry": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "SimFoundry: Robot Policy Simulation Generation",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Robot policy simulation framework; 0 upvotes"
+    },
+    "https://huggingface.co/papers/2026.06.singguard": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "SingGuard: A Multi-modal Guardrail for LLMs",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291413-singguard-multimodal-guardrail",
+      "raw_summary_excerpt": "Multi-modal LLM safety guardrail; 8 upvotes"
+    },
+    "https://importai.substack.com/p/import-ai-461-alignment-is-not-on": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271434-import-ai-461-alignment-not-on-track",
+      "source_name": "import-ai",
+      "kept_in_daily": [
+        "2026-06-27"
+      ],
+      "zettel_id": "202606271434",
+      "raw_summary_excerpt": ""
+    },
+    "https://importai.substack.com/p/import-ai-462-superpersuasion-self": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271433-import-ai-462-superpersuasion",
+      "source_name": "import-ai",
+      "kept_in_daily": [
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "zettel_id": "202606271433",
+      "raw_summary_excerpt": ""
+    },
+    "https://openai.com/index/codex-maxxing-long-running-work": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Codex-maxxing for long-running work",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Learn how Jason Liu uses Codex to preserve context, manage complex projects, and help work continue beyond a single prompt."
+    },
+    "https://openai.com/index/daybreak-securing-the-world": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "(from daily, no zettel)",
+      "source_name": "unknown",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://openai.com/index/gpt-5-immunology-mystery": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271439-gpt5-immunology",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-27"
+      ],
+      "zettel_id": "202606271439",
+      "raw_summary_excerpt": ""
+    },
+    "https://openai.com/index/helping-build-shared-standards-for-advanced-ai": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "(from daily, no zettel)",
+      "source_name": "unknown",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://openai.com/index/how-agents-are-transforming-work": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "How agents are transforming work",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291406-agents-transforming-work",
+      "raw_summary_excerpt": "A new OpenAI research paper shows how AI agents are transforming work, enabling longer, more complex tasks and expanding productivity across roles."
+    },
+    "https://openai.com/index/hp-frontier-partnership": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "HP Inc. launches Frontier strategic partnership with OpenAI",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "HP Inc. scales its OpenAI Frontier partnership to deploy AI across customer experiences, software development, and enterprise operations."
+    },
+    "https://openai.com/index/omio": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "How Omio is building the future of conversational travel",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Discover how Omio uses OpenAI to power conversational travel experiences, accelerate product development, and transform into an AI-native company."
+    },
+    "https://openai.com/index/openai-broadcom-jalapeno-inference-chip": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271437-jalapeno-inference-chip",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "zettel_id": "202606271437",
+      "raw_summary_excerpt": ""
+    },
+    "https://openai.com/index/patch-the-planet": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Patch the Planet: a Daybreak initiative to support open source maintainers",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "OpenAI introduces Patch the Planet, a Daybreak initiative helping open-source maintainers find, validate, and fix vulnerabilities with AI and expert review."
+    },
+    "https://openai.com/index/previewing-gpt-5-6-sol": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271430-gpt5-6-sol",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "zettel_id": "202606271430",
+      "raw_summary_excerpt": ""
+    },
+    "https://press.airstreet.com/p/macrodata-pre-seed": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Macrodata: Robots need a data refinery",
+      "source_name": "air-street-press",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291411-macrodata-robot-data-refinery",
+      "raw_summary_excerpt": "Former Hugging Face researchers launched Macrodata to refine physical AI training data. Their open-source Refiner tool standardizes incompatible robot sensor formats and handles preprocessing tasks li"
+    },
+    "https://press.airstreet.com/p/nikolay-donets-revolut": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "How Revolut runs AI at scale",
+      "source_name": "air-street-press",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291407-revolut-ai-deployment-scale",
+      "raw_summary_excerpt": "Nikolay Donets, Revolut's Head of Machine Learning Engineering, discussed managing AI deployment across a regulated bank serving 70M+ customers. The approach centers on a single gateway, use-case gove"
+    },
+    "https://press.airstreet.com/p/odyssey-series-b": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Odyssey raises $310M Series B for world models",
+      "source_name": "air-street-press",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291412-odyssey-world-model-funding",
+      "raw_summary_excerpt": "World model startup Odyssey closed a $310M Series B at $1.45B valuation to build interactive, persistent AI-generated environments. Products include Starchild-1 for multimodal generation, Agora-1 for "
+    },
+    "https://press.airstreet.com/p/stark-500m": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "STARK raises €500M to build Europe's next defense prime",
+      "source_name": "air-street-press",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "German defense company STARK announced a €500M funding round to manufacture autonomous unmanned strike systems. The capital will support production lines across Germany, the UK, and Ukraine for weapon"
+    },
+    "https://www.deeplearning.ai/the-batch/issue-358": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Testing Mythos and Fable, Moving Beyond SWE-bench, Nvidia's Open Contender",
+      "source_name": "the-batch",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Both the U.S. Government and Anthropic took significant actions to demonstrate their power to control access to AI by restricting what others can do with frontier models."
+    },
+    "https://www.deeplearning.ai/the-batch/issue-359": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems",
+      "source_name": "the-batch",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "\"Loop engineering\" is a hot buzzphrase after Boris Cherney (Claude Code's creator) and Peter Steinberger (OpenClaw's creator) both mentioned it on social media."
+    },
+    "https://www.interconnects.ai/p/artifacts-22-zyphra-cohere-and-poolside": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem",
+      "source_name": "interconnects",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291408-open-model-artifacts-22",
+      "raw_summary_excerpt": "Assessment of the open ecosystem showing increasing diversity in model releases. Companies span pure model makers, Big Tech, and product companies with varied motivations for releasing weights. Highli"
+    },
+    "https://www.interconnects.ai/p/frontier-post-training-recipe-review": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271435-mopd-post-training",
+      "source_name": "interconnects",
+      "kept_in_daily": [
+        "2026-06-27"
+      ],
+      "zettel_id": "202606271435",
+      "raw_summary_excerpt": ""
+    },
+    "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open": {
+      "first_seen_date": "2026-06-27",
+      "first_seen_run": "2026-06-27-pre-v22-bootstrap",
+      "title": "202606271432-glm-52-open-agents",
+      "source_name": "interconnects",
+      "kept_in_daily": [
+        "2026-06-27",
+        "2026-06-28"
+      ],
+      "zettel_id": "202606271432",
+      "raw_summary_excerpt": ""
+    },
+    "https://www.qbitai.com/2026/06/439027.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "GPT-5.6突然发布！Fable5痛失最强基模王座",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291409-gpt56-three-model-release",
+      "raw_summary_excerpt": "一口气端出三款GPT 5.6系列模型"
+    },
+    "https://www.qbitai.com/2026/06/439032.html": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "(from daily, no zettel)",
+      "source_name": "unknown",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://www.qbitai.com/2026/06/439236.html": {
+      "first_seen_date": "2026-06-28",
+      "first_seen_run": "2026-06-28-pre-v22-bootstrap",
+      "title": "202606281227-hangzhou-on-device-streaming-multimodal",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-28"
+      ],
+      "zettel_id": "202606281227",
+      "raw_summary_excerpt": ""
+    },
+    "https://www.qbitai.com/2026/06/439237.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "第一批一人公司，现在怎么样了？",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "我们跟一群OPC创业者聊了聊"
+    },
+    "https://www.qbitai.com/2026/06/439393.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "BrowserBC：克隆人类点击，让一次网页操作转化为所有Agent的能力",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "人类一次录制，Agent就能模拟"
+    },
+    "https://www.qbitai.com/2026/06/439464.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "一次吃下一本书！百度开源新OCR，作者疑似前DeepSeek研究员",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
+    "https://www.qbitai.com/2026/06/439515.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "前端工程师最不想看到的开源项目出现了，一行命令克隆任意网站",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "GitHub 20k Star"
+    },
+    "https://www.qbitai.com/2026/06/439548.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "梁文锋署名的DSpark，看懂这10个点就够了！",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291410-dspark-architecture-deepseek",
+      "raw_summary_excerpt": "精髓在于极强的系统工程"
+    },
+    "https://www.qbitai.com/2026/06/439603.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "抱抱脸模型TOP榜，我现在只服yuxinlu1",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "杀进一众大厂中间"
+    },
+    "https://www.qbitai.com/2026/06/439728.html": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "太空算力的国产答案：用光子更高效！马斯克和老黄都太绕了",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "把天基计算推进到可验证、可迭代的工程路线"
+    },
+    "https://www.stateof.ai/": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "State of AI Report 2025",
+      "source_name": "state-of-ai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": "202606291405-state-of-ai-report-2025",
+      "raw_summary_excerpt": "[date_unavailable_on_page] The eighth annual State of AI Report analyzes key developments in research, industry, politics, safety."
+    },
+    "https://www.stateof.ai/2025-report-launch": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "State of AI Report 2025 Launch",
+      "source_name": "state-of-ai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "[date_unavailable_on_page] Blog post detailing the launch of the 2025 State of AI Report."
+    },
+    "https://www.stateof.ai/survey": {
+      "first_seen_date": "2026-06-29",
+      "first_seen_run": "2026-06-29-1052",
+      "title": "AI Practitioner Survey 2025",
+      "source_name": "state-of-ai",
+      "kept_in_daily": [
+        "2026-06-29"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "[date_unavailable_on_page] Inaugural large-scale survey of 1,200+ AI practitioners."
+    }
+  }
+}

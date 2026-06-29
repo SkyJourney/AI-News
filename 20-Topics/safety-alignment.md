@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:33:00
-updated: 2026-06-28 12:29:00
-entry_total: 4
+updated: 2026-06-29 14:05:00
+entry_total: 6
 ---
 
 # 安全 / 对齐 (safety-alignment)
@@ -27,3 +27,12 @@ entry_total: 4
 - **Results from the first Anthropic Public Record** ([[202606281229-anthropic-public-record]])
   Anthropic 首次以结构化形式公开内部安全评估数据，透明度机制的重要基线。
   源：`anthropic-news`
+
+## 2026-06-29
+
+- **SingGuard: A Multi-modal Guardrail for LLMs** ([[202606291413-singguard-multimodal-guardrail]])
+  多模态 LLM 安全护栏新方法，HF 8 upvotes——本日批次安全方向最高关注论文。
+  源：`huggingface-daily-papers`
+- **The Batch #358: Testing Mythos and Fable, Moving Beyond SWE-bench**（未升级 Zettel）
+  美政府与 Anthropic 双向收紧前沿模型访问权限，安全政策从框架走向具名管制。
+  源：`the-batch`
