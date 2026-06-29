@@ -139,40 +139,45 @@ FETCH_PATH="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json"
 
 ---
 
-## Phase 2 — Filter
+## Phase 2 — Filter（v2.3：主会话内联 Python，弃用 agent）
 
 预计算 filtered path（HHMM 复用 Phase 1）+ 固定 seen-urls 路径（单例）：
 
-```
+```bash
 FILTERED_PATH=/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-filtered.json
 SEEN_URLS_PATH=/Volumes/Projects/AInews/00-Inbox/_seen-urls.json
 ```
 
-起 1 个 `news-filter` subagent，prompt 传：
+主会话直接 Bash 调脚本（不再 spawn agent）：
 
-- `fetch_path`: `$FETCH_PATH`（Phase 1 落盘的 fetch.json）
-- `out_path`: `$FILTERED_PATH`
-- `seen_urls_path`: `$SEEN_URLS_PATH`（跨日去重索引，filter 会读 + 写）
-- `target_date`: `$TARGET_DATE`
-- `batch_id`: `${TARGET_DATE}-${HH:MM}`
+```bash
+python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/filter-inline.py \
+  --fetch=$FETCH_PATH \
+  --out=$FILTERED_PATH \
+  --seen-urls=$SEEN_URLS_PATH \
+  --target-date=$TARGET_DATE \
+  --batch-id=${TARGET_DATE}-${HH}:${MM}
+```
 
-subagent 内部 Read filter-criteria.md + fetch.json + _seen-urls.json → §1.1 同跑去重 → §2 信噪过滤 → §1.5 跨日去重（方案 Y 词汇重叠豁免）→ Write filtered.json + Write _seen-urls.json → 主输出**仅**返回 `{filtered_path, seen_urls_path, stats, errors}`（不再回完整 kept/discarded 数组，规避 32k token 上限）。
+脚本规则化跑 §1.1 同跑去重 + §2 信噪 + §2.5 时效（>14d 一律丢）+ §1.5 跨日去重（Jaccard 0.6 豁免），Write filtered.json + Write _seen-urls.json，stdout 输出精简 JSON `{filtered_path, seen_urls_path, stats, errors}`。主会话从 stdout 拿 stats 给 Phase 6 Log；带 `FILTERED_PATH` 进入 Phase 3。
 
-主会话只读 stats 用于 Phase 6 Log；带 `FILTERED_PATH` 进入 Phase 3，带 `SEEN_URLS_PATH` 留到 Phase 4 给 writer 回填。
+**v2.3 设计原因**：v2.1/v2.2 的 news-filter agent 实际跑 30+ 分钟会因 sonnet 32k token 上限截断（agent 内部 Write filtered.json 时要构造 89 条 entries 的 25-30k 字符 JSON，加思考链就爆）。Filter 工作本质是纯算法（URL normalize / Jaccard / 关键词模式），不需要 LLM 推理；改主会话内联 Python < 5 秒完成，可复现可调试。news-filter agent 文件保留作未来 LLM judgment fallback。
 
-### Filter 错误处理
-- `errors` 非空 → 不阻断，但 Phase 6 Log 完整列出
-- 若 filtered.json Write 失败 → 检查 `out_path` 父目录可写性；失败重 spawn 一次，仍失败则 abort
-- 若 _seen-urls.json 损坏 → filter 会备份原文件到 `<seen_urls_path>.broken-<timestamp>` 后用空 schema 继续，errors 数组会记 `seen_urls_corrupted`——本次跑过得去，下次跑 cross_day 失效（视为全新数据），人工排查恢复
-- `stats.cross_day_discarded > 0` 时不算错误，意味着跨日去重正在工作；Phase 6 Log 提示"今日跨日去掉 N 条，re_coverage 保留 M 条"
+### 脚本错误处理
+- 脚本退出码 0 + `errors: []` → 正常进 Phase 3
+- 脚本退出码 0 + `errors` 非空（如 `seen_urls_corrupted`、`seen_urls_write_failed`）→ 不阻断，Phase 6 Log 完整列出
+- 脚本退出码非 0 → 主会话直接 abort，写 Phase 6 Log 标 `partial: true`，不进 Phase 3
+- 若 _seen-urls.json 损坏 → 脚本自动备份原文件到 `<seen_urls_path>.broken-<timestamp>` 后用空 schema 继续，下次跑 cross_day 失效（视为全新数据）
+- `stats.cross_day_discarded > 0` 时不算错误，意味跨日去重正在工作；Phase 6 Log 提示"今日跨日去掉 N 条，re_coverage 保留 M 条"
+- `stats.stale_discarded > 0` 时不算错误，意味时效过滤在工作；Phase 6 Log 醒目标"今日时效丢弃 N 条（按 source 拆分）"，便于发现源活性退化
 
 ---
 
-## Phase 3 — Cluster
+## Phase 3 — Cluster（v2.3：agent 仅出 mappings，主会话拼 cluster.json）
 
 预计算 cluster path（HHMM 复用）：
 
-```
+```bash
 CLUSTER_PATH=/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-cluster.json
 ```
 
@@ -180,21 +185,45 @@ CLUSTER_PATH=/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-cluster.js
 
 ```bash
 EXISTING_TOPICS=$(ls /Volumes/Projects/AInews/20-Topics/*.md 2>/dev/null | \
-  xargs -n1 basename | sed 's/\.md$//' | grep -v '^agents$' | sort)
+  xargs -n1 basename | sed 's/\.md$//' | sort)
 ```
 
-> `agents.md` 是 vault 内的 AI 行为约定文档，不是 topic 笔记，要排除。其他 `*.md` 都是 cluster 视野内的"已存在 topic"。
+> `20-Topics/*.md` 都是 cluster 视野内的"已存在 topic"。**历史曾错误排除 `agents.md`**——把它当作"AI 行为约定文档"——但实际它是 v2 期间 cluster 创建的真 topic（"AI Agent (agents)"），排除会导致 cluster 每次都把 agents 误判为 is_new=true。v2.3 起恢复完整 ls。
 
-把数组化的 EXISTING_TOPICS 作为参数注入 cluster prompt——cluster 严格按"slug 在数组里 → is_new=false；不在 → is_new=true"判定。**不再让 cluster 凭印象推断**。
+### 3.a · spawn news-cluster（只判定，不写文件）
 
 起 1 个 `news-cluster` subagent，prompt 传：
 - `filtered_path`: `$FILTERED_PATH`
-- `out_path`: `$CLUSTER_PATH`
 - `existing_topics`: `[...]`（上面 ls 拿到的数组）
 - `target_date`: `$TARGET_DATE`
 - `batch_id`: `${TARGET_DATE}-${HH:MM}`
 
-subagent Read filtered.json + filter-criteria §3 → Write cluster.json → 主输出**仅**返回 `{cluster_path, stats, topics_summary, errors}`（不再回完整 topics 数组）。
+subagent Read filtered.json + filter-criteria §3，主输出**精简 mappings 数组**（每条 url + topic_slug + is_new + zettel_worthy + rationale ≤60 字），**不 Write 任何文件**。
+
+### 3.b · 主会话 build cluster.json
+
+agent 返回的 JSON 写到临时文件（stdin 通过 pipe 传给 cluster-merge）：
+
+```bash
+# 假设 agent 返回的 JSON 已存到主会话变量 AGENT_JSON
+echo "$AGENT_JSON" | python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/cluster-merge.py \
+  --filtered=$FILTERED_PATH \
+  --out=$CLUSTER_PATH \
+  --target-date=$TARGET_DATE \
+  --batch-id=${TARGET_DATE}-${HH}:${MM} \
+  --existing-topics="$(echo "$EXISTING_TOPICS" | tr '\n' ',' | sed 's/,$//')" \
+  --mappings-stdin
+```
+
+cluster-merge.py 校验（agent 自造 url / 漏映射 / is_new 错判）→ 按 topic_slug 分桶 entries → 计算 stats → Write cluster.json → stdout 返回 `{cluster_path, stats, topics_summary, errors}`。
+
+**v2.3 设计原因**：v2.1/v2.2 cluster agent 要在脑子里构造完整 cluster.json（38 条 × 全字段 + rationale ≈ 23k 字符）加思考链接近 sonnet 32k 上限。v2.3 把 agent 工作瘦身为"判断 + 解释"（~5k 字符输出），cluster.json 由主会话 cluster-merge.py 拼装（含字段校验 + is_new 兜底纠正）。
+
+### Cluster 错误处理
+- cluster-merge.py 退出码 0 + `errors: []` → 正常进 Phase 4/5
+- cluster-merge.py 退出码 0 + `errors` 含 `agent_missing_urls` → 不阻断（已自动归 applications 兜底），但 Phase 6 Log 标"agent 漏映射 N 条已兜底"
+- cluster-merge.py 退出码 0 + `errors` 含 `cluster_is_new_mismatch:<slug>` → 不阻断（已纠正），但 Phase 6 Log 标"agent is_new 误判已纠正：<slug>"
+- cluster-merge.py 退出码非 0 → 主会话 abort，写 Phase 6 Log 标 `partial: true`，不进 Phase 4/5
 
 主会话读 stats + topics_summary 用于 Phase 6 Log；带 `CLUSTER_PATH` 进入 Phase 4 和 Phase 5（两者并列消费）。
 

@@ -1,9 +1,11 @@
 # 过滤 / 聚类 / 写盘判断标准
 
-> 给 news-filter、news-cluster、news-writer subagent 的判断标准。
+> 给 news-cluster、news-writer subagent + Phase 2 filter 脚本的判断标准。
 > 默认偏严：宁可少留高质量，也不放噪音过线。
 
-最后更新：2026-06-27
+**v2.3 起 §1.1 / §1.5 / §2 / §2.5 由 `scripts/filter-inline.py` 主会话内联规则化执行**（不再走 news-filter agent）。本节规则是脚本实现 + 人工 review 的双重权威——脚本规则与本节冲突时以本节为准，需同步修脚本。
+
+最后更新：2026-06-29
 
 ---
 
@@ -78,27 +80,42 @@ normalize(url) =
 
 ---
 
-## 2. 信噪过滤规则（news-filter）
+## 2. 信噪过滤规则（filter-inline.py §2）
 
 **默认丢弃**（写入丢弃理由）：
 
 | 类别 | 关键词 / 模式 | 例外 |
 |---|---|---|
-| 融资 PR | "completes Series X", "raises $XM", "valuation reaches" | 投资方是顶级 VC + 金额 > $100M + 公司是 AI 头部 → 保留 |
-| 招聘 / 团队公告 | "we're hiring", "join our team" | 关键人物动向（如核心研究员跳槽）→ 保留 |
-| 活动 / 大会通知 | "register now", "RSVP", "conference announcement" | 顶会 NeurIPS/ICML 论文榜单 → 保留 |
-| 产品营销软文 | 通篇赞美、无技术细节、无可验证数据 | — |
-| 二手编译 | "据 XX 报道"、"the X reported" + 无新增信息 | 编译方加了独家分析 → 保留 |
-| 广告 / 赞助 | "sponsored by"、"promoted post" | — |
+| 融资 PR | `raises $XM`, `closes/completes Series X`, `valuation reaches`, `融资 N 亿`, `估值 N 亿`, `完成 X 轮` | 顶级 VC + $100M+ + AI 头部 → 降为 `low_confidence: true` 保留（让 cluster 二判） |
+| 招聘 / 团队公告 | `we're hiring`, `join our team`, `open roles`, `招聘`, `急聘`, `内推` | 关键人物动向（如核心研究员跳槽）→ 不在 §2 规则化丢，靠 cluster 二判 |
+| 活动 / 大会通知 | `register now`, `RSVP`, `conference announcement`, `save the date`, `报名通知`, `嘉宾邀请` | 顶会 NeurIPS/ICML 论文榜单 → 靠 §2 keep signal `paper`/`benchmark` 覆盖 |
+| 广告 / 赞助 | `sponsored by`, `promoted post`, `#sponsored`, `赞助内容`, `推广文章`, `商务合作` | — |
+| **VC 软文 / IR 公告（v2.3 新增）** | 标题开头 `Investing in X`、`Investor Relations`、`Late Stage Venture`、`投资了` | — |
+| 产品营销软文 | 通篇赞美、无技术细节、无可验证数据 | 无规则化模式（脆弱），靠 cluster 二判 |
+| 二手编译 | 「据 XX 报道」、"the X reported" + 无新增信息 | 编译方加了独家分析 → 不在 §2 规则化丢，靠 cluster 二判 |
 
-**保留优先**：
-- 一手发布（论文、官方博客、官方公告）
-- 含可验证基准数据（benchmark, eval scores）
-- 含开源 release（github / huggingface 链接）
-- 政策 / 监管动向（EU AI Act, FCC, NIST 等）
-- 安全 / 对齐 / 失败案例（无论来源）
+**保留优先信号（hit 任一 → keep，覆盖一切 discard 规则）**：
+- arxiv.org / github.com / huggingface.co 链接
+- `benchmark`、`eval/evaluation score/result`、`SOTA`、`state-of-the-art`
+- `open-source`、`开源`、`论文`、`预印本`、`基准`、`评测`
+- 政策关键词：`EU AI Act`、`NIST`、`FCC`、`executive order`
+- 安全 / 对齐 / 可解释性：`red-team`、`alignment`、`safety`、`interpretability`、`对齐`、`可解释性`、`安全研究`
 
-**模糊地带**：subagent 拿不准时**倾向保留**，标 `low_confidence: true`，让 cluster 阶段二次判断。
+**模糊地带**：脚本判不准时**倾向保留**，标 `low_confidence: true`，让 cluster 阶段二次判断。具体规则：
+- tier 3 + 摘要 < 50 字 + 无 keep signal → low_confidence keep
+- published 解析失败 → low_confidence keep
+
+## 2.5 时效过滤规则（filter-inline.py §2.5，v2.3 新增）
+
+**规则**：`entry.published` 距 `target_date` **> 14 天** → discard，reason `stale:Nd_old`。**所有 source 一律 14 天阈值，不分 tier**。
+
+**设计原因**：
+- 用户期望"今天的 AI 新闻"，14d 前的内容是 throwback
+- RSS feed 经常给陈年项（feed reader 提供"最近 N 条"而非"按时间窗口"），若不过滤 anthropic/the-batch 这种偶有低活跃期的源会污染当日 Daily
+- 与 §1.5 跨日去重协同：14d 内 + 命中 _seen-urls → cross_day_discarded；14d 内 + 未命中 → kept；14d 外 → stale_discarded
+- 副作用：tier 1 一手发布源（anthropic 等）若 RSS 推送陈年项会被丢，且 meta-ai-blog 等低活源若全部陈年会"看起来失效"——这是预期行为，需在 Phase 6 Log 醒目标出按 source 拆分的 stale 数，用于发现源活性退化
+
+**执行顺序**（filter-inline.py）：§1.1 同跑去重 → **§2.5 时效（先于 §2）** → §2 信噪 → §1.5 跨日去重 → Write。§2.5 优先于 §1.5 意味着"14d 外 + 已 seen"会归类为 stale 而非 cross_day_discarded，最终结果相同。
 
 ---
 

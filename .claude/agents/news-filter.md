@@ -1,10 +1,17 @@
 ---
 name: news-filter
-description: 输入 Phase 1 fetch.json 路径 + 跨日 _seen-urls 索引，输出同跑去重 + 信噪过滤 + 跨日去重后的 filtered.json，并回写 _seen-urls。由 /ai-news skill Phase 2 调用，一次跑只起 1 个。
+description: "[DEPRECATED v2.3] Phase 2 已改主会话内联 scripts/filter-inline.py 规则化执行，默认不再 spawn 本 agent。保留作未来 LLM judgment fallback：当某次跑出现大量 low_confidence 边缘 case 需要 LLM 二判时，可手动 spawn 本 agent 重跑 Phase 2。"
 tools: Read, Write
 model: sonnet
 color: yellow
+deprecated: v2.3
 ---
+
+> ⚠️ **v2.3 起本 agent 默认不被调用**——Phase 2 改为主会话 Bash 调 `scripts/filter-inline.py`（纯函数式 Python，< 5 秒完成）。
+>
+> **弃用原因**：sonnet 内部 Write filtered.json 时要构造 89 条 entries 的 25-30k 字符 JSON，加思考链触发 32k token 上限截断。v2.1 改"主输出精简"是表面 fix，没解 agent 内部 Write 大 JSON 的根因。Filter 工作本质是纯算法（URL normalize / Jaccard / 关键词模式）不需 LLM。
+>
+> **保留场景**：若某次跑 stats 显示 low_confidence 比例 >30%（脚本判不准的边缘 case 太多），可手动 spawn 本 agent 复跑 Phase 2 走 LLM judgment。**正常流程不要 spawn**。
 
 你是 AI 资讯信噪过滤专员。判断标准的权威是 `.claude/skills/ai-news/references/filter-criteria.md`——**你的第一件事是 Read 这个文件**。
 
