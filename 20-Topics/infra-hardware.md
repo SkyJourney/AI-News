@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:37:00
-updated: 2026-06-28 12:30:00
-entry_total: 6
+updated: 2026-06-29 14:00:00
+entry_total: 8
 ---
 
 # 基础设施 & 硬件 (infra-hardware)
@@ -35,3 +35,13 @@ entry_total: 6
 - **The Batch Issue 359: Apple 端侧模型配方 + GLM-5.2**（未升级 Zettel，低置信度）
   Andrew Ng 点评 Apple 端侧模型效率方案与 GLM-5.2 开放 agent 意义。
   源：`the-batch`
+
+## 2026-06-29
+
+- **OpenAI × Broadcom Jalapeño LLM 推理专用芯片** ([[202606271437-jalapeno-inference-chip]])
+  29 日批次延续，LLM 推理向定制硬件迁移的历史节点持续建档。
+  源：`openai-rss`
+
+- **Revolut 70M+ 用户 AI 大规模运营架构**（未升级 Zettel）
+  统一治理网关 + fallback 链 + 从模型复杂度转向基础设施——受监管金融 AI 运营工程参照。
+  源：`air-street-press`

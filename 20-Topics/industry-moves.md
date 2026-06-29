@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-28 12:30:00
-entry_total: 7
+updated: 2026-06-29 14:00:00
+entry_total: 14
 ---
 
 # 产业动态 (industry-moves)
@@ -37,3 +37,33 @@ entry_total: 7
 - **谷歌"推理之王"研究员跳槽 Meta**（未升级 Zettel，低置信度）
   Google DeepMind 头部推理研究员加入 Meta AI，折射两家在前沿推理领域的人才争夺。
   源：`qbitai`
+
+## 2026-06-29
+
+- **HP Inc. × OpenAI Frontier 战略合作**（未升级 Zettel）
+  HP 全面 AI 化：覆盖客户体验、软件开发、企业运营三场景，传统硬件厂商深度绑定 LLM 平台。
+  源：`openai-rss`
+
+- **Samsung × ChatGPT + Codex 全球员工部署**（未升级 Zettel）
+  OpenAI 迄今最大规模企业 AI 部署案例，三星全球员工同步接入 ChatGPT Enterprise + Codex。
+  源：`openai-rss`
+
+- **Anthropic 首尔办公室 + 韩国 AI 生态合作**（未升级 Zettel）
+  Anthropic 亚太布局扩速：首尔办公室落地并与韩国生态伙伴签署战略合作。
+  源：`anthropic-news`
+
+- **TCS × Anthropic** / **DXC × Anthropic 受监管行业合作**（未升级 Zettel）
+  Claude 进入金融、航空等关键基础设施：TCS + DXC 双线推进受监管行业 AI 渗透。
+  源：`anthropic-news`
+
+- **Claude Partner Network: Services Track + Partner Hub**（未升级 Zettel）
+  Anthropic 合作伙伴生态基础设施扩张，新服务轨道与合作伙伴枢纽上线。
+  源：`anthropic-news`
+
+- **Introducing Claude Corps**（未升级 Zettel）
+  Anthropic 国家级早期职业奖学金项目，人才培育与社会布局同步推进。
+  源：`anthropic-news`
+
+- **Introducing Claude Tag**（未升级 Zettel）
+  Anthropic 面向团队的新协作标注功能，raw_summary 极简，细节待补。
+  源：`anthropic-news`

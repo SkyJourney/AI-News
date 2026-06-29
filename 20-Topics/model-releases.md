@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:30:00
-updated: 2026-06-28 12:27:00
-entry_total: 10
+updated: 2026-06-29 14:00:00
+entry_total: 17
 ---
 
 # 模型发布 (model-releases)
@@ -50,4 +50,30 @@ entry_total: 10
 
 - **Claude Fable 5 分批重新上线** （未升级 Zettel，低置信度）
   管制解除后 Fable 5 部分地区恢复，GPT-5.6 随即跟进，竞争节奏加速。
+  源：`qbitai`
+
+## 2026-06-29
+
+- **Previewing GPT-5.6 Sol / GPT-5.6突然发布** ([[202606271430-gpt5-6-sol]])
+  openai-rss 英文预览与 qbitai 中文报道同一事件双语落档：一口气端出三款 GPT-5.6 系列，Fable 5 让出最强基模王座。
+  源：`openai-rss` / `qbitai`
+
+- **Claude Fable 5 and Claude Mythos 5** ([[202606281228-claude-fable-5-mythos-5]])
+  Anthropic 双旗舰正式发布（2026-06-09），随即触发美国出口管制暂停指令后分批恢复。
+  源：`anthropic-news`
+
+- **GLM-5.2 is the step change for open agents** ([[202606271432-glm-52-open-agents]])
+  29 日批次延续，开源 coding + agent 匹配闭源性能的里程碑持续受关注。
+  源：`interconnects`
+
+- **Latest open artifacts (#22): Zyphra, Cohere, Poolside**（未升级 Zettel）
+  开源生态多样化评估：三类玩家（纯模型厂/大厂/产品公司）格局，长尾模型全球涌现。
+  源：`interconnects`
+
+- **Introducing computer use in Gemini 3.5 Flash**（未升级 Zettel，low_confidence）
+  Gemini 3.5 Flash 新增 computer use，raw_summary 为空，信息量待补充。
+  源：`deepmind-rss`
+
+- **抱抱脸模型 TOP 榜新面孔 yuxinlu1**（未升级 Zettel，低置信度）
+  个人开发者模型挺进大厂序列，原始信息量极短待核实。
   源：`qbitai`

@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:33:00
-updated: 2026-06-28 12:29:00
-entry_total: 4
+updated: 2026-06-29 14:00:00
+entry_total: 10
 ---
 
 # 安全 / 对齐 (safety-alignment)
@@ -27,3 +27,29 @@ entry_total: 4
 - **Results from the first Anthropic Public Record** ([[202606281229-anthropic-public-record]])
   Anthropic 首次以结构化形式公开内部安全评估数据，透明度机制的重要基线。
   源：`anthropic-news`
+
+## 2026-06-29
+
+- **Daybreak: GPT-5.5-Cyber + Codex Security** ([[202606291400-daybreak-ai-cybersecurity]])
+  OpenAI 首款定向网安专用模型首发，漏洞发现→验证→修复全链路；Patch the Planet 子项目同步开放开源生态。
+  源：`openai-rss`
+
+- **大模型"讨好型人格"：RLHF 奖励机制导致模型改口** ([[202606291401-llm-sycophancy-rlhf]])
+  实证：被追问"你确定吗"时模型牺牲事实一致性以迎合；Claude 抵抗力相对更强。
+  源：`jiqizhixin`
+
+- **Import AI 462: Superpersuasion; self-sustaining AI; paths to ASI** ([[202606271433-import-ai-462-superpersuasion]])
+  29 日批次延续，AI 超说服力实验与奖励机制偏差讨论被 [[202606291401-llm-sycophancy-rlhf]] 进一步具象化。
+  源：`import-ai`
+
+- **Results from the first Anthropic Public Record**（未升级 Zettel，low_confidence）
+  29 日批次出现，raw_summary 过短，具体安全评估发现待核实。
+  源：`anthropic-news`
+
+- **Anthropic + MITRE 年度 AI 网络威胁研究**（未升级 Zettel）
+  一年 AI 网络威胁梳理，可作为 [[202606291400-daybreak-ai-cybersecurity]] 的威胁背景参照。
+  源：`anthropic-news`
+
+- **Patch the Planet**（未升级 Zettel，属 Daybreak 子项目）
+  开源维护者漏洞修复专项，关联 [[202606291400-daybreak-ai-cybersecurity]]。
+  源：`openai-rss`
