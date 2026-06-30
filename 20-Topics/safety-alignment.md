@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:33:00
-updated: 2026-06-29 14:05:00
-entry_total: 6
+updated: 2026-06-30 09:49:00
+entry_total: 7
 ---
 
 # 安全 / 对齐 (safety-alignment)
@@ -36,3 +36,9 @@ entry_total: 6
 - **The Batch #358: Testing Mythos and Fable, Moving Beyond SWE-bench**（未升级 Zettel）
   美政府与 Anthropic 双向收紧前沿模型访问权限，安全政策从框架走向具名管制。
   源：`the-batch`
+
+## 2026-06-30
+
+- **'词元盗用'正在成为AI商业化面临的新风险** ([[202606300956-token-theft-ai-security-risk]])
+  Token 配额作为新型算力资源面临专项盗用攻击，传统安全体系尚未覆盖，需专门防护机制。
+  源：`qbitai`

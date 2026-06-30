@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-29 14:05:00
-entry_total: 4
+updated: 2026-06-30 09:49:00
+entry_total: 8
 ---
 
 # 融资 & 投资 (funding-investment)
@@ -26,3 +26,18 @@ entry_total: 4
 - **Odyssey raises $310M Series B for world models** ([[202606291412-odyssey-world-model-funding]])
   世界模型独角兽 Odyssey 完成 $310M B 轮，估值 $14.5 亿，产品线含 Starchild-1 / Agora-1 / PROWL。
   源：`air-street-press`
+
+## 2026-06-30
+
+- **Claude Mythos让梁文锋决定融资**（未升级 Zettel）
+  Claude Mythos 性能引发 DeepSeek 融资决策，梁文锋表示"不储备弹药根本没法打下去了"。
+  源：`qbitai`
+- **国家队+千亿产业+头部财投集体入局，智平方200亿估值筑就大湾区具身智能名片**（未升级 Zettel）
+  大湾区首个 200 亿具身智能独角兽智平方完成 50 亿融资，全矩阵顶级资本入局。
+  源：`qbitai`
+- **STARK raises €500M to build Europe's next defense prime**（未升级 Zettel，复盘）
+  德国防务 STARK €500M 融资再次出现，自主无人打击系统生产线扩建计划延续传播。
+  源：`air-street-press` · 首记于 [[2026-06-29]]
+- **Odyssey raises $310M Series B for world models** ([[202606291412-odyssey-world-model-funding]])（复盘）
+  Odyssey 世界模型 B 轮融资持续传播，三产品线竞争格局持续引发关注。
+  源：`air-street-press` · 首记于 [[2026-06-29]]

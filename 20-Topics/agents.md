@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-29 14:05:00
-entry_total: 5
+updated: 2026-06-30 09:49:00
+entry_total: 8
 ---
 
 # AI Agent (agents)
@@ -29,3 +29,15 @@ entry_total: 5
 - **BrowserBC：克隆人类点击**（未升级 Zettel）
   人类一次录制网页操作，BrowserBC 将其转化为所有 Agent 可复用的能力。
   源：`qbitai`
+
+## 2026-06-30
+
+- **How agents are transforming work** ([[202606291406-agents-transforming-work]])（复盘）
+  OpenAI agent 生产力研究再次出现，"更长任务"是 agent 核心价值的量化结论持续传播。
+  源：`openai-rss` · 首记于 [[2026-06-29]]
+- **AI助手不该只等人提问：清华团队两项新研究** ([[202606300952-ai-assistant-proactive-interaction]])（复盘）
+  EgoIntrospect + IPIBench，探索 AI 从被动应答走向主动感知与适时互动的能力边界。
+  源：`jiqizhixin` · 首记于 [[2026-06-29]]
+- **Import AI 463: Self-improving robots; a 10k Chinese GPU cluster**（未升级 Zettel）
+  NVIDIA ENPIRE 机器人自改进软件；腾讯 ARGUS 管理万卡 GPU 集群；探讨 AI 超级智能时代人类命运。
+  源：`import-ai`

@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:30:00
-updated: 2026-06-29 14:05:00
-entry_total: 15
+updated: 2026-06-30 09:49:00
+entry_total: 20
 ---
 
 # 模型发布 (model-releases)
@@ -69,3 +69,21 @@ entry_total: 15
 - **The Batch #359: A New Generation Studies AI, Apple's Recipe for On-Device Models**（未升级 Zettel）
   本期聚焦 GLM-5.2、Apple 端侧模型配方、loop engineering 术语崛起。
   源：`the-batch`
+
+## 2026-06-30
+
+- **New usage analytics and updated spend controls for enterprises**（未升级 Zettel）
+  OpenAI 为 ChatGPT Enterprise 推出成本管控与用量分析工具，助力企业规模化 AI 部署。
+  源：`openai-rss`
+- **Improving health intelligence in ChatGPT**（未升级 Zettel）
+  GPT-5.5 Instant 增强 ChatGPT 医疗健康回答的推理、上下文与清晰度，含医生评估校准。
+  源：`openai-rss`
+- **Latest open artifacts (#22): Zyphra, Cohere, and Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
+  开源模型生态多样性评述持续传播，三类发布主体动机分析框架继续引发关注。
+  源：`interconnects` · 首记于 [[2026-06-29]]
+- **全球首个：隐空间世界模型，打通长时序双向物理因果链了！**（未升级 Zettel）
+  新融资具身智能公司发布隐空间世界模型，声称登顶具身榜单第一。
+  源：`qbitai`
+- **OceanBase发布AI数据库：以一套引擎融合湖库与多模态数据**（未升级 Zettel）
+  OceanBase 新型 AI 数据库尝试以统一引擎融合湖仓一体与多模态数据处理。
+  源：`qbitai`

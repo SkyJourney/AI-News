@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:35:00
-updated: 2026-06-29 14:05:00
-entry_total: 13
+updated: 2026-06-30 09:49:00
+entry_total: 21
 ---
 
 # 研究论文 (research-papers)
@@ -57,4 +57,31 @@ entry_total: 13
   源：`huggingface-daily-papers`
 - **SimFoundry: Robot Policy Simulation Generation**（未升级 Zettel）
   机器人策略仿真生成框架，HF 0 upvotes。
+  源：`huggingface-daily-papers`
+
+## 2026-06-30
+
+- **Introducing LifeSciBench** ([[202606300953-lifescibench-life-science-eval]])
+  专家撰写的生命科学真实任务 AI 评测基准，从知识问答转向 task completion 评测范式。
+  源：`openai-rss`
+- **Predicting model behavior before release by simulating deployment** ([[202606300954-deployment-simulation-model-behavior]])
+  OpenAI Deployment Simulation 利用真实对话数据在发布前预测模型行为分布。
+  源：`openai-rss`
+- **Adaptive Financial Transformer with Regime-Gated Attention for Stock Return Prediction**（未升级 Zettel）
+  金融预测 Transformer 模型，arXiv 2606.29347。
+  源：`arxiv-api`
+- **Reliability, Faithfulness, and the Limits of Post-hoc Explanations of Opaque Scientific Models**（未升级 Zettel）
+  科学模型事后解释可靠性研究，arXiv 2606.29346。
+  源：`arxiv-api`
+- **PHF: Privileged Hidden Flow for On-Policy Self-Distillation**（未升级 Zettel）
+  在线策略自蒸馏新方法，arXiv 2606.29340。
+  源：`arxiv-api`
+- **Nonlinear mixture model motivated subspace clustering**（未升级 Zettel）
+  非线性混合模型驱动的子空间聚类，arXiv 2606.29261。
+  源：`arxiv-api`
+- **PhysisForcing: Physics Reinforced World Simulator for Robotic Manipulation** ([[202606300955-physisforcing-physics-world-model]])
+  训练阶段注入物理约束力，从根本上解决视频生成世界模型的物理不合理问题，HF 40 upvotes 本批次最高。
+  源：`huggingface-daily-papers`
+- **Translation as a Bridging Action: Transferring Manipulation Skills from Humans to Robots**（未升级 Zettel）
+  通过人类动作数据向双臂机器人迁移新操作技能，HF 33 upvotes。
   源：`huggingface-daily-papers`

@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:39:00
-updated: 2026-06-29 14:05:00
-entry_total: 13
+updated: 2026-06-30 09:49:00
+entry_total: 20
 ---
 
 # 应用案例 (applications)
@@ -58,3 +58,27 @@ entry_total: 13
 - **New Media, One Year In**（未升级 Zettel）
   a16z 媒体观察文章，空摘要低置信，归杂项备查。
   源：`a16z-news-content`
+
+## 2026-06-30
+
+- **Mapping Europe's AI Workforce Opportunity**（未升级 Zettel）
+  OpenAI 报告研究 AI 对欧洲各职业的自动化、增长与工作流变化影响。
+  源：`openai-rss`
+- **Codex-maxxing for long-running work**（未升级 Zettel，复盘）
+  Jason Liu 使用 Codex 管理超长任务流的实践方法继续传播，上下文保持与复杂项目分解策略。
+  源：`openai-rss` · 首记于 [[2026-06-29]]
+- **Using AI to help physicians diagnose rare genetic diseases affecting children** ([[202606300949-ai-rare-disease-diagnosis]])
+  OpenAI reasoning 模型识别出 18 个此前无法确诊的儿科罕见遗传病新病例。
+  源：`openai-rss`
+- **A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry** ([[202606300950-ai-chemist-drug-reaction]])
+  GPT-5.4 驱动的近自主 AI 化学家与 Molecule.one 合作改进药物关键合成反应步骤。
+  源：`openai-rss`
+- **AI当老板，快给10家公司干破产了…** ([[202606300951-ai-ceo-company-failure]])
+  AI 担任 CEO 的自主决策实验揭示系统性风险盲区：战略直觉与情境建模能力仍属于人类。
+  源：`qbitai`
+- **啥？做AI短剧可以免费，免费，免费了！**（未升级 Zettel）
+  AI 短剧生成工具免费化，作者实测生成修仙爽剧。
+  源：`qbitai`
+- **From Brain Waves to Words: Brain2Qwerty**（未升级 Zettel）
+  Meta Brain2Qwerty 通过脑电信号实现无需手术的无创脑机通信。
+  源：`meta-ai-blog`
