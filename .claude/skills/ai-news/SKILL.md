@@ -23,7 +23,7 @@ argument-hint: "[--date=YYYY-MM-DD] [--dry-run] [--from-cache=<inbox-file>]"
   - `<date>-<hhmm>-cluster.json` → 跳过 Phase 1+2+3，从该 cluster 进 Phase 4+5
   - filename 不含路径前缀，主会话拼接 `00-Inbox/`；HHMM 同跑必须一致（见 vault-schema §2）
 
-把解析结果记成 `TARGET_DATE`、`DRY_RUN`、`FROM_CACHE` 三个变量，后续 phase 用。本次跑的 HHMM 在 Phase 1 落 fetch.json 时锁定到变量 `HHMM`（或 `--from-cache` 从文件名解析），三种 IPC 文件共用同一 HHMM。
+把解析结果记成 `TARGET_DATE`、`DRY_RUN`、`FROM_CACHE` 三个变量，后续 phase 用。本次跑的 HHMM 在 **Phase 1 开头锁定**（v2.4 起提前，便于 spawn fetcher 前预计算 per-source 中转 path）到变量 `HHMM`；`--from-cache` 模式从文件名解析。四种 IPC 文件（per-source fetch / 总 fetch / filtered / cluster）共用同一 HHMM。
 
 ---
 
@@ -34,7 +34,7 @@ argument-hint: "[--date=YYYY-MM-DD] [--dry-run] [--from-cache=<inbox-file>]"
 ### 0.1 复验：读 references/
 
 并行 Read：
-- `${CLAUDE_SKILL_DIR}/references/sources.md` — 12 个源完整清单
+- `${CLAUDE_SKILL_DIR}/references/sources.md` — 14 个源完整清单
 - `${CLAUDE_SKILL_DIR}/references/blacklist.md` — 死源黑名单（确认不抓任何黑名单内源）
 - `${CLAUDE_SKILL_DIR}/references/vault-schema.md` — 落盘约定（writer 也会读，主会话先读一遍便于调度）
 - `${CLAUDE_SKILL_DIR}/references/filter-criteria.md` — 过滤/聚类标准（filter/cluster 也会读）
@@ -66,7 +66,26 @@ Phase 0 dry-run @ 2026-06-27
 
 ---
 
-## Phase 1 — Fetch（并发）
+## Phase 1 — Fetch（v2.4：fetcher Write 中转 + 主会话 fetch-merge.py）
+
+> **v2.4 架构**：fetcher subagent **Write 完整 JSON 到 per-source 中转文件**，主输出仅返 `{output_path, source_name, entry_count, error}`。主会话再用 `fetch-merge.py` 把 14 个中转文件合并成总 fetch.json。改动原因：v2.3 fetcher 用文本回报 entries，对大数据源（arxiv 20 篇 / the-batch 15 条 / a16z 15 条）触发 LLM 输出 token 上限，**真实抓取数据反复丢失**（git log 多次复现）。v2.4 复用 cluster v2.3 的"agent 出精简返回 + 文件作真实数据传递"模式根治。
+
+### 1.0 锁定 HHMM + 创建 inbox 目录（v2.4 提前到 Phase 1 开头）
+
+```bash
+mkdir -p /Volumes/Projects/AInews/00-Inbox
+HHMM=$(date +%H%M)
+FETCH_PATH="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json"
+```
+
+> HHMM 必须在 spawn fetcher 前锁定——主会话要为每个源预计算 `output_path = 00-Inbox/${TARGET_DATE}-${HHMM}-fetch-<source_name>.json` 传给 fetcher。
+
+若 `FROM_CACHE` 不为空 → 按文件后缀路由（不再 spawn fetcher）：
+- `*-fetch.json` → 跳过 Phase 1.x，直接设 `FETCH_PATH=00-Inbox/${FROM_CACHE}`，HHMM 从文件名解析，进 Phase 2
+- `*-filtered.json` → 跳过 Phase 1+2，设 `FILTERED_PATH=00-Inbox/${FROM_CACHE}`，进 Phase 3
+- `*-cluster.json` → 跳过 Phase 1+2+3，设 `CLUSTER_PATH=00-Inbox/${FROM_CACHE}`，进 Phase 4+5
+
+### 1.1 并发 spawn fetcher
 
 按每个 alive 源的 `fetch_method` 路由到对应 subagent。**在一条消息内并发起多个 Agent 调用**（同时 spawn，不要串行 await）：
 
@@ -75,67 +94,61 @@ Phase 0 dry-run @ 2026-06-27
 | `rss` | `news-fetcher-rss` | 一个源一个 Agent 实例 | RSS/Atom 标准 feed |
 | `api` | `news-fetcher-api` | 一个源一个 Agent 实例 | JSON API（含 arxiv-fetch.py 限流脚本封装） |
 | `webfetch` | `news-fetcher-webfetch` | 一个源一个 Agent 实例 | 无 RSS 的 HTML 列表页，且 WebFetch 工具能拿到所有关键字段 |
-| `script` | `news-fetcher-script` | 一个源一个 Agent 实例 | WebFetch 拿不到关键字段（如 a16z 列表页缺日期）→ 走 scripts/ 下专用 Python 脚本；sources.md 须填 `script: <filename>` |
+| `script` | `news-fetcher-script` | 一个源一个 Agent 实例 | WebFetch 拿不到关键字段（如 a16z 列表页缺日期）→ 走 scripts/ 下专用 Python 脚本 |
 
-调用时传入该源的 frontmatter（name / url / notes / fetch_method）作为 prompt 输入，例如：
-> "抓取信息源 openai-rss（url=https://openai.com/news/rss.xml, notes=官方一手）。按你的 system prompt 输出 JSON。"
+**spawn prompt 必含 output_path**（v2.4 关键变化），示例：
+> "抓取信息源 openai-rss。
+>  - name: openai-rss
+>  - url: https://openai.com/news/rss.xml
+>  - output_path: /Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch-openai-rss.json
+>  - notes: 官方一手
+>  按你的 system prompt 工作——Write 完整 JSON 到 output_path，主输出仅返 {source_name, output_path, entry_count, error}。"
 
-### 软失败处理
-- 任一 subagent 返回 `error` 字段非空 → 先标记为 first-fail，进入 retry（见下）
-- 60s 内未返回 → 视为超时，标记为 first-fail，进入 retry
-- 同一源在最近 2 次**完整跑**（不是单跑内 retry）都失败 → 在 Phase 6 Log 里 append 建议"将该源 reliability 改为 degraded"
+### 1.2 软失败处理 + retry 机制
 
-### Phase 1 retry 机制
-
-收到所有 Phase 1 输出后，对每个 first-fail 的 source：
-- **若 error 字段是 "unknown api source" 或类似不可恢复错误** → 不重试，直接进 failures
-- **若是 WebFetch/timeout/parse 类可能偶发的错误** → **重 spawn 一次同类型 subagent**（同 prompt、同 source 描述）
-- 同时只对**少量**（≤3 个）first-fail 源做 retry，避免雪崩；超过 3 个失败说明可能是系统性问题（如网络），不 retry 直接进 failures 并在 Phase 6 Log 标"考虑暂停本次跑"
+收到所有 fetcher 主输出后（每个仅 ~150 字符精简 JSON），对每个 `error` 字段非空的 source：
+- **若 error 是 "unknown api source" 等不可恢复错误** → 不重试，直接进 failures
+- **若是 WebFetch/timeout/parse 类可能偶发的错误** → **重 spawn 一次同类型 subagent**（同 prompt 含 output_path，agent 会覆盖原中转文件）
+- 同时只对 ≤3 个 first-fail 源做 retry，避免雪崩；超过 3 个失败说明系统性问题，不 retry 直接进 failures，Phase 6 Log 标"考虑暂停本次跑"
 - retry 仍 error → 进入 failures（最终失败）
-- retry 成功 → entries 用 retry 结果，在 Phase 6 Log 标"该源首次失败 retry 成功，原因：<retry 前 error>"
+- retry 成功 → 中转文件已被覆盖，Phase 6 Log 标"该源首次失败 retry 成功，原因：<retry 前 error>"
+- 60s 未返回的 subagent 视为超时，按 first-fail 处理
+- 同一源连续 2 次完整跑都失败 → Phase 6 Log 建议"将 reliability 改为 degraded"
 
-注意：**retry 不针对 `entry_count: 0`**（那是源真没新内容，不是失败），仅针对 `error` 字段非空。
+注意：**retry 不针对 `entry_count: 0`**（那是源真没新内容，不是失败）。
 
-### Phase 1 收尾
-
-把所有 subagent 输出合并为 batch 结构，给 Phase 2 准备：
-```json
-{
-  "batch_id": "<TARGET_DATE>-<HH:MM>",
-  "fetchers": [
-    { "source_name": "openai-rss", "entries": [...] },
-    ...
-  ],
-  "failures": [
-    { "source_name": "meta-ai-blog", "error": "..." }
-  ]
-}
-```
-
-### Phase 1 落盘到 00-Inbox（IPC 起点）
-
-锁定本跑次 HHMM，写一份原始 fetch JSON 到 `00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json`：
+### 1.3 调 fetch-merge.py 合并 per-source → 总 fetch.json
 
 ```bash
-mkdir -p /Volumes/Projects/AInews/00-Inbox
-HHMM=$(date +%H%M)
-FETCH_PATH="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json"
+python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/fetch-merge.py \
+  --inbox-dir=/Volumes/Projects/AInews/00-Inbox \
+  --target-date=$TARGET_DATE \
+  --hhmm=$HHMM \
+  --out=$FETCH_PATH \
+  --sources-md=/Volumes/Projects/AInews/.claude/skills/ai-news/references/sources.md \
+  --expected-sources=$(echo "${ALIVE_SOURCES[@]}" | tr ' ' ',')
 ```
 
-把 batch JSON 序列化 Write 到 `$FETCH_PATH`。这一步：
+`ALIVE_SOURCES` 是 Phase 0 source-health.sh 拿到的 alive 源名数组。
 
-- **是 Phase 2-5 的 IPC 起点**——下游所有 phase 都从这个文件衍生中间产物（`*-filtered.json`、`*-cluster.json` 共用同一 HHMM）
-- Write 失败不阻断 Phase 2（因为 filter 直接读 batch JSON 也行），但要在 Phase 6 Log 报警
-- 与同日多次跑不冲突（文件名含 HHMM）
-- 配套 `--from-cache=<filename>`：下次跑可指定 fetch/filtered/cluster 中任一文件，从对应 phase 起跑
-- **不要清理旧 inbox**——人工决定 retention（vault 是 git 仓库，inbox 文件会被一起追踪，体积失控时手动 archive 或 gitignore）
+`fetch-merge.py` 行为：
+- 扫 `00-Inbox/${TARGET_DATE}-${HHMM}-fetch-<source>.json` 对每个 expected source
+- 缺失文件 → 归 failures（fetcher 死掉没写盘）
+- 解析失败 → 归 failures
+- per-source 自报 `error` 字段非空 → 归 failures
+- 按 sources.md 注入 tier/perspective 字段
+- 写总 fetch.json（schema 与 vault-schema §6.1 一致）
+- stdout 返 `{fetch_path, stats, failures, errors}`
 
-若 `FROM_CACHE` 不为空 → 按文件后缀路由：
-- `*-fetch.json` → 跳过 Phase 1.1-1.4，直接设 `FETCH_PATH=00-Inbox/${FROM_CACHE}`，HHMM 从文件名解析，进 Phase 2
-- `*-filtered.json` → 跳过 Phase 1+2，设 `FILTERED_PATH=00-Inbox/${FROM_CACHE}`，进 Phase 3
-- `*-cluster.json` → 跳过 Phase 1+2+3，设 `CLUSTER_PATH=00-Inbox/${FROM_CACHE}`，进 Phase 4+5
+### 1.4 错误处理 + IPC 约定
 
-**所有 from-cache 模式下不再重复落盘**（避免污染缓存层）。
+- fetch-merge.py 退出码 0 + `errors: []` → 正常进 Phase 2
+- fetch-merge.py 退出码 0 + `errors` 含 `per_source_missing:<src>` → 不阻断（failures 数组已记录），Phase 6 Log 列出
+- fetch-merge.py 退出码非 0 → 主会话 abort，Phase 6 Log 标 `partial: true`
+
+per-source 中转文件**不入 git**（.gitignore 已排除 `00-Inbox/*-fetch-*.json`），人工 debug 单源时可直接 Read 该文件；总 fetch.json / filtered.json / cluster.json **仍入 git**（IPC 主权威，影响 catch-up `--from-cache` 模式）。
+
+**不要清理旧 inbox**——人工决定 retention（per-source 文件已 gitignored，体积失控时手动 rm）。
 
 ---
 

@@ -27,6 +27,7 @@ stdout: 精简 cluster stats JSON 给主会话 Phase 6 Log
 """
 
 import argparse
+import html
 import json
 import sys
 from collections import OrderedDict
@@ -72,6 +73,12 @@ def main():
     for m in mappings:
         if "topic_slug" not in m and "slug" in m:
             m["topic_slug"] = m.pop("slug")
+
+    # 4.5. URL HTML 实体反转义（v2.4，防御 agent 偶尔把 & 误写成 &amp; / &#39; 等，
+    #      污染 cluster.json 后导致 writer 查 _seen-urls 匹配不上 → seen_urls_missing_url）
+    for m in mappings:
+        if m.get("url"):
+            m["url"] = html.unescape(m["url"])
 
     # 5. 校验：mappings 中的 url 都该在 filtered.json kept 里
     unknown_urls = [m["url"] for m in mappings if m.get("url") not in url_to_entry]

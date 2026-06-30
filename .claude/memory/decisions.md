@@ -2,8 +2,8 @@
 name: decisions
 description: AInews 关键架构决策与理由——避免重复讨论已决事项，新会话基于既定路径继续
 type: project
-last_updated: 2026-06-28
-commit: 1fed1ab
+last_updated: 2026-06-30
+commit: 20d67bc
 ---
 
 # AInews 关键决策
@@ -195,6 +195,33 @@ commit: 1fed1ab
 - 新增 digester 类 subagent system prompt 必含"事实性硬约束"段（禁止合成 / source_name 严格 / URL 必填 / 去重自检 / 字数上限），v1 试跑暴露这些是 LLM 总结类任务的共性失败模式
 - 调试任何下游 phase → 先用 `/ai-news --from-cache=<inbox.json>` 跳过 Phase 1，对上游源友好
 - 周报启用阈值：积累 ≥7 天 30-Digests/ 后写 news-weekly-digester subagent + SKILL.md 加 Phase 5.5（或 Phase 8）
+
+---
+
+## D13：v2.4 — Fetcher IPC 改 Write 中转，根治 token 截断 + 时窗双源 + URL 编码 bug
+
+**决策**（2026-06-30）：三个长期边界 bug 一次性根治：
+1. **Bug 3（fetcher 文本截断）**：4 个 fetcher subagent 改 Write per-source 中转文件 `00-Inbox/<date>-<hhmm>-fetch-<source>.json`，主输出仅返 `{output_path, source_name, entry_count, error}`；新增 `scripts/fetch-merge.py` 由主会话调用合并为总 fetch.json
+2. **Bug 2（fetcher 7d 时窗与 §2.5 14d 阈值冲突）**：4 个 fetcher prompt 删除"过滤 7 天前"步骤，时窗判定**单一权威**在 filter-inline.py §2.5
+3. **Bug 1（cluster URL `&` → `&amp;` 编码）**：cluster-merge.py 加 `html.unescape(url)` 防御反转义，不信任 agent 输出格式
+
+**Why**：
+- **Bug 3 是 v2.3 IPC 设计的核心瓶颈**——fetcher 用 assistant 文本回报 entries，触发 LLM 输出 token 上限（arxiv 20 篇 × 500 字摘要 ≈ 7-8k tokens；the-batch 15 长 issue 同问题；a16z 15 条 entry 多字段同问题），主会话只能拿到"样本几条 + 文字说明已抓 N 条"。**真实抓取数据反复永久丢失**（git log 多次复现）。v2.4 复用 cluster v2.3 已验证的"agent 出精简返回 + 文件作真实数据传递"模式，agent Write 文件无 token 上限，主会话靠 path Read 拿真实数据。
+- **Bug 2 是 v1 残留**——fetcher prompt"7d 过滤"在 v2.3 引入 §2.5 后没同步删，导致 7-14d 窗口的有效内容（如 openai 6-16 deployment-simulation、the-batch 5-29 issue-355）被 fetcher 提前剔，没机会进 §2.5 统一判定。DRY 原则要求时窗判定单源。
+- **Bug 1 是 LLM 训练数据偏置**——cluster agent 把 URL 里 `&` 误转 HTML 实体 `&amp;`（jiqizhixin URL 含 `?type=2&query=...` 几乎每次中招），污染下游 _seen-urls 回填。`html.unescape()` 一行兜底所有 HTML 实体（&amp; / &lt; / &gt; / &#39;），不依赖 LLM 服从 prompt 约束。
+- **三个 bug 捆绑改**——Bug 2 跟 Bug 3 都在 fetcher prompt 修改范围内（一次性改完避免回归）；Bug 1 在 cluster-merge.py 是独立小修。
+
+**How to apply**：
+- **Phase 1 编排变化**：HHMM 从 Phase 1 末锁定提前到 Phase 1 开头（spawn fetcher 前主会话必须知道 per-source path）；spawn fetcher 时 prompt 必含 `output_path` 字段；收 agent 返回 `{output_path, count, error}` 后跑 fetch-merge.py 合并
+- **per-source 中转文件不入 git**（.gitignore 排除 `00-Inbox/*-fetch-*.json`），保留作单源 debug；总 fetch.json / filtered.json / cluster.json 仍入 git（catch-up `--from-cache` 模式依赖）
+- **新增 fetcher 类型**（如未来 v2.5 加 RSSHub 备份源）→ 复用 v2.4 同款 system prompt 模板：tools 含 Write、输入含 output_path、不做时窗过滤、Write 完整 JSON + 主输出精简、URL 不转义约束
+- **fetcher 失败时仍 Write 文件**（带 error 字段 + entries:[]）让 fetch-merge.py 统一归 failures，避免文件缺失走"per_source_missing"路径
+- **fetcher retry** 直接覆盖原 path（无需特殊处理）
+- **如未来某 fetcher 大量 entry 不再适配文本 prompt** → 不需要改架构，本设计已无 token 上限
+- **不要把 fetcher 主输出格式回退到带 entries 数组**——会重新触发 Bug 3
+- **不要给 cluster-merge.py 加"严格 url 校验失败就 abort"** —— 已有 unknown_urls / missing_urls 兜底足够，agent 偶有错产出归 errors[] 不阻断
+
+**对应改动 commit**：待生成（v2.4 改动包括 scripts/fetch-merge.py 新建、scripts/cluster-merge.py 加 html.unescape、4 个 fetcher agent prompt 重写、SKILL.md Phase 1 重写、vault-schema.md §6.1 + filter-criteria.md §2.5 文档同步、.gitignore 加 per-source pattern）
 
 ---
 

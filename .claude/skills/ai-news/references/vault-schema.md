@@ -149,9 +149,34 @@ zettel_written: 8
 
 ---
 
-## 6. IPC 中间文件 JSON Schema（v2.1）
+## 6. IPC 中间文件 JSON Schema（v2.4）
 
-### 6.1 `fetch.json`（Phase 1 输出 / Phase 2 输入）
+### 6.1.a `fetch-<source_name>.json`（v2.4 新增 — per-source 中转，Phase 1.1 fetcher Write）
+
+每个 fetcher subagent Write 自己抓取的 per-source 中转文件，schema 与总 fetch.json 内 `fetchers[]` 数组单元一致（**不含** tier/perspective，主会话 fetch-merge 阶段从 sources.md 注入）：
+
+```json
+{
+  "source_name": "openai-rss",
+  "fetched_at": "2026-06-27T18:00:00+08:00",
+  "entry_count": 19,
+  "entries": [
+    { "title": "...", "url": "...", "published": "...", "raw_summary": "...", "low_confidence": false }
+  ],
+  "error": null
+}
+```
+
+抓取失败时仍 Write 该文件，`entries: []` + `error: "<reason>"`，让主会话归 failures。
+
+**约定**：
+- 文件名锁定 `00-Inbox/<target_date>-<hhmm>-fetch-<source_name>.json`，HHMM 由主会话 Phase 1 开头锁定后传入 fetcher
+- 该文件**不入 git**（`.gitignore` 排除 `00-Inbox/*-fetch-*.json`），保留作单源 debug
+- 多次 retry 会覆盖同一 path
+
+### 6.1.b `fetch.json`（Phase 1 输出 / Phase 2 输入，由 fetch-merge.py 拼装）
+
+主会话 Phase 1.3 调 `scripts/fetch-merge.py` 扫所有 per-source 中转文件、按 sources.md 注入 tier/perspective、合并为总 fetch.json：
 
 ```json
 {
@@ -166,6 +191,8 @@ zettel_written: 8
   "stats": { "sources_attempted": N, "sources_with_data": N, "sources_empty": N, "sources_failed": N, "entries_total": N, "first_fail_retried": N, "retry_success": N }
 }
 ```
+
+**v2.4 设计原因**：v2.3 fetcher subagent 用 assistant 文本回报 entries，触发 LLM 输出 token 上限（arxiv 20 篇 / the-batch 15 条 / a16z 15 条历史重灾区），主会话只能拿到样本几条 + 文字说明，**真实抓取数据反复丢失**。改 per-source Write 中转后无截断（fetcher 文件 IO 无 token 上限），主会话靠 path Read 取真实数据。同时 fetcher 主输出瘦身为 `{output_path, source_name, entry_count, error}` ~150 字符，与 cluster v2.3 范式一致。
 
 ### 6.2 `filtered.json`（Phase 2 输出 / Phase 3 输入）
 

@@ -19,3 +19,10 @@
 
 # Claude Code 临时文件（持久化文档另说，但 tool-results 不入库）
 .claude/projects/
+
+# /ai-news v2.4 per-source fetch 中转文件（保留作 debug 但不入 git；总 fetch.json/filtered.json/cluster.json 不在排除内）
+00-Inbox/*-fetch-*.json
+
+# Python 副产物
+__pycache__/
+*.pyc

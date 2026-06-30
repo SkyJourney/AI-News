@@ -105,7 +105,9 @@ normalize(url) =
 - tier 3 + 摘要 < 50 字 + 无 keep signal → low_confidence keep
 - published 解析失败 → low_confidence keep
 
-## 2.5 时效过滤规则（filter-inline.py §2.5，v2.3 新增）
+## 2.5 时效过滤规则（filter-inline.py §2.5，v2.3 新增 / v2.4 单源化）
+
+> **v2.4 起 fetcher 不再做任何时窗过滤**（之前 fetcher subagent prompt 内有"过滤超过 7 天的旧条目"是 v1 残留，与本节 14d 阈值不一致，导致 7-14d 内有效内容被 fetcher 提前剔）。时效判定**单一权威在本节**——fetcher 把抓到的最多 N 条全保留交给主会话，由 filter-inline.py §2.5 按 14d 阈值统一裁决。
 
 **规则**：`entry.published` 距 `target_date` **> 14 天** → discard，reason `stale:Nd_old`。**所有 source 一律 14 天阈值，不分 tier**。
 

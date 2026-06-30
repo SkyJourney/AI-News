@@ -1,5 +1,5 @@
 # Memory Index
-> _Last synced: 2026-06-28 | Base commit: `1fed1ab`（v2 流程上线前）_
+> _Last synced: 2026-06-30 | Base commit: `20d67bc`（v2.4 架构升级 — fetcher IPC 改 Write 中转）_
 
 本目录是 **AInews 的项目记忆**，随仓库 git 管理。Obsidian 默认不索引 `.claude/` 隐藏目录，故不混入笔记图谱。新会话先读本目录了解项目上下文。
 
@@ -11,7 +11,7 @@
 |------|------|------|------|--------|
 | [project_overview.md](project_overview.md) | 项目定位、技术栈、目录结构、核心组件职责（v2 7 phase + digester） | project | 4 | `1fed1ab` |
 | [project_progress.md](project_progress.md) | 阶段进度、当前状态、待办、已观测脆弱点 | project | 3 | `d729cc9` |
-| [decisions.md](decisions.md) | 12 条关键架构决策与理由（含 D12 v2 流程上线） | project | 4 | `1fed1ab` |
+| [decisions.md](decisions.md) | 13 条关键架构决策与理由（含 D13 v2.4 fetcher IPC 升级） | project | 4 | `20d67bc` |
 | [feedback.md](feedback.md) | 9 条协作规范（语言/确认流程/不引 MCP 等） | feedback | 2 | `d729cc9` |
 
 ## 按需加载
