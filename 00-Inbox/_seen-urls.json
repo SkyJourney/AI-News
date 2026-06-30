@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "last_updated": "2026-06-29 13:36:12",
+  "last_updated": "2026-06-30 09:53:30",
   "window_days": 30,
   "urls": {
     "http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2651041465&idx=3&sn=729dd9680448f8b94858d11d019b3a10": {
@@ -31,7 +31,8 @@
       "title": "Dwarkesh Patel：下一代AI，可能是干活干出来的",
       "source_name": "jiqizhixin",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "硅谷科技播客主持人 Dwarkesh Patel 探讨 AI 下一代训练范式，提出 RLVR（可验证奖励强化学习）是关键，并指出真实世界任务需要 AI 从发布前训练走向发布后学习。"
@@ -68,6 +69,17 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": ""
+    },
+    "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery",
+      "source_name": "meta-ai-blog",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Research article exploring Brain2Qwerty technology that enables communication through brain signals without requiring surgical intervention."
     },
     "https://anthropic.com/news/anthropic-public-record": {
       "first_seen_date": "2026-06-28",
@@ -123,6 +135,50 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": ""
+    },
+    "https://arxiv.org/abs/2606.29261": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Nonlinear mixture model motivated subspace clustering",
+      "source_name": "arxiv-api",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "arxiv paper id 2606.29261 by Ivica Kopriva"
+    },
+    "https://arxiv.org/abs/2606.29340": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "PHF: Privileged Hidden Flow for On-Policy Self-Distillation",
+      "source_name": "arxiv-api",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "arxiv paper id 2606.29340 by Yuhan Li et al."
+    },
+    "https://arxiv.org/abs/2606.29346": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Reliability, Faithfulness, and the Limits of Post-hoc Explanations of Opaque Scientific Models",
+      "source_name": "arxiv-api",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "arxiv paper id 2606.29346 by Nick Oh et al."
+    },
+    "https://arxiv.org/abs/2606.29347": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Adaptive Financial Transformer with Regime-Gated Attention for Stock Return Prediction",
+      "source_name": "arxiv-api",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "arxiv paper id 2606.29347 by Dishan Sarkar"
     },
     "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/": {
       "first_seen_date": "2026-06-27",
@@ -234,6 +290,28 @@
       "zettel_id": "202606291413-singguard-multimodal-guardrail",
       "raw_summary_excerpt": "Multi-modal LLM safety guardrail; 8 upvotes"
     },
+    "https://huggingface.co/papers/2606.28128": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "PhysisForcing: Physics Reinforced World Simulator for Robotic Manipulation",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300955-physisforcing-physics-world-model",
+      "raw_summary_excerpt": "Video generation models have emerged as a promising paradigm for embodied world simulation. However, both general-domain video generators and robot-specific data fine-tuned models can still produce ph"
+    },
+    "https://huggingface.co/papers/2606.28133": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Translation as a Bridging Action: Transferring Manipulation Skills from Humans to Robots",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "We study whether we can learn novel manipulation skills from human actions to a bi-manual robot with parallel grippers. Human action data is cheap, abundant, and diverse, making it one of the most pro"
+    },
     "https://importai.substack.com/p/import-ai-461-alignment-is-not-on": {
       "first_seen_date": "2026-06-27",
       "first_seen_run": "2026-06-27-pre-v22-bootstrap",
@@ -257,13 +335,47 @@
       "zettel_id": "202606271433",
       "raw_summary_excerpt": ""
     },
+    "https://importai.substack.com/p/import-ai-463-self-improving-robots": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Import AI 463: Self-improving robots; a 10k Chinese GPU cluster; and an elegiac essay for the human era",
+      "source_name": "import-ai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "NVIDIA develops ENPIRE software enabling robots to autonomously improve policies through self-experimentation. Tencent details ARGUS system for managing 10,000+ GPU training clusters. Essay explores p"
+    },
+    "https://openai.com/index/ai-chemist-improves-reaction": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300950-ai-chemist-drug-reaction",
+      "raw_summary_excerpt": "OpenAI and Molecule.one demonstrate how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction."
+    },
+    "https://openai.com/index/chatgpt-enterprise-spend-controls": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "New usage analytics and updated spend controls for enterprises",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "OpenAI introduces spend controls and usage analytics for ChatGPT Enterprise, helping organizations manage costs and scale AI confidently."
+    },
     "https://openai.com/index/codex-maxxing-long-running-work": {
       "first_seen_date": "2026-06-29",
       "first_seen_run": "2026-06-29-1052",
       "title": "Codex-maxxing for long-running work",
       "source_name": "openai-rss",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Learn how Jason Liu uses Codex to preserve context, manage complex projects, and help work continue beyond a single prompt."
@@ -278,6 +390,28 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": ""
+    },
+    "https://openai.com/index/deployment-simulation": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Predicting model behavior before release by simulating deployment",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300954-deployment-simulation-model-behavior",
+      "raw_summary_excerpt": "OpenAI introduces Deployment Simulation, a method to predict AI model behavior before deployment using real conversation data."
+    },
+    "https://openai.com/index/diagnose-rare-childhood-diseases": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300949-ai-rare-disease-diagnosis",
+      "raw_summary_excerpt": "Researchers used an OpenAI reasoning model to identify 18 new diagnoses in previously unsolved rare disease cases in children."
     },
     "https://openai.com/index/gpt-5-immunology-mystery": {
       "first_seen_date": "2026-06-27",
@@ -307,7 +441,8 @@
       "title": "How agents are transforming work",
       "source_name": "openai-rss",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": "202606291406-agents-transforming-work",
       "raw_summary_excerpt": "A new OpenAI research paper shows how AI agents are transforming work, enabling longer, more complex tasks and expanding productivity across roles."
@@ -322,6 +457,39 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "HP Inc. scales its OpenAI Frontier partnership to deploy AI across customer experiences, software development, and enterprise operations."
+    },
+    "https://openai.com/index/improving-health-intelligence-in-chatgpt": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Improving health intelligence in ChatGPT",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "GPT-5.5 Instant enhances ChatGPT's health responses with improved reasoning, context, clarity, and physician-informed evaluations."
+    },
+    "https://openai.com/index/introducing-life-sci-bench": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Introducing LifeSciBench",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300953-lifescibench-life-science-eval",
+      "raw_summary_excerpt": "LifeSciBench is an expert-authored benchmark for evaluating how AI systems handle real-world life science research tasks and decisions."
+    },
+    "https://openai.com/index/mapping-ai-jobs-transition-eu": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Mapping Europe's AI Workforce Opportunity",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "OpenAI released a report examining how AI could reshape jobs across the EU, identifying which occupations may face automation, growth, or workflow changes."
     },
     "https://openai.com/index/omio": {
       "first_seen_date": "2026-06-29",
@@ -369,6 +537,17 @@
       "zettel_id": "202606271430",
       "raw_summary_excerpt": ""
     },
+    "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Samsung Electronics brings ChatGPT and Codex to employees",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Samsung Electronics deploys ChatGPT Enterprise and Codex globally to employees, representing one of OpenAI's largest enterprise AI rollouts."
+    },
     "https://press.airstreet.com/p/macrodata-pre-seed": {
       "first_seen_date": "2026-06-29",
       "first_seen_run": "2026-06-29-1052",
@@ -386,7 +565,8 @@
       "title": "How Revolut runs AI at scale",
       "source_name": "air-street-press",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": "202606291407-revolut-ai-deployment-scale",
       "raw_summary_excerpt": "Nikolay Donets, Revolut's Head of Machine Learning Engineering, discussed managing AI deployment across a regulated bank serving 70M+ customers. The approach centers on a single gateway, use-case gove"
@@ -397,7 +577,8 @@
       "title": "Odyssey raises $310M Series B for world models",
       "source_name": "air-street-press",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": "202606291412-odyssey-world-model-funding",
       "raw_summary_excerpt": "World model startup Odyssey closed a $310M Series B at $1.45B valuation to build interactive, persistent AI-generated environments. Products include Starchild-1 for multimodal generation, Agora-1 for "
@@ -408,7 +589,8 @@
       "title": "STARK raises €500M to build Europe's next defense prime",
       "source_name": "air-street-press",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "German defense company STARK announced a €500M funding round to manufacture autonomous unmanned strike systems. The capital will support production lines across Germany, the UK, and Ukraine for weapon"
@@ -441,7 +623,8 @@
       "title": "Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem",
       "source_name": "interconnects",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-06-30"
       ],
       "zettel_id": "202606291408-open-model-artifacts-22",
       "raw_summary_excerpt": "Assessment of the open ecosystem showing increasing diversity in model releases. Companies span pure model makers, Big Tech, and product companies with varied motivations for releasing weights. Highli"
@@ -578,6 +761,83 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "把天基计算推进到可验证、可迭代的工程路线"
+    },
+    "https://www.qbitai.com/2026/06/439746.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "'词元盗用'正在成为AI商业化面临的新风险",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300956-token-theft-ai-security-risk",
+      "raw_summary_excerpt": "有人盯上的不是钱，而是 Token"
+    },
+    "https://www.qbitai.com/2026/06/439750.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "啥？做AI短剧可以免费，免费，免费了！",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "我反手做了个修仙爽剧"
+    },
+    "https://www.qbitai.com/2026/06/439861.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "国家队+千亿产业+头部财投集体入局，智平方200亿估值筑就大湾区具身智能名片",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "大湾区首个200亿具身智能独角兽诞生！'最像特斯拉'智平方吸金50亿，全矩阵顶级资本重仓"
+    },
+    "https://www.qbitai.com/2026/06/439863.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "Claude Mythos让梁文锋决定融资",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "DeepSeek不储备弹药根本没法打下去了"
+    },
+    "https://www.qbitai.com/2026/06/439864.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "AI当老板，快给10家公司干破产了…",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": "202606300951-ai-ceo-company-failure",
+      "raw_summary_excerpt": "画出那个矩阵的能力——还属于人类。"
+    },
+    "https://www.qbitai.com/2026/06/439876.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "OceanBase发布AI数据库：以一套引擎融合湖库与多模态数据",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "让AI真正'读懂'企业"
+    },
+    "https://www.qbitai.com/2026/06/439891.html": {
+      "first_seen_date": "2026-06-30",
+      "first_seen_run": "2026-06-30-0949",
+      "title": "全球首个：隐空间世界模型，打通长时序双向物理因果链了！",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-06-30"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "刚融了2亿美元，冲到了具身榜单第一"
     },
     "https://www.stateof.ai/": {
       "first_seen_date": "2026-06-29",
