@@ -251,7 +251,7 @@ tags: [source-original, language-en]
 }
 ```
 
-### 6.3 `cluster.json`（Phase 3 输出 / Phase 4+5 输入）
+### 6.3 `cluster.json`（Phase 3 输出 / Phase 3.5 回填 / Phase 4+5 输入）
 
 ```json
 {
@@ -264,7 +264,7 @@ tags: [source-original, language-en]
       "is_new": false,
       "entry_count": N,
       "entries": [
-        { "title": "...", "url": "...", "source_name": "...", "published": "...", "raw_summary": "...", "low_confidence": false, "also_reported_by": [...], "zettel_worthy": true, "rationale": "..." }
+        { "title": "...", "url": "...", "source_name": "...", "published": "...", "raw_summary": "...", "low_confidence": false, "also_reported_by": [...], "zettel_worthy": true, "rationale": "...", "original_id": "2026-07-01-1710-<slug>" | null, "original_error": null | "<fallback_notice 内容>" }
       ]
     }
   ],
@@ -276,6 +276,7 @@ tags: [source-original, language-en]
 - 三种文件**保留完整字段**（不裁剪），下游 phase 直接消费，无需主会话回填
 - `existing_topics_snapshot` 由主会话在 Phase 3 起 cluster 前注入（`ls 20-Topics/*.md`），cluster 用它判定 `is_new = !snapshot.includes(slug)`
 - subagent Write 后**只**返回 `{filtered_path|cluster_path, stats, errors}` 三件套，主会话不再传 JSON 内容
+- **Phase 3.5 后 `entries[].original_id` 全部有值**（含 Fallback B 占位路径）——只有 originalizer agent 崩溃未返 JSON 时 `original_id = null`；writer/digester 依赖此字段做双链 `[[60-Originals/<id>]]`
 
 ### 6.4 `_seen-urls.json`（跨日去重索引，单例 / 跨跑维护）
 

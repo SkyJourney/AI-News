@@ -175,7 +175,7 @@ def try_fetch_html_via_subprocess(
 # ============================================================
 def now_iso() -> str:
     tz = dt.timezone(dt.timedelta(hours=8))
-    return dt.datetime.now(tz).strftime("%Y-%m-%dT%H:%M:%S%z")
+    return dt.datetime.now(tz).replace(microsecond=0).isoformat()
 
 
 def build_fallback_result(

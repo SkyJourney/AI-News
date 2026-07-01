@@ -238,7 +238,54 @@ cluster-merge.py 校验（agent 自造 url / 漏映射 / is_new 错判）→ 按
 - cluster-merge.py 退出码 0 + `errors` 含 `cluster_is_new_mismatch:<slug>` → 不阻断（已纠正），但 Phase 6 Log 标"agent is_new 误判已纠正：<slug>"
 - cluster-merge.py 退出码非 0 → 主会话 abort，写 Phase 6 Log 标 `partial: true`，不进 Phase 4/5
 
-主会话读 stats + topics_summary 用于 Phase 6 Log；带 `CLUSTER_PATH` 进入 Phase 4 和 Phase 5（两者并列消费）。
+主会话读 stats + topics_summary 用于 Phase 6 Log；带 `CLUSTER_PATH` 进入 Phase 3.5。
+
+---
+
+## Phase 3.5 — Originalize（F1 新增：60-Originals 全量离线化）
+
+主会话遍历 Phase 3 输出的 cluster.json 里所有 kept 条目（即 `topics[].entries[]` 全部），并发 spawn `news-originalizer` × N，一 agent 一条 entry，产出 `60-Originals/<target_id>.md`。产出后主会话把 `original_id` 回填到 cluster.json 原路径，供 Phase 4/5 消费。
+
+### 3.5.a · 遍历 cluster.json 生成 target_id
+
+主会话读 cluster.json，遍历 `topics[].entries[]`：
+
+1. 从 `entry.title` 生成 slug（小写 kebab-case，≤ 50 字符，剥停用词）
+2. `target_id = <target_date>-<HHMM>-<slug>`——HHMM 沿用 Phase 1 锁定的 `$HHMM`，**与 Zettel 同源**（见 vault-schema.md §2）
+3. 同 HHMM 内多条 slug 冲突：`<slug>-2` / `<slug>-3` 顺延（**不改 HHMM**，保留同源约定）
+4. `output_path = /Volumes/Projects/AInews/60-Originals/<target_id>.md`
+
+### 3.5.b · 并发 spawn news-originalizer
+
+对每条 kept entry，spawn 一个 news-originalizer：
+
+- 输入 `{url, title, source_name, target_id, output_path, date, published, related_daily}`
+- 并发：无手动上限，Claude Code 内部排队；20-30 条 entries 一次跑
+- 单 agent 预估耗时：haiku 翻译 40-80 KB HTML 约 60-240s；并发总时长 5-8 min
+
+### 3.5.c · 收集主输出 + 回填 cluster.json
+
+每 originalizer 主输出为一行 JSON：`{output_path, id, images_saved, images_attempted, language, translated, fallback_notice, word_count, error}`。
+
+主会话遍历所有主输出，按 `entry.url` 匹配到 cluster.json 里对应 entry，回填两个字段：
+
+- `entry.original_id = <id>`——即使 Fallback B 占位文件也算成功（有 output_path 就有 id）
+- `entry.original_error = <fallback_notice / error 内容>`——null 表示 normal，字符串表示降级/失败详情
+
+若 agent 崩溃未返 JSON：`original_id = null` + `original_error = "agent_crashed"`。
+
+### 3.5.d · Write 覆盖 cluster.json 原路径
+
+主会话把回填后的 cluster.json Write 覆盖到 `$CLUSTER_PATH`，供 Phase 4/5 直接 Read（不引入独立 IPC 文件，最小改动）。
+
+### Originalize 错误处理
+
+- **单 originalizer 失败/崩溃** → 不阻塞其他 entries，本条 `original_id = null`
+- **originalizer 返 error=all_channels_failed**（Fallback B 占位文件）→ `original_id` 仍有值，`original_error` 填 fallback_notice；不算失败
+- **> 50% originalizer 失败**（>15/30）→ Phase 6 Log 标 warning "60-Originals 覆盖率不足 X%"，但不 abort（继续 Phase 4/5）
+- **cluster.json Read/Write 失败** → fatal abort（Phase 3 应保证的产物）
+
+主会话读 stats 用于 Phase 6 Log；带更新后的 `CLUSTER_PATH` 进入 Phase 4 和 Phase 5（两者并列消费）。
 
 ---
 

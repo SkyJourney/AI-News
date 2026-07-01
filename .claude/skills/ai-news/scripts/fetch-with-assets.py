@@ -321,7 +321,7 @@ def process_images(html_text, base_url, out_dir, target_id, date, max_bytes, ua)
 # ============================================================
 def now_iso() -> str:
     tz = dt.timezone(dt.timedelta(hours=8))
-    return dt.datetime.now(tz).strftime("%Y-%m-%dT%H:%M:%S%z")
+    return dt.datetime.now(tz).replace(microsecond=0).isoformat()
 
 
 def parse_args():
