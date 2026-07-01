@@ -42,7 +42,8 @@ color: pink
   - <bullet 2>
 
   ## 来源
-  - [原文](<source_url>) — `<source_name>`
+  - [[<original_id>]]（60-Originals 层，含翻译 + 图片本地缓存；若 `entry.original_id` 为 null 则跳过本行）
+  - [原文外链](<source_url>) — `<source_name>`
   - 同时由 <also_reported_by> 报道（若有）
 
   ## 关联
@@ -92,12 +93,22 @@ color: pink
   ## 按主题
 
   ### 🤖 模型发布 [[model-releases]]
+  # 情形 A：有 Zettel + 有 original_id（最常见）→ 紧凑双链
+  - **<title>** ([[Zettel-ID]] · [[<original_id>]])
+    <事件描述 2 句话>
+    源：`<source_name>`
+  # 情形 B：无 Zettel 但有 original_id（普通条目，不升级为 Zettel）
+  - **<title>** (原文 [[<original_id>]])
+    <事件描述 2 句话>
+    源：`<source_name>`
+  # 情形 C：有 Zettel 但 original_id 为 null（Phase 3.5 agent 崩溃罕见）→ 兜底保留 URL 明链
   - **<title>** ([[Zettel-ID]])
     <事件描述 2 句话>
     源：[原文](<url>) — `<source_name>`
-  - 🔄 [复盘] **<title>** ([[旧 Zettel-ID]])
+  # 情形 D：复盘条目（re_coverage）
+  - 🔄 [复盘] **<title>** ([[旧 Zettel-ID]] · [[<original_id>]])
     <re_coverage 条目用 🔄 前缀，标"复盘"；wikilink 指向 _seen-urls 中已记录的 zettel_id 或 Glob 找到的旧 Zettel>
-    源：[原文](<url>) — `<source_name>` · 首记于 [[<previously_kept_in_daily>]]
+    源：`<source_name>` · 首记于 [[<previously_kept_in_daily>]]
 
   ### 🛡️ 安全 / 对齐 [[safety-alignment]]
   ...
@@ -165,6 +176,7 @@ color: pink
 - **绝不重写 Topic 文件**（Edit append 模式；rewrite 会丢历史）
 - **Zettel slug 时间戳冲突顺延**，不允许覆盖已有 Zettel
 - 所有 wikilink 必须用时间戳 ID / topic slug / 日期（vault-schema §4）
+- **优先使用 `[[<original_id>]]` 引用 60-Originals** —— 每条 entry 只有 `original_id: null`（Phase 3.5 agent 崩溃）时才回退到 `[原文](url)` 兜底；其他情况一律走双链
 - frontmatter 字段顺序：created → updated → status → 其余按 schema 字典序
 - 不要写 `00-Inbox/`、`40-Deep-Dives/`、`90-Archive/`——那是人工领域
 - 不要写 `99-Log/`——日志由 skill 主会话 Phase 5 写

@@ -35,6 +35,14 @@ tags: [moc, navigation]
 
 （出现 ≥ 2 条才独立成桶；新主题由 cluster 自动创建并加 `new_topic: true` 标记。）
 
+## 📄 原文全文（`60-Originals/`）
+
+自 F1 起，vault 采用**自包含**策略——`60-Originals/YYYY-MM-DD-HHMM-<slug>.md` 归档每日 10-Daily / 30-Digests 上全部条目原文（含 haiku 翻译 + 图片本地缓存 `_assets/YYYY-MM-DD/`）。10-Daily / 20-Topics / 50-Zettel 通过 `[[<original_id>]]` 引用作为原文单一权威，外链失效不影响 vault 完整性。
+
+- **命名**：`YYYY-MM-DD-HHMM-<slug>.md`，HHMM 与 Zettel ID 同源（详见 SCHEMA §2）
+- **动态视图**：见 [[_base-originals]]（按 source / language / 时间线 / fallback 异常）
+- **约定权威**：`.claude/skills/ai-news/references/vault-schema.md` §1/§2/§3/§4/§5
+
 ## 🔍 数据库视图（Obsidian Bases）
 
 | 视图 | 用途 |
@@ -42,6 +50,7 @@ tags: [moc, navigation]
 | [[_base-by-topic]] | 按主题分组看所有 Zettel；高优 draft 单视图；卡片视图 |
 | [[_base-by-source]] | 按来源切片（一手 / 学术 / 投资视角） |
 | [[_base-latest-daily]] | Daily 时间线 + 卡片视图 + 健康度异常检测 |
+| [[_base-originals]] | 60-Originals 层多视图（按 source / language / 时间线 / fallback 异常） |
 
 需要新视图？添加 `_base-<name>.base` 到 vault 根。
 

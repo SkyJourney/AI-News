@@ -1,0 +1,47 @@
+filters:
+  and:
+    - file.inFolder("60-Originals")
+    - type == "source-original"
+views:
+  - type: table
+    name: 按 source 分组
+    order:
+      - source_name
+      - published_at
+      - file.name
+      - language
+      - translated
+      - word_count
+      - images_saved
+  - type: table
+    name: 按 language 切
+    order:
+      - language
+      - source_name
+      - file.name
+      - word_count
+      - published_at
+  - type: table
+    name: 时间线
+    order:
+      - published_at
+      - file.name
+      - source_name
+      - language
+      - word_count
+  - type: table
+    name: fallback 异常
+    filters:
+      - fallback_notice != null
+    order:
+      - file.name
+      - source_name
+      - fallback_notice
+  - type: cards
+    name: 卡片
+    order:
+      - file.name
+      - source_name
+      - published_at
+      - language
+      - word_count

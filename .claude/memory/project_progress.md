@@ -18,8 +18,8 @@ commit: 9b48c6a
 - **MVP 状态**：✅ **已达成**——2026-06-27 → 2026-07-01 连续 5 天跑通，7-01 跑次 20 Zettel / 9 Topic / 完整 digest
 - **调度状态**：✅ **已自动化**——Mac mini 定时任务 + Claude 非交互会话跑通，无需 launchd 独立配置
 - **vault 状态**：14 alive 源 + 1 degraded；5 天 Daily/Zettel/Topic/Digest 已写入；Log 完整
-- **Sprint 1 进展**：F1.1 vault schema + F1.2 60-Originals 抓取组件（fetch-with-assets.py + arxiv-fulltext.py + news-originalizer.md haiku）+ F1.3 SKILL.md Phase 3.5 编排全部完成；14 源覆盖率：10 直接可用 + 2 fallback 兜底 + 2 arxiv 专项
-- **下一步**：F1.4 · 下游 writer/digester 改双链 `[[60-Originals/<id>]]` + MOC/base 加 60 层入口（~90 min）
+- **Sprint 1 进展**：F1.1 vault schema + F1.2 60-Originals 抓取组件 + F1.3 SKILL.md Phase 3.5 编排 + F1.4 下游改造（writer 原文双链三态 + MOC 60-Originals 节 + `_base-originals.base` 5 视图）全部完成；digester 保持现状读 cluster.raw_summary（Sprint 2 B1 评估重构方向）
+- **下一步**：F1.5 · `scripts/seen-urls-bootstrap.py` 冷启动升级（扫 10-Daily + 60-Originals，吞并老 A5）（~45 min）
 
 ## 已落地阶段
 
