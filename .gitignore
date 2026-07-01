@@ -26,3 +26,16 @@
 # Python 副产物
 __pycache__/
 *.pyc
+
+# F2 前端站点构建产物（web/poc-* 与 web/ 通用）
+web/*/node_modules/
+web/*/dist/
+web/*/public/
+web/*/.cache/
+web/*/.astro/
+web/*/resources/_gen/
+web/*/.hugo_build.lock
+web/*/.git.upstream-orig/
+# Quartz 5 插件解析缓存（含所有社区主题近 1G，`npm run install-plugins` 重生）
+web/*/.quartz/
+
