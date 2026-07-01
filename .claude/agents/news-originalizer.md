@@ -155,9 +155,50 @@ tags: [source-original, language-<lang>]
 <正文按原文结构渲染，一二三级标题保留，图片按 Step 5 分级>
 ```
 
+#### YAML 字符串引号规则（防严格 YAML 解析器拒收）
+
+Obsidian 宽容解析、Quartz / Astro / Hugo 三家静态站生成器**严格解析**。以下字符串字段**满足任一条件必用引号包裹**：
+
+- 含冒号 `:`（如 `Pessimism's Paradox: Conservative Offline Training`）
+- 含撇号 `'` 或双引号 `"`
+- 含换行 / tab
+- 以 `-` / `?` / `!` / `&` / `*` / `|` / `{` / `[` / `,` / `#` / `>` / `%` / `@` 开头
+- 纯数字或看起来像日期 / 时间 / bool（如 `2026-06-30` / `true` / `no`）
+
+**必查字段**：`title`（中文标题可能含"：/？/！"）、`original_title`、`source_name`（一般安全但仍要扫）、`fallback_notice`、`author` 数组内每个字符串元素。
+
+**引号规则**：
+
+- **推荐单引号**（更安全，字符串内单引号写成 `''` 双写转义，无其他转义规则）
+- 双引号需转义 `"` → `\"`、反斜杠 → `\\`、支持 `\n`
+
+**示例**：
+
+```yaml
+# ❌ 破格（Obsidian 能读、Quartz 报 "mapping values are not allowed here"）
+original_title: Pessimism's Paradox: Conservative Offline Training Amplifies Reward Hacking
+
+# ✅ 双引号包裹
+original_title: "Pessimism's Paradox: Conservative Offline Training Amplifies Reward Hacking"
+
+# ✅ 单引号包裹（撇号双写转义）
+original_title: 'Pessimism''s Paradox: Conservative Offline Training Amplifies Reward Hacking'
+
+# ✅ 中文冒号也算冒号
+title: '悲观性悖论：保守离线训练在推理模型在线自适应中加剧奖励黑客攻击'
+
+# ✅ fallback_notice 含冒号
+fallback_notice: '脚本失败: http_403；WebFetch 失败: HTTP 403 Forbidden'
+
+# ✅ 作者数组元素含撇号
+author: ["Vinija Jain", "Aman Chadha", "O'Brien"]
+```
+
+> **背景**：2026-07-01 F1 首次试跑产出的 `60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` 中 `original_title` 未加引号导致 F2.0 POC 三家框架 build 全失败；81 md 唯一破格。**下次 F1 真跑必须由本 agent 生成时就加好**，别再交给 F2 修。
+
 ### Step 7 · Write output_path
 
-用 Write tool 写完整文件到 `output_path`。**Write 前自检 vault-schema §5 七条**：
+用 Write tool 写完整文件到 `output_path`。**Write 前自检 vault-schema §5 七条 + YAML 引号第 8 条**：
 
 1. 目录 = 60-Originals？
 2. 文件名 = target_id.md？
@@ -166,6 +207,7 @@ tags: [source-original, language-<lang>]
 5. `source_name` 在 sources.md 内？
 6. Topic append 规则——本 agent **不写 Topic**，跳过
 7. `images_attempted` / `images_saved` 统计正确，`fallback_notice` 填了人可读原因或 null？
+8. **所有字符串字段扫一遍：含冒号 / 撇号 / 双引号 / 以特殊字符开头的必须已引号包裹**（YAML 严格解析）？
 
 ### Step 8 · 主输出精简（**你的最后一段回复**）
 
@@ -208,3 +250,4 @@ Write 完成后，**你的最后一段回复只有一行 JSON**——不加 ` ``
 - ❌ fetched_at 用自己生成的 `datetime.now()`（含微秒或错时区）——严格复用脚本 JSON 字段
 - ❌ 缩短原文长度以省 token——完整性优先
 - ❌ 用 markdown 表格代替原文 `<table>`——如果原文有表格保留结构
+- ❌ `title` / `original_title` / `fallback_notice` 含冒号未加引号（如 `original_title: Pessimism's Paradox: Conservative Offline Training`）——2026-07-01 F1 试跑产 `60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` 唯一破格，F2.0 POC 三家框架 build 全失败；参照 Step 6 · YAML 字符串引号规则
