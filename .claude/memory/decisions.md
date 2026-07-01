@@ -2,8 +2,8 @@
 name: decisions
 description: AInews 关键架构决策与理由——避免重复讨论已决事项，新会话基于既定路径继续
 type: project
-last_updated: 2026-06-30
-commit: 20d67bc
+last_updated: 2026-07-01
+commit: 9b48c6a
 ---
 
 # AInews 关键决策
@@ -221,7 +221,31 @@ commit: 20d67bc
 - **不要把 fetcher 主输出格式回退到带 entries 数组**——会重新触发 Bug 3
 - **不要给 cluster-merge.py 加"严格 url 校验失败就 abort"** —— 已有 unknown_urls / missing_urls 兜底足够，agent 偶有错产出归 errors[] 不阻断
 
-**对应改动 commit**：待生成（v2.4 改动包括 scripts/fetch-merge.py 新建、scripts/cluster-merge.py 加 html.unescape、4 个 fetcher agent prompt 重写、SKILL.md Phase 1 重写、vault-schema.md §6.1 + filter-criteria.md §2.5 文档同步、.gitignore 加 per-source pattern）
+**对应改动 commit**：`08cffbb`（v2.4 主提交）
+
+---
+
+## D14：MVP 后续按 F1 + F2 双主线，ROADMAP.md 为权威跟踪基准
+
+**决策**（2026-07-01）：v2.4 MVP 达成后，后续开发以两条主线推进：
+1. **F1 · 60-Originals 全量离线化**——vault 新增 `60-Originals/` 层，每天抓 10-Daily + 30-Digests 上全部条目原文，haiku 翻译外文/规整中文，10/20/40/50 全链路改双链引用
+2. **F2 · Vault 前端站点**——Mac mini 本地 docker compose + nginx（端口 40801），私有化部署，后续接内网穿透；框架 POC 3 选 1 实施时定
+
+**Why**：
+- **F1 让 vault 自包含**——不再依赖外部 URL，未来外链失效或被删也不丢内容；下游 digester / 前端展示层都直接消费本地全文，一致性更高
+- **F2 让 vault 对外可展**——GitHub 做内容管理 + 前端页面做呈现，对外效果显著优于让人直接翻 markdown 文件；私有化部署避开 GitHub Pages 依赖，Mac mini 已有稳定运行环境
+- **F1 → F2 顺序**——F1 产出的 60-Originals 是 F2 详情页的天然数据源；反序则 F2 只能挂外链，做完还要回改
+- **调度已达成不再是主线**——Mac mini cron + Claude 非交互跑通，取消原 D4 的"V2 Desktop scheduled tasks"待办
+- **老 A4-A9 编号列表退役**——按 F1/F2 主线做过合并/升级/延后（详见 ROADMAP.md「合并说明」表），单独维护会与主线脱节
+
+**How to apply**：
+- **`.claude/skills/ai-news/ROADMAP.md` 是权威跟踪基准**——所有 Sprint 任务清单、执行状态、优先级调整只改 ROADMAP，不散落到其他文档
+- **project_progress.md 与 ROADMAP.md 双向同步**——见 [[feedback#F10]]；project_progress 只维护快照 + 里程碑历史，不与 ROADMAP 内容冲突
+- **新决策接续 D14 之后编号**（D15, D16...），本条不再被覆盖
+- **F1/F2 落地节奏**：F1 完成后先跑 3 天观察 → Sprint 2 评估 → 再启 F2；不并行做以免上下文断裂
+- **不启用第三个主线**——除非用户显式提出，且要评估是否挤压 F1/F2
+
+**对应改动 commit**：`d421e60`（ROADMAP.md 重写）
 
 ---
 

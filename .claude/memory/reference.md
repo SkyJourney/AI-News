@@ -1,9 +1,9 @@
 ---
 name: reference
-description: AInews 外部资源、CLI 边界、调试入口、信息源指针——按需加载
+description: AInews 外部资源、CLI 边界、调试入口、信息源指针、ROADMAP 指针——按需加载
 type: reference
-last_updated: 2026-06-27
-commit: d729cc9
+last_updated: 2026-07-01
+commit: 9b48c6a
 ---
 
 # AInews 外部参考
@@ -133,19 +133,21 @@ python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fetch.py
 
 ---
 
-## R6：6 个原生 subagent 位置
+## R6：8 个原生 subagent 位置（v2.4 现状）
 
 ```
 .claude/agents/
-├── news-fetcher-rss.md
-├── news-fetcher-api.md
-├── news-fetcher-webfetch.md
-├── news-filter.md
-├── news-cluster.md
-└── news-writer.md
+├── news-fetcher-rss.md       # Phase 1 RSS/Atom 源
+├── news-fetcher-api.md       # Phase 1 arXiv / HF Daily Papers
+├── news-fetcher-webfetch.md  # Phase 1 无 RSS 的 HTML 源
+├── news-fetcher-script.md    # Phase 1 v2.2 新增，调度 scripts/ 内专用抓脚本（a16z）
+├── news-filter.md            # Phase 2 已 DEPRECATED，Phase 2 改主会话内联 filter-inline.py（v2.3）
+├── news-cluster.md           # Phase 3 主题分桶
+├── news-writer.md            # Phase 4 写 Daily / Topic / Zettel
+└── news-digester.md          # Phase 5 v2 新增，写 30-Digests 分享版
 ```
 
-被 `/ai-news` skill 在 SKILL.md 各 Phase 调度，可独立修改 system prompt 而不动 skill。
+被 `/ai-news` skill 在 SKILL.md 各 Phase 调度，可独立修改 system prompt 而不动 skill。**F1 落地后**会新增 `news-originalizer.md`（Phase 3.5 抓原文全文 + 翻译 + 图片处理）。
 
 ---
 
@@ -176,7 +178,43 @@ AInews 用到的：
 
 ---
 
+## R9：ROADMAP.md 权威路径
+
+**演化跟踪权威**：
+
+```
+.claude/skills/ai-news/ROADMAP.md
+```
+
+组织方式：按执行流水（Sprint 1/2/3 + 持续），非编号列表。
+
+### 主线速查
+
+- **Sprint 1 · F1**：60-Originals 全量离线化（vault 加 60 层 + `news-originalizer` + Phase 3.5）
+- **Sprint 2**：F1 后评估（B1 digester 重构 + A9' writer 降级二判）
+- **Sprint 3 · F2**：Vault 前端站点（Mac mini docker compose + nginx，端口 40801）
+- **持续**：A8' 全流程 Log 模板化（与 F2.6 合并）
+
+### 同步约束
+
+见 [[feedback#F10]]：ROADMAP.md 与 [[project_progress]] 双向同步。改一处必同步另一处。
+
+### 老 A4-A9 归宿
+
+- A4 → A4'（升级 P-中，Sprint 1 收尾）
+- A5 → F1.5 吞并
+- A6 → B1（Sprint 2 重构评估）
+- A7 → F2.3 吞并（改到前端组件层）
+- A8 → A8'（F2.6 收尾，全流程 Log 模板化）
+- A9 → A9'（Sprint 2 二判）
+- A10 → 不做
+
+详见 ROADMAP.md「合并说明」表。
+
+---
+
 ## 相关记忆
 
 - [[project_overview]] — 调试入口对应的组件
-- [[decisions]] — 为何把信息源元数据放 references/ 而非 vault
+- [[decisions#D14]] — F1/F2 双主线决策，ROADMAP 权威地位由此确立
+- [[project_progress#ROADMAP 摘要]] — Sprint 快照的另一端

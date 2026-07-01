@@ -2,8 +2,8 @@
 name: project_overview
 description: AInews 项目定位、技术栈、目录结构、核心组件——新会话 1 分钟建立全局认知
 type: project
-last_updated: 2026-06-28
-commit: 1fed1ab
+last_updated: 2026-07-01
+commit: 9b48c6a
 ---
 
 # AInews 项目总览
@@ -24,7 +24,8 @@ commit: 1fed1ab
 | 知识库 | Obsidian 1.12.7+ | vault id=`5a3c69ef6e15d242`、name=`AInews` |
 | 视图 | Obsidian Bases（1.9+ 原生） | 替代 Dataview，frontmatter 即数据 |
 | 采集编排 | Claude Code skill | `/ai-news`，`disable-model-invocation: true` |
-| 子任务 | Claude Code subagent × 6 | 原生 Agent，不依赖第三方 MCP |
+| 子任务 | Claude Code subagent × 8（含 script fetcher + digester） | 原生 Agent，不依赖第三方 MCP |
+| 调度 | Mac mini cron + Claude 非交互 | v2.4 MVP 达成，取代原 launchd 方案 |
 | 抓取通道 | WebFetch / Bash + curl / arXiv & HF API | 三路并发 |
 | 健康检查 | `scripts/source-health.sh`（bash + curl） | Phase 0 强制门 |
 | 版本控制 | 本地 git | 远程未挂载，纯本地工作流 |
@@ -68,16 +69,25 @@ commit: 1fed1ab
 │       ├── source-health.sh           # 全源活性检查（curl 并发）
 │       ├── arxiv-fetch.py             # arXiv API 封装（3 秒限流）
 │       └── test-fetcher.sh            # 单源调试入口
-├── agents/                            # 7 个原生 subagent
+├── agents/                            # 8 个原生 subagent
 │   ├── news-fetcher-rss.md
 │   ├── news-fetcher-api.md
 │   ├── news-fetcher-webfetch.md
-│   ├── news-filter.md
+│   ├── news-fetcher-script.md         # v2.2 新增：调 scripts/ 内专用抓脚本（a16z）
+│   ├── news-filter.md                 # DEPRECATED（v2.3 起 Phase 2 改主会话内联 filter-inline.py）
 │   ├── news-cluster.md
 │   ├── news-writer.md
 │   └── news-digester.md               # v2 新增：cluster topics → 30-Digests 分享版
 └── memory/                            # 本目录，跨会话持久化
 ```
+
+## 未来层指针（尚未落地）
+
+| 层 | 位置 | 引入时机 | 详见 |
+|---|---|---|---|
+| 60-Originals | vault 根 | F1 落地后 | [[decisions#D14]] · ROADMAP Sprint 1 |
+| web/ | 仓库根 | F2 落地后 | [[decisions#D14]] · ROADMAP Sprint 3 |
+| news-originalizer.md | `.claude/agents/` | F1 落地后 | ROADMAP F1.2 |
 
 ## 核心组件职责
 

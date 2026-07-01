@@ -2,8 +2,8 @@
 name: feedback
 description: AInews 协作规范与用户偏好——避免重犯已纠正的错误
 type: feedback
-last_updated: 2026-06-27
-commit: d729cc9
+last_updated: 2026-07-01
+commit: 9b48c6a
 ---
 
 # AInews 协作规范
@@ -151,7 +151,26 @@ commit: d729cc9
 
 ---
 
+## F10：project_progress.md 与 ROADMAP.md 双向同步
+
+**规则**：`.claude/memory/project_progress.md` 与 `.claude/skills/ai-news/ROADMAP.md` 内容必须保持一致，改一处必同步另一处。
+
+**Why**：
+- 用户 2026-07-01 明确要求："约定后续 progress 与 ROADMAP 保持双向同步"
+- 双写漂移是记忆体系常见失败模式——历史上 project_progress 停在 6-27（Stage 7），但代码已推进到 v2.4，脱节导致新会话读到过期信息
+- 权威分工清晰：**ROADMAP.md 是执行流水的权威**（Sprint 任务、状态、优先级），**project_progress.md 是里程碑历史与当前快照的权威**（已落地阶段、当前状态、脆弱点）；两者交集是「未来方向摘要」——这部分必须一致
+
+**How to apply**：
+- **改 ROADMAP.md 后**：同步更新 project_progress.md「ROADMAP 摘要」小节（Sprint 数量、主线、关键任务清单）；里程碑历史保持不变
+- **改 project_progress.md 后**：若涉及"已落地阶段"翻页（新 Stage 完成 / 主线切换），同步更新 ROADMAP.md 顶部「已完成」段 + 相关 Sprint 状态
+- **每次 memory-sync**：Phase 5 明确检查两处一致性；不一致时以最新 commit 时间为准，另一处对齐
+- **新 Sprint 完成**：在 project_progress.md 追加 Stage N+1 描述 + 在 ROADMAP.md 顶部「已完成」段追加编号总结
+- **单点动作准则**：不要在其他文档（SKILL.md / CLAUDE.md / SCHEMA.md）里重复列 Sprint 任务清单——那些地方只放"指针"（"见 ROADMAP.md"），不放内容副本
+
+---
+
 ## 相关记忆
 
 - [[project_overview]] — 项目整体上下文
-- [[decisions]] — 由 feedback 演化出的具体技术决策
+- [[decisions#D14]] — F1/F2 双主线决策，ROADMAP 权威地位由此确立
+- [[project_progress]] — 双向同步的另一端

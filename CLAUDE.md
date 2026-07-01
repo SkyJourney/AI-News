@@ -1,4 +1,4 @@
-<!-- Last updated: 2026-06-27 | Commit: d729cc9 -->
+<!-- Last updated: 2026-07-01 | Commit: 9b48c6a -->
 
 # AInews
 
@@ -15,8 +15,9 @@ aliases: AInews, ai-news, AI 新闻, AI资讯, AI新闻
 | 资源 | 路径 |
 |---|---|
 | 项目记忆索引 | `.claude/memory/MEMORY.md`（必读 4 件套 + 按需 reference + 历史归档） |
+| **演化跟踪权威** | **`.claude/skills/ai-news/ROADMAP.md`**（Sprint 1/2/3 F1/F2 主线；与 `project_progress.md` 双向同步） |
 | vault 落盘根公约 | `SCHEMA.md`（写盘前 5 项自检） |
-| 采集管道编排 | `.claude/skills/ai-news/SKILL.md`（5 phase：Preflight → Fetch → Filter → Cluster → Write → Log） |
+| 采集管道编排 | `.claude/skills/ai-news/SKILL.md`（v2.4，Phase 0-7：Preflight → Fetch → Filter → Cluster → Write → Digest → Log → Git Sync） |
 | 信息源单一权威 | `.claude/skills/ai-news/references/sources.md` |
 | 死源黑名单 | `.claude/skills/ai-news/references/blacklist.md` |
 | 过滤/聚类/打标准则 | `.claude/skills/ai-news/references/filter-criteria.md` |
@@ -36,6 +37,7 @@ aliases: AInews, ai-news, AI 新闻, AI资讯, AI新闻
 5. **vault 写盘前必读 `SCHEMA.md`**——5 项自检（目录正确 / 命名符合 / frontmatter 齐全 / wikilink 用时间戳 ID / source 已登记），任一不满足停下不写。
 6. **`SCHEMA.md` ↔ `references/vault-schema.md` 双份同步**——前者给所有 AI 看，后者是 `/ai-news` 内部镜像，改一处必须同步另一处。
 7. **arXiv 走脚本，不走主会话 curl**——`scripts/arxiv-fetch.py` 内置 3 秒限流（arXiv 礼仪），主会话直接 curl 会违规。
+8. **`ROADMAP.md` ↔ `project_progress.md` 双向同步**——ROADMAP 是**执行流水权威**（Sprint 任务、状态、优先级），progress 是**里程碑历史与当前快照权威**；交集「未来方向摘要」两处必须一致，改一处必同步另一处。详见 [`.claude/memory/feedback.md#F10`]。
 
 ---
 
@@ -68,7 +70,8 @@ aliases: AInews, ai-news, AI 新闻, AI资讯, AI新闻
 
 - `SCHEMA.md` / `references/vault-schema.md`（vault 公约，影响所有 AI 写盘）
 - `.claude/skills/ai-news/SKILL.md`（管道编排骨架）
-- `.claude/agents/news-*.md`（6 个 subagent system prompt）
+- `.claude/skills/ai-news/ROADMAP.md`（演化跟踪权威，改前先确认与 `project_progress.md` 摘要一致）
+- `.claude/agents/news-*.md`（8 个 subagent system prompt）
 - `references/sources.md` / `blacklist.md` / `filter-criteria.md`（采集行为权威）
 - `.claude/memory/` 内 5 件套（记忆体系，跨会话）
 
@@ -90,19 +93,26 @@ aliases: AInews, ai-news, AI 新闻, AI资讯, AI新闻
 
 > **强制规则**：每次新会话启动时，必须先读取本项目的记忆体系索引，再按需加载关键记忆文件，然后才能开始处理用户请求。长会话中若上下文被压缩，同样需要重新加载。
 
+### 权威分工
+
+- **`.claude/memory/`** = 决策 / 进度快照 / 协作规范 / 外部指针
+- **`.claude/skills/ai-news/ROADMAP.md`** = 演化跟踪权威（Sprint 任务、执行流水、优先级）
+- 交集「未来方向摘要」由 `project_progress.md` 与 `ROADMAP.md` **双向同步**（见 `feedback.md#F10`）
+
 ### 读取流程
 
 1. **读取索引**：`cat .claude/memory/MEMORY.md` — 获取记忆文件清单与最近更新状态（含 Base commit 锚点）
 2. **必读文件**（每次会话必须加载）：
-   - `project_overview.md` — 项目定位、技术栈、目录结构、核心组件职责
-   - `project_progress.md` — 阶段进度、当前状态、待办、已观测脆弱点
-   - `decisions.md` — 11 条关键架构决策与理由（What + Why + How）
-   - `feedback.md` — 9 条协作规范（语言、确认流程、不引 MCP 等）
-3. **按需加载**（与当前任务相关时加载）：
-   - `reference.md` — Obsidian CLI 边界 / vault 标识 / 调试脚本 / 信息源指针（涉及 CLI、调试、源管理时）
-4. **健康检查报告**（按需查看）：
+   - `project_overview.md` — 项目定位、技术栈、目录结构、8 个 subagent 职责、未来层指针
+   - `project_progress.md` — Stage 1-10 里程碑 + 当前状态（v2.4 MVP 达成）+ ROADMAP 摘要
+   - `decisions.md` — 14 条架构决策（含 D14 F1/F2 双主线 + ROADMAP 权威）
+   - `feedback.md` — 10 条协作规范（含 F10 progress ↔ ROADMAP 双向同步）
+3. **同步加载 ROADMAP**：`.claude/skills/ai-news/ROADMAP.md` — 具体 Sprint 任务清单与状态
+4. **按需加载**（与当前任务相关时加载）：
+   - `reference.md` — Obsidian CLI 边界 / vault 标识 / 调试脚本 / 信息源指针 / R9 ROADMAP 路径
+5. **健康检查报告**（按需查看）：
    - `lint_report.md` — 最新一次 memory-lint 结果与待处理项
-5. **归档备查**（仅历史溯源时）：
+6. **归档备查**（仅历史溯源时）：
    - `_archive/architecture-snapshot-2026-06-27.md` — 旧版项目架构快照
    - `_archive/obsidian-cli-facts-snapshot-2026-06-27.md` — 旧版 CLI 边界快照
    - `_archive/ainews-source-matrix-snapshot-2026-06-27.md` — 信息源 v1 实测调研快照
@@ -113,10 +123,10 @@ aliases: AInews, ai-news, AI 新闻, AI资讯, AI新闻
 .claude/memory/
 ├── MEMORY.md                # 索引（入口）
 ├── project_overview.md      # 项目总览（必读，type=project）
-├── project_progress.md      # 阶段进度（必读，type=project）
-├── decisions.md             # 架构决策（必读，type=project）
-├── feedback.md              # 协作规范（必读，type=feedback）
-├── reference.md             # 外部资源指针（按需，type=reference）
+├── project_progress.md      # 阶段进度 + ROADMAP 摘要（必读，type=project）
+├── decisions.md             # 14 条架构决策（必读，type=project）
+├── feedback.md              # 10 条协作规范（必读，type=feedback）
+├── reference.md             # 外部资源指针 + ROADMAP 路径（按需，type=reference）
 ├── lint_report.md           # 健康检查报告（type=lint，自动生成）
 └── _archive/                # 历史快照（仅溯源）
     ├── architecture-snapshot-2026-06-27.md

@@ -1,24 +1,29 @@
 # Memory Index
-> _Last synced: 2026-06-30 | Base commit: `20d67bc`（v2.4 架构升级 — fetcher IPC 改 Write 中转）_
+> _Last synced: 2026-07-01 | Base commit: `9b48c6a`（MVP 达成 + ROADMAP 重写 F1/F2 双主线）_
 
 本目录是 **AInews 的项目记忆**，随仓库 git 管理。Obsidian 默认不索引 `.claude/` 隐藏目录，故不混入笔记图谱。新会话先读本目录了解项目上下文。
 
 **原则**：记忆只留"跨会话需要知道的有效信息"——架构决策、当前状态、协作规范、外部引用。一次性调研结果落地到 skill 后归档到 `_archive/`。
 
+**权威分工**：
+- **本目录** = 记忆体系（决策 / 进度快照 / 协作规范 / 外部指针）
+- **`.claude/skills/ai-news/ROADMAP.md`** = 演化跟踪权威（Sprint 任务、执行流水、优先级）
+- 两处「未来方向摘要」双向同步，见 [[feedback#F10]]
+
 ## 必读（每次会话）
 
 | 文件 | 描述 | 类型 | 引用 | Commit |
 |------|------|------|------|--------|
-| [project_overview.md](project_overview.md) | 项目定位、技术栈、目录结构、核心组件职责（v2 7 phase + digester） | project | 4 | `1fed1ab` |
-| [project_progress.md](project_progress.md) | 阶段进度、当前状态、待办、已观测脆弱点 | project | 3 | `d729cc9` |
-| [decisions.md](decisions.md) | 13 条关键架构决策与理由（含 D13 v2.4 fetcher IPC 升级） | project | 4 | `20d67bc` |
-| [feedback.md](feedback.md) | 9 条协作规范（语言/确认流程/不引 MCP 等） | feedback | 2 | `d729cc9` |
+| [project_overview.md](project_overview.md) | 项目定位、技术栈、目录结构、8 个 subagent 职责、未来层指针 | project | 5 | `9b48c6a` |
+| [project_progress.md](project_progress.md) | Stage 1-10 里程碑 + 当前状态（v2.4 MVP 达成）+ ROADMAP 摘要 | project | 4 | `9b48c6a` |
+| [decisions.md](decisions.md) | 14 条架构决策（含 D14 F1/F2 双主线 + ROADMAP 权威） | project | 5 | `9b48c6a` |
+| [feedback.md](feedback.md) | 10 条协作规范（含 F10 progress ↔ ROADMAP 双向同步） | feedback | 3 | `9b48c6a` |
 
 ## 按需加载
 
 | 文件 | 描述 | 类型 | 引用 | Commit |
 |------|------|------|------|--------|
-| [reference.md](reference.md) | Obsidian CLI 边界 / vault 标识 / 调试脚本 / 信息源指针 | reference | 2 | `d729cc9` |
+| [reference.md](reference.md) | Obsidian CLI 边界 / 调试脚本 / 信息源指针 / R9 ROADMAP 路径 | reference | 3 | `9b48c6a` |
 | [lint_report.md](lint_report.md) | memory-lint 最近一次执行报告 | lint | 0 | 自动生成 |
 
 ## 归档（`_archive/`，仅供历史溯源）
