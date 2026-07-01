@@ -5,6 +5,8 @@ type: project
 last_updated: 2026-07-01
 commit: 9b48c6a
 ---
+<!-- 注：F2.0 决策（D15）已增补，等 F2.0 完成 commit 后 last_updated / commit 字段一并更新 -->
+
 
 # AInews 关键决策
 
@@ -246,6 +248,35 @@ commit: 9b48c6a
 - **不启用第三个主线**——除非用户显式提出，且要评估是否挤压 F1/F2
 
 **对应改动 commit**：`d421e60`（ROADMAP.md 重写）
+
+---
+
+## D15：F2 前端框架采用 Quartz 5
+
+**决策**（2026-07-01）：Sprint 3 · F2 · Vault 前端站点采用 **Quartz 5** 作为静态站生成器。Astro / Hugo 淘汰。
+
+**Why**：
+- **Quartz 5 是唯一原生 Obsidian vault 感知的候选**——POC 实测 wikilink 4 种形态（`[[foo]]` / `[[foo|alias]]` / `[[foo#heading]]` / `[[dir/foo]]`）全解析；backlinks / graph / search / explorer / TOC / dark mode / reader mode / RSS / sitemap / OG image / callouts / mermaid / latex 全部由 46 官方插件即开即用
+- **Bases plugin 是差异化王牌**——vault 里 4 个 `.base` 文件 0 改动直接渲染 5 视图 tab（表格/卡片/时间线/异常表）；Astro/Hugo 都需重写 Base 查询与视图渲染层（~1 天工作）
+- **净节省 ~2 天开发**——F2.3（wikilink + backlinks）/ F2.4（主题、深色模式、TOC）/ F2.5 大部分（Pagefind 类搜索、RSS）都被 Quartz 内置覆盖；F2 总投入从 4-5 天压到 2-3 天
+- **Astro 优势不敌**：图像 webp 优化（省 60%）与快 build（5s vs 12s）价值低于"所有 vault 特性都要自建"的成本；POC 实测 wikilink 全部标 broken 需自写 slug 映射表
+- **Hugo 死穴致命**：`[[wikilink]]` 未解析（0.163.3 的 `[markup.goldmark.extensions.wikilink]` 未生效），需 pre-processing pipeline 或 Hugo Module；Bases / Graph / Search 全无；不跟随目录 symlink（须 `module.mounts`）
+- **技术栈契合**：Quartz Node 22+ 与 news-originalizer 生态（js/python 混合）无冲突；Docker 部署 Quartz 官方已提供 Dockerfile
+
+**How to apply**：
+- **F2.1 起以 `web/poc-quartz/` 为骨架**改造为生产 `web/`——保留 quartz.config.yaml、layouts、content/ symlink 白名单策略
+- **F2.3 缩水**：wikilink + backlinks 由 Quartz 内置，无需自建；只需微调样式
+- **F2.4 缩水**：主题/深色模式/TOC/自适应布局由 Quartz 内置；只需 override CSS 变量做品牌化
+- **F2.5 缩水**：RSS / sitemap 由 `content-index` 插件内置；search 由 `search` 插件（客户端全文索引）内置；OG image 由 `og-image` 插件内置
+- **F2.6 Phase 7 Publish**：`docker compose --profile build run --rm builder` 走 `npx quartz build`，smoke test 保留
+- **不引入 Dataview 类社区插件**——继续走 Bases（Quartz 5 原生支持，与 vault 中 Obsidian 1.9+ Bases 一致，无双写）
+- **修 news-originalizer.md YAML frontmatter bug**：`original_title`（以及所有可能含冒号的字符串）在 subagent 生成时强制加双引号；避免严格 YAML 解析（Quartz / Astro / Hugo 三家都会报错）拒收 vault 文件。这条已加入 F1 收尾/Sprint 2 待办
+- **关 Quartz LaTeX 插件或改 delimiter**：中文 `$500M` / `$100 亿` 会被 latex 插件误认数学模式产生大量 warning——F2.1 中配置调整
+- **未来若考虑迁移到其他框架**（如内容量爆炸后想上更快的 Hugo）——需先做 Bases 视图与 wikilink 解析的替代方案画像，否则会阻断迁移
+
+**副产品发现**：POC 意外扫出的 vault 内容 bug——`60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` 的 `original_title` 含冒号未加引号，81 md 中唯一 YAML 破格，Quartz 严格 YAML 解析器拒收（Obsidian 宽松所以之前没暴露）；本次 POC 已手工修复该文件，同时新增 news-originalizer 约束（见上）。
+
+**对应改动 commit**：（F2.0 完成后单次提交，含本条 + ROADMAP 更新 + POC 报告 + web/poc-quartz/ 骨架 + 1 个 vault 内容修复）
 
 ---
 

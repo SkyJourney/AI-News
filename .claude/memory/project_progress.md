@@ -21,7 +21,9 @@ commit: 9b48c6a
 - **Sprint 1 全部完成**：F1.1-F1.5 + A4' + F1.6 Phase 3.5 试跑（sampling 11 条真跑：10/11 覆盖率 91% / 6 完美 / 3 openai Fallback B / 1 hf-papers 翻译 bug 现场 / 1 arxiv API stalled 崩溃）+ 4 bug fix（news-originalizer.md Step 4/6/8 + 常见错误清单 + SKILL.md Phase 3.5 retry 机制）全部就绪
 - **F1.6 未跑的 Phase 4/5**：writer/digester 编排文档 F1.4 已定型 + F1.2.4 单元测过，为避免覆盖今天真实 20 Zettel/9 Topic 产出未在 F1.6 真跑；下次 /ai-news 正常触发时会自动测
 - **60-Originals/ 首批产出**：10 篇 + 89 图（作为 F1 首次真跑证据保留）
-- **下一步**：Sprint 2 · B1 digester 重构评估 + A9' writer 降级二评估（~2h）；或 Sprint 3 · F2 前端站点（~4-5 天）
+- **Sprint 3 · F2.0 完成**（2026-07-01，commit tbd）：**采用 Quartz 5**——三候选 POC 得分 Quartz 38 / Astro 30 / Hugo 26；`web/poc-quartz/` 骨架就绪、`web/poc-astro/` 与 `web/poc-hugo/` 待清理；F2.1-F2.7 因 Quartz 内置省 ~2 天。报告 `.claude/skills/ai-news/notes/F2.0-poc-report.md`
+- **F2.0 副产品**：vault 内容 bug `60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` YAML `original_title` 含冒号未加引号已修；news-originalizer.md 需补"含冒号强制引号"约束（Sprint 1 收尾 or Sprint 2）
+- **下一步**：Sprint 2 · B1 digester 重构评估 + A9' writer 降级二评估（~2h）；或 Sprint 3 剩余 F2.1-F2.7（~2-3 天，Quartz 内置节省 2 天）
 
 ## 已落地阶段
 
@@ -98,12 +100,13 @@ commit: 9b48c6a
 - B1：digester 输入结构变化后重构评估
 - A9'：writer 降级二判（F1 后 writer 责任变小）
 
-### Sprint 3 · F2 · Vault 前端站点（~4-5 天）
+### Sprint 3 · F2 · Vault 前端站点（~2-3 天，压缩自 4-5 天）
 - Mac mini 本地 docker compose + nginx，端口 40801
 - 私有化部署，后续接内网穿透到公网
-- 框架 POC 3 选 1（Quartz / Astro / 其他），实施时定
+- **框架 = Quartz 5**（2026-07-01 F2.0 POC 决策，见 [[decisions#D15]]）
 - 新增 Phase 7 Publish，skill 跑完自动 rebuild
-- 任务：F2.0-F2.7（含 A7 边角条组件合并、A8 全流程 Log 模板化合并）
+- 任务：F2.0 ✅ / F2.1-F2.7（含 A7 边角条组件合并、A8 全流程 Log 模板化合并）
+- F2.3/F2.4/F2.5 大幅缩水（wikilink/backlinks/graph/search/dark-mode/RSS/OG 全部 Quartz 内置）
 
 ### 持续 · 边角优化
 - A8'（全流程 Log 模板化，与 F2.6 合并）

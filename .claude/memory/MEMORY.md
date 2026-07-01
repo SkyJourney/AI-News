@@ -1,5 +1,5 @@
 # Memory Index
-> _Last synced: 2026-07-01 | Base commit: `9b48c6a`（MVP 达成 + ROADMAP 重写 F1/F2 双主线）_
+> _Last synced: 2026-07-01 | Base commit: `9b48c6a`（MVP 达成 + ROADMAP 重写 F1/F2 双主线）· **F2.0 完成待 commit**（Quartz 5 决策，见 [[decisions#D15]]）_
 
 本目录是 **AInews 的项目记忆**，随仓库 git 管理。Obsidian 默认不索引 `.claude/` 隐藏目录，故不混入笔记图谱。新会话先读本目录了解项目上下文。
 
@@ -16,7 +16,7 @@
 |------|------|------|------|--------|
 | [project_overview.md](project_overview.md) | 项目定位、技术栈、目录结构、8 个 subagent 职责、未来层指针 | project | 5 | `9b48c6a` |
 | [project_progress.md](project_progress.md) | Stage 1-10 里程碑 + 当前状态（v2.4 MVP 达成）+ ROADMAP 摘要 | project | 4 | `9b48c6a` |
-| [decisions.md](decisions.md) | 14 条架构决策（含 D14 F1/F2 双主线 + ROADMAP 权威） | project | 5 | `9b48c6a` |
+| [decisions.md](decisions.md) | 15 条架构决策（含 D14 F1/F2 双主线 + D15 F2 采用 Quartz 5） | project | 5 | `9b48c6a` (D15 待 commit) |
 | [feedback.md](feedback.md) | 10 条协作规范（含 F10 progress ↔ ROADMAP 双向同步） | feedback | 3 | `9b48c6a` |
 
 ## 按需加载
