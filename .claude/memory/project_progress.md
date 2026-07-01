@@ -18,8 +18,10 @@ commit: 9b48c6a
 - **MVP 状态**：✅ **已达成**——2026-06-27 → 2026-07-01 连续 5 天跑通，7-01 跑次 20 Zettel / 9 Topic / 完整 digest
 - **调度状态**：✅ **已自动化**——Mac mini 定时任务 + Claude 非交互会话跑通，无需 launchd 独立配置
 - **vault 状态**：14 alive 源 + 1 degraded；5 天 Daily/Zettel/Topic/Digest 已写入；Log 完整
-- **Sprint 1 进展**：F1.1 vault schema + F1.2 60-Originals 抓取组件 + F1.3 SKILL.md Phase 3.5 编排 + F1.4 下游改造 + F1.5 seen-urls-bootstrap.py + A4' cluster-merge.py 按 source 默认 topic 兜底（14 源全部映射：4 model-releases / 3 research-papers / 5 industry-moves / 2 funding-investment）全部完成；digester 保持现状（Sprint 2 B1 评估）
-- **下一步**：F1.6 · 全流程试跑（需你手动 `/ai-news` 触发；建议 `--from-cache=<cluster.json>` 回放跳过 Phase 1-3，专测 Phase 3.5 + writer 三态双链）（~60 min）
+- **Sprint 1 全部完成**：F1.1-F1.5 + A4' + F1.6 Phase 3.5 试跑（sampling 11 条真跑：10/11 覆盖率 91% / 6 完美 / 3 openai Fallback B / 1 hf-papers 翻译 bug 现场 / 1 arxiv API stalled 崩溃）+ 4 bug fix（news-originalizer.md Step 4/6/8 + 常见错误清单 + SKILL.md Phase 3.5 retry 机制）全部就绪
+- **F1.6 未跑的 Phase 4/5**：writer/digester 编排文档 F1.4 已定型 + F1.2.4 单元测过，为避免覆盖今天真实 20 Zettel/9 Topic 产出未在 F1.6 真跑；下次 /ai-news 正常触发时会自动测
+- **60-Originals/ 首批产出**：10 篇 + 89 图（作为 F1 首次真跑证据保留）
+- **下一步**：Sprint 2 · B1 digester 重构评估 + A9' writer 降级二评估（~2h）；或 Sprint 3 · F2 前端站点（~4-5 天）
 
 ## 已落地阶段
 

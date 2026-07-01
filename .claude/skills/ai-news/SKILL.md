@@ -280,8 +280,11 @@ cluster-merge.py 校验（agent 自造 url / 漏映射 / is_new 错判）→ 按
 
 ### Originalize 错误处理
 
-- **单 originalizer 失败/崩溃** → 不阻塞其他 entries，本条 `original_id = null`
-- **originalizer 返 error=all_channels_failed**（Fallback B 占位文件）→ `original_id` 仍有值，`original_error` 填 fallback_notice；不算失败
+- **单 originalizer 失败/崩溃**（API stalled mid-stream / JSON parse 失败 / 60s 无响应）→ 主会话 **retry 一次同 prompt 同 target_id**（agent Write 会覆盖原文件，无需清理）
+  - 只对 ≤3 个 first-fail 做 retry，避免雪崩；超过 3 个失败说明系统性问题（token / API rate limit），不 retry 直接归 crashed
+  - retry 仍崩溃或 API error → 本条 `original_id = null` + `original_error = "agent_crashed"`
+  - retry 成功 → Phase 6 Log 标"originalizer <target_id> first-fail retry 成功"
+- **originalizer 返 error=all_channels_failed**（Fallback B 占位文件）→ `original_id` 仍有值，`original_error` 填 fallback_notice；不算失败，**不 retry**（fallback B 是稳定行为）
 - **> 50% originalizer 失败**（>15/30）→ Phase 6 Log 标 warning "60-Originals 覆盖率不足 X%"，但不 abort（继续 Phase 4/5）
 - **cluster.json Read/Write 失败** → fatal abort（Phase 3 应保证的产物）
 
