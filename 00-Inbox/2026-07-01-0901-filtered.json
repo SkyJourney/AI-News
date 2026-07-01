@@ -1,0 +1,1473 @@
+{
+  "batch_id": "2026-07-01-09:01",
+  "target_date": "2026-07-01",
+  "kept": [
+    {
+      "title": "How ChatGPT adoption has expanded",
+      "url": "https://openai.com/index/how-chatgpt-adoption-has-expanded",
+      "published": "2026-06-30T09:00:00Z",
+      "raw_summary": "New OpenAI Signals data shows how ChatGPT adoption is growing globally, with users increasing usage, exploring more capabilities, and driving growth across regions and languages.",
+      "low_confidence": false,
+      "source_name": "openai-rss",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Introducing GeneBench-Pro",
+      "url": "https://openai.com/index/introducing-genebench-pro",
+      "published": "2026-06-30T00:00:00Z",
+      "raw_summary": "Introducing GeneBench-Pro, a new benchmark testing AI performance in genomics, biology, and scientific research using complex, real-world datasets.",
+      "low_confidence": false,
+      "source_name": "openai-rss",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Core dump epidemiology: fixing an 18-year-old bug",
+      "url": "https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug",
+      "published": "2026-06-30T00:00:00Z",
+      "raw_summary": "OpenAI engineers used large-scale core dump analysis to debug rare infrastructure crashes, uncovering both a hardware fault and a long-standing software bug.",
+      "low_confidence": false,
+      "source_name": "openai-rss",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Improving health intelligence in ChatGPT",
+      "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+      "published": "2026-06-18T11:00:00Z",
+      "raw_summary": "Learn how GPT-5.5 Instant improves ChatGPT's health and wellness responses with stronger reasoning, better context, clearer communication, and physician-informed evaluations.",
+      "low_confidence": false,
+      "source_name": "openai-rss",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-30",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+      "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+      "published": "2026-06-30T16:02:40Z",
+      "raw_summary": "",
+      "low_confidence": true,
+      "source_name": "deepmind-rss",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "VLK: Learning Humanoid Loco-Manipulation from Synthetic Interactions in Reconstructed Scenes",
+      "url": "http://arxiv.org/abs/2606.30645v1",
+      "published": "2026-06-29T17:59:55Z",
+      "raw_summary": "Perception-based humanoid loco-manipulation requires connecting egocentric observations and task instructions to whole-body motion. Learning this mapping requires synchronized egocentric images, language commands, and robot-compatible kinematic trajectories, yet no existing data source provides this complete tuple at scale. We address this bottleneck by generating vision-language-kinematics (VLK) supervision synthetically in reconstructed scenes. Our pipeline leverages 3D Gaussian Splatting to reconstruct metric-scale indoor environments, synthesizes navigation and object-interaction trajectories using privileged scene information, and renders paired egocentric observations after the fact. We produce 48,000 paired trajectories with no human intervention and train a VLK policy that predicts short-horizon whole-body kinematic trajectories. A whole-body tracker converts these predictions into actions on the physical humanoid. We evaluate on the physical Unitree G1 performing navigation and single-object transport, demonstrating that synthesized interactions in reconstructed scenes provide effective supervision for sim-to-real perception-based humanoid loco-manipulation. Project Website: https://vision-language-kinematics.github.io/",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "LeVo 2: Stable and Melodious Song Generation via Hierarchical Representation Modeling and Progressive Post-Training",
+      "url": "http://arxiv.org/abs/2606.30642v1",
+      "published": "2026-06-29T17:59:20Z",
+      "raw_summary": "Full-length song generation must preserve coherence and musicality, render detailed vocal and accompaniment acoustics, and follow lyrics and prompts. Existing language model-based systems face a structural trade-off: mixed-token modeling preserves vocal-instrument coordination but obscures track-specific details, whereas dual-track prediction improves acoustics but requires longer sequences and weakens global planning. We present LeVo 2, a hybrid LLM-Diffusion framework for controllable full-length song generation. LeVo 2 formulates this trade-off as hierarchical modeling: LeLM first predicts mixed tokens for semantic planning, then predicts vocal and accompaniment tokens in parallel for track-specific refinement, while a diffusion-based Music Codec reconstructs full-length waveforms. A central contribution of this extended version is an aesthetics-guided training schedule for alignment. During pre-training, an automated music aesthetic evaluation framework assigns musicality-tier conditions to large-scale data, providing musicality priors before preference alignment. Progressive post-training applies SFT, large-scale offline DPO, and closed-loop semi-online DPO to separately improve generation quality, controllability, and musicality. Modular extension then trains the Track-Specific LM for acoustic refinement while preserving the aligned semantic planner. This schedule separates musicality learning, controllability alignment, and acoustic refinement, mitigating optimization conflict and the limitations of static offline preference pairs. Expert listening tests and objective evaluations show that LeVo 2 outperforms open-source baselines across six subjective dimensions, and approaches leading commercial systems on several listening metrics. Ablations validate the effects of the training strategy, aesthetics guidance, scaling, and hierarchical architecture.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Self-Evolving World Models for LLM Agent Planning",
+      "url": "http://arxiv.org/abs/2606.30639v1",
+      "published": "2026-06-29T17:58:43Z",
+      "raw_summary": "World models offer a principled way to equip long-horizon LLM agents with foresight: predictions of action consequences before execution. However, unreliable foresight can be ignored, misused, or even degrade downstream decision-making. In this paper, we introduce WorldEvolver, a self-evolving world model framework that revises its deployment-time context while keeping the downstream agent and all model parameters frozen. WorldEvolver integrates three modules: (i) Episodic Memory, which exploits real action transitions through retrieval-based simulation; (ii) Semantic Memory, which extracts persistent heuristic rules from prediction-observation mismatches; and (iii) Selective Foresight, which filters low-confidence predictions before integrating them into agent reasoning context. We evaluate WorldEvolver on ALFWorld and ScienceWorld, measuring world model prediction accuracy on Word2World and downstream agent success rate on AgentBoard. Extensive experiments show that WorldEvolver achieves the highest prediction accuracy across three backbones and leads other world model baselines on downstream agent success rate, demonstrating that test-time memory revision enhances both predictive fidelity and planning performance.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "One-Step Gradient Delay is Not a Barrier for Large-Scale Asynchronous Pipeline Parallel LLM Pretraining",
+      "url": "http://arxiv.org/abs/2606.30634v1",
+      "published": "2026-06-29T17:57:50Z",
+      "raw_summary": "Modern large-scale LLM pretraining benefits from utilizing Pipeline Parallelism; however, synchronous implementations leave GPUs idle during pipeline bubbles, wasting computational resources. Asynchronous Pipeline Parallelism eliminates these bubbles, maximizing throughput at the cost of gradient staleness. Among asynchronous schedules, PipeDream-2BW is particularly appealing: unlike the original PipeDream schedule, it ensures a constant one-step gradient delay regardless of pipeline depth. However, its adoption remains limited due to the common belief that optimizing under staleness is fundamentally unstable. In this work, we challenge this assumption, demonstrating that degradation under one-step delay depends strongly on optimizer choice rather than being an intrinsic limitation. We provide the first comprehensive empirical analysis showing that while AdamW, the predominant optimizer at the time when PipeDream-2BW was introduced, indeed suffers from severe degradation, recent methods like Muon exhibit strong robustness under a one-step delay. We introduce an optimizer-agnostic Error Feedback-inspired correction to further mitigate delay effects. We provide supporting theoretical analysis demonstrating convergence for Muon with and without this correction. Extensive evaluation on models up to 10B parameters confirms that our strategies bridge the performance gap with synchronous training, highlighting the practical potential of asynchronous pipeline parallelism at scale.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "GROW$^2$: Grounding Which and Where for Robot Tool Use",
+      "url": "http://arxiv.org/abs/2606.30632v1",
+      "published": "2026-06-29T17:56:53Z",
+      "raw_summary": "Can the robot use a plate to cut a cake if no knife is available? Tool use greatly expands robot capabilities, but to use tools creatively beyond their intended functions, the robot faces the challenge of $\\textit{open-world affordance grounding}$: select an open-category object to act as a tool and localize its specific region of action. To this end, we introduce GROW$^2$ (GROunding Which and Where), which leverages object parts as a natural abstraction to split the grounding process hierarchically into semantic and geometric levels, thus bypassing the need for data-heavy, end-to-end training. Semantically, GROW$^2$ harnesses the commonsense reasoning of Vision-Language Models (VLMs) to parse a natural-language task instruction, select a suitable object as the tool, and identify task-relevant parts on the tool and the target object. Geometrically, vision foundation models then ground the selected parts into precise 3D regions from a single RGB-D image. Experiments on established benchmarks show that GROW$^2$ outperforms state-of-the-art baselines on affordance prediction benchmarks. Further, it achieves zero-shot generalization over open-category objects and outperforms baselines in both simulated and real-world robot tool use experiments.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Pessimism's Paradox: Conservative Offline Training Amplifies Reward Hacking During Online Adaptation in Reasoning Models",
+      "url": "http://arxiv.org/abs/2606.30627v1",
+      "published": "2026-06-29T17:56:03Z",
+      "raw_summary": "Conservative offline training is widely advocated as a safe foundation for subsequent online adaptation: if a policy stays close to well-supported behaviour, the argument goes, it is less likely to exploit imperfections in a learned reward model. We challenge this intuition empirically and mechanistically. We train a Qwen3-14B policy under Direct Preference Optimisation (DPO) with three levels of conservatism ($β\\in \\{β_{\\mathrm{lo}}, β_{\\mathrm{mid}}, β_{\\mathrm{hi}}\\}$ derived from empirical log-ratio percentiles), then adapt each checkpoint online against a learned reward ensemble (3\\,$\\times$\\,Qwen3-1.7B) while measuring true performance on GSM8K exact-answer accuracy. We find that \\emph{higher offline conservatism monotonically increases reward-hacking damage}, measured by the Goodhart gap and its area under the curve (AUGC), with Spearman $ρ= 1.0$ across all three conditions. Mechanistic analysis reveals a three-link causal chain: (i) high-$β$ DPO compresses policy entropy, (ii) Low-entropy policies generate responses with reduced diversity, concentrating in a narrow region of the reward model's training distribution (lower pairwise cosine distance), and (iii) despite this proximity, ensemble disagreement (epistemic uncertainty) increases with $β$ and is exploited faster during online optimisation. We further fit a power-law curve to the $(β, \\augc)$ data and identify a practical optimal conservatism level $β^{\\star}$ that balances alignment fidelity against hacking vulnerability. Our results suggest that the field needs \\emph{calibrated}, not \\emph{maximal}, conservatism.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "DOPD: Dual On-policy Distillation",
+      "url": "http://arxiv.org/abs/2606.30626v1",
+      "published": "2026-06-29T17:55:53Z",
+      "raw_summary": "On-policy distillation (OPD) offers superior capacity transfer by supervising student-sampled trajectories with dense token-level signals. To furnish high-quality supervision sources and thereby elevate the performance frontier of distillation, an intuitive direction is to infuse privileged information to either teacher or student itself. However, this additional input induces a potential failure mode we dub privilege illusion: a pattern that conflates the transferable capability gap that students are meant to close, and the information asymmetry gap that can only be mimicked but never replicated. This issue is further amplified by the inherent non-uniformity of token-level supervision, where only a small subset of tokens carries pivotal capability-bearing signals. To this end, we propose DOPD, an advantage-aware dual distillation paradigm that dynamically routes token-level supervision between privileged teacher and privileged student policies based on their advantage gap and relative probabilities. Each token receives supervision of different strength, objective, and strategy from either teacher or student itself, which transfers credible capability while simultaneously receiving auxiliary signals, to alleviate privilege illusion. Extensive experiments on both large language model (LLM) and vision-language model (VLM) settings demonstrate that DOPD consistently outperforms Vanilla OPD and other counterparts. Further results on stability, robustness, continual learning, and out-of-distribution tasks validate its superiority.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Optimization Dynamics Imprint Semantic Specificity in Contrastive Embedding Norms",
+      "url": "http://arxiv.org/abs/2606.30625v1",
+      "published": "2026-06-29T17:55:40Z",
+      "raw_summary": "Contrastive embedding models trained with scale-invariant losses are typically paired with distance metrics like cosine similarity, effectively ignoring embedding magnitudes. However, surprisingly, empirical studies reveal that despite this, these \"discarded\" norms seem to correlate with semantic properties such as concept specificity, token frequency, and human uncertainty. In this work, we provide a formal theoretical framework explaining this phenomenon. By analyzing the optimization dynamics, we derive an analytic formula demonstrating that embedding length naturally encodes this information as a byproduct of the training process. We also show how this gives rise to signals that can serve as \"free\" calibration tools in specific models and retrieval tasks, providing a grounded explanation for a previously heuristic observation.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "C$^{2}$R: Cross-sample Consistency Regularization Mitigates Feature Splitting and Absorption in Sparse Autoencoders",
+      "url": "http://arxiv.org/abs/2606.30609v1",
+      "published": "2026-06-29T17:45:31Z",
+      "raw_summary": "Sparse Autoencoders (SAEs) are widely used to interpret large language models by decomposing activations into sparse, human-understandable features, but scaling to large dictionaries exposes fundamental challenges. Systematic studies reveal pervasive feature splitting that fragments coherent concepts into non-atomic latents and widespread feature absorption that creates arbitrary exceptions in general features, severely compromising latent reliability. These issues stem from inconsistent latent assignment across samples: without cross-sample constraints, per-sample optimization often allows a single underlying concept to be inconsistently distributed across multiple redundant or interfering latents. To address this, we introduce C$^2$R (\\underline{\\textbf{C}}ross-sample \\underline{\\textbf{C}}onsistency \\underline{\\textbf{R}}egularization). C$^2$R explicitly encourages that each semantic feature is consistently represented by a unified latent across the batch by penalizing the co-activation of directionally similar latents. Comprehensive evaluation demonstrates that C$^2$R effectively mitigates both splitting and absorption while, crucially, preserving reconstruction fidelity, providing a principled solution that enhances latent interpretability without degrading model performance. Source code is available at https://github.com/hr-jin/Cross-sample-Consistency-Regularization.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "MESA: Prioritizing Vulnerable Communication Channels for Securing Multi-Agent Systems",
+      "url": "http://arxiv.org/abs/2606.30602v1",
+      "published": "2026-06-29T17:40:45Z",
+      "raw_summary": "Multi-agent systems (MAS) are increasingly used to automate complex, distributed workflows. However, their inter-agent communication channels introduce new attack surfaces that remain poorly understood and are difficult to defend against. In this paper, we address how defenders should prioritize limited security effort to protect vulnerable communication channels before attacks are observed. This is motivated by our observation that the channel-level attack impact is highly non-uniform: a single compromised edge can account for up to 75% of total attack success. We introduce Mesa, a label-free framework for proactively ranking which MAS edges are most security-critical -- that is, most likely to affect the system's decision if compromised. Mesa combines six graph-theoretic metrics and two dynamic probes (ablation and masking) without requiring attack traces. We evaluate Mesa against a dynamic misinformation attack pipeline across three diverse MAS scenarios, eight network topologies, and five open-source LLMs from Qwen, Llama, and Gemma families. Mesa rankings correlate strongly with empirical per-edge attack success rate, achieving mean Spearman $ρ=+0.60$ (peaking at $+0.73$). In resource-constrained defense deployment, monitoring the top 10% of Mesa-ranked edges intercepts about 3x the successful attacks as random allocation. We further test Mesa under varying attacker and defender models and LangGraph workflows and characterize its limits under adaptive attacks and high-redundancy graphs. Overall, our results show that edge-level risk in MAS is often concentrated and predictable, allowing proactive hardening of multi-agent infrastructures.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Wireless Backdoor Attack and Defense for Semantic Communications over Multiple Access Channel",
+      "url": "http://arxiv.org/abs/2606.30595v1",
+      "published": "2026-06-29T17:36:09Z",
+      "raw_summary": "Semantic communication (SemCom) aims to preserve semantic meaning and task-oriented information beyond conventional message recovery over wireless channels. The adoption of SemCom in shared-access wireless networks introduces new vulnerabilities for multi-user semantic inference. This paper considers a SemCom system for two transmitters communicating with a common receiver over a multiple access channel. Each transmitter maps source information into latent semantic representations, while the receiver jointly reconstructs and classifies the semantic information for both transmitters. A selective over-the-air backdoor (Trojan) attack is presented in which an adversary transmits a low-power trigger waveform over the air and injects it into the shared received signal during training. By transmitting the trigger again during testing, this stealthy, low-power attack selectively manipulates the semantic inference for one transmitter while minimally affecting the inference of the other transmitter. To mitigate this vulnerability, a trigger-aware defense mechanism is developed to preserve correct semantic labels under trigger-contaminated wireless observations. The results demonstrate both the vulnerability of shared-access SemCom systems to selective over-the-air backdoor attacks and the effectiveness of trigger-aware robust training for semantic protection.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Words Speak Louder Than Code: Investigating Cognitive Heuristics in LLM-Based Code Vulnerability Detection",
+      "url": "http://arxiv.org/abs/2606.30587v1",
+      "published": "2026-06-29T17:31:10Z",
+      "raw_summary": "Researchers and practitioners increasingly apply Large Language Models (LLMs) for automated vulnerability detection. Recent work has shown that LLMs are susceptible to the same cognitive heuristics that bias human judgment. Yet, no work has investigated whether these heuristics affect a model's assessment of code vulnerabilities. In this paper, we present the first systematic exploration of cognitive heuristics in LLM-driven code vulnerability detection. We introduce a controlled framework that holds the code fixed and only varies the surrounding context to trigger three cognitive heuristics: the halo effect through author attribution, the framing effect through task objectives and consequences, and the anchoring effect through prior analysis results. Within this framework, we evaluate eight LLMs across three programming languages and perform both quantitative and code-level analyses. Our findings demonstrate that all evaluated models are susceptible to these heuristics. Cross-model average susceptibility is highest for framing at 33.2%, followed by anchoring at 23.5% and halo at 18.4%. Code-level analysis reveals that vulnerabilities that require semantic reasoning for detection are more susceptible to cognitive heuristics than those identifiable through pattern matching. Furthermore, models often change their verdict from safe to vulnerable based on the cognitive condition, without accurately identifying the actual vulnerability. To highlight the practical impact, we demonstrate a proof-of-concept black-box cognitive attack that can suppress up to 97% of previously detected vulnerabilities. These findings indicate that cognitive susceptibility is a consistent and exploitable property of LLM-based vulnerability detection.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "A Hybrid Framework For Crypto-Ransomware Detection In Enterprise Shared Storage",
+      "url": "http://arxiv.org/abs/2606.30586v1",
+      "published": "2026-06-29T17:30:51Z",
+      "raw_summary": "Most corporate workplace environments enforce policies and technical controls that limit the storage of sensitive data on client endpoints. Consequently, ransomware operators have evolved variants that expand their attack surface from local systems to network drives and shared storage resources. As traditional endpoint detection mechanisms focus primarily on local system behaviour, a compromised client can impact remote file servers, such as by encrypting shared data, without directly triggering behavioural changes on the servers themselves. In this paper, we propose a hybrid detection framework for detecting crypto-ransomware intrusion within integrated file server and client environments. The framework is based on a new technique referred to as Region of Interest (RoI) to analyse network traffic and extract Indicators of Compromise (IoCs). The IoC repository serves as an additional ruleset to enhance existing security tools such as EDRs and IDSs, while RoI-derived features are used to train an ML model to detect highly evasive variants. This study incorporates a broader set of ransomwares families and carefully selected benign behaviors based on domain expertise, ensuring coverage of common user actions that could interfere with ransomware detection. Beyond IoCs, which operate in a signature-based manner, our machine learning module achieves a detection precision of 99.64%, with a 0% false negative rate (FNR) and a minimal false positive rate (FPR). Furthermore, the proposed method enables early detection, identifying ransomware intrusions before significant damage occurs, achieving an accuracy of 99.44%.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Uncertainty-Aware Generation and Decision-Making Under Ambiguity",
+      "url": "http://arxiv.org/abs/2606.30578v1",
+      "published": "2026-06-29T17:20:43Z",
+      "raw_summary": "With rapidly improving capabilities, Large Language Models (LLMs) are increasingly used in many complex real-world tasks. Beyond requiring in-depth knowledge and reasoning skills, many of these tasks exhibit a high degree of subjectivity and require that the outputs of the model can be trusted. While a lot of progress has been made to train better models, decision-making algorithms have received less attention. In this work, we present and evaluate various uncertainty-aware decision-making algorithms based on Bayesian decision theory and risk-averse decision making on the tasks of tutoring and automatic peer reviewing. Concretely, we take uncertainty over tutoring strategies and review scores into account when generating a tutor response or review and use conformal prediction to provide guarantees over strategy and score. We find empirically that these algorithms can improve the utility of the generations but need to be carefully implemented when ambiguity is high. For example, risk-averse rules can degrade performance by optimizing for generic outputs, while Bayesian methods tend to perform better. Our work uses techniques from decision theory to improve LLM-based decision-making and outlines open challenges for the community.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Beyond 2D Matching: A Unified Single-Stage Framework for Geometry-Aware Cross-View Object Geo-Localization",
+      "url": "http://arxiv.org/abs/2606.30576v1",
+      "published": "2026-06-29T17:19:49Z",
+      "raw_summary": "Cross-view object geo-localization (CVOGL) aims to locate a target object from a query view (e.g., ground or drone) within a geo-tagged reference image (e.g., satellite). Existing approaches heavily rely on 2D appearance matching and are constrained by limited datasets lacking geometric metadata, diverse prompts, and standard field-of-view imagery. To address these intertwined challenges, we first introduce \\dataset, a large-scale, high-fidelity building dataset comprising over 220,000 ground-satellite and drone-satellite pairs. It provides multi-modal prompts (points, boxes, masks) and camera poses to enable flexible target referring and explicit spatial modeling. Furthermore, we propose a novel single-stage Geometry-Aware Geo-localization framework (GAGeo), built upon the permutation-equivariant 3D foundation model $π^3$. By seamlessly integrating visual features, referring prompts, and learnable task tokens, our model adapts the inherited 3D prior to jointly predict bounding boxes, segmentation masks, and camera poses in a single forward pass. Additionally, we introduce a contrastive loss that utilizes the satellite view as a universal anchor, implicitly aligning ground and drone representations to enable zero-shot ground-to-drone localization without requiring triplet training data. Extensive experiments demonstrate that our approach significantly outperforms state-of-the-art methods, exhibiting exceptional generalization ability in unseen scenes and novel cross-view setups.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "The Fundamental Limits of Valid Transport Map Estimation",
+      "url": "http://arxiv.org/abs/2606.30574v1",
+      "published": "2026-06-29T17:17:55Z",
+      "raw_summary": "Many modern generative modeling methods, including diffusion models, normalizing flows, and flow matching, estimate transport maps or plans between distributions without explicitly targeting an optimal transport (OT) map. In applications like generative modeling, the transport cost itself is irrelevant, and this makes it natural to target maps which are more tractable from either a statistical or computational standpoint. In this short note, we formalize the task of estimating any valid transport map in a rigorous minimax framework. One consequence of this framing is that it yields sample complexity lower bounds for any method whose learned object is evaluated as a transport map or plan, including flow matching and diffusion-based generative models, in settings where direct analysis would be challenging due to the analytic complexity of the methods and their target maps. We observe that, under standard, though strong, stability assumptions from the OT literature, estimating any valid transport map is statistically as hard as estimating the OT map. We complement these results with some examples showing that when these stability assumptions fail, alternative transport maps can be learned substantially more accurately than the OT map. Our minimax framing provides a rigorous foundation for understanding the statistical limits of modern transport-based generative methods and clarifies when targeting sub-optimal maps can provide real statistical advantages.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "SWE-INTERACT: Reimagining SWE Benchmarks as User-Driven Long-Horizon Coding Sessions",
+      "url": "http://arxiv.org/abs/2606.30573v1",
+      "published": "2026-06-29T17:17:45Z",
+      "raw_summary": "We introduce SWE-Interact, a new testbed for evaluating coding agents on multi-turn, interactive, user-driven software engineering tasks. Existing frontier SWE benchmarks typically provide complete requirements upfront and evaluate agents on autonomous implementation. In contrast, SWE-Interact places agents in a realistic developer workflow: a carefully designed user simulator starts with vague or incomplete instructions, progressively reveals requirements, inspects the agent's workspace, and provides targeted feedback, revisions, and new constraints until the full task goal has been handed off. Grounded in large-scale studies of real coding-agent interactions, this setup tests whether agents can discover user intent, adapt to evolving requirements, and build on their own prior work. Across a suite of frontier and open-weight models, we find that strong performance on single-turn SWE tasks does not reliably transfer to multi-turn, user-driven workflows: the best-performing models solve roughly 50% of single-turn baseline tasks but only 25% of the corresponding SWE-Interact tasks. The strongest models in our evaluation, including Opus 4.8 and GPT 5.5, start strong even in the face of vague initial instructions, persevere until all the requirements are surfaced by the user, integrate them better and write clean code. However, they still suffer from over-agentic coding, forgetting requirements and technical mistakes. Weaker models start poorly under ambiguity, give up early, forget or ignore instructions and rework their code more. Overall, SWE-Interact measures an orthogonal, real-world capability axis for frontier model development: interactive goal discovery and iterative refinement with a user in the loop.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "A Multi-task Mixture of Experts Framework for Malware Classification, Packing Detection, and Family Attribution",
+      "url": "http://arxiv.org/abs/2606.30572v1",
+      "published": "2026-06-29T17:15:25Z",
+      "raw_summary": "Malware classification remains a challenging problem due to its inherent heterogeneity, the presence of packed binaries, and the diverse distribution of malware families. Traditional single-model detection mechanisms often fail to generalize across such diverse data, leading to degraded performance, particularly on obfuscated and rare malware samples. In this work, we propose a unified multi-task malware analysis framework based on Mixture of Experts (MoE) architectures. The proposed system evaluates performance across two different input representations, i.e., high-dimensional EMBER feature sets and raw 1D byte arrays extracted from Portable Executable files. It simultaneously performs three critical tasks: malware family classification, packed versus unpacked detection, and malware versus benign identification. By decomposing the problem into specialized expert networks and employing adaptive gating mechanisms, the model enables effective task-specific learning while maintaining overall scalability. We investigate multiple architectural variants, including Homogeneous MoE, Heterogeneous MoE, and Multi-Gate MoE (MMoE). Performance is evaluated in both standard and adversarial settings using original and mutated samples. The obtained results demonstrate that the Multi-Gate MoE model achieves the best performance, reaching a combined detection rate of 0.9744 with only $2.56\\%$ failure rate. Moreover, this configuration exhibits improved robustness under mutation-induced distribution shifts. Our findings highlight the effectiveness of expert specialization and task-specific routing in handling complex malware distributions, making the proposed framework a promising direction for scalable and resilient malware detection systems.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Attractor States Emerge in Multi-Turn LLM Conversations",
+      "url": "http://arxiv.org/abs/2606.30571v1",
+      "published": "2026-06-29T17:14:29Z",
+      "raw_summary": "Large language models (LLMs) are increasingly used in open-ended multi-agent settings, but the long-run dynamics of model--model interaction remain poorly understood. We study whether open-ended LLM discussions exhibit attractor-like behavior, i.e. topic-independent stable sets of behaviors which conversations settle into. Across 7 LLMs and 20 controversial topics, we compare self-play and mixed-play dyadic debates, tracking trajectories in representation space, discourse traits, and stances. We find self-play trajectories to be model-specific attractors that draw their conversation partners asymmetrically in mixed-play debates, influencing the other models' stylistic choices and behavior. For example, Claude Haiku is a strong attractor of other models in latent space, corresponding to other models taking on its traits like metacommentary, and models like GPT-4.1 nano are especially malleable. Our results suggest that open-ended LLM interactions are partially predictable from model-specific attractors, but shaped by structured and asymmetric partner influence. Overall, our analysis sheds some light on the complex behavior of open-ended multi-agent interaction, which we hope is helpful in designing, predicting, and monitoring autonomous agentic systems in the real world.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Forensic Trajectory Signatures for Agent Memory Poisoning Detection",
+      "url": "http://arxiv.org/abs/2606.30566v1",
+      "published": "2026-06-29T17:09:03Z",
+      "raw_summary": "We discover a behavioral invariant in LLM agents under persistent memory poisoning: in architectures where routing information is retrieved through observable memory-tool invocations, successful attacks require calling memory_recall_fact before email_send_email, a transition that non-exfiltrating sessions rarely exhibit. Under the evaluated architecture, this invariant follows from the attack's information-retrieval dependency rather than being merely an empirical correlation, and suppressing it breaks the attack. A simple rule exploiting this invariant alone achieves AUC = 0.9563. A Random Forest classifier over 19 trajectory features refines it to AUC = 0.9904 (BCa 95% CI [0.987, 0.993], N=10,000 resamples), demonstrating that the attack imprints on multiple independent behavioral channels. The signature is overdetermined: removing all recall-related features (half the feature set) leaves AUC unchanged at 0.990, confirming that memory poisoning induces a distributed trajectory signature rather than a single observable anomaly. Cross-model hold-out on 9 models (7B-120B parameters) confirms AUC = 1.000 on 6/9 hold-out splits, with all three exceptions mechanistically explained. The invariant generalizes to frontier models (GPT-4.1, GPT-4o) without retraining. A strictly prefix-only variant achieves AUC = 0.934, suggesting that real-time blocking is feasible with moderate degradation. The boundary is forensically useful: prompt-injection attacks that bypass memory produce a distinct trajectory (score = 0.541), enabling incident responders to distinguish memory-channel attacks from prompt-injection attacks using tool-call logs alone.",
+      "low_confidence": false,
+      "source_name": "arxiv-api",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "MirrorPPR: Exemplar-Based Portrait Photo Retouching",
+      "url": "https://huggingface.co/papers/2606.29308",
+      "published": "2026-06-28",
+      "raw_summary": "Framework for structural portrait retouching using Diffusion Transformer with LoRA modules",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.29308",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Delayed Verification Destabilizes Multi-Agent LLM Belief: Instability Thresholds and Optimal Corrector Placement",
+      "url": "https://huggingface.co/papers/2606.27409",
+      "published": "2026-06-25",
+      "raw_summary": "Analysis of how verification delays in multi-agent LLM systems cause oscillations and instability",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.27409",
+        "upvotes": 2,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Drop-Then-Recovery: How Redundant Are Vision-Language-Action Models?",
+      "url": "https://huggingface.co/papers/2606.27755",
+      "published": "2026-06-26",
+      "raw_summary": "Study revealing language backbones in VLA models are highly redundant for robotic manipulation tasks",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.27755",
+        "upvotes": 2,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "LLM Program Optimization via Retrieval Augmented Search",
+      "url": "https://huggingface.co/papers/2501.18916",
+      "published": "2026-06-23",
+      "raw_summary": "Blackbox method using retrieval-augmented search to optimize C++ and Python programs with LLMs",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2501.18916",
+        "upvotes": 2,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Mind the Heads: Topological Representation Alignment for Multimodal LLMs",
+      "url": "https://huggingface.co/papers/2606.23885",
+      "published": "2026-06-22",
+      "raw_summary": "Head-wise alignment method improving vision-centric tasks and reducing visual hallucinations in MLLMs",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.23885",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "SWE-Together: Evaluating Coding Agents in Interactive User Sessions",
+      "url": "https://huggingface.co/papers/2606.29957",
+      "published": "2026-06-29",
+      "raw_summary": "Multi-turn benchmark from real coding sessions with reactive user simulator for evaluating agent collaboration",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.29957",
+        "upvotes": 11,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "RocketSmith: Agentic Additive Manufacturing of High-Powered Rockets",
+      "url": "https://huggingface.co/papers/2606.00097",
+      "published": "2026-06-26",
+      "raw_summary": "Agentic system automating rocket design using LLMs for parametric generation and flight simulation",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.00097",
+        "upvotes": 4,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "A Gravitational Interpretation of Fine-Tuning Reversion",
+      "url": "https://huggingface.co/papers/2606.28525",
+      "published": "2026-06-26",
+      "raw_summary": "Geometric analysis showing post-alignment safety degradation follows persistent reversion direction",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.28525",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "One Model, Many Latencies: Universal Speech Enhancement for Diverse Real-Time Applications",
+      "url": "https://huggingface.co/papers/2606.25621",
+      "published": "2026-06-24",
+      "raw_summary": "Universal speech enhancement model with configurable latency using parallel convolutions and early-exit",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.25621",
+        "upvotes": 16,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "SAM2Matting: Generalized Image and Video Matting",
+      "url": "https://huggingface.co/papers/2606.27339",
+      "published": "2026-06-25",
+      "raw_summary": "Tracker-to-matting framework achieving state-of-the-art video matting using foundational trackers",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.27339",
+        "upvotes": 6,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "One-Step Gradient Delay is Not a Barrier for Large-Scale Asynchronous Pipeline Parallel LLM Pretraining",
+      "url": "https://huggingface.co/papers/2606.30634",
+      "published": "2026-06-29",
+      "raw_summary": "Analysis showing asynchronous pipeline parallelism can match synchronous training through optimizer selection",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.30634",
+        "upvotes": 19,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "One Scene, Two Depths: Probing Geometric Ambiguity in Monocular Foundation Models",
+      "url": "https://huggingface.co/papers/2606.29600",
+      "published": "2026-06-28",
+      "raw_summary": "Study of depth ambiguity in monocular models with new benchmark for measuring multi-layer geometry",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.29600",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "RaysUp: Ultra-light Universal Feature Upsampling via Geometry-Aware Ray Representation",
+      "url": "https://huggingface.co/papers/2606.22749",
+      "published": "2026-06-22",
+      "raw_summary": "Lightweight feature upsampling framework using ray coordinates for arbitrary resolution reconstruction",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.22749",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Illuminating Unified Multimodal Model for Free-form Interleaved Text-Image Generation",
+      "url": "https://huggingface.co/papers/2606.30054",
+      "published": "2026-06-29",
+      "raw_summary": "Multimodal paradigm enabling free-form interleaved text-image sequences with improved data efficiency",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.30054",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Beyond IID: How General Are Tabular Foundation Models, Really?",
+      "url": "https://huggingface.co/papers/2606.30410",
+      "published": "2026-06-29",
+      "raw_summary": "Comprehensive benchmark showing tabular foundation models excel on small IID data but underperform on complex datasets",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.30410",
+        "upvotes": 36,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "How Good Can Linear Models Be for Time-Series Forecasting?",
+      "url": "https://huggingface.co/papers/2606.27282",
+      "published": "2026-06-25",
+      "raw_summary": "Preprocessing optimization study showing Ridge regression with tuning outperforms complex architectures",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.27282",
+        "upvotes": 6,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Agentic Abstention: Do Agents Know When to Stop Instead of Act?",
+      "url": "https://huggingface.co/papers/2606.28733",
+      "published": "2026-06-27",
+      "raw_summary": "Evaluation of when LLM agents should abstain from acting, introducing CONVOLVE method for improved stopping",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.28733",
+        "upvotes": 120,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "ZooClaw-FashionSigLIP2: Distilled Fine-tuning for Robust Fashion Retrieval",
+      "url": "https://huggingface.co/papers/2606.27708",
+      "published": "2026-06-26",
+      "raw_summary": "Fashion-specialized vision-language model using knowledge distillation and weight interpolation",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.27708",
+        "upvotes": 3,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Large-Scale Tunnel Air-Ground Collaboration With FLISP: Fast LiDAR-IMU Synchronized Path Planner",
+      "url": "https://huggingface.co/papers/2606.25393",
+      "published": "2026-06-25",
+      "raw_summary": "Mapless path planning framework for UGV-UAV tunnel inspection achieving 7x speedup over traditional methods",
+      "low_confidence": false,
+      "extra": {
+        "arxiv_id": "2606.25393",
+        "upvotes": 1,
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Import AI 463: Self-improving robots; a 10k Chinese GPU cluster; and an elegiac essay for the human era",
+      "url": "https://importai.substack.com/p/import-ai-463-self-improving-robots",
+      "published": "2026-06-29T13:03:27Z",
+      "raw_summary": "NVIDIA develops ENPIRE, a self-improvement framework for physical robotics using autonomous experimentation loops. Tencent details ARGUS, software for debugging large-scale AI training across 10,000+ GPUs. Essay explores potential human disempowerment in superintelligent AI scenarios.",
+      "low_confidence": false,
+      "source_name": "import-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-30",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem",
+      "url": "https://www.interconnects.ai/p/artifacts-22-zyphra-cohere-and-poolside",
+      "published": "2026-06-28T17:03:07Z",
+      "raw_summary": "Assessment of the open ecosystem showing increasing diversity in model releases. Companies are categorized as pure model makers, Big Tech, and product companies. Discusses GLM-5.2, NVIDIA-Nemotron-3-Ultra, Command A+, ZAYA1, and Laguna-M.1 models.",
+      "low_confidence": false,
+      "source_name": "interconnects",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Banning Open Source AI Would Be A Mistake",
+      "url": "https://www.interconnects.ai/p/banning-open-source-ai-would-be-a",
+      "published": "2026-06-19T13:02:47Z",
+      "raw_summary": "Op-ed arguing that regulating open-source AI models would harm education, innovation, and competition. Emphasizes open source's role in democratizing technology and maintaining competitive markets against monopolistic threats.",
+      "low_confidence": false,
+      "source_name": "interconnects",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "State of the blog, mid-2026",
+      "url": "https://www.interconnects.ai/p/state-of-the-blog-mid-2026",
+      "published": "2026-06-17T14:29:06Z",
+      "raw_summary": "Author discusses Interconnects' mission, operational changes, and strategic direction. Announces advising roles at Arcee AI and Mercor, paywalled comments, and goal of 1000 paid subscribers. Emphasizes independence and commitment to open ecosystem.",
+      "low_confidence": false,
+      "source_name": "interconnects",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "百亿估值只是起点，跨维智能的物理AGI之路",
+      "url": "https://www.qbitai.com/2026/06/440949.html",
+      "published": "2026-06-30T11:04:47Z",
+      "raw_summary": "",
+      "low_confidence": true,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "港股新贵押注物理AI，乐动机器人打造万亿市场空间的核心基础设施",
+      "url": "https://www.qbitai.com/2026/06/440818.html",
+      "published": "2026-06-30T10:20:04Z",
+      "raw_summary": "The article discusses capturing market space through digital means and controlling the next phase of machine intelligence entry points.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "顶刊生物实验难复现？统一操作话术来了！编译通过率98.6%",
+      "url": "https://www.qbitai.com/2026/06/440630.html",
+      "published": "2026-06-30T10:09:56Z",
+      "raw_summary": "AI enters biological manufacturing, addressing the critical need for interfaces connecting digital and physical worlds rather than more sophisticated algorithms.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "Claude Code之父版「职场MBTI」：AI洗牌后只剩5类人，你选哪种？",
+      "url": "https://www.qbitai.com/2026/06/440599.html",
+      "published": "2026-06-30T09:34:05Z",
+      "raw_summary": "An analysis identifying five occupational categories that will remain viable in the future following AI transformation.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "GLM-5.3你来定！智谱唐杰全球征集意见，评论区清一色：视觉",
+      "url": "https://www.qbitai.com/2026/06/440478.html",
+      "published": "2026-06-30T08:46:19Z",
+      "raw_summary": "Zhipu solicits global community input for GLM-5.3 development, with overwhelming consensus in favor of visual capabilities.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "中国信通院发布AI Infra运维领域首个评测基准",
+      "url": "https://www.qbitai.com/2026/06/440454.html",
+      "published": "2026-06-30T07:20:26Z",
+      "raw_summary": "China Academy of Information and Communications Technology releases industry's first benchmark for AI infrastructure operations, covering five major domestic chip platforms.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "华尔街把美光当成「下一个英伟达」，市值一度超过特斯拉Meta",
+      "url": "https://www.qbitai.com/2026/06/440332.html",
+      "published": "2026-06-30T06:51:05Z",
+      "raw_summary": "Market positioning Micron as the successor to Nvidia, with valuations temporarily exceeding those of Tesla and Meta.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "24小时直播，只靠一张照片？虎牙实时多模态数字人VAM 1.0率先突围行业三堵墙",
+      "url": "https://www.qbitai.com/2026/06/440236.html",
+      "published": "2026-06-30T05:53:21Z",
+      "raw_summary": "Huya's VAM 1.0 digital human technology enables 24-hour streaming from single images, with conversation, singing, dancing and gaming capabilities.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "Agent之间，有互联网了！",
+      "url": "https://www.qbitai.com/2026/06/440199.html",
+      "published": "2026-06-30T05:23:36Z",
+      "raw_summary": "Minglue Technology open-sources Octo, establishing internet connectivity infrastructure between AI agents.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "破天荒！DeepSeek V4正式版居然要涨价，而且翻着倍地涨",
+      "url": "https://www.qbitai.com/2026/06/440162.html",
+      "published": "2026-06-30T04:08:11Z",
+      "raw_summary": "DeepSeek's V4 official release features significant price increases alongside performance enhancements to the model.",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "Compute scarcity is an engineering problem",
+      "url": "https://press.airstreet.com/p/angelos-perivolaropoulos-elevenlabs",
+      "published": "2026-06-30T13:07:15Z",
+      "raw_summary": "ElevenLabs demonstrates how to serve 70x more users per GPU through batching, FP8 quantization, speculative decoding, and KV-cache compression. The talk measures optimization techniques from one to 140 users per GPU at the frontier.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "STARK raises €500M to build Europe's next defense prime",
+      "url": "https://press.airstreet.com/p/stark-500m",
+      "published": "2026-06-26T13:37:24Z",
+      "raw_summary": "German defense company STARK raised €500M to manufacture cheap, autonomous unmanned systems at scale. The Virtus loitering munition platform assembles in minutes, with production lines across Germany, UK, and Ukraine supporting sovereign military capability.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "How Revolut runs AI at scale",
+      "url": "https://press.airstreet.com/p/nikolay-donets-revolut",
+      "published": "2026-06-25T13:06:16Z",
+      "raw_summary": "Nikolay Donets explains Revolut's centralized AI platform governance managing 200+ products across 40 countries. A single gateway handles both classical ML and generative AI with fallback chains, cost controls, and human-in-the-loop compliance for 70 million customers.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Odyssey raises $310M Series B for world models",
+      "url": "https://press.airstreet.com/p/odyssey-series-b",
+      "published": "2026-06-23T13:10:03Z",
+      "raw_summary": "Odyssey announced a $310M Series B at $1.45B valuation for building interactive world models. Starchild-1 generates synchronized audio-video; Agora-1 enables multi-agent shared environments; PROWL uses RL agents to improve model robustness through adversarial discovery.",
+      "low_confidence": true,
+      "source_name": "air-street-press",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Introducing Claude Sonnet 5",
+      "url": "https://anthropic.com/news/claude-sonnet-5",
+      "published": "2026-06-30",
+      "raw_summary": "Sonnet 5 delivers frontier performance across coding, agents, and professional work at scale.",
+      "low_confidence": false,
+      "source_name": "anthropic-news",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Claude Science, an AI workbench for scientists, is now available",
+      "url": "https://anthropic.com/news/claude-science-ai-workbench",
+      "published": "2026-06-30",
+      "raw_summary": "Claude Science is a customizable app that integrates tools and packages researchers use, produces auditable artifacts, and provides flexible access to computing resources.",
+      "low_confidence": false,
+      "source_name": "anthropic-news",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery",
+      "url": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/",
+      "published": "2026-06-29",
+      "raw_summary": "Research on Brain2Qwerty technology that enables communication through brain waves without requiring surgical implants, advancing noninvasive brain-computer interfaces.",
+      "low_confidence": false,
+      "source_name": "meta-ai-blog",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-30",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "登上Nature子刊！Meta脑机接口重大阶段性进展，超高实时解码准确率",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E7%99%BB%E4%B8%8ANature%E5%AD%90%E5%88%8A%EF%BC%81Meta%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E9%87%8F%E5%A4%A7%E9%98%B6%E6%AE%B5%E6%80%A7%E8%BF%9B%E5%B1%95%EF%BC%8C%E8%B6%85%E9%AB%98%E5%AE%9E%E6%97%B6%E8%A7%A3%E7%A0%81%E5%87%86%E7%A1%AE%E7%8E%87",
+      "published": "2026-06-30",
+      "raw_summary": "Meta发布Brain2Qwerty v2，一个非侵入式脑到文本解码系统，能从脑信号中实时解码完整句子。9名被试的平均词准确率达61%，最优被试达78%。研究团队开源全部训练代码与数据集。",
+      "low_confidence": true,
+      "source_name": "jiqizhixin",
+      "also_reported_by": [
+        "jiqizhixin"
+      ],
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "language": "zh"
+    },
+    {
+      "title": "State of AI Report 2025",
+      "url": "https://www.stateof.ai/",
+      "published": null,
+      "raw_summary": "Annual analysis of key AI developments covering research breakthroughs, commercial applications, regulation, safety, and industry trends. Includes inaugural AI Practitioner Survey with 1,200+ respondents showing 95% use AI at work/home.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "State of AI Report 2025 - Full Slide Deck",
+      "url": "https://docs.google.com/presentation/d/1xiLl0VdrlNMAei8pmaX4ojIOfej6lhvZbOIK7Z6C-Go/edit?usp=sharing",
+      "published": null,
+      "raw_summary": "Complete presentation covering reasoning breakthroughs, AI as scientific collaborator, embodied AI systems, commercial acceleration, and the industrial era of AI infrastructure.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "State of AI Report 2025 - Live Survey Results",
+      "url": "https://airstreet.typeform.com/report/ke3fqSty/3HzifRvsfvIwRcnZ",
+      "published": null,
+      "raw_summary": "Real-time survey data from 1,200+ AI practitioners tracking adoption patterns, tool usage, productivity gains, and professional AI integration trends.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Compute Index",
+      "url": "https://www.stateof.ai/compute",
+      "published": null,
+      "raw_summary": "Resource tracking AI compute infrastructure and data center developments, including multi-GW facilities like Stargate backed by sovereign funds.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    }
+  ],
+  "discarded": [
+    {
+      "title": "普朗克被撤稿了？量子之父竟被算法绊了一跤",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E6%99%AE%E6%9C%97%E5%85%8B%E8%A2%AB%E6%92%A4%E7%A8%BF%E4%BA%86%EF%BC%9F%E9%87%8F%E5%AD%90%E4%B9%8B%E7%88%B6%E7%AB%9F%E8%A2%AB%E7%AE%97%E6%B3%95%E7%BB%8A%E4%BA%86%E4%B8%80%E8%B7%A4",
+      "source_name": "jiqizhixin",
+      "reason": "duplicate of http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E7%99%BB%E4%B8%8ANature%E5%AD%90%E5%88%8A%EF%BC%81Meta%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E9%87%8F%E5%A4%A7%E9%98%B6%E6%AE%B5%E6%80%A7%E8%BF%9B%E5%B1%95%EF%BC%8C%E8%B6%85%E9%AB%98%E5%AE%9E%E6%97%B6%E8%A7%A3%E7%A0%81%E5%87%86%E7%A1%AE%E7%8E%87 (tier 3 preferred)"
+    },
+    {
+      "title": "LiveWorld：视频世界模型新范式，让镜头之外的世界继续演化",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+LiveWorld%EF%BC%9A%E8%A7%86%E9%A2%91%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B%E6%96%B0%E8%8C%83%E5%BC%8F%EF%BC%8C%E8%AE%A9%E9%95%9C%E5%A4%B4%E4%B9%8B%E5%A4%96%E7%9A%84%E4%B8%96%E7%95%8C%E7%BB%A7%E7%BB%AD%E6%BC%94%E5%8C%96",
+      "source_name": "jiqizhixin",
+      "reason": "duplicate of http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E7%99%BB%E4%B8%8ANature%E5%AD%90%E5%88%8A%EF%BC%81Meta%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E9%87%8F%E5%A4%A7%E9%98%B6%E6%AE%B5%E6%80%A7%E8%BF%9B%E5%B1%95%EF%BC%8C%E8%B6%85%E9%AB%98%E5%AE%9E%E6%97%B6%E8%A7%A3%E7%A0%81%E5%87%86%E7%A1%AE%E7%8E%87 (tier 3 preferred)"
+    },
+    {
+      "title": "不只DeepSeek，阶跃等开源JetSpec：大模型解码提速近10倍",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%B8%8D%E5%8F%AADeepSeek%EF%BC%8C%E9%98%B6%E8%B7%83%E7%AD%89%E5%BC%80%E6%BA%90JetSpec%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%A7%A3%E7%A0%81%E6%8F%90%E9%80%9F%E8%BF%9110%E5%80%8D",
+      "source_name": "jiqizhixin",
+      "reason": "duplicate of http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E7%99%BB%E4%B8%8ANature%E5%AD%90%E5%88%8A%EF%BC%81Meta%E8%84%91%E6%9C%BA%E6%8E%A5%E5%8F%A3%E9%87%8F%E5%A4%A7%E9%98%B6%E6%AE%B5%E6%80%A7%E8%BF%9B%E5%B1%95%EF%BC%8C%E8%B6%85%E9%AB%98%E5%AE%9E%E6%97%B6%E8%A7%A3%E7%A0%81%E5%87%86%E7%A1%AE%E7%8E%87 (tier 3 preferred)"
+    },
+    {
+      "title": "Unlocking UK house-building with AI-accelerated planning",
+      "url": "https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Securing the future of AI agents",
+      "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "DiffusionGemma: 4x faster text generation",
+      "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:21d_old"
+    },
+    {
+      "title": "Investing in multi-agent AI safety research",
+      "url": "https://deepmind.google/blog/investing-in-multi-agent-ai-safety-research/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:21d_old"
+    },
+    {
+      "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+      "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Introducing Gemma 4 12B: a unified, encoder-free multimodal model",
+      "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Powering the future of robotics in Europe",
+      "url": "https://deepmind.google/blog/powering-the-future-of-robotics-in-europe/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Measuring the impact of learning with AI in Sierra Leone and beyond",
+      "url": "https://deepmind.google/blog/measuring-the-impact-of-learning-with-ai-in-sierra-leone-and-beyond/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:23d_old"
+    },
+    {
+      "title": "We're launching the Google DeepMind Accelerator program in Asia Pacific to tackle environmental risks",
+      "url": "https://deepmind.google/blog/were-launching-the-google-deepmind-accelerator-program-in-asia-pacific-to-tackle-environmental-risks/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:41d_old"
+    },
+    {
+      "title": "Fast-tracking genetic leads to reverse cellular aging",
+      "url": "https://deepmind.google/blog/fast-tracking-genetic-leads-to-reverse-cellular-aging/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:44d_old"
+    },
+    {
+      "title": "Simulate real-world places with Project Genie and Street View",
+      "url": "https://deepmind.google/blog/simulate-real-world-places-with-project-genie-and-street-view/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:45d_old"
+    },
+    {
+      "title": "Introducing Gemini Omni",
+      "url": "https://deepmind.google/blog/introducing-gemini-omni/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:45d_old"
+    },
+    {
+      "title": "Introducing Google Antigravity 2.0",
+      "url": "https://deepmind.google/blog/introducing-google-antigravity-2-0/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:45d_old"
+    },
+    {
+      "title": "Gemini for Science: AI experiments and tools for a new era of discovery",
+      "url": "https://deepmind.google/blog/gemini-for-science-ai-experiments-and-tools-for-a-new-era-of-discovery/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:45d_old"
+    },
+    {
+      "title": "Making it easier to understand how content was created and edited",
+      "url": "https://deepmind.google/blog/making-it-easier-to-understand-how-content-was-created-and-edited/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:45d_old"
+    },
+    {
+      "title": "Strengthening Singapore's AI Future: A New National Partnership",
+      "url": "https://deepmind.google/blog/strengthening-singapores-ai-future-a-new-national-partnership/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Finding the molecular switches behind new infectious diseases",
+      "url": "https://deepmind.google/blog/finding-the-molecular-switches-behind-new-infectious-diseases/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Opening new paths in aging research",
+      "url": "https://deepmind.google/blog/opening-new-paths-in-aging-research/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Import AI 461: \"Alignment is not on track\"; FrontierCode; and synthetic research interns",
+      "url": "https://importai.substack.com/p/import-ai-461-alignment-is-not-on",
+      "source_name": "import-ai",
+      "reason": "stale:16d_old"
+    },
+    {
+      "title": "Import AI 460: Reward hacking society, RSI data from Anthropic; and RL-based quadcopter racing",
+      "url": "https://importai.substack.com/p/import-ai-460-reward-hacking-society",
+      "source_name": "import-ai",
+      "reason": "stale:23d_old"
+    },
+    {
+      "title": "Import AI 459: AI oversight is difficult; scaling laws for protein folding models; and pricing the extinction risk of AI systems",
+      "url": "https://importai.substack.com/p/import-ai-459-ai-oversight-is-difficult",
+      "source_name": "import-ai",
+      "reason": "stale:30d_old"
+    },
+    {
+      "title": "Frontier post-training recipe review with Finbarr Timbers",
+      "url": "https://www.interconnects.ai/p/frontier-post-training-recipe-review",
+      "source_name": "interconnects",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5",
+      "url": "https://anthropic.com/news/fable-mythos-access",
+      "source_name": "anthropic-news",
+      "reason": "stale:19d_old"
+    },
+    {
+      "title": "Results from the first Anthropic Public Record",
+      "url": "https://anthropic.com/news/anthropic-public-record",
+      "source_name": "anthropic-news",
+      "reason": "stale:19d_old"
+    },
+    {
+      "title": "TCS and Anthropic partner to bring Claude to regulated industries",
+      "url": "https://anthropic.com/news/tcs-anthropic-partnership",
+      "source_name": "anthropic-news",
+      "reason": "stale:19d_old"
+    },
+    {
+      "title": "DXC will integrate Claude into the systems banks, airlines, and other regulated industries rely on",
+      "url": "https://anthropic.com/news/dxc-anthropic-alliance",
+      "source_name": "anthropic-news",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "Introducing Claude Corps",
+      "url": "https://anthropic.com/news/claude-corps",
+      "source_name": "anthropic-news",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "Claude Fable 5 and Claude Mythos 5",
+      "url": "https://anthropic.com/news/claude-fable-5-mythos-5",
+      "source_name": "anthropic-news",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:84d_old"
+    },
+    {
+      "title": "Scaling How We Build and Test Our Most Advanced AI",
+      "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:84d_old"
+    },
+    {
+      "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
+      "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:86d_old"
+    },
+    {
+      "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning",
+      "url": "https://ai.meta.com/blog/segment-anything-model-3/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:96d_old"
+    },
+    {
+      "title": "Mythos Begets Fable, Cursor's Composer 2.5, Agents Building Agents",
+      "url": "https://www.deeplearning.ai/the-batch/issue-357",
+      "source_name": "the-batch",
+      "reason": "stale:19d_old"
+    },
+    {
+      "title": "Qwen3.7-Max Challenges Google for Third Place, AI Saves Whales, Fine-Tuning Breaks Copyright Alignment",
+      "url": "https://www.deeplearning.ai/the-batch/issue-356",
+      "source_name": "the-batch",
+      "reason": "stale:26d_old"
+    },
+    {
+      "title": "Gemini Flash Gets Pricey, AI Act Delays, Agents Drive Online Traffic",
+      "url": "https://www.deeplearning.ai/the-batch/issue-355",
+      "source_name": "the-batch",
+      "reason": "stale:33d_old"
+    },
+    {
+      "title": "Hermes vs. OpenClaw, Cybersecurity Alarms Ring, More-Interactive Conversations, Can Agents Do Human Work?",
+      "url": "https://www.deeplearning.ai/the-batch/issue-354",
+      "source_name": "the-batch",
+      "reason": "stale:40d_old"
+    },
+    {
+      "title": "China Thwarts Meta's Agentic Ambition, U.S. Evaluates Upcoming Models, AI Diagnoses Mammograms",
+      "url": "https://www.deeplearning.ai/the-batch/issue-353",
+      "source_name": "the-batch",
+      "reason": "stale:47d_old"
+    },
+    {
+      "title": "Seedance Makes A Splash, Nvidia's AI-Guided Chip Designs, Helping Robots Not Forget",
+      "url": "https://www.deeplearning.ai/the-batch/issue-352",
+      "source_name": "the-batch",
+      "reason": "stale:54d_old"
+    },
+    {
+      "title": "GPT-5.5 Outperforms (and Hallucinates), Kimi K2.6 Leads Open LLMs, AI Strains Climate Pledges, Strategic Thinking in LLMs vs. Humans",
+      "url": "https://www.deeplearning.ai/the-batch/issue-351",
+      "source_name": "the-batch",
+      "reason": "stale:61d_old"
+    },
+    {
+      "title": "GLM 5.1 Thinks Strategically, Data-Center Revolt Intensifies, When Helpful LLMs Turn Unhelpful, Humanoid Robots Get to Work",
+      "url": "https://www.deeplearning.ai/the-batch/issue-350",
+      "source_name": "the-batch",
+      "reason": "stale:68d_old"
+    },
+    {
+      "title": "Meta Pivots From Open Weights, Big Pharma Bets On AI, Regulatory Patchwork, Simulating Human Cohorts",
+      "url": "https://www.deeplearning.ai/the-batch/issue-349",
+      "source_name": "the-batch",
+      "reason": "stale:75d_old"
+    },
+    {
+      "title": "Anthropic's Claude Mythos Problem, Dark DNA Unveiled, Pitfalls for Assistive Models, Simulating Fluid Dynamics",
+      "url": "https://www.deeplearning.ai/the-batch/issue-348",
+      "source_name": "the-batch",
+      "reason": "stale:82d_old"
+    },
+    {
+      "title": "Claude Code's Source Leaks, OpenAI Exits Video Generation, Gemini Adds Music Generation, LLMs Learn at Inference",
+      "url": "https://www.deeplearning.ai/the-batch/issue-347",
+      "source_name": "the-batch",
+      "reason": "stale:89d_old"
+    },
+    {
+      "title": "Nvidia's Open Salvo, OpenAI's Amazon Deal, Grok Cuts Video Prices, Recursive Language Models",
+      "url": "https://www.deeplearning.ai/the-batch/issue-346",
+      "source_name": "the-batch",
+      "reason": "stale:96d_old"
+    },
+    {
+      "title": "Attacks On Data Centers, Qwen3.5 In All Sizes, DeepSeek's Huawei Play, Apple's Multimodal Tokenizer",
+      "url": "https://www.deeplearning.ai/the-batch/issue-345",
+      "source_name": "the-batch",
+      "reason": "stale:103d_old"
+    },
+    {
+      "title": "Investing in Netris",
+      "url": "https://a16z.com/announcement/investing-in-netris",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Mirendil",
+      "url": "https://a16z.com/announcement/investing-in-mirendil",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Probook",
+      "url": "https://a16z.com/announcement/investing-in-probook",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Prosper AI",
+      "url": "https://a16z.com/announcement/investing-in-prosper-ai",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Telepatia",
+      "url": "https://a16z.com/announcement/investing-in-telepatia",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Convey",
+      "url": "https://a16z.com/announcement/investing-in-convey",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Late Stage Venture Is About Late Stage Founders",
+      "url": "https://a16z.com/late-stage-venture-is-about-late-stage-founders",
+      "source_name": "a16z-news-content",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "Everything is Recorded Now",
+      "url": "https://a16z.com/everything-is-recorded-now",
+      "source_name": "a16z-news-content",
+      "reason": "stale:21d_old"
+    },
+    {
+      "title": "Marc Andreessen on Evaluating Founders and AI's Consumer Surplus",
+      "url": "https://a16z.com/podcast/marc-andreessen-on-evaluating-founders-and-ais-consumer-surplus-2",
+      "source_name": "a16z-news-content",
+      "reason": "stale:23d_old"
+    },
+    {
+      "title": "Building Search for AI Agents with Exa CEO Will Bryk",
+      "url": "https://a16z.com/podcast/building-search-for-ai-agents-with-exa-ceo-will-bryk",
+      "source_name": "a16z-news-content",
+      "reason": "stale:25d_old"
+    },
+    {
+      "title": "AI Agents and the Fight for Customer Data",
+      "url": "https://a16z.com/podcast/ai-agents-and-the-fight-for-customer-data",
+      "source_name": "a16z-news-content",
+      "reason": "stale:26d_old"
+    },
+    {
+      "title": "A16Z Investor Relations is now Global Partnerships",
+      "url": "https://a16z.com/a16z-investor-relations-is-now-global-partnerships",
+      "source_name": "a16z-news-content",
+      "reason": "stale:27d_old"
+    },
+    {
+      "title": "Mapping Europe's AI Workforce Opportunity",
+      "url": "https://openai.com/index/mapping-ai-jobs-transition-eu",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.74)"
+    },
+    {
+      "title": "HP Inc. launches Frontier strategic partnership with OpenAI",
+      "url": "https://openai.com/index/hp-frontier-partnership",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Previewing GPT-5.6 Sol: a next-generation model",
+      "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "How agents are transforming work",
+      "url": "https://openai.com/index/how-agents-are-transforming-work",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "OpenAI and Broadcom unveil LLM-optimized inference chip",
+      "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "Helping build shared standards for advanced AI",
+      "url": "https://openai.com/index/helping-build-shared-standards-for-advanced-ai",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-28 (overlap=0.00)"
+    },
+    {
+      "title": "How GPT-5 helped immunologist Derya Unutmaz solve a 3-year-old mystery",
+      "url": "https://openai.com/index/gpt-5-immunology-mystery",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "How Omio is building the future of conversational travel",
+      "url": "https://openai.com/index/omio",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Daybreak: Tools for securing every organization in the world",
+      "url": "https://openai.com/index/daybreak-securing-the-world",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-28 (overlap=0.00)"
+    },
+    {
+      "title": "Patch the Planet: a Daybreak initiative to support open source maintainers",
+      "url": "https://openai.com/index/patch-the-planet",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Codex-maxxing for long-running work",
+      "url": "https://openai.com/index/codex-maxxing-long-running-work",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Samsung Electronics brings ChatGPT and Codex to employees",
+      "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.75)"
+    },
+    {
+      "title": "New usage analytics and updated spend controls for enterprises",
+      "url": "https://openai.com/index/chatgpt-enterprise-spend-controls",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.82)"
+    },
+    {
+      "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
+      "url": "https://openai.com/index/diagnose-rare-childhood-diseases",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.61)"
+    },
+    {
+      "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+      "url": "https://openai.com/index/ai-chemist-improves-reaction",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.71)"
+    },
+    {
+      "title": "Introducing LifeSciBench",
+      "url": "https://openai.com/index/introducing-life-sci-bench",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.89)"
+    },
+    {
+      "title": "Introducing computer use in Gemini 3.5 Flash",
+      "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+      "source_name": "deepmind-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "Import AI 462: Superpersuasion; self-sustaining AI; paths to ASI",
+      "url": "https://importai.substack.com/p/import-ai-462-superpersuasion-self",
+      "source_name": "import-ai",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "GLM-5.2 is the step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "source_name": "interconnects",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "Introducing Claude Tag",
+      "url": "https://anthropic.com/news/introducing-claude-tag",
+      "source_name": "anthropic-news",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Anthropic opens Seoul office and announces new partnerships across the Korean AI ecosystem",
+      "url": "https://anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem",
+      "source_name": "anthropic-news",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    },
+    {
+      "title": "A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems",
+      "url": "https://www.deeplearning.ai/the-batch/issue-359",
+      "source_name": "the-batch",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Testing Mythos and Fable, Moving Beyond SWE-bench, Nvidia's Open Contender",
+      "url": "https://www.deeplearning.ai/the-batch/issue-358",
+      "source_name": "the-batch",
+      "reason": "seen-on-2026-06-29 (overlap=0.90)"
+    },
+    {
+      "title": "The World-Building Doors Are Open, Again.",
+      "url": "https://a16z.com/the-world-building-doors-are-open-again",
+      "source_name": "a16z-news-content",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    },
+    {
+      "title": "How to Win a Space War",
+      "url": "https://a16z.com/how-to-win-a-space-war",
+      "source_name": "a16z-news-content",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    },
+    {
+      "title": "New Media, One Year In",
+      "url": "https://a16z.com/what-is-new-media-in-2026",
+      "source_name": "a16z-news-content",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    }
+  ],
+  "stats": {
+    "input_count": 156,
+    "after_intra_dedup": 153,
+    "after_filter": 96,
+    "after_cross_day": 70,
+    "discarded_count": 86,
+    "stale_discarded": 51,
+    "cross_day_discarded": 26,
+    "cross_day_re_coverage_kept": 10,
+    "seen_urls_pruned": 0
+  },
+  "errors": []
+}
