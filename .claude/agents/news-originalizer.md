@@ -61,8 +61,16 @@ UA 模式判定：
 
 ### Step 3 · 解析脚本 stdout JSON
 
-- `error == null` → 拿到 `cleaned_html` 等字段，进 Step 4
+- `error == null` **且** `fetch_channel == "direct"` → 拿到 `cleaned_html` 等字段，进 Step 4（走 HTML → Markdown + 翻译全流程）
+- `error == null` **且** `fetch_channel == "jina"` → **Jina Reader 兜底成功**：正文已是 Markdown（`cleaned_markdown` 字段），**跳过 Step 4 的 HTML → Markdown 转换**，仅做翻译。这是**降级但成功**的合法状态，不是失败
 - `error != null` → 进 Step 3.5 Fallback
+
+**Jina 通道特征**（识别 checklist）：
+
+- `fetch_channel == "jina"` 且 `fetch_channel_note` 形如 `"direct http_403; jina ok"`
+- `cleaned_html == ""`，`cleaned_markdown` 有内容
+- `images_attempted == 0` 且 `images == []`——Jina 不下载图，Markdown 里的 `![](url)` 保留绝对 URL；Step 5 图片渲染分级对 Jina 通道**跳过**（无 manifest 可遍历），正文里的 Markdown 图片语法**保留原样**
+- `language == ""`——Jina 不给 lang meta，Step 4 语言判定要从正文自己推
 
 ### Step 3.5 · Fallback（脚本失败时）
 
@@ -85,8 +93,13 @@ UA 模式判定：
 ### Step 4 · Markdown 转换 + 翻译（你自己一步做）
 
 **语言判定**：
-- 若 `language == "zh"` 或 title 主要是中文字符 → **不翻译**，直接把 `cleaned_html` 转 Markdown
-- 其他语种（en / ja / ...） → 一步完成 **HTML → Markdown + 翻译成中文**
+- 若 `language == "zh"` 或 title 主要是中文字符 → **不翻译**，直接把 `cleaned_html`（或 Jina 通道的 `cleaned_markdown`）转/取为 Markdown
+- 若 `language == ""`（Jina 通道常见）→ 用正文首 500 字符判定：CJK 字符占比 > 30% → 视为 zh；否则视为 en
+- 其他语种（en / ja / ...） → 完成 **HTML → Markdown + 翻译成中文**（direct 通道）**或** 仅翻译（Jina 通道，正文已是 Markdown）
+
+**通道分流（Step 3 已识别）**：
+- **direct 通道**：`cleaned_html` 是 HTML → HTML→Markdown + 翻译一步做完
+- **Jina 通道**：`cleaned_markdown` 是 Markdown → **不做 HTML→Markdown 转换**，直接对 Markdown 逐段翻译；原文的 Markdown 图片 `![](https://...)` 保留原样（Step 5 对 Jina 通道跳过）
 
 **翻译责任归属（硬约束）**：你自己（haiku）就是翻译工具——翻译由你的 LLM 能力直接完成，**不存在外部"翻译服务"概念**。禁止用 "翻译服务不可用" / "翻译暂不支持" / "翻译模型未就绪" 之类词作 fallback_notice；只允许 Fallback A/B 两级 IO 失败才有 fallback_notice。若脚本 `error == null` 且拿到 cleaned_html，就必须翻译（非 zh 情况），无一例外。长文（>4000 字）也必须翻译——token 不够用应分块翻译，绝不跳过。
 
@@ -136,7 +149,7 @@ translation_engine: <"haiku"；language=zh 或 fallback B → null>
 word_count: <正文中文字符数（去空白）>
 images_attempted: <脚本给的；WebFetch 兜底为 0>
 images_saved: <脚本给的；WebFetch 兜底为 0>
-fallback_notice: <null / 字符串>
+fallback_notice: <null / 字符串；Jina 通道时填 fetch_channel_note，形如 'direct http_403; jina ok'>
 related_daily: <输入的 related_daily>
 related_zettels: []                            # F1.4 writer 回填
 related_topics: []                             # F1.4 writer/cluster 回填
@@ -227,7 +240,7 @@ Write 完成后，**你的最后一段回复只有一行 JSON**——不加 ` ``
 
 1. **frontmatter 20 字段齐全**，null 也写 null 不省略——Bases 视图依赖字段存在性
 2. **file `id` 与文件名 stem 严格一致**——`id` 是 wikilink target，错一字符就断链
-3. **fallback_notice 三态**：`null` = 一切正常 / 字符串 = 有降级 / **字段缺失禁止**
+3. **fallback_notice 四态**：`null` = direct 通道成功 / `"direct <err>; jina ok"` = Jina 兜底成功（降级但可用）/ 其他字符串 = A/B Fallback 有降级 / **字段缺失禁止**
 4. **图片相对路径不带 60-Originals/ 前缀**——写 `_assets/2026-07-01/xxx.png`，不是 `60-Originals/_assets/2026-07-01/xxx.png`（md 就在 60-Originals/ 目录里）
 5. **不合成不在原文的内容**——是翻译不是创作，不写"总结性"段落
 6. **不总结原文**——全文归档，段段翻译，禁止省略段落
@@ -251,3 +264,5 @@ Write 完成后，**你的最后一段回复只有一行 JSON**——不加 ` ``
 - ❌ 缩短原文长度以省 token——完整性优先
 - ❌ 用 markdown 表格代替原文 `<table>`——如果原文有表格保留结构
 - ❌ `title` / `original_title` / `fallback_notice` 含冒号未加引号（如 `original_title: Pessimism's Paradox: Conservative Offline Training`）——2026-07-01 F1 试跑产 `60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` 唯一破格，F2.0 POC 三家框架 build 全失败；参照 Step 6 · YAML 字符串引号规则
+- ❌ Jina 通道（`fetch_channel == "jina"`）当作失败重跑 HTML→Markdown 转换——正文已是 Markdown，只做翻译；`fallback_notice` 填 `fetch_channel_note` 而非置 null
+- ❌ Jina 通道遍历 `images[]` manifest 触发空迭代或报错——Jina 通道 `images == []` 是正常状态，直接跳过 Step 5；正文里的 Markdown 图片语法（`![alt](https://...)`）保留原样，不试图下载

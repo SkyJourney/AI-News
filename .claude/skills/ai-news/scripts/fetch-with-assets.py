@@ -50,6 +50,12 @@ UA_PROJECT = "AInews-skill/1.0 (personal-vault; https://github.com/local/ainews)
 
 IMAGE_TIMEOUT_SEC = 15
 
+# ─── Jina Reader 兜底（Cloudflare 挑战 / rate limit / timeout 场景） ───
+# 免 auth HTTPS GET，非第三方 MCP，符合 CLAUDE.md D5 边界
+JINA_READER_BASE = "https://r.jina.ai/"
+JINA_TRIGGER_ERRORS = {"http_403", "http_429", "http_503", "timeout"}
+JINA_TIMEOUT_SEC = 45  # Jina 内部跑 headless render，比直连宽松
+
 # 噪声标签（连同内容一并删除）
 NOISE_TAG_RE = re.compile(
     r"<(script|style|noscript|nav|header|footer|aside|form|iframe|template|svg)\b[^>]*>.*?</\1>",
@@ -98,6 +104,57 @@ def fetch_html(url: str, timeout: int, ua: str):
         return None, "timeout"
     except Exception as e:
         return None, f"unexpected: {type(e).__name__}: {e}"
+
+
+def fetch_via_jina(url: str, timeout: int = JINA_TIMEOUT_SEC):
+    """Jina Reader 兜底通道，返回 (markdown_body, title, published_time, error)
+
+    Jina 响应体结构：
+        Title: <title>
+
+        URL Source: <url>
+
+        Published Time: <YYYY-MM-DDTHH:MM:SSZ>   # 可选，非所有站点都有
+
+        Markdown Content:
+        <正文 markdown>
+
+    解析策略：前 8 行遍历抽字段，"Markdown Content:" 之后全部为正文。
+    走 splitlines() 而非 split("Markdown Content:") 避免正文里同串误切。
+    """
+    try:
+        jina_url = JINA_READER_BASE + url
+        req = urllib.request.Request(
+            jina_url,
+            headers={"User-Agent": UA_PROJECT, "Accept": "text/plain, */*"},
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            raw = resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as e:
+        return None, None, None, f"jina_http_{e.code}"
+    except urllib.error.URLError as e:
+        return None, None, None, f"jina_url_error: {e.reason}"
+    except socket.timeout:
+        return None, None, None, "jina_timeout"
+    except Exception as e:
+        return None, None, None, f"jina_unexpected: {type(e).__name__}: {e}"
+
+    title, published_time = "", ""
+    lines = raw.splitlines()
+    body_start = 0
+    for i, line in enumerate(lines[:8]):
+        if line.startswith("Title:"):
+            title = line[len("Title:"):].strip()
+        elif line.startswith("Published Time:"):
+            published_time = line[len("Published Time:"):].strip()
+        elif line.startswith("Markdown Content:"):
+            body_start = i + 1
+            break
+
+    markdown_body = "\n".join(lines[body_start:]).strip()
+    if not markdown_body:
+        return None, None, None, "jina_empty_body"
+    return markdown_body, title, published_time, None
 
 
 # ============================================================
@@ -342,6 +399,40 @@ def main() -> int:
     out_dir = Path(args.out_dir)
 
     html_text, err = fetch_html(args.url, args.timeout, ua)
+
+    # ─── Jina Reader 兜底 ───
+    # 触发场景：CF 挑战（403）/ rate limit（429）/ 5xx 挑战（503）/ timeout
+    if err in JINA_TRIGGER_ERRORS:
+        md_body, md_title, md_pub, jina_err = fetch_via_jina(args.url)
+        if jina_err is None:
+            # 归一化 published_time 到 YYYY-MM-DD
+            published_norm = ""
+            if md_pub:
+                m = re.match(r"(\d{4})-(\d{2})-(\d{2})", md_pub)
+                if m:
+                    published_norm = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+            result = {
+                "url": args.url,
+                "title": md_title,
+                "original_title": md_title,
+                "author": [],
+                "published_at": published_norm,
+                "language": "",  # Jina 不给 lang meta，交 agent 从正文推断
+                "cleaned_html": "",
+                "cleaned_markdown": md_body,
+                "images_attempted": 0,
+                "images_saved": 0,
+                "images": [],
+                "fetched_at": now_iso(),
+                "fetch_channel": "jina",
+                "fetch_channel_note": f"direct {err}; jina ok",
+                "error": None,
+            }
+            print(json.dumps(result, ensure_ascii=False))
+            return 0
+        # Jina 也挂，把两级 error 都带出去让 agent 走 Fallback A/B
+        err = f"{err}; {jina_err}"
+
     if err:
         result = {
             "url": args.url,
@@ -351,15 +442,19 @@ def main() -> int:
             "published_at": "",
             "language": "",
             "cleaned_html": "",
+            "cleaned_markdown": "",
             "images_attempted": 0,
             "images_saved": 0,
             "images": [],
             "fetched_at": now_iso(),
+            "fetch_channel": "direct",
+            "fetch_channel_note": err,
             "error": err,
         }
         print(json.dumps(result, ensure_ascii=False))
         return 1
 
+    # ─── direct 通道正常流程 ───
     meta = extract_metadata(html_text)
     cleaned = strip_noise(html_text)
     main_content = strip_noise(extract_main_content(cleaned))
@@ -378,10 +473,13 @@ def main() -> int:
         "url": args.url,
         **meta,
         "cleaned_html": rewritten,
+        "cleaned_markdown": "",
         "images_attempted": len(images),
         "images_saved": sum(1 for i in images if i["status"] == "saved"),
         "images": images,
         "fetched_at": now_iso(),
+        "fetch_channel": "direct",
+        "fetch_channel_note": "direct ok",
         "error": None,
     }
     print(json.dumps(result, ensure_ascii=False))
