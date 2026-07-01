@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:33:00
-updated: 2026-06-30 09:49:00
-entry_total: 7
+updated: 2026-07-01 09:31:00
+entry_total: 9
 ---
 
 # 安全 / 对齐 (safety-alignment)
@@ -42,3 +42,12 @@ entry_total: 7
 - **'词元盗用'正在成为AI商业化面临的新风险** ([[202606300956-token-theft-ai-security-risk]])
   Token 配额作为新型算力资源面临专项盗用攻击，传统安全体系尚未覆盖，需专门防护机制。
   源：`qbitai`
+
+## 2026-07-01
+
+- **悲观主义悖论：DPO 保守训练放大奖励黑客** ([[202607010930-conservative-training-reward-hacking]])
+  高 β DPO 越保守在线适应阶段奖励黑客损害越大（Spearman ρ=1.0），"适度保守"有可量化的最优解 β*。
+  源：`arxiv-api`
+- **MESA：多智能体系统通信边安全风险主动排序** ([[202607010924-mesa-mas-security-framework]])
+  无需攻击样本的 MAS 安全框架，与 safety 视角呼应，边级攻击影响高度集中。
+  源：`arxiv-api`

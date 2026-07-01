@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-30 09:49:00
-entry_total: 8
+updated: 2026-07-01 09:31:00
+entry_total: 10
 ---
 
 # 融资 & 投资 (funding-investment)
@@ -40,4 +40,13 @@ entry_total: 8
   源：`air-street-press` · 首记于 [[2026-06-29]]
 - **Odyssey raises $310M Series B for world models** ([[202606291412-odyssey-world-model-funding]])（复盘）
   Odyssey 世界模型 B 轮融资持续传播，三产品线竞争格局持续引发关注。
+  源：`air-street-press` · 首记于 [[2026-06-29]]
+
+## 2026-07-01
+
+- **STARK €500M 欧洲防务融资** (未升级 Zettel)（复盘）
+  🔄 [复盘] STARK 自主无人系统融资第三次浮现，欧洲防务 AI 化持续受关注。
+  源：`air-street-press` · 首记于 [[2026-06-29]]
+- **Odyssey $310M Series B** ([[202606291412-odyssey-world-model-funding]])（复盘）
+  🔄 [复盘] 世界模型融资热度持续，Starchild-1/Agora-1/PROWL 三产品线布局延续讨论。
   源：`air-street-press` · 首记于 [[2026-06-29]]

@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-29 14:05:00
-entry_total: 14
+updated: 2026-07-01 09:31:00
+entry_total: 15
 ---
 
 # 产业动态 (industry-moves)
@@ -61,3 +61,9 @@ entry_total: 14
 - **State of AI Report 2025 Launch**（未升级 Zettel）
   报告发布博客，与主报告内容重复。
   源：`state-of-ai`
+
+## 2026-07-01
+
+- **乐动机器人港股押注物理 AI，打造万亿市场核心基础设施**（未升级 Zettel）
+  港股新贵乐动机器人战略定位物理 AI 基础设施，新一轮资本向具身智能赛道聚拢。
+  源：`qbitai`

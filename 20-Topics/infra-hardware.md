@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:37:00
-updated: 2026-06-28 12:30:00
-entry_total: 6
+updated: 2026-07-01 09:31:00
+entry_total: 10
 ---
 
 # 基础设施 & 硬件 (infra-hardware)
@@ -35,3 +35,15 @@ entry_total: 6
 - **The Batch Issue 359: Apple 端侧模型配方 + GLM-5.2**（未升级 Zettel，低置信度）
   Andrew Ng 点评 Apple 端侧模型效率方案与 GLM-5.2 开放 agent 意义。
   源：`the-batch`
+
+## 2026-07-01
+
+- **异步 Pipeline 并行 LLM 预训练：一步梯度延迟不是瓶颈** ([[202607010919-async-pipeline-parallel-llm]])
+  关键在优化器选择——Muon 对梯度延迟鲁棒，10B 参数验证与同步训练性能对齐，异步并行消除 GPU bubble 路径清晰。
+  源：`arxiv-api`（同时：`huggingface-daily-papers` 19 赞）
+- **中国信通院发布 AI Infra 运维首个评测基准** ([[202607010920-china-ai-infra-ops-benchmark]])
+  覆盖五大国内芯片平台，AI 基础设施运维从"能跑"到"可量化"成熟度标志。
+  源：`qbitai`
+- **ElevenLabs：70 倍 GPU 效率提升——算力稀缺是工程问题** ([[202607010921-elevenlabs-gpu-efficiency-70x]])
+  batching + FP8 + speculative decoding + KV-cache 压缩组合达到 140 用户/GPU，推理优化标准套件实测验证。
+  源：`air-street-press`

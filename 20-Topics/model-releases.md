@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:30:00
-updated: 2026-06-30 09:49:00
-entry_total: 20
+updated: 2026-07-01 09:31:00
+entry_total: 23
 ---
 
 # 模型发布 (model-releases)
@@ -86,4 +86,16 @@ entry_total: 20
   源：`qbitai`
 - **OceanBase发布AI数据库：以一套引擎融合湖库与多模态数据**（未升级 Zettel）
   OceanBase 新型 AI 数据库尝试以统一引擎融合湖仓一体与多模态数据处理。
+  源：`qbitai`
+
+## 2026-07-01
+
+- **Introducing Claude Sonnet 5** ([[202607010922-claude-sonnet-5-release]])
+  Anthropic 发布 Sonnet 5，编码 + Agent 前沿性能定位，强调规模化部署能力，与 Claude Science 同日双线推进。
+  源：`anthropic-news`
+- **开源生态 Artifacts #22：Zyphra、Cohere、Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
+  🔄 [复盘] 开源模型生态多样化持续受关注，GLM-5.2、Command A+、ZAYA1、Laguna-M.1 评估延续。
+  源：`interconnects` · 首记于 [[2026-06-29]]
+- **DeepSeek V4 官方版涨价** (未升级 Zettel)
+  DeepSeek V4 正式版伴随性能提升大幅调价，打破此前超低价策略。
   源：`qbitai`

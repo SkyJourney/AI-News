@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-28 12:30:00
-entry_total: 2
+updated: 2026-07-01 09:31:00
+entry_total: 3
 ---
 
 # 政策 & 监管 (policy-regulation)
@@ -17,3 +17,9 @@ entry_total: 2
 - **Helping build shared standards for advanced AI**（未升级 Zettel）
   OpenAI 通过 Appia Foundation 推动 AI 评估框架与安全实践的国际共同标准，是主动配合监管的信号。
   源：`openai-rss`
+
+## 2026-07-01
+
+- **Banning Open Source AI Would Be A Mistake**（未升级 Zettel）
+  Interconnects 评论文章，论证开源 AI 监管将损害教育、创新与竞争；评论记录，非政策事件。
+  源：`interconnects`

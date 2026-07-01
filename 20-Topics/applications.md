@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:39:00
-updated: 2026-06-30 09:49:00
-entry_total: 20
+updated: 2026-07-01 09:31:00
+entry_total: 27
 ---
 
 # 应用案例 (applications)
@@ -82,3 +82,24 @@ entry_total: 20
 - **From Brain Waves to Words: Brain2Qwerty**（未升级 Zettel）
   Meta Brain2Qwerty 通过脑电信号实现无需手术的无创脑机通信。
   源：`meta-ai-blog`
+
+## 2026-07-01
+
+- **AI 进入生物制造：统一操作话术编译通过率 98.6%** ([[202607010911-ai-bio-manufacturing-interface]])
+  AI 进入生物制造的瓶颈是数字-物理接口而非算法能力，统一操作话语体系达到工程级稳定性。
+  源：`qbitai`
+- **虎牙 VAM 1.0 数字人：单图实现 24 小时实时直播** ([[202607010912-huya-vam-digital-human]])
+  单图生成实时多模态数字人，突破直播流媒体三堵墙，内容创作边际成本趋零。
+  源：`qbitai`
+- **Claude Science AI 科学家工作台正式上线** ([[202607010913-claude-science-workbench]])
+  Anthropic 推出科研专属垂直应用，集成工具包 + 可审计产物 + 弹性算力，垂直化路径延伸至科研基础设施。
+  源：`anthropic-news`
+- **Brain2Qwerty v2 登上 Nature 子刊：非侵入式脑机接口达到实用门槛** ([[202607010914-brain2qwerty-noninvasive-bci]])
+  Meta 开源全数据集与代码，无手术脑到文本解码平均词准确率 61%，非侵入 BCI 首次进入"够用"区间。
+  源：`meta-ai-blog` · 同日中文报道：`jiqizhixin`（re_coverage）
+- **Revolut AI 大规模治理架构** ([[202606291407-revolut-ai-deployment-scale]])（复盘）
+  🔄 [复盘] 覆盖 200+ 产品、40 国的 AI 平台治理案例持续受关注。
+  源：`air-street-press` · 首记于 [[2026-06-29]]
+- **ChatGPT 全球采用扩展数据** (未升级 Zettel)
+  OpenAI Signals 数据显示 ChatGPT 全球用户增长、功能深度使用与区域多语言渗透趋势。
+  源：`openai-rss`

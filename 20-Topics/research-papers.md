@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:35:00
-updated: 2026-06-30 09:49:00
-entry_total: 21
+updated: 2026-07-01 09:31:00
+entry_total: 29
 ---
 
 # 研究论文 (research-papers)
@@ -85,3 +85,21 @@ entry_total: 21
 - **Translation as a Bridging Action: Transferring Manipulation Skills from Humans to Robots**（未升级 Zettel）
   通过人类动作数据向双臂机器人迁移新操作技能，HF 33 upvotes。
   源：`huggingface-daily-papers`
+
+## 2026-07-01
+
+- **GeneBench-Pro：AI 基因组学 & 生物学评测基准** ([[202607010915-genebench-pro-genomics-benchmark]])
+  OpenAI 发布基于复杂真实世界数据集的生命科学评测基准，AI 科学能力竞争进入标准化评测阶段。
+  源：`openai-rss`
+- **VLK：合成场景学习人形机器人感知操作** ([[202607010916-vlk-humanoid-loco-manipulation]])
+  3DGS 重建 + 合成 48k 轨迹无需人工标注，视觉-语言-运动学三模态在 Unitree G1 上完成 sim-to-real。
+  源：`arxiv-api`
+- **LeVo 2：层级 LLM-Diffusion 歌曲生成** ([[202607010917-levo2-song-generation]])
+  语义规划 + 音轨细化 + 美学引导后训练，完整歌曲生成逼近商用系统水平。
+  源：`arxiv-api`
+- **Beyond IID：表格基础模型泛化能力基准** ([[202607010918-tabular-foundation-models-benchmark]])
+  36 赞高关注论文揭示表格 FM 在复杂数据集上泛化严重不足，挑战"通用"叙事。
+  源：`huggingface-daily-papers`
+- **State of AI Report 2025** ([[202606291405-state-of-ai-report-2025]])（复盘）
+  🔄 [复盘] 年度 AI 状态报告持续受关注，今日再次浮现。
+  源：`state-of-ai` · 首记于 [[2026-06-29]]

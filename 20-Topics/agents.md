@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-06-30 09:49:00
-entry_total: 8
+updated: 2026-07-01 09:31:00
+entry_total: 17
 ---
 
 # AI Agent (agents)
@@ -41,3 +41,27 @@ entry_total: 8
 - **Import AI 463: Self-improving robots; a 10k Chinese GPU cluster**（未升级 Zettel）
   NVIDIA ENPIRE 机器人自改进软件；腾讯 ARGUS 管理万卡 GPU 集群；探讨 AI 超级智能时代人类命运。
   源：`import-ai`
+
+## 2026-07-01
+
+- **WorldEvolver：自演化 LLM Agent 世界模型框架** ([[202607010923-worldevolver-self-evolving-agent]])
+  不改参数只改上下文，情节/语义记忆 + 选择性预见三模块在 ALFWorld/ScienceWorld 双提升。
+  源：`arxiv-api`
+- **MESA：多智能体系统通信安全优先级排序框架** ([[202607010924-mesa-mas-security-framework]])
+  无需攻击样本的主动风险排序，监控前 10% 边拦截 3 倍攻击，9 款 LLM 跨模型验证 AUC=1.0。
+  源：`arxiv-api`
+- **SWE-Interact：用户驱动长时程编码会话基准** ([[202607010925-swe-interact-coding-benchmark]])
+  最强模型单轮 50% 成功但多轮仅 25%，揭示交互能力与自主能力的正交性；"过度 agentic"是主要失败模式。
+  源：`arxiv-api`
+- **SWE-Together：编码 Agent 交互会话评测** ([[202607010926-swe-together-coding-agents]])
+  真实编码会话数据驱动的响应式用户模拟器，与 SWE-Interact 同期发布，多轮编码基准成 2026 新前沿。
+  源：`huggingface-daily-papers`（11 赞）
+- **Agentic Abstention：CONVOLVE 方法改进 Agent 弃权决策** ([[202607010927-agentic-abstention-convolve]])
+  120 赞高热度论文，系统评估"该停不停"问题，弃权作为独立推理能力框架性定义。
+  源：`huggingface-daily-papers`
+- **NVIDIA ENPIRE 机器人自改进框架** ([[202607010928-import-ai-463-nvidia-enpire]])（复盘）
+  🔄 [复盘] ENPIRE 自主实验循环机器人策略自改进，腾讯 ARGUS 万卡集群调试工具同期披露。
+  源：`import-ai` · 首记于 [[2026-06-30]]
+- **Octo 开源：Agent 间互联网基础设施** ([[202607010929-octo-agent-internet-infra]])
+  明略科技开源 Octo，建立 AI Agent 标准化互联网级通信协议，multi-agent 规模化落地前提基础。
+  源：`qbitai`
