@@ -34,6 +34,33 @@ from collections import OrderedDict
 from pathlib import Path
 
 
+# A4': 按 source_name 查默认 topic 兜底表——依据 sources.md 里 14 个源的性质。
+# 使用场景：cluster agent 漏 mappings 时，主会话按 source 分配合理的默认 topic，
+# 而不是全部塞进 'applications'——F1 后所有 kept 条目都要绑 topic 才能有效双链。
+# 未列的 source 走 'applications' fallback（保底不丢数据）。
+SOURCE_DEFAULT_TOPIC = {
+    # Tier 1 主力（模型/产品发布）
+    "openai-rss": "model-releases",
+    "anthropic-news": "model-releases",
+    "deepmind-rss": "model-releases",
+    "meta-ai-blog": "model-releases",
+    # 学术源（论文）
+    "arxiv-api": "research-papers",
+    "huggingface-daily-papers": "research-papers",
+    "state-of-ai": "research-papers",       # 年度综述/报告归学术层
+    # 分析类 / 行业动态
+    "import-ai": "industry-moves",
+    "interconnects": "industry-moves",
+    "the-batch": "industry-moves",
+    # 中文行业
+    "qbitai": "industry-moves",
+    "jiqizhixin": "industry-moves",
+    # 投资视角
+    "air-street-press": "funding-investment",
+    "a16z-news-content": "funding-investment",
+}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--filtered", required=True, help="filtered.json 绝对路径")
@@ -90,14 +117,18 @@ def main():
     missing_urls = [u for u in url_to_entry if u not in mapped_urls]
     if missing_urls:
         errors.append(f"agent_missing_urls:{len(missing_urls)}_count")
-        # 漏的条目自动归 'applications' 兜底，避免数据丢失
+        # A4': 按 source_name 查默认 topic 兜底表，未列走 applications fallback
+        # F1 后所有 kept 条目都要绑 topic 才能有效双链，兜底重要性提升到 P-中
         for u in missing_urls:
+            entry = url_to_entry[u]
+            source_name = entry.get("source_name") or ""
+            default_topic = SOURCE_DEFAULT_TOPIC.get(source_name, "applications")
             mappings.append({
                 "url": u,
-                "topic_slug": "applications",
+                "topic_slug": default_topic,
                 "is_new": False,
                 "zettel_worthy": False,
-                "rationale": "(auto-assigned by cluster-merge: agent missed)",
+                "rationale": f"(auto-assigned by cluster-merge: agent missed; source={source_name} → {default_topic})",
             })
 
     # 6. existing_topics 校验 is_new（兜底纠正 agent 错判）
