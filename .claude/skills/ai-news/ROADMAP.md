@@ -1,148 +1,269 @@
 # /ai-news skill 演化 Roadmap
 
-> 跟踪 v2.3 后续可做的优化项。每条编号沿用 v2.3 会话内的 A 标号（A1-A10），
-> 不重编号，便于回查 [[2026-06-29-run]] log 与 commit 历史。
+> 跟踪 v2.4 后续大方向：**F1 全量离线化**（60-Originals 层）→ **F2 前端站点**（私有化 docker 部署）。
+> 老 v2.3 遗留优化项（A4-A9）按新方向做了合并/升级/改造，不再独立编号——见「合并说明」小节。
+> 编号沿用 A/F/B 前缀，便于回查 [[2026-06-29-run]] / [[2026-07-01-run]] log 与 commit 历史。
 
-最后更新：2026-06-29 v2.3 端到端首次跑通后
-
----
-
-## 已完成（v2.3 落地）
-
-- **A1** cluster agent `model: sonnet → haiku`（commit `beeffcd`）—— 预期 5m17s → < 2 分钟
-- **A2** ~~sources.md meta-ai-blog reliability 改 degraded~~ —— 撤销，实际已是 degraded（Log 误判）
-- **A3** cluster agent system prompt 加严字段约束（`topic_slug` not `slug`、`is_new` 必填）（commit `beeffcd`）
+最后更新：2026-07-01 · v2.4 后 F1/F2 规划确认
 
 ---
 
-## 待办（按 ROI 排）
+## 已完成（v2.3 → v2.4 落地）
 
-### A4 · cluster-merge.py 按 source 默认 topic 兜底
+- **A1** cluster agent `sonnet → haiku`（commit `beeffcd`）
+- **A2** ~~sources.md meta-ai-blog reliability~~ —— 撤销（Log 误判）
+- **A3** cluster agent schema 加严：`topic_slug` / `is_new` 必填（commit `beeffcd`）
+- **v2.4** fetcher IPC 改 Write 中转，根治 3 类边界 bug（commit `08cffbb`）
+- **调度自动化**：Mac mini 定时任务 + Claude 非交互会话跑通（不再需要 launchd 独立配置）
 
-**问题**：cluster agent 自检要求 mappings 完全对齐 kept，偶尔漏。当前 cluster-merge.py 漏的兜底归 `applications`——粗糙。
+---
 
-**实施**：cluster-merge.py 加一个 `SOURCE_DEFAULT_TOPIC` 表，漏的条目按 `source_name` 兜底：
-```python
-SOURCE_DEFAULT_TOPIC = {
-    'arxiv-api': 'research-papers',
-    'huggingface-daily-papers': 'research-papers',
-    'a16z-news-content': 'applications',    # tier3 评论默认杂项
-    'state-of-ai': 'industry-moves',
-    'the-batch': 'model-releases',           # 周刊主要讲模型
-    # ...
-}
+## Sprint 1 · F1 · 60-Originals 全量离线化
+
+**目标**：在 vault 加一层 `60-Originals/`，每天把 **10-Daily + 30-Digests 清单上的所有条目**的原文全文抓下来，规整成中文模板，供 10/20/40/50 全链路双链引用。产出后 vault 变成**自包含**，不依赖外部 URL。
+
+### 设计要点
+
+- **触发时机**：Phase 3 Cluster 之后新增 **Phase 3.5 Originalize**，遍历 cluster.json 里所有 `kept=true` 条目 spawn `news-originalizer`
+- **命名**：`60-Originals/YYYY-MM-DD-HHMM-<slug>.md`，与 Zettel ID 同源（同 HHMM）便于精确配对
+- **翻译模型**：`haiku`（够用，不需要深度推理）
+- **翻译准则**：保留原文所有观点/细节/数据/专有名词；专有名词保留原词加括号中文解释
+- **图片策略**（三级降级）：
+  1. HTML `<img>` 有 URL → 下载到 `60-Originals/_assets/YYYY-MM-DD/<id>-<n>.<ext>`
+  2. 下载失败（403/超时/CDN 挡）→ 保留原图 URL + 用 `alt`/`figcaption`/周围文字生成一句中文描述
+  3. arXiv PDF 图无法抽 → 用 `> _图 Figure N：<描述>_` 占位 + 论文页锚点
+- **frontmatter 追踪图片状态**：`images_attempted` / `images_saved`
+- **失败不阻塞**：某条抓取失败仅标注 `fallback_notice`，不影响其他条目和后续 phase
+
+### 模板
+
+```yaml
+---
+id: YYYY-MM-DD-HHMM-<slug>
+type: source-original
+title: <中文标题>
+original_title: <原文标题>
+source_name: <sources.md 里的 name>
+source_url: <原文 URL>
+author: [<作者列表>]
+published_at: YYYY-MM-DD
+fetched_at: YYYY-MM-DDTHH:MM:SSZ
+language: zh|en|...
+translated: true|false
+translation_engine: haiku
+word_count: <int>
+images_attempted: <int>
+images_saved: <int>
+related_zettels: [[...]]
+related_topics: [[...]]
+related_daily: [[YYYY-MM-DD]]
+tags: [source-original, <language-*>]
+---
+
+# <中文标题>
+
+> 原文：[<原文标题>](<source_url>) · <source_name> · <published_at>
+> 抓取：<fetched_at> · 翻译：<engine> · <word_count> 字
+
+## <一级标题按原文结构>
+...
 ```
 
-**成本**：30 min（写表 + 测试）
-**收益**：cluster agent 偶尔漏映射时归类更准；errors 数组的 `agent_missing_urls` 不再代表"丢条目"而代表"按 source 默认归类了"
-**紧迫**：低（兜底已 work，只是更准）
+### 任务拆解
+
+| # | 任务 | 成本 | 输出 |
+|---|---|---|---|
+| **F1.1** | vault schema 更新：60 目录约定 + `_assets/` 图片规范 + 命名规则 + 模板 | 30 min | `SCHEMA.md` + `references/vault-schema.md` 双份改动 |
+| **F1.2** | `news-originalizer.md` subagent + `scripts/fetch-with-assets.py`（含图片下载） + `scripts/arxiv-fulltext.py`（HTML 版优先 + PDF 回退） | 150 min | 1 个 agent + 2 个脚本 |
+| **F1.3** | SKILL.md 加 Phase 3.5 编排（cluster 后 spawn originalizer 并发池） + cluster.json schema 加 `original_id` 字段 | 60 min | SKILL 编排改动 |
+| **F1.4** | 下游改造：news-writer 双链改 `[[60-Originals/<id>]]`；news-digester 可读 60 全文替代 cluster 摘要；MOC 加 60 层入口；3 个 `.base` 加 language/source_name 视图 | 90 min | 3 个 agent + MOC + `.base` |
+| **F1.5** | 冷启动脚本升级 `scripts/seen-urls-bootstrap.py`：扫 10-Daily + 60-Originals 反推 _seen-urls（**吞并老 A5**） | 45 min | 1 个脚本 |
+| **F1.6** | 全流程试跑 + 校准（挑一天回放，人工审 3-5 篇原文质量） | 60 min | 一次真跑 + Log 分析 |
+| **A4'** | cluster-merge.py 按 source 默认 topic 兜底表（**升级 P-中**，F1 后所有 kept 条目要绑 topic，兜底重要性↑） | 30 min | 脚本改动 |
+
+**F1 总投入**：~7.5 小时，可切成 3-4 个开发日。
 
 ---
 
-### A5 · _seen-urls 预填脚本固化 `scripts/seen-urls-bootstrap.py`
+## Sprint 2 · F1 后评估（~2h）
 
-**问题**：cold start（_seen-urls.json 不存在或损坏）时需要主会话手写 Python 扫历史 Daily 反推索引。本次 6-29 会话就手写过一次。
+F1 落地后 pipeline 输入/输出结构都变了，几个待定项需要重新画像再决策：
 
-**实施**：
-1. 新建 `scripts/seen-urls-bootstrap.py`：扫 `10-Daily/*.md` 提取 `[原文](url)` 链接 + 关联 `50-Zettel/*.md` 的 frontmatter `source_url`，构造完整 _seen-urls 节点。**默认不扫 target_date 当天**（避免循环）。
-2. SKILL.md Phase 0 加自检：
-   ```bash
-   if [ ! -f 00-Inbox/_seen-urls.json ]; then
-     python3 scripts/seen-urls-bootstrap.py --target-date=$TARGET_DATE --window-days=30
-   fi
-   ```
+### B1 · digester 重构评估
 
-**成本**：50 min（30 min 脚本 + 20 min 改 SKILL）
-**收益**：cold start 自动化，避免手写脚本（约 30 天一次）
-**紧迫**：低（30 天一次频率不高，且当前 _seen-urls 已健康）
+**背景**：老 A6 想诊断 digester 9 分钟性能。F1 后 digester 可以直接读 60-Originals 全文替代原来的 cluster 摘要，输入结构完全不同——**不是简单优化，是重构**。
 
----
+**动作**：
+1. F1 落地后跑一次，测新的 digester 时长 / token / tool_uses
+2. 若时长 > 5 min：考虑改造为"读 60-Originals 摘要区（前 500 字）+ zettel_worthy 条目 TL;DR"的精简输入
+3. 决定 system prompt 是否移除 LLM self-check（改机械校验脚本）
 
-### A6 · digester 9 分钟性能诊断
+**成本**：60 min 评估 + 可能 60 min 改造
 
-**问题**：digester 跑 530s / 59K tokens / 6 个 tool_uses，输出 13K 字符 markdown。每条 14 秒，超出单条 summary 合理时间。
+### A9' · writer 降级二次评估
 
-**诊断方向**：
-1. spawn digester 时 prompt 加 `请用最少思考链` 看是否减时
-2. agent system prompt 是否要求反复读 cluster.json 或 zettel？看 tool_uses=6 是什么操作
-3. 是否在循环 self-check（system prompt 6 项自检的 LLM 实现可能慢）
+**背景**：F1 后 writer 责任变小（不再嵌大量原文，改双链），复杂度下降。老 A9 因质量风险搁置。
 
-**可能优化**：
-- self-check 改成机械校验（脚本验证 url 去重 / wikilinks 不存在 / 等），不让 LLM 做
-- 类似 cluster 思路，digester 输出"章节大纲 + 关键洞察"精简 JSON，主会话拼装 markdown
+**动作**：F1 稳定 3 天后，试跑 `sonnet 4.5` 或 `haiku`，对比 Zettel 质量。
 
-**成本**：60 min（诊断 + 可能改造）
-**收益**：可能省 4-5 分钟/天，但风险高（可能没明显瓶颈）
-**紧迫**：低（性能可观察但非阻塞）
+**成本**：30 min 试跑 + 人工对比
 
 ---
 
-### A7 · a16z LC 评论压成"📌 边角条"渲染
+## Sprint 3 · F2 · Vault 前端站点
 
-**问题**：6-29 跑 a16z 3 条评论（low_confidence + zettel_worthy=false）全进 applications 桶平铺，与"7000 万用户 Revolut 银行 ML 部署"这种真案例混在一起。Daily 阅读体验被稀释。
+**目标**：本地 docker compose 起 nginx，把 vault 转成前端可访问的站点。GitHub 做内容管理，前端页面做展示。**私有化部署**在 Mac mini 本地，后续通过内网穿透暴露公网。
 
-**实施**：
-1. 改 `news-writer.md` system prompt 渲染规则：
-   - 当一个 topic 内 LC 条目 ≥ 1 时，topic 段内拆 "## 主要" + "## 📌 边角观察" 两个子段
-   - 边角条用更紧凑的渲染（标题 + 一句 rationale，无 frontmatter 表头）
-2. 改 filter-criteria.md §5 文档化新渲染约定
+### 需求（框架无关）
 
-**成本**：30 min 改 + 15 min 试跑
-**收益**：Daily 阅读节奏改善，applications 桶不再杂质
-**紧迫**：低（功能正常，UX 优化）
+**必备**：
+- **Markdown 解析**：CommonMark + GFM（表格、任务列表、脚注）
+- **Vault 双链解析**：Wikilink `[[filename]]` / `[[filename|alias]]` / `[[filename#heading]]` → 站内 HTML 链接
+- **反向链接**：每页底部展示"被谁引用"列表
+- **Frontmatter 感知**：title / published_at / tags / related_* 字段驱动路由和聚合
+- **主题化排版**：Typography 友好，代码块高亮，Callout 支持
+- **自适应布局**：桌面 + 平板 + 手机三档
+- **私有内容过滤**：排除 `.claude/` / `_archive/` / `99-Log/` / frontmatter `visibility: private` / tag `private`
+
+**加分**：
+- Pagefind 静态全文搜索（无需后端）
+- Backlinks 图谱（Cytoscape / D3）
+- RSS 输出（`/rss.xml`）
+- OG image 自动生成
+- 阅读时长估算
+- 深色模式
+
+### 路由设计
+
+```
+/                    → 首页（最新 Daily + 主题速览 + 站点地图）
+/daily/[date]        → 每日简报（10-Daily）
+/topics/[slug]       → 主题聚合（20-Topics）
+/digests/[date]      → 每日分享版（30-Digests）
+/deep-dives/[slug]   → 深度专题（40-Deep-Dives）
+/zettel/[id]         → 原子卡（50-Zettel）
+/originals/[id]      → 原文全文（60-Originals，F1 落地后启用）
+/tags/[tag]          → 标签聚合
+/sources/[name]      → 按信息源聚合（读 sources.md）
+/search              → Pagefind
+/rss.xml             → RSS 输出
+```
+
+### 框架候选（实施时详细比对）
+
+| 候选 | 亮点 | 待验证 |
+|---|---|---|
+| Quartz 4 | 专为 Obsidian vault 设计，wikilink/backlinks/graph 全内置 | 主题定制灵活度 |
+| Astro | 通用性强、生态丰富、SSG 首选 | wikilink 需自写 remark 插件 |
+| Hugo | 极致构建速度 | Go template 学习曲线 |
+| Zola | 单二进制部署简单 | 生态较小 |
+| Docusaurus | 文档站成熟 | 偏 API 文档、内容站定制 |
+
+**实施时**：先 POC 三个候选各半天，对比 wikilink 解析 + 部署产物 + 主题空间，再定。
+
+### Docker Compose 编排
+
+```yaml
+# docker-compose.yml
+services:
+  builder:
+    build: ./web             # Dockerfile: node + <chosen-framework>
+    volumes:
+      - .:/vault:ro           # vault 只读挂载
+      - web-static:/output
+    command: ["npm", "run", "build"]
+    profiles: ["build"]       # 默认不启，靠 skill Phase 7 触发
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "40801:80"            # 本机 localhost:40801 / 内网 192.168.50.253:40801
+    volumes:
+      - web-static:/usr/share/nginx/html:ro
+      - ./web/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped
+
+volumes:
+  web-static:
+```
+
+**访问方式**：
+- 开发/自用：`http://localhost:40801` / `http://192.168.50.253:40801`
+- 公网：后续接内网穿透网关（frp / cloudflare tunnel / tailscale funnel）
+
+### 与 skill 集成（新增 Phase 7 · Publish）
+
+```
+Phase 5 Digest → Phase 6 Log → Phase 7 Publish（新增）
+                                    ↓
+                     docker compose --profile build run --rm builder
+                                    ↓
+                          curl -sf http://localhost:40801/ >/dev/null
+```
+
+Phase 7 只是两行 bash：build + smoke test。skill 跑完自动更新站点，端到端闭环。
+
+### 任务拆解
+
+| # | 任务 | 成本 | 输出 |
+|---|---|---|---|
+| **F2.0** | 框架 POC 3 选 1（Quartz / Astro / 其他），产出比对报告 + 决策 | 1.5 day | 决策文档 + `web/` 骨架 |
+| **F2.1** | Docker Compose 骨架 + nginx 配置 + vault 只读挂载 | 4 h | `docker-compose.yml` + `web/nginx.conf` |
+| **F2.2** | 内容管道：vault 遍历 + 私有内容过滤 + frontmatter 解析 + 路由生成 | 8 h | 内容 ingest 模块 |
+| **F2.3** | Wikilink 解析器 + backlinks 反查 + 未解析链接标注（含**吞并老 A7** LC 边角条组件） | 6 h | wikilink 插件 + 边角条组件 |
+| **F2.4** | 布局 + 主题美化 + 自适应 + Typography + 代码高亮 + Callout | 8 h | 完整视觉层 |
+| **F2.5** | Pagefind 搜索 + tags/sources 聚合页 + RSS + 深色模式 | 4 h | 二级功能 |
+| **F2.6** | SKILL.md 加 Phase 7 Publish 集成 + Log 模板扩展（**吞并老 A8** 的 Phase 7 段） | 2 h | Phase 7 + 模板 |
+| **F2.7** | 内网穿透接入（frp / cloudflare tunnel 选一）+ 端到端验证 | 3 h | 公网可访问 |
+
+**F2 总投入**：~4-5 天工作时间（框架 POC 独占 1.5 天）。
 
 ---
 
-### A8 · Phase 6 Log 模板化 `scripts/build-log.py`
+## 持续 · 边角优化
 
-**问题**：当前 SKILL.md Phase 6 规定"主会话内联"写 99-Log/${TARGET_DATE}-run.md。每次跑 LLM 手写 100+ 行 markdown——浪费 token + 易出错（如本次 A2 误判 meta-ai-blog 状态就因人工读 sources.md 漏看）。
+### A8' · Phase 全流程 Log 模板化（`scripts/build-log.py`）
 
-**实施**：
-1. 新建 `scripts/build-log.py`：
-   - 输入：filtered.json + cluster.json + writer-output.json + digester-output.json
-   - 自动从文件读 stats + Phase timing + source 详情（包含从 sources.md 读 reliability）
-   - 渲染 markdown 模板
-2. SKILL.md Phase 6 改：主会话调脚本，不再手写
+**背景**：老 A8 想模板化 Phase 6 Log。F1 加 Phase 3.5，F2 加 Phase 7，Log 模板要覆盖全部 8 phase（0/1/2/3/3.5/4/5/6/7）。
 
-**成本**：60-90 min（脚本 + 模板 + SKILL 改）
-**收益**：每天省 5-10 min 主会话手写；格式一致；source 状态从配置自动读不靠记忆
-**紧迫**：中（长期收益高，但单次投入大）
+**动作**：F2.6 完成后统一实现，一次覆盖全部 phase。不再单独立项，作为 F2.6 的收尾任务。
 
 ---
 
-### A9 · writer agent 降级试 sonnet 4.5 / haiku
+## 合并说明（老 A4-A9 归宿）
 
-**问题**：writer 跑 11m32s / 96K tokens。但 writer 是创作类工作（Daily 段落 + Zettel 正文），降级风险高。
-
-**实施**：
-1. 先备份当前 writer 输出（6-29 落盘的 9 张 Zettel 作为基线）
-2. 改 `news-writer.md` `model: sonnet → sonnet 4.5`（如果有较小 sonnet 版本）或 haiku 试跑一次同样的 cluster.json
-3. 人工对比 Zettel 内容质量 + Daily 渲染美感
-
-**成本**：1 min 改 + 30 min 试跑 + 人工对比
-**收益**：可能省 5 分钟/天，但内容质量可能下降
-**紧迫**：低（更激进的优化，先看 A1 haiku 实测再判断）
-
----
-
-### A10 · ~~filter-inline.py 写 pytest 单元测试~~
-
-**决定**：不做。个人 vault 项目 overkill。`filter-inline.py` 已 dry-run + 真数据验证两次，规则改动频率低。回归测试靠每次跑后人工 review stats 即可。
+| 老编号 | 新归宿 | 变化 |
+|---|---|---|
+| A4 | **A4'**（Sprint 1 收尾） | P-低 → P-中，兜底表在 F1 全量抓取下更关键 |
+| A5 | **F1.5** 吞并 | 冷启动脚本要同时扫 10-Daily + 60-Originals，一次写完 |
+| A6 | **B1**（Sprint 2） | 从"性能诊断"改造为"输入结构变化后的重构评估" |
+| A7 | **F2.3** 吞并 | 从 markdown 层拆段改到前端组件层区分，效果更好 |
+| A8 | **A8'**（F2.6 收尾） | 覆盖全部 8 phase，与 F2 集成一次做完 |
+| A9 | **A9'**（Sprint 2） | 保留 P-最低，F1 后 writer 责任变小，降级风险下降 |
+| ~~A10~~ | 保持不做 | 个人 vault 项目 overkill |
 
 ---
 
 ## 决策原则
 
-- **优先做**：成本 ≤ 30 min + 收益 ≥ 3 min/天 + 风险低
-- **延后做**：成本 > 60 min 或风险高（如降级 writer model）
-- **不做**：成本 > 90 min 且收益不明（如 A10）
+- **优先做**：F1 / F2 主线任务
+- **合并做**：老 A 系列凡与新方向有交叉的，一次做完（省一次改）
+- **延后做**：需要 F1 或 F2 落地后才能画像的评估类（B1 / A9'）
+- **不做**：与主线正交、单次 ROI 低于 5 min/天的（部分 A10 类）
 
-## 与 v2.3 commit 链的对照
+---
+
+## 与 commit 链的对照
 
 - v2.1 `9e050c2`：IPC 文件契约 + cluster is_new 严格判定
 - v2.2 `60ddde7`：跨日去重 + a16z 脚本 fetcher
 - v2.3 `fb92607`：filter/cluster 解决 32k 截断（架构）
 - v2.3 `9b2da71`：6-29 首次成功跑通（产物）
 - v2.3 `beeffcd`：A1+A3 cluster haiku + schema 加严
+- v2.4 `08cffbb`：fetcher IPC 改 Write 中转
+- v2.4 `5efad3b`：7-01 自动跑 20 Zettel/9 Topic/digest（MVP 达成）
+- F1.x：`feat(ai-news): F1.<n> ...` 命名 commit
+- F2.x：`feat(web): F2.<n> ...` 命名 commit
+- B1 / A4' / A8' / A9'：`refactor(ai-news): <编号> ...` 命名 commit
 
-A4-A9 一旦实施，会以 `refactor(ai-news): A<N> ...` 命名 commit，便于在 git log 中按编号回查。
+一旦实施，编号命名让 git log 按前缀可回查。
