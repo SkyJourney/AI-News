@@ -72,6 +72,7 @@
   --glass-blur-panel: 12px;
   --glass-bg-card: rgba(255, 255, 255, 0.7);
   --glass-bg-panel: rgba(250, 248, 255, 0.8);
+  --glass-bg-header: rgba(250, 248, 255, 0.94);
   --glass-border-card: rgba(218, 226, 253, 0.5);
   --glass-border-panel: rgba(255, 255, 255, 0.4);
 
@@ -136,6 +137,7 @@
   /* 玻璃拟态 3 层（白底玻璃 → 暗底玻璃） */
   --glass-bg-card: rgba(21, 26, 44, 0.7);
   --glass-bg-panel: rgba(15, 19, 32, 0.8);
+  --glass-bg-header: rgba(15, 19, 32, 0.94);
   --glass-border-card: rgba(42, 48, 80, 0.5);
   --glass-border-panel: rgba(255, 255, 255, 0.08);
 

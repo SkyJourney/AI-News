@@ -1,7 +1,8 @@
 ---
 // AInews · 顶栏
 // 布局：Logo 左 · 搜索按钮 + 主题切换 右
-// 视觉：透明背景，滚动时无边框（sticky 不 solid）
+// 视觉：薄玻璃遮罩（--glass-bg-header + blur）。专属 token（非 --glass-bg-panel），
+// 透明度比浮层玻璃更低——顶栏常驻滚动区，需要更强遮罩盖住内容，避免移动端窄视口下"透视"叠加
 import Logo from './Logo.astro'
 import GlassSearchBar from './GlassSearchBar.tsx'
 // Material Symbols Outlined 自托管（替代 Google Fonts CDN，见 F2.8）
@@ -28,9 +29,10 @@ import 'material-symbols/outlined.css'
     top: 0;
     z-index: 50;
     padding: 0.75rem 0;
-    background: transparent;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--glass-bg-header);
+    backdrop-filter: blur(var(--glass-blur-panel));
+    -webkit-backdrop-filter: blur(var(--glass-blur-panel));
+    border-bottom: 1px solid var(--glass-border-panel);
   }
 
   .lumina-header-inner {
