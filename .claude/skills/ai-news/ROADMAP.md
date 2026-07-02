@@ -4,7 +4,7 @@
 > 老 v2.3 遗留优化项（A4-A9）按新方向做了合并/升级/改造，不再独立编号——见「合并说明」小节。
 > 编号沿用 A/F/B 前缀，便于回查 [[2026-06-29-run]] / [[2026-07-01-run]] log 与 commit 历史。
 
-最后更新：2026-07-02 · **F2 重启：Quartz 弃用 · 迁 Astro 5 自主前端完成** + 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署
+最后更新：2026-07-02 · **F2 重启：Quartz 弃用 · 迁 Astro 5 自主前端完成** + 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署 + F2.8 生产化 6/7 项
 
 ---
 
@@ -19,6 +19,11 @@
 - **F2 重启：迁 Astro 5**（2026-07-02，commit `e992215`）：F2.4 Lumina 内容层接管走 Quartz override 路径实证失败（架构性 3 层 hack + 大小写目录重复 + trailing-slash 404 + 视觉严重偏离设计稿），彻底放弃 Quartz 框架，改 Astro 5 独立自主前端。M0-M6 全通：83 页 build 805ms · 11/11 route 200 · LAN `192.168.50.253:8801` 部署 · vault 5 collection + zod schema + backlinks 反向 map + Lumina 49 CSS 变量继承。详见 [`.claude/skills/ai-news/notes/F2-astro-completion-report.md`](../../.claude/skills/ai-news/notes/F2-astro-completion-report.md)。F2.4 决策上下文归档到 [`.claude/skills/ai-news/notes/_archive/`](../../.claude/skills/ai-news/notes/_archive/)。
 - **F2 内容质量优化补丁**（2026-07-02，commit `83c20b2`）：originals 图片资产接入 build（`scripts/sync-assets.mjs` 物理复制 + `vault-loader.ts` 路径重写 `_assets/` → `/originals-assets/`，修复此前图片全部 404）；zettel 瀑布流 `<a>` 嵌套 `<a>` 布局撕裂修复；Zettel frontmatter 加 `title`/`title_original` 中文标题字段并回填 59 篇历史 Zettel；Topic 日期聚合改倒序并重排 11 篇历史文件；**D17** conda 环境固定（独立 env `ai-news`，根治 python3 版本漂移）+ **D18** originals 抓取域名级 UA override。详见 [[decisions#D17]] / [[decisions#D18]]。
 - **F2.7 本地 Docker 部署**（2026-07-02，commit `412159b`）：内网穿透明确划出范围，收窄为纯 LAN 本地部署。新增 `web/frontend/Dockerfile`（node:22-alpine builder）+ `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻服务）+ `web/nginx.conf`（pretty URL try_files）。SKILL.md 新增 **Phase 8 · Publish**（Phase 7 Git Sync 之后，独立于 git push 结果）。本地验证：137 页 build 通过，`localhost:8801` 与 LAN `192.168.50.253:8801` 全路由 200（含图片资产）。
+- **F2.8 生产化 6/7 项**（2026-07-02，3 个独立 commit，逐批 build + Docker + Playwright 实测）：
+  - 批次1 `a0d5b71`：wikilink 断链检测（`remarkWikiLink` 改异步插件 await 全库缓存判定，命中 tokens.css 里预埋已久但从未接上的 `a.wikilink.broken` 样式）+ hover 预览（内联 `data-preview-title/excerpt`，popover 用安全 DOM 方法拼节点）。踩坑：同步存取器读到了 astro.config.mjs 与 content.config.ts 两条 import 链各自独立的模块实例，改异步 `await getVaultCache()` 才规避
+  - 批次2 `3d38682`：深色模式（tokens.css `[data-theme='dark']` 全套覆盖 + FOUC 防护 inline script + document 级事件委托的切换按钮，适配 ClientRouter 每次导航重渲染 Header）+ Article Progress（originals 详情页右栏滚动进度条 Preact island）+ 字体 self-host（`@fontsource/geist-sans` + `@fontsource/inter` + `@fontsource/ibm-plex-mono` + `material-symbols` 取代 Google Fonts CDN）
+  - 批次3 `6bc9411`：Pagefind 全文搜索（`GlassSearchBar.tsx` 从 alert 桩改真实浮层，`createPortal` 挂 `document.body` 绕开 Header `backdrop-filter` 的 fixed 定位包含块问题；excerpt 高亮不用 `dangerouslySetInnerHTML`，改正则拆分 `<mark>` + 手动解码实体后走 Preact 安全文本节点）
+  - **Bases 视图迁移降为 v2 之后再看**：4 个 `.base` 文件（by-source/by-topic/latest-daily/originals）本质是面向运营的内部分组视图，非面向读者的站点功能，暂不占 F2.8 工时
 
 ---
 
@@ -192,9 +197,9 @@ Phase 8 独立于 Phase 7（不依赖 git push 是否成功，直接读本地工
 | ~~F2.1-F2.4~~ | Quartz 5 vendor + Docker 部署 + wikilink + Lumina 视觉 | — | **全撤销** |
 | **F2 重启 M0-M6** | ✅ Astro 5 独立自主前端 + Preact islands + Tailwind 4 + vaultLoader + 5 collection + 5 列表页 + 5 详情页 + / landing + LuminaBacklinks 分栏 + Lumina 49 tokens | ~40 min（含探索） | `web/frontend/` + 83 页 build + 报告 `notes/F2-astro-completion-report.md` |
 | **F2.7** | ✅ Docker Compose + nginx 本地部署（LAN-only，内网穿透已划出范围）+ SKILL.md Phase 8 Publish 编排 | ~30 min | `web/docker-compose.yml` + `web/nginx.conf` + `web/frontend/Dockerfile`，137 页 build 通过 · 本地/LAN `8801` 全路由 200 |
-| **F2.8** | 生产化：@fontsource self-host + pagefind 搜索 + 深色模式 + Article Progress + Wikilink hover preview + Bases 视图迁移 + Wikilink broken link 检测 | 4 h | v2 二级功能 |
+| **F2.8** | ✅ 生产化 6/7 项：Wikilink broken link 检测 + hover preview（批次1 `a0d5b71`）· 深色模式 + Article Progress + @fontsource self-host（批次2 `3d38682`）· Pagefind 搜索（批次3 `6bc9411`）。~~Bases 视图迁移~~ 降为 v2 之后再看（面向运营的内部视图，非读者站点功能，见下） | ~2.5 h（3 批次） | 3 个独立 commit，逐批 build + Docker + Playwright 实测通过 |
 
-**F2 已完成**：~40 min（重启后）+ 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署（LAN-only，commit `412159b`）· 剩 F2.8 待做。
+**F2 已完成**：~40 min（重启后）+ 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署（LAN-only，commit `412159b`）+ F2.8 生产化 6/7 项（3 批次）· Sprint 3 主线基本收尾，剩 Bases 视图迁移待评估是否值得做。
 
 ---
 

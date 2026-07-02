@@ -3,7 +3,7 @@ name: project_progress
 description: AInews 各阶段进度、当前状态、待办——避免重复已完成工作；后续方向以 ROADMAP.md 为权威基准
 type: project
 last_updated: 2026-07-02
-commit: 412159b
+commit: 6bc9411
 ---
 
 # AInews 项目进度
@@ -14,14 +14,15 @@ commit: 412159b
 ## 当前状态（2026-07-02）
 
 - **管道版本**：v2.4（IPC Write 中转架构稳定）
-- **commit 数**：33，Base = `6d5170f`
+- **commit 数**：56，Base = `6bc9411`
 - **MVP 状态**：✅ **已达成**——2026-06-27 → 2026-07-02 连续 6 天跑通
 - **调度状态**：✅ **已自动化**——Mac mini 定时任务 + Claude 非交互会话跑通
 - **vault 状态**：14 alive 源 + 1 degraded；6 天 Daily/Zettel/Topic/Digest 已写入；Log 完整
 - **Sprint 1 全部完成**：F1.1-F1.6 + A4' + F1 侧 news-writer 情形 E 补齐（复盘/未升级 Zettel 也挂原文双链，见 [[decisions#D16]] 副产品）
 - **60-Originals 累计**：60+ 篇 · 图片资产 660+
 - **Sprint 3 · F2 重启完成**（2026-07-02，commits `e992215` / `6bea330` / `6d5170f`）：**弃用 Quartz 5 · 迁 Astro 5 自主前端**（见 [[decisions#D16]]）——Quartz vendor 200+ 文件全删，`web/frontend/` 独立 Astro 5 项目上线，83 页 build 805ms，11/11 route 200，LAN `192.168.50.253:8801` 部署。F2.4 Lumina 视觉 tokens（49 CSS 变量 + 8 utility class + shell 组件）全部继承。完成报告 `.claude/skills/ai-news/notes/F2-astro-completion-report.md`；F2.4 P4 决策上下文归档 `.claude/skills/ai-news/notes/_archive/`
-- **下一步（v2）**：F2.7 Docker Compose + nginx + 内网穿透；F2.8 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · `60-Originals/_assets/` 图片 pipeline）
+- **F2.7 + F2.8 完成**（2026-07-02，commits `412159b` / `a0d5b71` / `3d38682` / `6bc9411`）：本地 Docker 部署（LAN-only）+ SKILL.md Phase 8 Publish；生产化 6/7 项（wikilink 断链检测 + hover 预览 · 深色模式 · Article Progress · 字体 self-host · Pagefind 全文搜索）逐批 build + Docker + Playwright 实测通过
+- **下一步（v2）**：Bases 视图迁移评估是否值得做（4 个 `.base` 文件本质是运营内部视图，非读者站点功能，暂缓）
 
 ## 已落地阶段
 
@@ -81,7 +82,7 @@ commit: 412159b
 - **7-01 跑次**：20 Zettel / 9 Topic / digest（`5efad3b`）
 - **ROADMAP 重写**（`d421e60`）：结束"MVP 阶段"，进入 **F1/F2 双主线**——见下节
 
-### Stage 11 — F2 前端框架决策反转 · Quartz → Astro + 内容质量优化补丁（commit `e992215` → `83c20b2`）
+### Stage 11 — F2 前端框架决策反转 · Quartz → Astro + 内容质量优化补丁 + F2.7/F2.8（commit `e992215` → `6bc9411`）
 - **F2.0 → F2.4 归档**：F2.0 Quartz 5 POC 决策（见 [[decisions#D15]]）在 F2.4 P4 深度实证阶段被推翻——Quartz 5 架构性 3 层硬约束（renderPage 6-slot 硬编码 + dispatcher pageType.body 硬编码 + config-loader `??` 兜底）导致 override 路径 4500 行 Lumina 组件全废、build 产 216 HTML 大小写重复、trailing-slash 全 404
 - **D16 F2 重启 Astro 5**（见 [[decisions#D16]]）：`web/frontend/` 独立项目，Preact islands + Tailwind 4 + 自建 remark-wiki-link + Content Collections + zod schema + backlinks 反向 map
 - **Milestone 全通**（40 min 完成）：M0 干净回滚 → M1 项目骨架 → M2 vaultLoader → M3 Design tokens + Shell → M4 5 列表页 → M5 5 详情页 + / landing → M6 全站验证
@@ -93,6 +94,7 @@ commit: 412159b
 - **F2 Astro 完成报告**：`.claude/skills/ai-news/notes/F2-astro-completion-report.md`
 - **F2 内容质量优化补丁**（commit `83c20b2`）：originals 图片资产接入 build 修复（`scripts/sync-assets.mjs`）· zettel 瀑布流嵌套 `<a>` 布局撕裂修复 · Zettel/Topic 历史内容批量回填（中文标题 59 篇 + 日期倒序重排 11 篇）· D17 conda 环境固定 · D18 域名级 UA override，详见 [[decisions#D17]] / [[decisions#D18]]
 - **F2.7 本地 Docker 部署**（commit `412159b`）：内网穿透明确划出范围，收窄为纯 LAN 部署。新增 `web/frontend/Dockerfile` + `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻）+ `web/nginx.conf`；SKILL.md 新增 **Phase 8 · Publish**（独立于既有 Phase 7 Git Sync，不依赖 push 结果）。本地验证 137 页 build 通过，`localhost:8801` / LAN `192.168.50.253:8801` 全路由 200
+- **F2.8 生产化 6/7 项**（3 个独立 commit，逐批 build + Docker + Playwright 实测）：批次1 `a0d5b71` wikilink 断链检测（异步 `await getVaultCache()` 规避 astro.config.mjs 与 content.config.ts 两条 import 链各自独立模块实例的坑）+ hover 预览；批次2 `3d38682` 深色模式（`[data-theme='dark']` 全套 token + FOUC 防护 + document 级事件委托切换按钮）+ Article Progress + 字体 self-host（`@fontsource/*` + `material-symbols`）；批次3 `6bc9411` Pagefind 全文搜索（`createPortal` 挂 body 绕开 Header backdrop-filter 的 fixed 包含块问题，excerpt 高亮不用 `dangerouslySetInnerHTML` 改安全文本节点渲染）。Bases 视图迁移降为 v2 之后再评估
 
 ---
 
@@ -111,11 +113,11 @@ commit: 412159b
 - B1：digester 输入结构变化后重构评估
 - A9'：writer 降级二判（F1 后 writer 责任变小）
 
-### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 完成核心 + 内容质量补丁 + 本地 Docker 部署）
+### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 主线基本收尾）
 - **框架 = Astro 5**（2026-07-02 D16 反转 D15，见 [[decisions#D16]]）
-- **已完成**（M0-M6 + 内容质量优化补丁 `83c20b2` + F2.7 Docker 部署）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承 · 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · originals 图片资产 pipeline（`scripts/sync-assets.mjs`）· conda 环境固定（D17）· 域名级 UA override（D18）· **F2.7** `web/docker-compose.yml` + `web/nginx.conf` + `web/frontend/Dockerfile`（LAN-only，内网穿透已划出范围）+ SKILL.md Phase 8 Publish · 137 页 build 通过 · 本地/LAN `8801` 全路由 200
+- **已完成**（M0-M6 + 内容质量优化补丁 `83c20b2` + F2.7 Docker 部署 + F2.8 生产化 6/7 项）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承（含深色模式覆盖）· 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · originals 图片资产 pipeline · conda 环境固定（D17）· 域名级 UA override（D18）· **F2.7** Docker Compose + nginx（LAN-only）+ SKILL.md Phase 8 Publish · **F2.8** wikilink 断链检测 + hover 预览 · 深色模式 · Article Progress · 字体 self-host · Pagefind 全文搜索 · 137 页 build 通过 · 本地/LAN `8801` 全路由 200
 - **待做**：
-  - F2.8 · 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · Wikilink broken link 检测）
+  - Bases 视图迁移（4 个 `.base` 文件，运营内部视图性质，评估是否值得做）
 
 ### 持续 · 边角优化
 - A8'（全流程 Log 模板化，与 F2.6 合并）
