@@ -3,7 +3,7 @@ name: project_progress
 description: AInews 各阶段进度、当前状态、待办——避免重复已完成工作；后续方向以 ROADMAP.md 为权威基准
 type: project
 last_updated: 2026-07-02
-commit: 6bc9411
+commit: 32ac314
 ---
 
 # AInews 项目进度
@@ -14,7 +14,7 @@ commit: 6bc9411
 ## 当前状态（2026-07-02）
 
 - **管道版本**：v2.4（IPC Write 中转架构稳定）
-- **commit 数**：56，Base = `6bc9411`
+- **commit 数**：59，Base = `32ac314`
 - **MVP 状态**：✅ **已达成**——2026-06-27 → 2026-07-02 连续 6 天跑通
 - **调度状态**：✅ **已自动化**——Mac mini 定时任务 + Claude 非交互会话跑通
 - **vault 状态**：14 alive 源 + 1 degraded；6 天 Daily/Zettel/Topic/Digest 已写入；Log 完整
@@ -22,7 +22,7 @@ commit: 6bc9411
 - **60-Originals 累计**：60+ 篇 · 图片资产 660+
 - **Sprint 3 · F2 重启完成**（2026-07-02，commits `e992215` / `6bea330` / `6d5170f`）：**弃用 Quartz 5 · 迁 Astro 5 自主前端**（见 [[decisions#D16]]）——Quartz vendor 200+ 文件全删，`web/frontend/` 独立 Astro 5 项目上线，83 页 build 805ms，11/11 route 200，LAN `192.168.50.253:8801` 部署。F2.4 Lumina 视觉 tokens（49 CSS 变量 + 8 utility class + shell 组件）全部继承。完成报告 `.claude/skills/ai-news/notes/F2-astro-completion-report.md`；F2.4 P4 决策上下文归档 `.claude/skills/ai-news/notes/_archive/`
 - **F2.7 + F2.8 完成**（2026-07-02，commits `412159b` / `a0d5b71` / `3d38682` / `6bc9411`）：本地部署（LAN-only）+ SKILL.md Phase 8 Publish；生产化 6/7 项（wikilink 断链检测 + hover 预览 · 深色模式 · Article Progress · 字体 self-host · Pagefind 全文搜索）逐批 build + Docker + Playwright 实测通过
-- **F2.7 部署编排重构**（2026-07-02，commit tbd）：build 阶段判断 Docker 化是过度设计，改本地 `npm run build` + `rsync -a --delete` 到 `/Volumes/Docker/data/ainews/`；compose 文件挪出仓库到 `/Volumes/Docker/compose/ainews/`（与本机其他项目同构），只剩 nginx 一个常驻服务；`web/frontend/Dockerfile` + 仓库内 `docker-compose.yml`/`nginx.conf` 已删除
+- **F2.7 部署编排重构**（2026-07-02，commit `32ac314`）：build 阶段判断 Docker 化是过度设计，改本地 `npm run build` + `rsync -a --delete` 到 `/Volumes/Docker/data/ainews/`；compose 文件挪出仓库到 `/Volumes/Docker/compose/ainews/`（与本机其他项目同构），只剩 nginx 一个常驻服务；`web/frontend/Dockerfile` + 仓库内 `docker-compose.yml`/`nginx.conf` 已删除
 - **下一步（v2）**：Bases 视图迁移评估是否值得做（4 个 `.base` 文件本质是运营内部视图，非读者站点功能，暂缓）
 
 ## 已落地阶段
@@ -95,7 +95,7 @@ commit: 6bc9411
 - **F2 Astro 完成报告**：`.claude/skills/ai-news/notes/F2-astro-completion-report.md`
 - **F2 内容质量优化补丁**（commit `83c20b2`）：originals 图片资产接入 build 修复（`scripts/sync-assets.mjs`）· zettel 瀑布流嵌套 `<a>` 布局撕裂修复 · Zettel/Topic 历史内容批量回填（中文标题 59 篇 + 日期倒序重排 11 篇）· D17 conda 环境固定 · D18 域名级 UA override，详见 [[decisions#D17]] / [[decisions#D18]]
 - **F2.7 本地 Docker 部署**（commit `412159b`）：内网穿透明确划出范围，收窄为纯 LAN 部署。首版新增 `web/frontend/Dockerfile` + `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻）+ `web/nginx.conf`；SKILL.md 新增 **Phase 8 · Publish**（独立于既有 Phase 7 Git Sync，不依赖 push 结果）。本地验证 137 页 build 通过，`localhost:8801` / LAN `192.168.50.253:8801` 全路由 200
-- **F2.7 部署编排重构**（commit tbd）：Docker builder 判断为过度设计（build 阶段容器化除环境隔离外无额外收益，却带来镜像 build/run 复杂度），撤销 `web/frontend/Dockerfile` + 仓库内 compose/nginx 配置。改为本地 Node 直接 `npm run build`（本机已有 Node 环境，见 `~/.claude/ENVIRONMENTS.md`）+ `rsync -a --delete` 同步进 `/Volumes/Docker/data/ainews/`；compose 编排搬到 `/Volumes/Docker/compose/ainews/`（与本机 `panwatch`/`fundval-live` 等项目同构的目录约定），只剩 `nginx:alpine` 一个常驻服务，只读挂载该数据目录。更新变成一次 rsync，nginx 容器不再需要因内容更新而重建
+- **F2.7 部署编排重构**（commit `32ac314`）：Docker builder 判断为过度设计（build 阶段容器化除环境隔离外无额外收益，却带来镜像 build/run 复杂度），撤销 `web/frontend/Dockerfile` + 仓库内 compose/nginx 配置。改为本地 Node 直接 `npm run build`（本机已有 Node 环境，见 `~/.claude/ENVIRONMENTS.md`）+ `rsync -a --delete` 同步进 `/Volumes/Docker/data/ainews/`；compose 编排搬到 `/Volumes/Docker/compose/ainews/`（与本机 `panwatch`/`fundval-live` 等项目同构的目录约定），只剩 `nginx:alpine` 一个常驻服务，只读挂载该数据目录。更新变成一次 rsync，nginx 容器不再需要因内容更新而重建
 - **F2.8 生产化 6/7 项**（3 个独立 commit，逐批 build + Docker + Playwright 实测）：批次1 `a0d5b71` wikilink 断链检测（异步 `await getVaultCache()` 规避 astro.config.mjs 与 content.config.ts 两条 import 链各自独立模块实例的坑）+ hover 预览；批次2 `3d38682` 深色模式（`[data-theme='dark']` 全套 token + FOUC 防护 + document 级事件委托切换按钮）+ Article Progress + 字体 self-host（`@fontsource/*` + `material-symbols`）；批次3 `6bc9411` Pagefind 全文搜索（`createPortal` 挂 body 绕开 Header backdrop-filter 的 fixed 包含块问题，excerpt 高亮不用 `dangerouslySetInnerHTML` 改安全文本节点渲染）。Bases 视图迁移降为 v2 之后再评估
 
 ---
