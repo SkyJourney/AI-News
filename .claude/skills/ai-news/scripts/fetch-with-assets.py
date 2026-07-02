@@ -38,6 +38,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import Optional
 
 # ============================================================
 # 常量
@@ -282,7 +283,7 @@ def guess_ext(url: str, content_type):
     return ".bin"
 
 
-def download_image(url: str, target_stem: Path, max_bytes: int, ua: str, referer: str | None = None):
+def download_image(url: str, target_stem: Path, max_bytes: int, ua: str, referer: Optional[str] = None):
     """返回 (成功?, 详情 dict)。修 B：加 Referer 头绕过 CDN 防盗链（qbitai 类）"""
     try:
         headers = {"User-Agent": ua, "Accept": "image/*,*/*;q=0.8"}

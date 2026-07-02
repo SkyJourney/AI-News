@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:35:00
-updated: 2026-07-01 09:31:00
-entry_total: 29
+updated: 2026-07-02 09:41:00
+entry_total: 46
 ---
 
 # 研究论文 (research-papers)
@@ -102,4 +102,58 @@ entry_total: 29
   源：`huggingface-daily-papers`
 - **State of AI Report 2025** ([[202606291405-state-of-ai-report-2025]])（复盘）
   🔄 [复盘] 年度 AI 状态报告持续受关注，今日再次浮现。
+  源：`state-of-ai` · 首记于 [[2026-06-29]]
+
+## 2026-07-02
+
+- **Orca: The World is in Your Mind** ([[202607020935-orca-world-foundation-model]])
+  北京人工智能研究院提出统一世界基础模型，以 Next-State-Prediction 取代割裂的 next-token/frame/action 预测。
+  源：`huggingface-daily-papers`（176 赞）
+- **DOPD: Dual On-policy Distillation**（未升级 Zettel）
+  双向在线蒸馏方法，解决"特权错觉"导致的能力差距误判问题。
+  源：`huggingface-daily-papers`（75 赞）
+- **BlockPilot: Instance-Adaptive Policy Learning for Diffusion-based Speculative Decoding**（未升级 Zettel）
+  自适应 block 尺寸策略提升扩散式推测解码效率，替代固定推理 block 假设。
+  源：`huggingface-daily-papers`（67 赞）
+- **Scenes as Objects, Not Primitives**（未升级 Zettel）
+  实例级 3D token 分组框架，从无姿态多视角图像直接输出对象中心结构化表示。
+  源：`huggingface-daily-papers`（34 赞）
+- **GEAR: Guided End-to-End AutoRegression for Image Synthesis**（未升级 Zettel）
+  联合训练 VQ tokenizer 与自回归生成器，用表示对齐引导解决两阶段解耦缺陷。
+  源：`huggingface-daily-papers`（28 赞）
+- **Evolution Fine-Tuning**（未升级 Zettel）
+  371 个优化任务上验证 LLM 进化式搜索经验的跨任务迁移能力。
+  源：`huggingface-daily-papers`（23 赞）
+- **Multi-Block Diffusion Language Models**（未升级 Zettel）
+  从 Single-Block 扩展到 Multi-Block 扩散语言模型，解决 teacher forcing 下的块间并行问题。
+  源：`huggingface-daily-papers`（22 赞）
+- **MemLearner: Learning to Query Context Memory for Video World Models**（原文抓取超时，未升级 Zettel）
+  视频世界模型记忆检索方法，应对场景遮挡与动态物体下的规则式记忆检索失效问题。
+  源：[原文](https://huggingface.co/papers/2606.31734) — `huggingface-daily-papers`（18 赞）
+- **PhotoQuilt: Training-Free Arbitrary-Resolution Photomosaics**（未升级 Zettel）
+  无训练框架实现任意分辨率照片马赛克生成，解决扩散模型难以同时满足全局与局部细节的问题。
+  源：`huggingface-daily-papers`（12 赞）
+- **Little Brains, Big Feats: Exploring Compact Language Models**（未升级 Zettel）
+  紧凑语言模型在 RAG 生成阶段的性能评估研究。
+  源：`huggingface-daily-papers`（10 赞）
+- **Are We Measuring Strategy or Phrasing?**（未升级 Zettel）
+  提出"策略级多样性"概念，揭示现有 LLM 数学推理多样性指标多为表面变化而非真实策略差异。
+  源：`huggingface-daily-papers`（10 赞）
+- **Play2Perfect: Dexterous Play Pretraining for Precise Assembly**（未升级 Zettel）
+  灵巧操作预训练研究，探索精确装配任务在接触密集、稀疏奖励场景下的可行路径。
+  源：`huggingface-daily-papers`（10 赞）
+- **Loop世界模型论文登顶Hugging Face** ([[202607020936-loop-world-model-paper]])
+  中国初创脸谱心智提出 LoopWM，用迭代潜空间深度作新 scaling axis，登顶 HF Papers 当日 Top1。
+  源：`qbitai`
+- **Testing Mythos and Fable, Moving Beyond SWE-bench**（未升级 Zettel，复盘）
+  The Batch 综述美国政府与 Anthropic 对前沿模型访问权的控制行动持续传播。
+  源：`the-batch` · 首记于 [[2026-06-29]]
+- **State of AI Report 2025** ([[202606291405-state-of-ai-report-2025]])（复盘）
+  🔄 [复盘] 第八届年度 AI 状态报告持续被引用，覆盖研究/产业/政策/安全/使用趋势综合分析。
+  源：`state-of-ai` · 首记于 [[2026-06-29]]
+- **State of AI Report 2025 - Full Slide Deck**（未升级 Zettel，复盘）
+  报告完整幻灯片版持续传播，作为主报告的配套引用材料。
+  源：`state-of-ai` · 首记于 [[2026-06-29]]
+- **2025 Report Launch Blog Post**（未升级 Zettel，复盘）
+  报告发布博文延伸解读，聚焦 OpenAI 竞争地位、推理模型进展、科研加速等主题。
   源：`state-of-ai` · 首记于 [[2026-06-29]]

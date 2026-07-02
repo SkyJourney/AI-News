@@ -1,6 +1,6 @@
 {
   "schema_version": "1",
-  "last_updated": "2026-07-01 09:05:25",
+  "last_updated": "2026-07-02 09:05:47",
   "window_days": 30,
   "urls": {
     "http://arxiv.org/abs/2606.30566v1": {
@@ -253,7 +253,8 @@
       "kept_in_daily": [
         "2026-06-29",
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "硅谷科技播客主持人 Dwarkesh Patel 探讨 AI 下一代训练范式，提出 RLVR（可验证奖励强化学习）是关键，并指出真实世界任务需要 AI 从发布前训练走向发布后学习。"
@@ -298,7 +299,8 @@
       "source_name": "meta-ai-blog",
       "kept_in_daily": [
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": "202607010914-brain2qwerty-noninvasive-bci",
       "raw_summary_excerpt": "Research article exploring Brain2Qwerty technology that enables communication through brain signals without requiring surgical intervention."
@@ -379,6 +381,17 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Claude Tag is a new way for teams to work with Claude."
+    },
+    "https://anthropic.com/news/redeploying-fable-5": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Redeploying Fable 5",
+      "source_name": "anthropic-news",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020934-fable-5-redeployment-jailbreak-scoring",
+      "raw_summary_excerpt": "Fable 5 returns globally July 1. Anthropic is also proposing an industry-wide framework for scoring jailbreak severity, together with Amazon, Microsoft, Google, and other partners."
     },
     "https://anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem": {
       "first_seen_date": "2026-06-29",
@@ -464,7 +477,8 @@
       "source_name": "state-of-ai",
       "kept_in_daily": [
         "2026-06-29",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "[date_unavailable_on_page] Complete downloadable presentation of the 2025 State of AI Report."
@@ -579,6 +593,17 @@
       "zettel_id": null,
       "raw_summary_excerpt": "Agentic system automating rocket design using LLMs for parametric generation and flight simulation"
     },
+    "https://huggingface.co/papers/2606.08671": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020937-skillhone-agent-skill-evolution",
+      "raw_summary_excerpt": "Agent skills extend language-model agents with task-specific procedures, scripts, and references, but the tasks and environments they target continually change. Existing methods improve skills in boun"
+    },
     "https://huggingface.co/papers/2606.22749": {
       "first_seen_date": "2026-07-01",
       "first_seen_run": "2026-07-01-0901",
@@ -589,6 +614,17 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Lightweight feature upsampling framework using ray coordinates for arbitrary resolution reconstruction"
+    },
+    "https://huggingface.co/papers/2606.23127": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Managing Procedural Memory in LLM Agents: Control, Adaptation, and Evaluation",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Procedural memory is increasingly used to improve LLM agents on recurring workplace tasks, yet its ability to produce reusable skills remains poorly understood. We introduce AFTER, a benchmark of 382 "
     },
     "https://huggingface.co/papers/2606.23885": {
       "first_seen_date": "2026-07-01",
@@ -622,6 +658,28 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Universal speech enhancement model with configurable latency using parallel convolutions and early-exit"
+    },
+    "https://huggingface.co/papers/2606.26428": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Play2Perfect: What Matters in Dexterous Play Pretraining for Precise Assembly?",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Multi-fingered robots promise the speed and dexterity of human hands, yet challenging problems such as precise assembly have remained out of reach. These tasks are contact-rich, making data collection"
+    },
+    "https://huggingface.co/papers/2606.26968": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "RedVox: Safety and Fairness Gaps in Speech Models Across Languages",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020939-redvox-speech-safety-benchmark",
+      "raw_summary_excerpt": "Speech-capable models are increasingly deployed in real-world applications across languages. Yet their safety and fairness beyond English settings and under naturalistic conditions remain understudied"
     },
     "https://huggingface.co/papers/2606.27282": {
       "first_seen_date": "2026-07-01",
@@ -700,6 +758,17 @@
       "zettel_id": null,
       "raw_summary_excerpt": "We study whether we can learn novel manipulation skills from human actions to a bi-manual robot with parallel grippers. Human action data is cheap, abundant, and diverse, making it one of the most pro"
     },
+    "https://huggingface.co/papers/2606.28436": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Dockerless: Environment-Free Program Verifier for Coding Agents",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Program verifiers play a central role in training coding agents, including selecting trajectories for supervised fine-tuning (SFT) and providing rewards for reinforcement learning (RL). Standard execu"
+    },
     "https://huggingface.co/papers/2606.28525": {
       "first_seen_date": "2026-07-01",
       "first_seen_run": "2026-07-01-0901",
@@ -722,6 +791,28 @@
       "zettel_id": "202607010927-agentic-abstention-convolve",
       "raw_summary_excerpt": "Evaluation of when LLM agents should abstain from acting, introducing CONVOLVE method for improved stopping"
     },
+    "https://huggingface.co/papers/2606.29082": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Would experience designing faster GPU kernels also help close in on a long-standing open mathematical conjecture? Large Language Models (LLMs) integrated into evolutionary search have recently produce"
+    },
+    "https://huggingface.co/papers/2606.29215": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Multi-Block Diffusion Language Models",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Block Diffusion Language Models (BD-LMs) improve diffusion-based text generation with KV caching and flexible-length generation. A natural next step is to extend them from Single-Block Diffusion (Sing"
+    },
     "https://huggingface.co/papers/2606.29308": {
       "first_seen_date": "2026-07-01",
       "first_seen_run": "2026-07-01-0901",
@@ -732,6 +823,17 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Framework for structural portrait retouching using Diffusion Transformer with LoRA modules"
+    },
+    "https://huggingface.co/papers/2606.29513": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Scenes as Objects, Not Primitives: Instance-Structured 3D Tokenization from Unposed Views",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "A 3D scene is understood through its objects, not the primitives that compose them. Yet feed-forward reconstruction methods output dense, unstructured sets of points or Gaussians, leaving object-level"
     },
     "https://huggingface.co/papers/2606.29600": {
       "first_seen_date": "2026-07-01",
@@ -755,6 +857,17 @@
       "zettel_id": "202607010926-swe-together-coding-agents",
       "raw_summary_excerpt": "Multi-turn benchmark from real coding sessions with reactive user simulator for evaluating agent collaboration"
     },
+    "https://huggingface.co/papers/2606.29985": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Are We Measuring Strategy or Phrasing? The Gap Between Surface- and Approach-Level Diversity in LLM Math Reasoning",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Diversity in LLM mathematical reasoning is critical for exploration, but common diversity metrics mostly capture surface-level variation rather than differences in how a problem is solved. We address "
+    },
     "https://huggingface.co/papers/2606.30054": {
       "first_seen_date": "2026-07-01",
       "first_seen_run": "2026-07-01-0901",
@@ -765,6 +878,17 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Multimodal paradigm enabling free-form interleaved text-image sequences with improved data efficiency"
+    },
+    "https://huggingface.co/papers/2606.30062": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Little Brains, Big Feats: Exploring Compact Language Models",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "While large language models have been dominating the research landscape recently, small language models remain highly relevant across various domains; yet, they receive far less attention. In this stu"
     },
     "https://huggingface.co/papers/2606.30410": {
       "first_seen_date": "2026-07-01",
@@ -777,6 +901,28 @@
       "zettel_id": "202607010918-tabular-foundation-models-benchmark",
       "raw_summary_excerpt": "Comprehensive benchmark showing tabular foundation models excel on small IID data but underperform on complex datasets"
     },
+    "https://huggingface.co/papers/2606.30534": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Orca: The World is in Your Mind",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020935-orca-world-foundation-model",
+      "raw_summary_excerpt": "We introduce Orca, an initial instantiation of a general world foundation model. Orca learns a unified world latent space from multimodal world signals and exposes it through multimodal readout interf"
+    },
+    "https://huggingface.co/papers/2606.30626": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "DOPD: Dual On-policy Distillation",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "On-policy distillation (OPD) offers superior capacity transfer by supervising student-sampled trajectories with dense token-level signals. To furnish high-quality supervision sources and thereby eleva"
+    },
     "https://huggingface.co/papers/2606.30634": {
       "first_seen_date": "2026-07-01",
       "first_seen_run": "2026-07-01-0901",
@@ -787,6 +933,83 @@
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Analysis showing asynchronous pipeline parallelism can match synchronous training through optimizer selection"
+    },
+    "https://huggingface.co/papers/2606.30968": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "PhotoQuilt: Training-Free Arbitrary-Resolution Photomosaics via Bootstrapped Tiled Denoising",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Photomosaics are large images whose local regions are seen as independent tiles while their overall arrangement forms a coherent scene. Generating them at high resolution, with every tile convincing i"
+    },
+    "https://huggingface.co/papers/2606.31315": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "BlockPilot: Instance-Adaptive Policy Learning for Diffusion-based Speculative Decoding",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Speculative decoding accelerates inference by using a lightweight draft model to generate candidate tokens in parallel, and are then verified by the target model, enabling lossless acceleration. Recen"
+    },
+    "https://huggingface.co/papers/2606.31537": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Text-rich image generation is one of the most challenging settings in image generation, since models must simultaneously produce visually realistic images and render legible, semantically aligned, and"
+    },
+    "https://huggingface.co/papers/2606.31734": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "MemLearner: Learning to Query Context memory for Video World Models",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Video World Models are interactive video generation models that predict future world states based on user actions and history video frames. A critical challenge in video world models is the lack of me"
+    },
+    "https://huggingface.co/papers/2606.32032": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Metacognition is a critical component of intelligence that describes the ability to monitor and regulate one's own cognitive processes. Yet LLMs exhibit systemic deficiencies in key metacognitive facu"
+    },
+    "https://huggingface.co/papers/2606.32034": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "QVal: Cheaply Evaluating Dense Supervision Signals for Long-Horizon LLM Agents",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "LLM agents increasingly act over long horizons, where a single trajectory can contain hundreds or thousands of actions. In these settings, outcome-only rewards provide too sparse guidance, failing to "
+    },
+    "https://huggingface.co/papers/2606.32039": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "GEAR: Guided End-to-End AutoRegression for Image Synthesis",
+      "source_name": "huggingface-daily-papers",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Visual generative models are typically trained in two stages. A tokenizer is first trained for reconstruction and then frozen, after which a generator is trained on its discrete indices or continuous "
     },
     "https://importai.substack.com/p/import-ai-461-alignment-is-not-on": {
       "first_seen_date": "2026-06-27",
@@ -818,7 +1041,8 @@
       "source_name": "import-ai",
       "kept_in_daily": [
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": "202607010928-import-ai-463-nvidia-enpire",
       "raw_summary_excerpt": "NVIDIA develops ENPIRE software enabling robots to autonomously improve policies through self-experimentation. Tencent details ARGUS system for managing 10,000+ GPU training clusters. Essay explores p"
@@ -901,6 +1125,17 @@
       "zettel_id": "202606300949-ai-rare-disease-diagnosis",
       "raw_summary_excerpt": "Researchers used an OpenAI reasoning model to identify 18 new diagnoses in previously unsolved rare disease cases in children."
     },
+    "https://openai.com/index/genebench-pro/case-studies": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Inside Genebench-Pro",
+      "source_name": "openai-rss",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": ""
+    },
     "https://openai.com/index/gpt-5-immunology-mystery": {
       "first_seen_date": "2026-06-27",
       "first_seen_run": "2026-06-27-pre-v22-bootstrap",
@@ -964,7 +1199,8 @@
       "source_name": "openai-rss",
       "kept_in_daily": [
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "GPT-5.5 Instant enhances ChatGPT's health responses with improved reasoning, context, clarity, and physician-informed evaluations."
@@ -1065,7 +1301,8 @@
       "title": "Compute scarcity is an engineering problem",
       "source_name": "air-street-press",
       "kept_in_daily": [
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": "202607010921-elevenlabs-gpu-efficiency-70x",
       "raw_summary_excerpt": "ElevenLabs demonstrates how to serve 70x more users per GPU through batching, FP8 quantization, speculative decoding, and KV-cache compression. The talk measures optimization techniques from one to 14"
@@ -1089,7 +1326,8 @@
       "kept_in_daily": [
         "2026-06-29",
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": "202606291407-revolut-ai-deployment-scale",
       "raw_summary_excerpt": "Nikolay Donets, Revolut's Head of Machine Learning Engineering, discussed managing AI deployment across a regulated bank serving 70M+ customers. The approach centers on a single gateway, use-case gove"
@@ -1115,10 +1353,22 @@
       "kept_in_daily": [
         "2026-06-29",
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "German defense company STARK announced a €500M funding round to manufacture autonomous unmanned strike systems. The capital will support production lines across Germany, the UK, and Ukraine for weapon"
+    },
+    "https://press.airstreet.com/p/state-of-ai-compute-index-june-2026": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "State of AI Report Compute Index 2026",
+      "source_name": "air-street-press",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020940-state-of-ai-compute-index-2026",
+      "raw_summary_excerpt": "Updated AI compute index showing NVIDIA challengers gaining ground but not displacing it. Real shift occurring within NVIDIA, from A100 to H100/H200 and early Blackwell. Open research citations up 10."
     },
     "https://www.deeplearning.ai/the-batch/issue-358": {
       "first_seen_date": "2026-06-29",
@@ -1126,7 +1376,8 @@
       "title": "Testing Mythos and Fable, Moving Beyond SWE-bench, Nvidia's Open Contender",
       "source_name": "the-batch",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Both the U.S. Government and Anthropic took significant actions to demonstrate their power to control access to AI by restricting what others can do with frontier models."
@@ -1150,7 +1401,8 @@
       "kept_in_daily": [
         "2026-06-29",
         "2026-06-30",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": "202606291408-open-model-artifacts-22",
       "raw_summary_excerpt": "Assessment of the open ecosystem showing increasing diversity in model releases. Companies span pure model makers, Big Tech, and product companies with varied motivations for releasing weights. Highli"
@@ -1161,7 +1413,8 @@
       "title": "Banning Open Source AI Would Be A Mistake",
       "source_name": "interconnects",
       "kept_in_daily": [
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "Op-ed arguing that regulating open-source AI models would harm education, innovation, and competition. Emphasizes open source's role in democratizing technology and maintaining competitive markets aga"
@@ -1497,6 +1750,116 @@
       "zettel_id": null,
       "raw_summary_excerpt": ""
     },
+    "https://www.qbitai.com/2026/07/441124.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Om AI联汇发布VLX：全球首个面向物理世界的端侧流式多模态模型",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020933-om-ai-vlx-physical-multimodal",
+      "raw_summary_excerpt": "物理世界AI的下一步"
+    },
+    "https://www.qbitai.com/2026/07/441127.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "卖Token也不是稳赚不赔！硅基流动招股书来了",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "AI推理时代的Token工厂"
+    },
+    "https://www.qbitai.com/2026/07/441140.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "大湾区首个200亿具身大脑来了！自变量两个月连融四轮，完成交割",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "四大互联网分别领投"
+    },
+    "https://www.qbitai.com/2026/07/441183.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "卡帕西李飞飞辛顿都投了的Transformer专用芯片，签下10亿美元大单",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "已流片"
+    },
+    "https://www.qbitai.com/2026/07/441225.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "Loop世界模型论文登顶Hugging Face，来自中国一家初创，周鸿祎陆奇都投了",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": "202607020936-loop-world-model-paper",
+      "raw_summary_excerpt": "重写「AI如何反复推演世界」"
+    },
+    "https://www.qbitai.com/2026/07/441237.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "群核科技三项成果入选ECCV 2026，联手英伟达等探索物理AI仿真平台",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "共同推进物理AI前沿技术探索。"
+    },
+    "https://www.qbitai.com/2026/07/441240.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "OpenSquilla 发布 0.4.0：AI 写代码首次能「自我验证」",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "OpenSquilla 上线后数周内 GitHub star 增至数千量级"
+    },
+    "https://www.qbitai.com/2026/07/441246.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "金融AI武道大会开赛！四道业务真题，出题人：猜不到最优解",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "Taste，决定天花板。"
+    },
+    "https://www.qbitai.com/2026/07/441386.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "OceanBase湖库一体，重新定义AI数据库",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "一套技术栈实现离在线统一"
+    },
+    "https://www.qbitai.com/2026/07/441396.html": {
+      "first_seen_date": "2026-07-02",
+      "first_seen_run": "2026-07-02-0901",
+      "title": "具身智能Skill时刻！英伟达开源机器人技能库，Jim Fan：范式变了",
+      "source_name": "qbitai",
+      "kept_in_daily": [
+        "2026-07-02"
+      ],
+      "zettel_id": null,
+      "raw_summary_excerpt": "全新的持续学习范式"
+    },
     "https://www.stateof.ai/": {
       "first_seen_date": "2026-06-29",
       "first_seen_run": "2026-06-29-1052",
@@ -1504,7 +1867,8 @@
       "source_name": "state-of-ai",
       "kept_in_daily": [
         "2026-06-29",
-        "2026-07-01"
+        "2026-07-01",
+        "2026-07-02"
       ],
       "zettel_id": "202606291405-state-of-ai-report-2025",
       "raw_summary_excerpt": "[date_unavailable_on_page] The eighth annual State of AI Report analyzes key developments in research, industry, politics, safety."
@@ -1515,7 +1879,8 @@
       "title": "State of AI Report 2025 Launch",
       "source_name": "state-of-ai",
       "kept_in_daily": [
-        "2026-06-29"
+        "2026-06-29",
+        "2026-07-02"
       ],
       "zettel_id": null,
       "raw_summary_excerpt": "[date_unavailable_on_page] Blog post detailing the launch of the 2025 State of AI Report."

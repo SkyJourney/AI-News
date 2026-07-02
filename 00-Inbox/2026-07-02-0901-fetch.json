@@ -1,0 +1,1242 @@
+{
+  "batch_id": "2026-07-02-09:01",
+  "target_date": "2026-07-02",
+  "fetched_at": "2026-07-02T09:05:41+08:00",
+  "fetchers": [
+    {
+      "source_name": "openai-rss",
+      "tier": 1,
+      "perspective": "research",
+      "entry_count": 20,
+      "entries": [
+        {
+          "title": "How ChatGPT adoption has expanded",
+          "url": "https://openai.com/index/how-chatgpt-adoption-has-expanded",
+          "published": "2026-06-30T09:00:00Z",
+          "raw_summary": "New OpenAI Signals data shows how ChatGPT adoption is growing globally, with users increasing usage, exploring more capabilities, and driving growth across regions and languages.",
+          "low_confidence": false
+        },
+        {
+          "title": "Inside Genebench-Pro",
+          "url": "https://openai.com/index/genebench-pro/case-studies",
+          "published": "2026-06-30T00:00:00Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Introducing GeneBench-Pro",
+          "url": "https://openai.com/index/introducing-genebench-pro",
+          "published": "2026-06-30T00:00:00Z",
+          "raw_summary": "Introducing GeneBench-Pro, a new benchmark testing AI performance in genomics, biology, and scientific research using complex, real-world datasets.",
+          "low_confidence": false
+        },
+        {
+          "title": "Core dump epidemiology: fixing an 18-year-old bug",
+          "url": "https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug",
+          "published": "2026-06-30T00:00:00Z",
+          "raw_summary": "OpenAI engineers used large-scale core dump analysis to debug rare infrastructure crashes, uncovering both a hardware fault and a long-standing software bug.",
+          "low_confidence": false
+        },
+        {
+          "title": "Mapping Europe's AI Workforce Opportunity",
+          "url": "https://openai.com/index/mapping-ai-jobs-transition-eu",
+          "published": "2026-06-29T07:00:00Z",
+          "raw_summary": "A new OpenAI report maps how AI could reshape jobs across the EU, highlighting which occupations may face automation, growth, or workflow changes.",
+          "low_confidence": false
+        },
+        {
+          "title": "HP Inc. launches Frontier strategic partnership with OpenAI",
+          "url": "https://openai.com/index/hp-frontier-partnership",
+          "published": "2026-06-28T17:00:00Z",
+          "raw_summary": "HP Inc. scales its OpenAI Frontier partnership to deploy AI across customer experiences, software development, and enterprise operations.",
+          "low_confidence": false
+        },
+        {
+          "title": "Previewing GPT-5.6 Sol: a next-generation model",
+          "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+          "published": "2026-06-26T10:00:00Z",
+          "raw_summary": "OpenAI previews GPT-5.6 Sol, a next-generation model with stronger capabilities in coding, science, and cybersecurity, paired with its most advanced safety stack.",
+          "low_confidence": false
+        },
+        {
+          "title": "How agents are transforming work",
+          "url": "https://openai.com/index/how-agents-are-transforming-work",
+          "published": "2026-06-25T02:00:00Z",
+          "raw_summary": "A new OpenAI research paper shows how AI agents are transforming work, enabling longer, more complex tasks and expanding productivity across roles.",
+          "low_confidence": false
+        },
+        {
+          "title": "OpenAI and Broadcom unveil LLM-optimized inference chip",
+          "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+          "published": "2026-06-24T06:00:00Z",
+          "raw_summary": "OpenAI and Broadcom introduce Jalapeño, a custom AI chip built for LLM inference to improve performance, efficiency, and scale across AI systems.",
+          "low_confidence": false
+        },
+        {
+          "title": "Helping build shared standards for advanced AI",
+          "url": "https://openai.com/index/helping-build-shared-standards-for-advanced-ai",
+          "published": "2026-06-23T13:00:00Z",
+          "raw_summary": "OpenAI helps build shared standards for advanced AI, supporting evaluation frameworks, safety practices, and global cooperation through the Appia Foundation.",
+          "low_confidence": false
+        },
+        {
+          "title": "How GPT-5 helped immunologist Derya Unutmaz solve a 3-year-old mystery",
+          "url": "https://openai.com/index/gpt-5-immunology-mystery",
+          "published": "2026-06-23T17:00:00Z",
+          "raw_summary": "GPT-5 Pro helped solve a 3-year-old immunology mystery, offering insights into T cell behavior. The breakthrough could support cancer and autoimmune research.",
+          "low_confidence": false
+        },
+        {
+          "title": "How Omio is building the future of conversational travel",
+          "url": "https://openai.com/index/omio",
+          "published": "2026-06-23T00:00:00Z",
+          "raw_summary": "Discover how Omio uses OpenAI to power conversational travel experiences, accelerate product development, and transform into an AI-native company.",
+          "low_confidence": false
+        },
+        {
+          "title": "Patch the Planet: a Daybreak initiative to support open source maintainers",
+          "url": "https://openai.com/index/patch-the-planet",
+          "published": "2026-06-22T10:00:00Z",
+          "raw_summary": "OpenAI introduces Patch the Planet, a Daybreak initiative helping open-source maintainers find, validate, and fix vulnerabilities with AI and expert review.",
+          "low_confidence": false
+        },
+        {
+          "title": "Daybreak: Tools for securing every organization in the world",
+          "url": "https://openai.com/index/daybreak-securing-the-world",
+          "published": "2026-06-22T10:00:00Z",
+          "raw_summary": "OpenAI introduces new Daybreak tools, including Codex Security and GPT-5.5-Cyber, to help organizations find, validate, and patch vulnerabilities at scale.",
+          "low_confidence": false
+        },
+        {
+          "title": "Codex-maxxing for long-running work",
+          "url": "https://openai.com/index/codex-maxxing-long-running-work",
+          "published": "2026-06-22T00:00:00Z",
+          "raw_summary": "Learn how Jason Liu uses Codex to preserve context, manage complex projects, and help work continue beyond a single prompt.",
+          "low_confidence": false
+        },
+        {
+          "title": "Samsung Electronics brings ChatGPT and Codex to employees",
+          "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment",
+          "published": "2026-06-21T23:00:00Z",
+          "raw_summary": "Samsung Electronics deploys ChatGPT Enterprise and Codex to employees worldwide, marking one of OpenAI's largest enterprise AI rollouts.",
+          "low_confidence": false
+        },
+        {
+          "title": "New usage analytics and updated spend controls for enterprises",
+          "url": "https://openai.com/index/chatgpt-enterprise-spend-controls",
+          "published": "2026-06-18T17:00:00Z",
+          "raw_summary": "OpenAI introduces new spend controls and usage analytics for ChatGPT Enterprise, helping organizations manage costs and scale AI with confidence.",
+          "low_confidence": false
+        },
+        {
+          "title": "Improving health intelligence in ChatGPT",
+          "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+          "published": "2026-06-18T11:00:00Z",
+          "raw_summary": "Learn how GPT-5.5 Instant improves ChatGPT's health and wellness responses with stronger reasoning, better context, clearer communication, and physician-informed evaluations.",
+          "low_confidence": false
+        },
+        {
+          "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
+          "url": "https://openai.com/index/diagnose-rare-childhood-diseases",
+          "published": "2026-06-18T08:00:00Z",
+          "raw_summary": "Researchers used an OpenAI reasoning model to help diagnose rare diseases, identifying 18 new diagnoses in previously unsolved cases.",
+          "low_confidence": false
+        },
+        {
+          "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+          "url": "https://openai.com/index/ai-chemist-improves-reaction",
+          "published": "2026-06-17T10:00:00Z",
+          "raw_summary": "OpenAI and Molecule.one show how a near-autonomous AI chemist using GPT-5.4 improved a key drug-making reaction, advancing medicinal chemistry research.",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "deepmind-rss",
+      "tier": 1,
+      "perspective": "research",
+      "entry_count": 20,
+      "entries": [
+        {
+          "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+          "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+          "published": "2026-06-30T16:02:40Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Introducing computer use in Gemini 3.5 Flash",
+          "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+          "published": "2026-06-24T16:30:01Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Unlocking UK house-building with AI-accelerated planning",
+          "url": "https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/",
+          "published": "2026-06-16T21:29:50Z",
+          "raw_summary": "UK government partners with Google DeepMind to build a new AI-powered prototype aimed at faster housing decisions.",
+          "low_confidence": false
+        },
+        {
+          "title": "Securing the future of AI agents",
+          "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
+          "published": "2026-06-16T15:46:31Z",
+          "raw_summary": "Securing internal systems with an AI Control Roadmap, combining traditional safeguards and real-time monitoring.",
+          "low_confidence": false
+        },
+        {
+          "title": "DiffusionGemma: 4x faster text generation",
+          "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+          "published": "2026-06-10T16:24:11Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Investing in multi-agent AI safety research",
+          "url": "https://deepmind.google/blog/investing-in-multi-agent-ai-safety-research/",
+          "published": "2026-06-10T10:21:19Z",
+          "raw_summary": "Google DeepMind and partners announce a $10M funding call for multi-agent safety research.",
+          "low_confidence": false
+        },
+        {
+          "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+          "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+          "published": "2026-06-09T15:16:25Z",
+          "raw_summary": "Gemini 3.5 Live Translate brings near real-time, natural speech translation to Google AI Studio, Google Translate and Google Meet.",
+          "low_confidence": false
+        },
+        {
+          "title": "Introducing Gemma 4 12B: a unified, encoder-free multimodal model",
+          "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+          "published": "2026-06-09T14:10:19Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Powering the future of robotics in Europe",
+          "url": "https://deepmind.google/blog/powering-the-future-of-robotics-in-europe/",
+          "published": "2026-06-09T14:02:33Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Measuring the impact of learning with AI in Sierra Leone and beyond",
+          "url": "https://deepmind.google/blog/measuring-the-impact-of-learning-with-ai-in-sierra-leone-and-beyond/",
+          "published": "2026-06-08T13:04:59Z",
+          "raw_summary": "Results from a randomized controlled trial show the potential of Gemini's Guided Learning feature to boost engagement and accelerate learning.",
+          "low_confidence": false
+        },
+        {
+          "title": "We're launching the Google DeepMind Accelerator program in Asia Pacific to tackle environmental risks",
+          "url": "https://deepmind.google/blog/were-launching-the-google-deepmind-accelerator-program-in-asia-pacific-to-tackle-environmental-risks/",
+          "published": "2026-05-21T19:46:42Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Fast-tracking genetic leads to reverse cellular aging",
+          "url": "https://deepmind.google/blog/fast-tracking-genetic-leads-to-reverse-cellular-aging/",
+          "published": "2026-05-18T18:21:39Z",
+          "raw_summary": "Biologists use Co-Scientist to find novel factors that successfully rejuvenate human cells.",
+          "low_confidence": false
+        },
+        {
+          "title": "Simulate real-world places with Project Genie and Street View",
+          "url": "https://deepmind.google/blog/simulate-real-world-places-with-project-genie-and-street-view/",
+          "published": "2026-05-17T19:53:18Z",
+          "raw_summary": "Expanding access to Google AI Ultra subscribers globally and introducing a new capability powered by Street View.",
+          "low_confidence": false
+        },
+        {
+          "title": "Introducing Gemini Omni",
+          "url": "https://deepmind.google/blog/introducing-gemini-omni/",
+          "published": "2026-05-17T19:50:57Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Introducing Google Antigravity 2.0",
+          "url": "https://deepmind.google/blog/introducing-google-antigravity-2-0/",
+          "published": "2026-05-17T19:43:45Z",
+          "raw_summary": "",
+          "low_confidence": true
+        },
+        {
+          "title": "Gemini for Science: AI experiments and tools for a new era of discovery",
+          "url": "https://deepmind.google/blog/gemini-for-science-ai-experiments-and-tools-for-a-new-era-of-discovery/",
+          "published": "2026-05-17T13:50:34Z",
+          "raw_summary": "A collection of science tools and experiments to expand the scale and precision of scientific exploration.",
+          "low_confidence": false
+        },
+        {
+          "title": "Making it easier to understand how content was created and edited",
+          "url": "https://deepmind.google/blog/making-it-easier-to-understand-how-content-was-created-and-edited/",
+          "published": "2026-05-17T13:43:50Z",
+          "raw_summary": "Expanding tools to help understand how content was created and edited across the web.",
+          "low_confidence": false
+        },
+        {
+          "title": "Strengthening Singapore's AI Future: A New National Partnership",
+          "url": "https://deepmind.google/blog/strengthening-singapores-ai-future-a-new-national-partnership/",
+          "published": "2026-05-16T09:13:34Z",
+          "raw_summary": "Google DeepMind and Singapore partner to apply frontier AI to address complex challenges across health, education, and sustainability.",
+          "low_confidence": false
+        },
+        {
+          "title": "Finding the molecular switches behind new infectious diseases",
+          "url": "https://deepmind.google/blog/finding-the-molecular-switches-behind-new-infectious-diseases/",
+          "published": "2026-05-16T08:16:06Z",
+          "raw_summary": "Clare Bryant uses Co-Scientist to identify genetic triggers in emerging infectious diseases.",
+          "low_confidence": false
+        },
+        {
+          "title": "Opening new paths in aging research",
+          "url": "https://deepmind.google/blog/opening-new-paths-in-aging-research/",
+          "published": "2026-05-16T08:08:44Z",
+          "raw_summary": "Calico Life Sciences uses Co-Scientist to connect scattered findings and generate new leads in aging research.",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "huggingface-daily-papers",
+      "tier": 1,
+      "perspective": "research",
+      "entry_count": 20,
+      "entries": [
+        {
+          "title": "Orca: The World is in Your Mind",
+          "url": "https://huggingface.co/papers/2606.30534",
+          "published": "2026-06-28T20:00:00.000Z",
+          "raw_summary": "We introduce Orca, an initial instantiation of a general world foundation model. Orca learns a unified world latent space from multimodal world signals and exposes it through multimodal readout interfaces. Rather than optimizing isolated next-token, next-frame, or next-action prediction, we are centered on Next-State-Prediction modeling, offering a unified state-transition modeling route toward understanding, predicting, and acting upon the world. Orca learns through two complementary paradigms:",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 176,
+            "arxiv_id": "2606.30534",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Dockerless: Environment-Free Program Verifier for Coding Agents",
+          "url": "https://huggingface.co/papers/2606.28436",
+          "published": "2026-06-25T20:00:00.000Z",
+          "raw_summary": "Program verifiers play a central role in training coding agents, including selecting trajectories for supervised fine-tuning (SFT) and providing rewards for reinforcement learning (RL). Standard execution-based verification requires running unit tests inside per-repository environments such as Docker images, incurring substantial environment setup costs. We propose Dockerless, an environment-free agentic patch verifier that evaluates generated code patches without executing them. Rather than sim",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 86,
+            "arxiv_id": "2606.28436",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "DOPD: Dual On-policy Distillation",
+          "url": "https://huggingface.co/papers/2606.30626",
+          "published": "2026-06-28T20:00:00.000Z",
+          "raw_summary": "On-policy distillation (OPD) offers superior capacity transfer by supervising student-sampled trajectories with dense token-level signals. To furnish high-quality supervision sources and thereby elevate the performance frontier of distillation, an intuitive direction is to infuse privileged information to either teacher or student itself. However, this additional input induces a potential failure mode we dub privilege illusion: a pattern that conflates the transferable capability gap that studen",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 75,
+            "arxiv_id": "2606.30626",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "BlockPilot: Instance-Adaptive Policy Learning for Diffusion-based Speculative Decoding",
+          "url": "https://huggingface.co/papers/2606.31315",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "Speculative decoding accelerates inference by using a lightweight draft model to generate candidate tokens in parallel, and are then verified by the target model, enabling lossless acceleration. Recently, diffusion-based speculative decoding further improves parallelism by generating multiple tokens per forward pass via block-level diffusion, achieving state-of-the-art (SOTA) performance. However, existing methods adopt a fixed inference block size and assume a uniform optimal decoding strategy ",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 67,
+            "arxiv_id": "2606.31315",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Does VLA Even Know the Basics? Measuring Commonsense and World Knowledge Retention in Vision-Language-Action Models",
+          "url": "https://huggingface.co/papers/2606.19297",
+          "published": "2026-06-16T20:00:00.000Z",
+          "raw_summary": "Embodied Vision-Language-Action (VLA) models are typically obtained by fine-tuning powerful pretrained VLMs on robotics data, yet it is unclear how much commonsense and factual knowledge they retain after adaptation. Failures on knowledge-sensitive tasks are ambiguous, conflating missing knowledge with poor generalization of low-level control. We introduce Act2Answer, a lightweight protocol that adapts VLM knowledge benchmarks to VLA evaluation by requiring agents to answer through action. Each ",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 41,
+            "arxiv_id": "2606.19297",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Scenes as Objects, Not Primitives: Instance-Structured 3D Tokenization from Unposed Views",
+          "url": "https://huggingface.co/papers/2606.29513",
+          "published": "2026-06-27T20:00:00.000Z",
+          "raw_summary": "A 3D scene is understood through its objects, not the primitives that compose them. Yet feed-forward reconstruction methods output dense, unstructured sets of points or Gaussians, leaving object-level structure to be recovered after the fact. We propose a feed-forward framework that decomposes a scene into instance-structured 3D token groups directly from unposed multi-view images -- compact object-centric units from which reconstruction, segmentation, and manipulation all follow. Each token gro",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 34,
+            "arxiv_id": "2606.29513",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "GEAR: Guided End-to-End AutoRegression for Image Synthesis",
+          "url": "https://huggingface.co/papers/2606.32039",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "Visual generative models are typically trained in two stages. A tokenizer is first trained for reconstruction and then frozen, after which a generator is trained on its discrete indices or continuous latents. This decoupling leaves the tokenizer unaware of what the generator finds easy to model. We present GEAR (Guided End-to-end AutoRegression), which trains a vector-quantized (VQ) tokenizer and an autoregressive (AR) generator jointly and end-to-end, guided by representation alignment. The key",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 28,
+            "arxiv_id": "2606.32039",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks",
+          "url": "https://huggingface.co/papers/2606.29082",
+          "published": "2026-06-26T20:00:00.000Z",
+          "raw_summary": "Would experience designing faster GPU kernels also help close in on a long-standing open mathematical conjecture? Large Language Models (LLMs) integrated into evolutionary search have recently produced state-of-the-art solutions on optimization tasks, including open mathematical conjectures, GPU kernel design, scientific law discovery, and combinatorial puzzles. To achieve this, prior work applied search scaffolds to one target task at a time, so every new problem is approached from scratch and ",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 23,
+            "arxiv_id": "2606.29082",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Multi-Block Diffusion Language Models",
+          "url": "https://huggingface.co/papers/2606.29215",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "Block Diffusion Language Models (BD-LMs) improve diffusion-based text generation with KV caching and flexible-length generation. A natural next step is to extend them from Single-Block Diffusion (SingleBD) to Multi-Block Diffusion (MultiBD), where a running-set of consecutive blocks is decoded concurrently for inter-block parallelism. However, existing BD-LMs are mostly trained under teacher forcing, where the model observes only one noisy block conditioned on a clean prefix. While the recent di",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 22,
+            "arxiv_id": "2606.29215",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+          "url": "https://huggingface.co/papers/2606.08671",
+          "published": "2026-06-22T20:00:00.000Z",
+          "raw_summary": "Agent skills extend language-model agents with task-specific procedures, scripts, and references, but the tasks and environments they target continually change. Existing methods improve skills in bounded runs and retain only the final artifact, discarding the decision history that later agents need to interpret prior revisions, evaluations, and rejected alternatives. We introduce SkillHone, a harness for continual agent skill evolution grounded in persistent decision history. SkillHone pairs ski",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 21,
+            "arxiv_id": "2606.08671",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "MemLearner: Learning to Query Context memory for Video World Models",
+          "url": "https://huggingface.co/papers/2606.31734",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "Video World Models are interactive video generation models that predict future world states based on user actions and history video frames. A critical challenge in video world models is the lack of memory, causing inconsistent generated scenes over extended durations. Previous methods explored rule-based context frame retrieval as memory, but they fail to generalize in scenarios with scene occlusions and dynamic objects. We propose MemLearner, a learning-based adaptive context query method using",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 18,
+            "arxiv_id": "2606.31734",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Managing Procedural Memory in LLM Agents: Control, Adaptation, and Evaluation",
+          "url": "https://huggingface.co/papers/2606.23127",
+          "published": "2026-06-21T20:00:00.000Z",
+          "raw_summary": "Procedural memory is increasingly used to improve LLM agents on recurring workplace tasks, yet its ability to produce reusable skills remains poorly understood. We introduce AFTER, a benchmark of 382 realistic enterprise tasks spanning six professional roles and 22 procedural skills, designed to evaluate how skills transfer across tasks, roles, and model backbones. The benchmark includes controlled evaluation settings for local improvement, cross-task transfer, cross-role transfer, and cross-mod",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 17,
+            "arxiv_id": "2606.23127",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation",
+          "url": "https://huggingface.co/papers/2606.31537",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "Text-rich image generation is one of the most challenging settings in image generation, since models must simultaneously produce visually realistic images and render legible, semantically aligned, and layout-consistent text. Existing data pipelines usually follow a static crawl-filter-freeze paradigm. They collect candidate samples, filter them once, and freeze the accepted data for training. However, rejected samples are usually discarded, although they often contain useful failure signals such",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 16,
+            "arxiv_id": "2606.31537",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs",
+          "url": "https://huggingface.co/papers/2606.32032",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "Metacognition is a critical component of intelligence that describes the ability to monitor and regulate one's own cognitive processes. Yet LLMs exhibit systemic deficiencies in key metacognitive faculties: they hallucinate with high confidence, fail to recognize knowledge boundaries, and misrepresent their internal uncertainty--undermining trustworthiness and reliability. Since monitoring task performance and adapting behavior accordingly are central to metacognition, we posit that models capab",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 16,
+            "arxiv_id": "2606.32032",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "PhotoQuilt: Training-Free Arbitrary-Resolution Photomosaics via Bootstrapped Tiled Denoising",
+          "url": "https://huggingface.co/papers/2606.30968",
+          "published": "2026-06-28T20:00:00.000Z",
+          "raw_summary": "Photomosaics are large images whose local regions are seen as independent tiles while their overall arrangement forms a coherent scene. Generating them at high resolution, with every tile convincing in its own right, is computationally expensive, since the canvas must hold many detailed tiles at once. We present PhotoQuilt, a training-free framework that generates photomosaics at arbitrary resolution. Diffusion models struggle to satisfy both scales at once, as direct high-resolution generation ",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 12,
+            "arxiv_id": "2606.30968",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "RedVox: Safety and Fairness Gaps in Speech Models Across Languages",
+          "url": "https://huggingface.co/papers/2606.26968",
+          "published": "2026-06-24T20:00:00.000Z",
+          "raw_summary": "Speech-capable models are increasingly deployed in real-world applications across languages. Yet their safety and fairness beyond English settings and under naturalistic conditions remain understudied. We survey safety reporting practices across state-of-the-art speech model releases, finding that only 8% document any multilingual analysis. To address this gap, we introduce RedVox, a multilingual safety and fairness benchmark for audio and speech built on real voices, covering unsafe and unfair ",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 12,
+            "arxiv_id": "2606.26968",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Little Brains, Big Feats: Exploring Compact Language Models",
+          "url": "https://huggingface.co/papers/2606.30062",
+          "published": "2026-06-28T20:00:00.000Z",
+          "raw_summary": "While large language models have been dominating the research landscape recently, small language models remain highly relevant across various domains; yet, they receive far less attention. In this study, we investigate how smaller language models perform during the generation stage within a Retrieval-Augmented Generation (RAG) system. To benchmark these models effectively, we utilised both open-source and proprietary datasets covering diverse subject areas and question types. Our findings demons",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 10,
+            "arxiv_id": "2606.30062",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Are We Measuring Strategy or Phrasing? The Gap Between Surface- and Approach-Level Diversity in LLM Math Reasoning",
+          "url": "https://huggingface.co/papers/2606.29985",
+          "published": "2026-06-28T20:00:00.000Z",
+          "raw_summary": "Diversity in LLM mathematical reasoning is critical for exploration, but common diversity metrics mostly capture surface-level variation rather than differences in how a problem is solved. We address this gap by introducing approach-level diversity: variation in strategies across correct solutions to the same problem. Using a human-calibrated LLM judge framework, we show that prior diversity measures are unreliable proxies for approach-level diversity, and this mismatch carries over to diversity",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 10,
+            "arxiv_id": "2606.29985",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "Play2Perfect: What Matters in Dexterous Play Pretraining for Precise Assembly?",
+          "url": "https://huggingface.co/papers/2606.26428",
+          "published": "2026-06-23T20:00:00.000Z",
+          "raw_summary": "Multi-fingered robots promise the speed and dexterity of human hands, yet challenging problems such as precise assembly have remained out of reach. These tasks are contact-rich, making data collection for imitation learning difficult, and sparse-reward, making direct exploration with reinforcement learning (RL) intractable. Consequently, prior work has made progress by structuring the problem with specialized grippers, tool attachments, and environment fixtures. In this work, we argue that befor",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 10,
+            "arxiv_id": "2606.26428",
+            "fetched_date": "2026-07-01"
+          }
+        },
+        {
+          "title": "QVal: Cheaply Evaluating Dense Supervision Signals for Long-Horizon LLM Agents",
+          "url": "https://huggingface.co/papers/2606.32034",
+          "published": "2026-06-29T20:00:00.000Z",
+          "raw_summary": "LLM agents increasingly act over long horizons, where a single trajectory can contain hundreds or thousands of actions. In these settings, outcome-only rewards provide too sparse guidance, failing to inform the model about the goodness of intermediate actions. Dense supervision methods aim to solve this problem by scoring intermediate steps, from intrinsic confidence to self-distillation and embedding similarities. However, it is common practice to evaluate them by measuring the downstream perfo",
+          "low_confidence": true,
+          "extra": {
+            "upvotes": 9,
+            "arxiv_id": "2606.32034",
+            "fetched_date": "2026-07-01"
+          }
+        }
+      ]
+    },
+    {
+      "source_name": "import-ai",
+      "tier": 2,
+      "perspective": "research",
+      "entry_count": 5,
+      "entries": [
+        {
+          "title": "Import AI 463: Self-improving robots; a 10k Chinese GPU cluster; and an elegiac essay for the human era",
+          "url": "https://importai.substack.com/p/import-ai-463-self-improving-robots",
+          "published": "2026-06-29T13:03:27Z",
+          "raw_summary": "NVIDIA develops ENPIRE software enabling physical robots to autonomously experiment and improve themselves. Tencent details ARGUS system for managing 10,000+ GPU training clusters. Essay explores inevitable human disempowerment as AI systems become superintelligent.",
+          "low_confidence": false
+        },
+        {
+          "title": "Import AI 462: Superpersuasion; self-sustaining AI; paths to ASI",
+          "url": "https://importai.substack.com/p/import-ai-462-superpersuasion-self",
+          "published": "2026-06-22T12:31:45Z",
+          "raw_summary": "AI systems reliably out-persuade expert human debaters, achieving 3x effectiveness versus professional fundraisers. Discussion of timeline to self-sustaining AI systems integrated with physical infrastructure. DeepMind outlines pathways toward artificial superintelligence.",
+          "low_confidence": false
+        },
+        {
+          "title": "Import AI 461: \"Alignment is not on track\"; FrontierCode; and synthetic research interns",
+          "url": "https://importai.substack.com/p/import-ai-461-alignment-is-not-on",
+          "published": "2026-06-15T11:30:53Z",
+          "raw_summary": "New safety startup Sequent launches to develop alignment techniques for superintelligent systems. FrontierCode benchmark tests code quality with 13.4% performance from Claude on hardest tasks. Benchmark evaluates AI systems performing research intern-level work.",
+          "low_confidence": false
+        },
+        {
+          "title": "Import AI 460: Reward hacking society, RSI data from Anthropic; and RL-based quadcopter racing",
+          "url": "https://importai.substack.com/p/import-ai-460-reward-hacking-society",
+          "published": "2026-06-08T12:31:32Z",
+          "raw_summary": "SocioHack benchmark shows AI can discover loopholes in institutional rules. Anthropic reports 8x code merge increase suggesting recursive self-improvement. RL-trained drones outperform champion human pilot at speeds exceeding 22 m/s.",
+          "low_confidence": false
+        },
+        {
+          "title": "Import AI 459: AI oversight is difficult; scaling laws for protein folding models; and pricing the extinction risk of AI systems",
+          "url": "https://importai.substack.com/p/import-ai-459-ai-oversight-is-difficult",
+          "published": "2026-06-01T13:31:56Z",
+          "raw_summary": "Research shows AI economy growing at 2,600% annually but invisible in GDP statistics. Paper outlines challenges in automated alignment research and human oversight. Biohub releases ESMFold2 protein prediction model rivaling DeepMind's AlphaFold.",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "interconnects",
+      "tier": 2,
+      "perspective": "research",
+      "entry_count": 5,
+      "entries": [
+        {
+          "title": "Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem",
+          "url": "https://www.interconnects.ai/p/artifacts-22-zyphra-cohere-and-poolside",
+          "published": "2026-06-28T17:03:07Z",
+          "raw_summary": "Assessment of the open ecosystem and motivations behind releasing models. Discusses three categories of organizations: pure model makers, Big Tech, and product companies. Features releases from NVIDIA Nemotron, Cohere Command A+, GLM-5.2, Zyphra ZAYA1, and Poolside Laguna models.",
+          "low_confidence": false
+        },
+        {
+          "title": "GLM-5.2 is the step change for open agents",
+          "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+          "published": "2026-06-22T14:52:45Z",
+          "raw_summary": "Analysis of Z.ai's GLM-5.2 model as a meaningful capability threshold for open-weight models. Explores the model's performance in coding and agentic tasks, its ecosystem reception, and implications for the open vs. closed model landscape and future regulation.",
+          "low_confidence": false
+        },
+        {
+          "title": "Banning Open Source AI Would Be A Mistake",
+          "url": "https://www.interconnects.ai/p/banning-open-source-ai-would-be-a",
+          "published": "2026-06-19T13:02:47Z",
+          "raw_summary": "Co-authored op-ed arguing against potential regulation or bans on open-source AI. Discusses historical benefits of open source in education, innovation, and competition. Addresses safety concerns and competitive dynamics with China.",
+          "low_confidence": false
+        },
+        {
+          "title": "State of the blog, mid-2026",
+          "url": "https://www.interconnects.ai/p/state-of-the-blog-mid-2026",
+          "published": "2026-06-17T14:29:06Z",
+          "raw_summary": "Update on Interconnects AI blog operations and strategy. Discusses three career missions: frontier model clarity, vibrant open ecosystem, and institution building. Notes recent advising agreements with Arcee AI and Mercor, audience curation approaches, and financial sustainability.",
+          "low_confidence": false
+        },
+        {
+          "title": "Frontier post-training recipe review with Finbarr Timbers",
+          "url": "https://www.interconnects.ai/p/frontier-post-training-recipe-review",
+          "published": "2026-06-16T13:29:30Z",
+          "raw_summary": "Podcast interview reviewing post-training recipes from InstructGPT through 2026 models. Discusses historical progression, MOPD (Multi-teacher On-Policy Distillation) pattern in frontier models, and interviews with Finbarr Timbers on technical details and career advice.",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "qbitai",
+      "tier": 2,
+      "perspective": "product",
+      "entry_count": 10,
+      "entries": [
+        {
+          "title": "具身智能Skill时刻！英伟达开源机器人技能库，Jim Fan：范式变了",
+          "url": "https://www.qbitai.com/2026/07/441396.html",
+          "published": "2026-07-01T09:33:05Z",
+          "raw_summary": "全新的持续学习范式",
+          "low_confidence": false
+        },
+        {
+          "title": "OceanBase湖库一体，重新定义AI数据库",
+          "url": "https://www.qbitai.com/2026/07/441386.html",
+          "published": "2026-07-01T09:05:10Z",
+          "raw_summary": "一套技术栈实现离在线统一",
+          "low_confidence": false
+        },
+        {
+          "title": "金融AI武道大会开赛！四道业务真题，出题人：猜不到最优解",
+          "url": "https://www.qbitai.com/2026/07/441246.html",
+          "published": "2026-07-01T07:41:42Z",
+          "raw_summary": "Taste，决定天花板。",
+          "low_confidence": false
+        },
+        {
+          "title": "OpenSquilla 发布 0.4.0：AI 写代码首次能「自我验证」",
+          "url": "https://www.qbitai.com/2026/07/441240.html",
+          "published": "2026-07-01T07:32:23Z",
+          "raw_summary": "OpenSquilla 上线后数周内 GitHub star 增至数千量级",
+          "low_confidence": false
+        },
+        {
+          "title": "群核科技三项成果入选ECCV 2026，联手英伟达等探索物理AI仿真平台",
+          "url": "https://www.qbitai.com/2026/07/441237.html",
+          "published": "2026-07-01T07:29:32Z",
+          "raw_summary": "共同推进物理AI前沿技术探索。",
+          "low_confidence": false
+        },
+        {
+          "title": "Loop世界模型论文登顶Hugging Face，来自中国一家初创，周鸿祎陆奇都投了",
+          "url": "https://www.qbitai.com/2026/07/441225.html",
+          "published": "2026-07-01T07:24:48Z",
+          "raw_summary": "重写「AI如何反复推演世界」",
+          "low_confidence": false
+        },
+        {
+          "title": "卡帕西李飞飞辛顿都投了的Transformer专用芯片，签下10亿美元大单",
+          "url": "https://www.qbitai.com/2026/07/441183.html",
+          "published": "2026-07-01T07:15:29Z",
+          "raw_summary": "已流片",
+          "low_confidence": false
+        },
+        {
+          "title": "大湾区首个200亿具身大脑来了！自变量两个月连融四轮，完成交割",
+          "url": "https://www.qbitai.com/2026/07/441140.html",
+          "published": "2026-07-01T06:26:06Z",
+          "raw_summary": "四大互联网分别领投",
+          "low_confidence": false
+        },
+        {
+          "title": "卖Token也不是稳赚不赔！硅基流动招股书来了",
+          "url": "https://www.qbitai.com/2026/07/441127.html",
+          "published": "2026-07-01T05:52:09Z",
+          "raw_summary": "AI推理时代的Token工厂",
+          "low_confidence": false
+        },
+        {
+          "title": "Om AI联汇发布VLX：全球首个面向物理世界的端侧流式多模态模型",
+          "url": "https://www.qbitai.com/2026/07/441124.html",
+          "published": "2026-07-01T03:46:20Z",
+          "raw_summary": "物理世界AI的下一步",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "air-street-press",
+      "tier": 2,
+      "perspective": "investor",
+      "entry_count": 4,
+      "entries": [
+        {
+          "title": "State of AI Report Compute Index 2026",
+          "url": "https://press.airstreet.com/p/state-of-ai-compute-index-june-2026",
+          "published": "2026-07-01T15:57:26Z",
+          "raw_summary": "Updated AI compute index showing NVIDIA challengers gaining ground but not displacing it. Real shift occurring within NVIDIA, from A100 to H100/H200 and early Blackwell. Open research citations up 10.7% YoY, with Hopper as installed base and Grace-Blackwell mostly pipeline.",
+          "low_confidence": false
+        },
+        {
+          "title": "Compute scarcity is an engineering problem",
+          "url": "https://press.airstreet.com/p/angelos-perivolaropoulos-elevenlabs",
+          "published": "2026-06-30T13:07:15Z",
+          "raw_summary": "ElevenLabs demonstrates turning GPU scarcity into engineering solutions: serving 70x more users per GPU through batching, FP8 quantization, speculative decoding and KV-cache compression. Techniques push throughput from one to 140 users per GPU at frontier.",
+          "low_confidence": false
+        },
+        {
+          "title": "STARK raises €500M to build Europe's next defense prime",
+          "url": "https://press.airstreet.com/p/stark-500m",
+          "published": "2026-06-26T13:37:24Z",
+          "raw_summary": "German defense company STARK closes €500M funding led by Sequoia and Founders Fund for autonomous unmanned systems. Platforms include Virtus loitering munition, Gambit and Cascade munitions, plus Vanta unmanned surface vessel, with Minerva software coordinating all.",
+          "low_confidence": false
+        },
+        {
+          "title": "How Revolut runs AI at scale",
+          "url": "https://press.airstreet.com/p/nikolay-donets-revolut",
+          "published": "2026-06-25T13:06:16Z",
+          "raw_summary": "Nikolay Donets from Revolut discusses running AIR assistant at scale across 70+ million customers in 40+ countries. Emphasizes control plane complexity: governance layers, cost controls, human review, and regulatory compliance within banking infrastructure.",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "anthropic-news",
+      "tier": 3,
+      "perspective": "research",
+      "entry_count": 10,
+      "entries": [
+        {
+          "title": "Redeploying Fable 5",
+          "url": "https://anthropic.com/news/redeploying-fable-5",
+          "published": "2026-06-30",
+          "raw_summary": "Fable 5 returns globally July 1. Anthropic is also proposing an industry-wide framework for scoring jailbreak severity, together with Amazon, Microsoft, Google, and other partners.",
+          "low_confidence": false
+        },
+        {
+          "title": "Introducing Claude Sonnet 5",
+          "url": "https://anthropic.com/news/claude-sonnet-5",
+          "published": "2026-06-30",
+          "raw_summary": "Sonnet 5 delivers frontier performance across coding, agents, and professional work at scale.",
+          "low_confidence": false
+        },
+        {
+          "title": "Claude Science, an AI workbench for scientists, is now available",
+          "url": "https://anthropic.com/news/claude-science-ai-workbench",
+          "published": "2026-06-30",
+          "raw_summary": "Claude Science is a customizable app that integrates tools and packages researchers use, produces auditable artifacts, and provides flexible access to computing resources.",
+          "low_confidence": false
+        },
+        {
+          "title": "Introducing Claude Tag",
+          "url": "https://anthropic.com/news/introducing-claude-tag",
+          "published": "2026-06-23",
+          "raw_summary": "Claude Tag is a new way for teams to work with Claude.",
+          "low_confidence": false
+        },
+        {
+          "title": "Anthropic opens Seoul office and announces new partnerships across the Korean AI ecosystem",
+          "url": "https://anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem",
+          "published": "2026-06-17",
+          "raw_summary": "Anthropic expands its presence in Korea with a new Seoul office and strategic partnerships.",
+          "low_confidence": false
+        },
+        {
+          "title": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5",
+          "url": "https://anthropic.com/news/fable-mythos-access",
+          "published": "2026-06-12",
+          "raw_summary": "Anthropic addresses a US government directive regarding suspension of access to two AI models.",
+          "low_confidence": false
+        },
+        {
+          "title": "Results from the first Anthropic Public Record",
+          "url": "https://anthropic.com/news/anthropic-public-record",
+          "published": "2026-06-12",
+          "raw_summary": "Anthropic releases findings from its inaugural Public Record initiative.",
+          "low_confidence": false
+        },
+        {
+          "title": "TCS and Anthropic partner to bring Claude to regulated industries",
+          "url": "https://anthropic.com/news/tcs-anthropic-partnership",
+          "published": "2026-06-12",
+          "raw_summary": "Tata Consultancy Services and Anthropic collaborate to deploy Claude in highly regulated business sectors.",
+          "low_confidence": false
+        },
+        {
+          "title": "DXC will integrate Claude into the systems banks, airlines, and other regulated industries rely on",
+          "url": "https://anthropic.com/news/dxc-anthropic-alliance",
+          "published": "2026-06-11",
+          "raw_summary": "DXC Technology integrates Claude into enterprise systems serving financial, aviation, and other regulated sectors.",
+          "low_confidence": false
+        },
+        {
+          "title": "Introducing Claude Corps",
+          "url": "https://anthropic.com/news/claude-corps",
+          "published": "2026-06-11",
+          "raw_summary": "Anthropic launches Claude Corps program.",
+          "low_confidence": false
+        }
+      ]
+    },
+    {
+      "source_name": "meta-ai-blog",
+      "tier": 3,
+      "perspective": "research",
+      "entry_count": 5,
+      "entries": [
+        {
+          "title": "From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery",
+          "url": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/",
+          "published": "2026-06-29",
+          "raw_summary": "Research demonstrating how brain-AI interfaces can enable communication without surgical intervention, advancing assistive technology for individuals with speech and mobility limitations.",
+          "low_confidence": false
+        },
+        {
+          "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
+          "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+          "published": "2026-04-08",
+          "raw_summary": "Meta's latest advancement in AI scaling, introducing Muse Spark as a step toward creating increasingly capable personal AI systems. [date_suspicious: 2026-04-08, 85 days before 2026-07-02]",
+          "low_confidence": true
+        },
+        {
+          "title": "Scaling How We Build and Test Our Most Advanced AI",
+          "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
+          "published": "2026-04-08",
+          "raw_summary": "Overview of Meta's infrastructure and methodology for developing and rigorously testing state-of-the-art AI models at scale. [date_suspicious: 2026-04-08, 85 days before 2026-07-02]",
+          "low_confidence": true
+        },
+        {
+          "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
+          "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
+          "published": "2026-04-06",
+          "raw_summary": "Case study showing how computer vision technology powers innovative fashion applications, enabling advanced image segmentation for digital wardrobe management. [date_suspicious: 2026-04-06, 87 days before 2026-07-02]",
+          "low_confidence": true
+        },
+        {
+          "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning",
+          "url": "https://ai.meta.com/blog/segment-anything-model-3/",
+          "published": "2026-03-27",
+          "raw_summary": "Latest iteration of Segment Anything Model featuring performance improvements in real-time video analysis through advanced reasoning techniques. [date_suspicious: 2026-03-27, 97 days before 2026-07-02]",
+          "low_confidence": true
+        }
+      ]
+    },
+    {
+      "source_name": "the-batch",
+      "tier": 3,
+      "perspective": "research",
+      "entry_count": 15,
+      "entries": [
+        {
+          "title": "A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems",
+          "url": "https://www.deeplearning.ai/the-batch/issue-359",
+          "published": "2026-06-26",
+          "raw_summary": "The Batch News & Insights: \"Loop engineering\" is a hot buzzphrase after Boris Cherney (Claude Code's creator) and Peter Steinberger (OpenClaw's creator) both mentioned it on social media.",
+          "low_confidence": false
+        },
+        {
+          "title": "Testing Mythos and Fable, Moving Beyond SWE-bench, Nvidia's Open Contender",
+          "url": "https://www.deeplearning.ai/the-batch/issue-358",
+          "published": "2026-06-19",
+          "raw_summary": "The Batch AI News and Insights: Over the last two weeks, both the U.S. Government and Anthropic took significant actions that demonstrated their power to control access to AI.",
+          "low_confidence": false
+        },
+        {
+          "title": "Mythos Begets Fable, Cursor's Composer 2.5, Agents Building Agents",
+          "url": "https://www.deeplearning.ai/the-batch/issue-357",
+          "published": "2026-06-12",
+          "raw_summary": "The Batch AI News and Insights: \"If you haven't already, I encourage you to experiment with using AI agents not just to chat but to actually do work for you on your desktop.\"",
+          "low_confidence": false
+        },
+        {
+          "title": "Qwen3.7-Max Challenges Google for Third Place, AI Saves Whales, Fine-Tuning Breaks Copyright Alignment",
+          "url": "https://www.deeplearning.ai/the-batch/issue-356",
+          "published": "2026-06-05",
+          "raw_summary": "The Batch AI News and Insights: Intense efforts have occurred over recent years to lobby governments to pass AI laws for regulatory capture or to suppress open source.",
+          "low_confidence": false
+        },
+        {
+          "title": "Gemini Flash Gets Pricey, AI Act Delays, Agents Drive Online Traffic",
+          "url": "https://www.deeplearning.ai/the-batch/issue-355",
+          "published": "2026-05-29",
+          "raw_summary": "The Batch AI News and Insights: One of the new, buzzy jobs in Silicon Valley is the AI Forward Deployed Engineer, an engineer embedded within client organizations.",
+          "low_confidence": false
+        },
+        {
+          "title": "Hermes vs. OpenClaw, Cybersecurity Alarms Ring, More-Interactive Conversations, Can Agents Do Human Work?",
+          "url": "https://www.deeplearning.ai/the-batch/issue-354",
+          "published": "2026-05-22",
+          "raw_summary": "The Batch AI News and Insights: Harvard University voted to limit A grades in undergraduate classes to approximately 20% of each class.",
+          "low_confidence": false
+        },
+        {
+          "title": "China Thwarts Meta's Agentic Ambition, U.S. Evaluates Upcoming Models, AI Diagnoses Mammograms",
+          "url": "https://www.deeplearning.ai/the-batch/issue-353",
+          "published": "2026-05-15",
+          "raw_summary": "The Batch AI News and Insights: \"We've been working on AI Andrew, an AI companion shaped by my personality.\"",
+          "low_confidence": false
+        },
+        {
+          "title": "Seedance Makes A Splash, Nvidia's AI-Guided Chip Designs, Helping Robots Not Forget",
+          "url": "https://www.deeplearning.ai/the-batch/issue-352",
+          "published": "2026-05-08",
+          "raw_summary": "The Batch AI News and Insights: \"There will be no AI jobpocalypse.\"",
+          "low_confidence": false
+        },
+        {
+          "title": "GPT-5.5 Outperforms (and Hallucinates), Kimi K2.6 Leads Open LLMs, AI Strains Climate Pledges",
+          "url": "https://www.deeplearning.ai/the-batch/issue-351",
+          "published": "2026-05-01",
+          "raw_summary": "[date_suspicious: 2026-05-01 is 62 days before fetched_at 2026-07-02] The Batch AI News and Insights: Ways of prompting AI in 2026 differ significantly from 2022 when ChatGPT launched.",
+          "low_confidence": true
+        },
+        {
+          "title": "GLM 5.1 Thinks Strategically, Data-Center Revolt Intensifies, When Helpful LLMs Turn Unhelpful",
+          "url": "https://www.deeplearning.ai/the-batch/issue-350",
+          "published": "2026-04-24",
+          "raw_summary": "[date_suspicious: 2026-04-24 is 69 days before fetched_at 2026-07-02] The Batch AI News and Insights: Coding agents are accelerating different types of software work to different degrees.",
+          "low_confidence": true
+        },
+        {
+          "title": "Meta Pivots From Open Weights, Big Pharma Bets On AI, Regulatory Patchwork, Simulating Human Cohorts",
+          "url": "https://www.deeplearning.ai/the-batch/issue-349",
+          "published": "2026-04-17",
+          "raw_summary": "[date_suspicious: 2026-04-17 is 76 days before fetched_at 2026-07-02] The Batch AI News and Insights: AI-native software engineering teams operate very differently than traditional teams.",
+          "low_confidence": true
+        },
+        {
+          "title": "Anthropic's Claude Mythos Problem, Dark DNA Unveiled, Pitfalls for Assistive Models",
+          "url": "https://www.deeplearning.ai/the-batch/issue-348",
+          "published": "2026-04-10",
+          "raw_summary": "[date_suspicious: 2026-04-10 is 83 days before fetched_at 2026-07-02] The Batch AI News and Insights: As AI agents accelerate coding, the future of software engineering transforms.",
+          "low_confidence": true
+        },
+        {
+          "title": "Claude Code's Source Leaks, OpenAI Exits Video Generation, Gemini Adds Music Generation",
+          "url": "https://www.deeplearning.ai/the-batch/issue-347",
+          "published": "2026-04-03",
+          "raw_summary": "[date_suspicious: 2026-04-03 is 90 days before fetched_at 2026-07-02] The Batch AI News and Insights: Voice-based AI is improving rapidly, yet most people underestimate how pervasive voice UIs will become.",
+          "low_confidence": true
+        },
+        {
+          "title": "Nvidia's Open Salvo, OpenAI's Amazon Deal, Grok Cuts Video Prices, Recursive Language Models",
+          "url": "https://www.deeplearning.ai/the-batch/issue-346",
+          "published": "2026-03-27",
+          "raw_summary": "[date_suspicious: 2026-03-27 is 97 days before fetched_at 2026-07-02] The Batch AI News and Insights: The anti-AI coalition continues maneuvering to find arguments to slow down AI progress.",
+          "low_confidence": true
+        },
+        {
+          "title": "Attacks On Data Centers, Qwen3.5 In All Sizes, DeepSeek's Huawei Play, Apple's Multimodal Tokenizer",
+          "url": "https://www.deeplearning.ai/the-batch/issue-345",
+          "published": "2026-03-20",
+          "raw_summary": "[date_suspicious: 2026-03-20 is 104 days before fetched_at 2026-07-02] The Batch AI News and Insights: Reports from professionals at all seniority levels reveal job insecurity concerns.",
+          "low_confidence": true
+        }
+      ]
+    },
+    {
+      "source_name": "jiqizhixin",
+      "tier": 3,
+      "perspective": "product",
+      "entry_count": 3,
+      "entries": [
+        {
+          "title": "从答题到做实验：SciAgentGym让大模型进入科学工作流",
+          "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%BB%8E%E7%AD%94%E9%A2%98%E5%88%B0%E5%81%9A%E5%AE%9E%E9%AA%8C%EF%BC%9ASciAgentGym%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BF%9B%E5%85%A5%E7%A7%91%E5%AD%A6%E5%B7%A5%E4%BD%9C%E6%B5%81",
+          "published": "2026-07-01",
+          "raw_summary": "复旦大学NLP实验室提出SciAgentGym，一个为多步科学工具使用而设计的智能体环境。该框架强调类型安全、可复现性和可扩展性，包含259个任务的评测集SciAgentBench，覆盖物理、化学、材料科学和生命科学四个领域。",
+          "low_confidence": true
+        },
+        {
+          "title": "直通ICML 2026！上海AI实验室携百余顶尖岗位，双场人才交流会报名开启",
+          "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E7%9B%B4%E9%80%9AICML%202026%EF%BC%81%E4%B8%8A%E6%B5%B7AI%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%BA%E7%99%BE%E4%BD%99%E9%A1%B6%E5%B0%96%E5%B2%97%E4%BD%8D%EF%BC%8C%E5%8F%8C%E5%9C%BA%E4%BA%BA%E6%89%8D%E4%BA%A4%E6%B5%81%E4%BC%9A%E6%8A%A1%E5%90%8D%E5%BC%80%E5%90%AF",
+          "published": "2026-07-01",
+          "raw_summary": "上海AI实验室将于ICML 2026期间在韩国首尔举办两场人才交流活动。活动包括\"云帆·ICML 2026 AI Talent Meetup\"和\"北极星X星启人才交流会\"，汇聚20余家顶尖科研机构和企业，开放100+岗位需求。",
+          "low_confidence": true
+        },
+        {
+          "title": "一句话生图要过时了？开源图像生成Agent进化出「工具编排」",
+          "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%94%9F%E5%9B%BE%E8%A6%81%E8%BF%87%E6%97%B6%E4%BA%86%EF%BC%9F%E5%BC%80%E6%BA%90%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90Agent%E8%BF%9B%E5%8C%96%E5%87%BA%E3%80%8C%E5%B7%A5%E5%85%B7%E7%BC%96%E6%8E%92%E3%80%8D",
+          "published": "2026-07-01",
+          "raw_summary": "香港科技大学、美团等机构研究团队提出GenEvolve框架，将图像生成建模为工具编排轨迹。智能体先理解请求，调用搜索、图像检索和生成知识工具，最后组织成prompt-reference program交给底层生成器。该方法支持知识锚定和质量锚定两类生成需求。",
+          "low_confidence": true
+        }
+      ]
+    },
+    {
+      "source_name": "a16z-news-content",
+      "tier": 3,
+      "perspective": "investor",
+      "entry_count": 15,
+      "entries": [
+        {
+          "title": "Investing in Netris",
+          "url": "https://a16z.com/announcement/investing-in-netris",
+          "published": "2026-06-25T12:25:00+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Infra",
+            "is_new_tagged": true,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Investing in Mirendil",
+          "url": "https://a16z.com/announcement/investing-in-mirendil",
+          "published": "2026-06-24T17:10:29+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Infra",
+            "is_new_tagged": true,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "The World-Building Doors Are Open, Again.",
+          "url": "https://a16z.com/the-world-building-doors-are-open-again",
+          "published": "2026-06-23T13:55:44+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Consumer",
+            "is_new_tagged": true,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Investing in Probook",
+          "url": "https://a16z.com/announcement/investing-in-probook",
+          "published": "2026-06-23T12:55:16+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Enterprise",
+            "is_new_tagged": true,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "How to Win a Space War",
+          "url": "https://a16z.com/how-to-win-a-space-war",
+          "published": "2026-06-22T13:55:41+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "American Dynamism",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Investing in Prosper AI",
+          "url": "https://a16z.com/announcement/investing-in-prosper-ai",
+          "published": "2026-06-22T12:55:42+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "General",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "New Media, One Year In",
+          "url": "https://a16z.com/what-is-new-media-in-2026",
+          "published": "2026-06-18T14:10:41+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "General",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Investing in Telepatia",
+          "url": "https://a16z.com/announcement/investing-in-telepatia",
+          "published": "2026-06-17T18:09:08+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Bio + Health",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Investing in Convey",
+          "url": "https://a16z.com/announcement/investing-in-convey",
+          "published": "2026-06-17T13:55:30+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Enterprise",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Late Stage Venture Is About Late Stage Founders",
+          "url": "https://a16z.com/late-stage-venture-is-about-late-stage-founders",
+          "published": "2026-06-11T13:55:25+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Growth",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Everything is Recorded Now",
+          "url": "https://a16z.com/everything-is-recorded-now",
+          "published": "2026-06-10T13:55:38+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Enterprise",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Marc Andreessen on Evaluating Founders and AI's Consumer Surplus",
+          "url": "https://a16z.com/podcast/marc-andreessen-on-evaluating-founders-and-ais-consumer-surplus-2",
+          "published": "2026-06-08T16:41:45+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "General",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "Building Search for AI Agents with Exa CEO Will Bryk",
+          "url": "https://a16z.com/podcast/building-search-for-ai-agents-with-exa-ceo-will-bryk",
+          "published": "2026-06-06T13:00:14+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Infra",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "AI Agents and the Fight for Customer Data",
+          "url": "https://a16z.com/podcast/ai-agents-and-the-fight-for-customer-data",
+          "published": "2026-06-05T13:00:18+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "Enterprise",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        },
+        {
+          "title": "A16Z Investor Relations is now Global Partnerships",
+          "url": "https://a16z.com/a16z-investor-relations-is-now-global-partnerships",
+          "published": "2026-06-04T13:15:44+00:00",
+          "raw_summary": "",
+          "low_confidence": false,
+          "extra": {
+            "category": "General",
+            "is_new_tagged": false,
+            "published_source": "detail_page_schema_org"
+          }
+        }
+      ]
+    },
+    {
+      "source_name": "state-of-ai",
+      "tier": 3,
+      "perspective": "investor",
+      "entry_count": 3,
+      "entries": [
+        {
+          "title": "State of AI Report 2025",
+          "url": "https://www.stateof.ai/",
+          "published": null,
+          "raw_summary": "[date_missing] The eighth annual State of AI Report, produced by Nathan Benaich and Air Street Capital, analyzes key developments across research, industry, politics, safety, and AI usage trends. Features insights on frontier model competition, reasoning capabilities, scientific AI collaboration, commercial adoption acceleration, and geopolitical dynamics.",
+          "low_confidence": true
+        },
+        {
+          "title": "State of AI Report 2025 - Full Slide Deck",
+          "url": "https://docs.google.com/presentation/d/1xiLl0VdrlNMAei8pmaX4ojIOfej6lhvZbOIK7Z6C-Go/edit?usp=sharing",
+          "published": null,
+          "raw_summary": "[date_missing] Complete presentation deck for the 2025 State of AI Report covering research breakthroughs, industry applications, regulatory landscape, safety considerations, practitioner survey results, and predictions for the coming year.",
+          "low_confidence": true
+        },
+        {
+          "title": "2025 Report Launch Blog Post",
+          "url": "https://www.stateof.ai/2025-report-launch",
+          "published": null,
+          "raw_summary": "[date_missing] Extended analysis of the 2025 State of AI Report findings, including details on OpenAI's competitive position, reasoning model advances, AI's emerging role in scientific research, and the acceleration of commercial AI adoption across U.S. businesses.",
+          "low_confidence": true
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "retries": [],
+  "stats": {
+    "sources_attempted": 13,
+    "sources_with_data": 13,
+    "sources_empty": 0,
+    "sources_failed": 0,
+    "entries_total": 135,
+    "first_fail_retried": 0,
+    "retry_success": 0
+  }
+}

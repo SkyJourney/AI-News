@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:30:00
-updated: 2026-07-01 09:31:00
-entry_total: 23
+updated: 2026-07-02 09:41:00
+entry_total: 27
 ---
 
 # 模型发布 (model-releases)
@@ -99,3 +99,18 @@ entry_total: 23
 - **DeepSeek V4 官方版涨价** (未升级 Zettel)
   DeepSeek V4 正式版伴随性能提升大幅调价，打破此前超低价策略。
   源：`qbitai`
+
+## 2026-07-02
+
+- **Improving health intelligence in ChatGPT**（未升级 Zettel，复盘）
+  🔄 [复盘] GPT-5.5 Instant 健康对话改进功能持续传播第三日。
+  源：`openai-rss` · 首记于 [[2026-06-30]]
+- **开源生态 Artifacts #22：Zyphra、Cohere、Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
+  🔄 [复盘] 开源模型生态多样化综述连续第四日出现，多模型发布评价持续引用。
+  源：`interconnects` · 首记于 [[2026-06-29]]
+- **Om AI联汇发布VLX：全球首个端侧流式多模态模型** ([[202607020933-om-ai-vlx-physical-multimodal]])
+  三段式子模型（Flow/Seek/Go）协同实现端侧持续感知-定位-决策闭环，单路延迟 0.06 秒。
+  源：`qbitai`
+- **Redeploying Fable 5** ([[202607020934-fable-5-redeployment-jailbreak-scoring]])
+  Fable 5 全球重新部署，Anthropic 联合 Amazon/Microsoft/Google 提出业界越狱严重性评分框架。
+  源：`anthropic-news`

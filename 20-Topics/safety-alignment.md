@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:33:00
-updated: 2026-07-01 09:31:00
-entry_total: 9
+updated: 2026-07-02 09:41:00
+entry_total: 11
 ---
 
 # 安全 / 对齐 (safety-alignment)
@@ -51,3 +51,12 @@ entry_total: 9
 - **MESA：多智能体系统通信边安全风险主动排序** ([[202607010924-mesa-mas-security-framework]])
   无需攻击样本的 MAS 安全框架，与 safety 视角呼应，边级攻击影响高度集中。
   源：`arxiv-api`
+
+## 2026-07-02
+
+- **Reinforcement Learning with Metacognitive Feedback**（未升级 Zettel）
+  用强化学习训练元认知反馈，缓解 LLM 高置信度幻觉与不确定性表达失真问题。
+  源：`huggingface-daily-papers`（16 赞）
+- **RedVox** ([[202607020939-redvox-speech-safety-benchmark]])
+  首个覆盖五语种的语音模型安全公平性基准，揭示语音模态安全评估近乎空白且漏洞随语言/模态双重放大。
+  源：`huggingface-daily-papers`（12 赞）

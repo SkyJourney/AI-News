@@ -1,7 +1,7 @@
 ---
 created: 2026-06-29 14:05:00
-updated: 2026-06-29 14:05:00
-entry_total: 3
+updated: 2026-07-02 09:41:00
+entry_total: 5
 ---
 
 # 开源工具 (opensource-tools)
@@ -21,3 +21,12 @@ entry_total: 3
 - **Macrodata: Robots need a data refinery** ([[202606291411-macrodata-robot-data-refinery]])
   前 HF 研究员创立 Macrodata，开源 Refiner 工具标准化机器人传感器数据，填补物理 AI 数据管道空白。
   源：`air-street-press`
+
+## 2026-07-02
+
+- **具身智能Skill时刻：英伟达开源机器人技能库**（未升级 Zettel）
+  Jim Fan 评价为"范式变了"，NVIDIA 开源机器人技能库开创具身持续学习新范式。
+  源：`qbitai`
+- **OpenSquilla 发布 0.4.0：AI 写代码首次能"自我验证"**（未升级 Zettel）
+  上线数周内 GitHub star 增至数千量级，代码生成自验证能力成为关注焦点。
+  源：`qbitai`

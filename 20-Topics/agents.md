@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-07-01 09:31:00
-entry_total: 17
+updated: 2026-07-02 09:41:00
+entry_total: 23
 ---
 
 # AI Agent (agents)
@@ -65,3 +65,24 @@ entry_total: 17
 - **Octo 开源：Agent 间互联网基础设施** ([[202607010929-octo-agent-internet-infra]])
   明略科技开源 Octo，建立 AI Agent 标准化互联网级通信协议，multi-agent 规模化落地前提基础。
   源：`qbitai`
+
+## 2026-07-02
+
+- **Dockerless: Environment-Free Program Verifier for Coding Agents**（未升级 Zettel）
+  无需执行环境即可评估代码补丁的 Agent 验证器，规避 Docker 环境搭建开销。
+  源：`huggingface-daily-papers`（86 赞）
+- **SkillHone** ([[202607020937-skillhone-agent-skill-evolution]])
+  持久决策历史驱动的 Agent 技能持续演进框架，GAIA/WebWalkerQA 上超越商业深度研究 Agent。
+  源：`huggingface-daily-papers`（21 赞）
+- **Managing Procedural Memory in LLM Agents**（未升级 Zettel）
+  AFTER 基准（382 个企业任务、6 类角色）评测程序性记忆跨任务/角色/模型迁移能力。
+  源：`huggingface-daily-papers`（17 赞）
+- **DataEvolver: Self-Evolving Multi-Agent Data Construction**（未升级 Zettel）
+  多 Agent 自演化数据构建管线，保留拒绝样本中的失败信号用于文本密集图像生成训练。
+  源：`huggingface-daily-papers`（16 赞）
+- **QVal: Cheaply Evaluating Dense Supervision Signals**（未升级 Zettel）
+  长视距 LLM Agent 密集监督信号的低成本评估方法，解决中间步骤打分方法的评价缺口。
+  源：`huggingface-daily-papers`（9 赞）
+- **SciAgentGym：从答题到做实验** ([[202607020938-sciagentgym-scientific-workflow-agent]])（复盘）
+  🔄 [复盘] 复旦 NLP 实验室 259 任务科学工作流 Agent 评测基准 SciAgentBench 持续传播。
+  源：`jiqizhixin` · 首记于 [[2026-06-29]]

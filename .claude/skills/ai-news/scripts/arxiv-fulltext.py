@@ -47,6 +47,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+from typing import Tuple, Optional, Dict
 
 # ============================================================
 # 常量
@@ -65,7 +66,7 @@ ARXIV_ID_RE = re.compile(r"(\d{4}\.\d{4,5})(v\d+)?")
 # ============================================================
 # ID 解析
 # ============================================================
-def parse_arxiv_id(input_str: str) -> tuple[str | None, str | None]:
+def parse_arxiv_id(input_str: str) -> Tuple[Optional[str], Optional[str]]:
     """从任意输入抽 canonical arxiv ID。返回 (full_id_with_v, base_id_no_v)"""
     m = ARXIV_ID_RE.search(input_str)
     if not m:
@@ -146,7 +147,7 @@ def fetch_arxiv_api_meta(arxiv_id: str, timeout: int) -> dict:
 # ============================================================
 def try_fetch_html_via_subprocess(
     url: str, out_dir: str, target_id: str, date: str, timeout: int
-) -> dict | None:
+) -> Optional[Dict]:
     """subprocess 调 fetch-with-assets.py；成功返回 dict，失败返回 None"""
     try:
         result = subprocess.run(
@@ -254,7 +255,7 @@ def main() -> int:
             (f"https://arxiv.org/html/{full_id}", "arxiv_html_official"),
             (f"https://ar5iv.labs.arxiv.org/html/{base_id}", "arxiv_html_ar5iv"),
         ]
-        html_result: dict | None = None
+        html_result: Optional[Dict] = None
         tried_urls: list[str] = []
         for url, label in candidates:
             tried_urls.append(url)

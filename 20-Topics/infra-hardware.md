@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:37:00
-updated: 2026-07-01 09:31:00
-entry_total: 10
+updated: 2026-07-02 09:41:00
+entry_total: 14
 ---
 
 # 基础设施 & 硬件 (infra-hardware)
@@ -47,3 +47,18 @@ entry_total: 10
 - **ElevenLabs：70 倍 GPU 效率提升——算力稀缺是工程问题** ([[202607010921-elevenlabs-gpu-efficiency-70x]])
   batching + FP8 + speculative decoding + KV-cache 压缩组合达到 140 用户/GPU，推理优化标准套件实测验证。
   源：`air-street-press`
+
+## 2026-07-02
+
+- **OceanBase湖库一体，重新定义AI数据库**（未升级 Zettel）
+  一套技术栈实现离在线统一，AI 数据库湖仓一体化持续推进。
+  源：`qbitai`
+- **卡帕西李飞飞辛顿都投了的Transformer专用芯片，签下10亿美元大单**（未升级 Zettel）
+  Transformer 专用芯片完成流片并签下十亿美元订单，硬件加速赛道再添新玩家。
+  源：`qbitai`
+- **State of AI Report Compute Index 2026** ([[202607020940-state-of-ai-compute-index-2026]])
+  算力指数刷新：Hopper 成已安装基础，Blackwell 仍主要在管道中；前沿实验室开始以吉瓦计价算力组合。
+  源：`air-street-press`
+- **Compute scarcity is an engineering problem** ([[202607010921-elevenlabs-gpu-efficiency-70x]])（复盘）
+  🔄 [复盘] ElevenLabs 70 倍 GPU 效率工程化方案持续传播第二日。
+  源：`air-street-press` · 首记于 [[2026-07-01]]

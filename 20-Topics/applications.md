@@ -1,7 +1,7 @@
 ---
 created: 2026-06-27 14:39:00
-updated: 2026-07-01 09:31:00
-entry_total: 27
+updated: 2026-07-02 09:41:00
+entry_total: 34
 ---
 
 # 应用案例 (applications)
@@ -103,3 +103,27 @@ entry_total: 27
 - **ChatGPT 全球采用扩展数据** (未升级 Zettel)
   OpenAI Signals 数据显示 ChatGPT 全球用户增长、功能深度使用与区域多语言渗透趋势。
   源：`openai-rss`
+
+## 2026-07-02
+
+- **Inside Genebench-Pro：GeneBench-Pro 应用案例研究**（未升级 Zettel）
+  GeneBench-Pro 基准的实际应用案例分析，呼应模型发布层面的基因组学评测布局。
+  源：`openai-rss`
+- **Import AI 463：NVIDIA ENPIRE 机器人自改进框架** ([[202607010928-import-ai-463-nvidia-enpire]])（复盘）
+  🔄 [复盘] NVIDIA ENPIRE 机器人自主实验循环、腾讯万卡 GPU 集群调试工具、AI 时代人类失权哲思三合一综述持续传播。
+  源：`import-ai` · 首记于 [[2026-06-30]]
+- **Banning Open Source AI Would Be A Mistake**（未升级 Zettel，复盘）
+  开源 AI 监管论战延续，反对禁令的教育、创新、竞争多维论证持续讨论。
+  源：`interconnects` · 首记于 [[2026-07-01]]
+- **金融AI武道大会开赛：四道业务真题**（未升级 Zettel）
+  金融 AI 竞赛聚焦业务真实场景挑战，考察模型商业落地能力而非纯粹刷榜。
+  源：`qbitai`
+- **群核科技三项成果入选 ECCV 2026**（未升级 Zettel）
+  群核科技联手英伟达等探索物理 AI 仿真平台，三项成果获顶会认可。
+  源：`qbitai`
+- **How Revolut runs AI at scale** ([[202606291407-revolut-ai-deployment-scale]])（复盘）
+  🔄 [复盘] 7,000 万用户规模受监管银行 AI 部署方法论持续受关注，第四日仍在传播。
+  源：`air-street-press` · 首记于 [[2026-06-29]]
+- **Brain2Qwerty：非侵入式脑机接口新途径** ([[202607010914-brain2qwerty-noninvasive-bci]])（复盘）
+  🔄 [复盘] 无手术脑机通信助残应用案例持续引发关注。
+  源：`meta-ai-blog` · 首记于 [[2026-06-30]]

@@ -1,7 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
-updated: 2026-07-01 09:31:00
-entry_total: 10
+updated: 2026-07-02 09:41:00
+entry_total: 13
 ---
 
 # 融资 & 投资 (funding-investment)
@@ -49,4 +49,16 @@ entry_total: 10
   源：`air-street-press` · 首记于 [[2026-06-29]]
 - **Odyssey $310M Series B** ([[202606291412-odyssey-world-model-funding]])（复盘）
   🔄 [复盘] 世界模型融资热度持续，Starchild-1/Agora-1/PROWL 三产品线布局延续讨论。
+  源：`air-street-press` · 首记于 [[2026-06-29]]
+
+## 2026-07-02
+
+- **大湾区首个200亿具身大脑：自变量两个月连融四轮**（未升级 Zettel）
+  自变量完成交割，四大互联网公司分别领投，具身智能融资热度延续。
+  源：`qbitai`
+- **硅基流动招股书：卖Token也不是稳赚不赔**（未升级 Zettel）
+  硅基流动 IPO 招股书披露，AI 推理时代 Token 工厂商业模式面临盈利拷问。
+  源：`qbitai`
+- **STARK raises €500M**（未升级 Zettel，复盘）
+  🔄 [复盘] 欧洲防务自主系统融资持续传播第四日。
   源：`air-street-press` · 首记于 [[2026-06-29]]

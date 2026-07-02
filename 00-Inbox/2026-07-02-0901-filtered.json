@@ -1,0 +1,1197 @@
+{
+  "batch_id": "2026-07-02-09:01",
+  "target_date": "2026-07-02",
+  "kept": [
+    {
+      "title": "Inside Genebench-Pro",
+      "url": "https://openai.com/index/genebench-pro/case-studies",
+      "published": "2026-06-30T00:00:00Z",
+      "raw_summary": "",
+      "low_confidence": true,
+      "source_name": "openai-rss",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Improving health intelligence in ChatGPT",
+      "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+      "published": "2026-06-18T11:00:00Z",
+      "raw_summary": "Learn how GPT-5.5 Instant improves ChatGPT's health and wellness responses with stronger reasoning, better context, clearer communication, and physician-informed evaluations.",
+      "low_confidence": false,
+      "source_name": "openai-rss",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-30",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Orca: The World is in Your Mind",
+      "url": "https://huggingface.co/papers/2606.30534",
+      "published": "2026-06-28T20:00:00.000Z",
+      "raw_summary": "We introduce Orca, an initial instantiation of a general world foundation model. Orca learns a unified world latent space from multimodal world signals and exposes it through multimodal readout interfaces. Rather than optimizing isolated next-token, next-frame, or next-action prediction, we are centered on Next-State-Prediction modeling, offering a unified state-transition modeling route toward understanding, predicting, and acting upon the world. Orca learns through two complementary paradigms:",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 176,
+        "arxiv_id": "2606.30534",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Dockerless: Environment-Free Program Verifier for Coding Agents",
+      "url": "https://huggingface.co/papers/2606.28436",
+      "published": "2026-06-25T20:00:00.000Z",
+      "raw_summary": "Program verifiers play a central role in training coding agents, including selecting trajectories for supervised fine-tuning (SFT) and providing rewards for reinforcement learning (RL). Standard execution-based verification requires running unit tests inside per-repository environments such as Docker images, incurring substantial environment setup costs. We propose Dockerless, an environment-free agentic patch verifier that evaluates generated code patches without executing them. Rather than sim",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 86,
+        "arxiv_id": "2606.28436",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "DOPD: Dual On-policy Distillation",
+      "url": "https://huggingface.co/papers/2606.30626",
+      "published": "2026-06-28T20:00:00.000Z",
+      "raw_summary": "On-policy distillation (OPD) offers superior capacity transfer by supervising student-sampled trajectories with dense token-level signals. To furnish high-quality supervision sources and thereby elevate the performance frontier of distillation, an intuitive direction is to infuse privileged information to either teacher or student itself. However, this additional input induces a potential failure mode we dub privilege illusion: a pattern that conflates the transferable capability gap that studen",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 75,
+        "arxiv_id": "2606.30626",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "BlockPilot: Instance-Adaptive Policy Learning for Diffusion-based Speculative Decoding",
+      "url": "https://huggingface.co/papers/2606.31315",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "Speculative decoding accelerates inference by using a lightweight draft model to generate candidate tokens in parallel, and are then verified by the target model, enabling lossless acceleration. Recently, diffusion-based speculative decoding further improves parallelism by generating multiple tokens per forward pass via block-level diffusion, achieving state-of-the-art (SOTA) performance. However, existing methods adopt a fixed inference block size and assume a uniform optimal decoding strategy ",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 67,
+        "arxiv_id": "2606.31315",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Scenes as Objects, Not Primitives: Instance-Structured 3D Tokenization from Unposed Views",
+      "url": "https://huggingface.co/papers/2606.29513",
+      "published": "2026-06-27T20:00:00.000Z",
+      "raw_summary": "A 3D scene is understood through its objects, not the primitives that compose them. Yet feed-forward reconstruction methods output dense, unstructured sets of points or Gaussians, leaving object-level structure to be recovered after the fact. We propose a feed-forward framework that decomposes a scene into instance-structured 3D token groups directly from unposed multi-view images -- compact object-centric units from which reconstruction, segmentation, and manipulation all follow. Each token gro",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 34,
+        "arxiv_id": "2606.29513",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "GEAR: Guided End-to-End AutoRegression for Image Synthesis",
+      "url": "https://huggingface.co/papers/2606.32039",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "Visual generative models are typically trained in two stages. A tokenizer is first trained for reconstruction and then frozen, after which a generator is trained on its discrete indices or continuous latents. This decoupling leaves the tokenizer unaware of what the generator finds easy to model. We present GEAR (Guided End-to-end AutoRegression), which trains a vector-quantized (VQ) tokenizer and an autoregressive (AR) generator jointly and end-to-end, guided by representation alignment. The key",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 28,
+        "arxiv_id": "2606.32039",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Evolution Fine-Tuning: Learning to Discover Across 371 Optimization Tasks",
+      "url": "https://huggingface.co/papers/2606.29082",
+      "published": "2026-06-26T20:00:00.000Z",
+      "raw_summary": "Would experience designing faster GPU kernels also help close in on a long-standing open mathematical conjecture? Large Language Models (LLMs) integrated into evolutionary search have recently produced state-of-the-art solutions on optimization tasks, including open mathematical conjectures, GPU kernel design, scientific law discovery, and combinatorial puzzles. To achieve this, prior work applied search scaffolds to one target task at a time, so every new problem is approached from scratch and ",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 23,
+        "arxiv_id": "2606.29082",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Multi-Block Diffusion Language Models",
+      "url": "https://huggingface.co/papers/2606.29215",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "Block Diffusion Language Models (BD-LMs) improve diffusion-based text generation with KV caching and flexible-length generation. A natural next step is to extend them from Single-Block Diffusion (SingleBD) to Multi-Block Diffusion (MultiBD), where a running-set of consecutive blocks is decoded concurrently for inter-block parallelism. However, existing BD-LMs are mostly trained under teacher forcing, where the model observes only one noisy block conditioned on a clean prefix. While the recent di",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 22,
+        "arxiv_id": "2606.29215",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "SkillHone: A Harness for Continual Agent Skill Evolution Through Persistent Decision History",
+      "url": "https://huggingface.co/papers/2606.08671",
+      "published": "2026-06-22T20:00:00.000Z",
+      "raw_summary": "Agent skills extend language-model agents with task-specific procedures, scripts, and references, but the tasks and environments they target continually change. Existing methods improve skills in bounded runs and retain only the final artifact, discarding the decision history that later agents need to interpret prior revisions, evaluations, and rejected alternatives. We introduce SkillHone, a harness for continual agent skill evolution grounded in persistent decision history. SkillHone pairs ski",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 21,
+        "arxiv_id": "2606.08671",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "MemLearner: Learning to Query Context memory for Video World Models",
+      "url": "https://huggingface.co/papers/2606.31734",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "Video World Models are interactive video generation models that predict future world states based on user actions and history video frames. A critical challenge in video world models is the lack of memory, causing inconsistent generated scenes over extended durations. Previous methods explored rule-based context frame retrieval as memory, but they fail to generalize in scenarios with scene occlusions and dynamic objects. We propose MemLearner, a learning-based adaptive context query method using",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 18,
+        "arxiv_id": "2606.31734",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Managing Procedural Memory in LLM Agents: Control, Adaptation, and Evaluation",
+      "url": "https://huggingface.co/papers/2606.23127",
+      "published": "2026-06-21T20:00:00.000Z",
+      "raw_summary": "Procedural memory is increasingly used to improve LLM agents on recurring workplace tasks, yet its ability to produce reusable skills remains poorly understood. We introduce AFTER, a benchmark of 382 realistic enterprise tasks spanning six professional roles and 22 procedural skills, designed to evaluate how skills transfer across tasks, roles, and model backbones. The benchmark includes controlled evaluation settings for local improvement, cross-task transfer, cross-role transfer, and cross-mod",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 17,
+        "arxiv_id": "2606.23127",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "DataEvolver: Self-Evolving Multi-Agent Data Construction for Text-Rich Image Generation",
+      "url": "https://huggingface.co/papers/2606.31537",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "Text-rich image generation is one of the most challenging settings in image generation, since models must simultaneously produce visually realistic images and render legible, semantically aligned, and layout-consistent text. Existing data pipelines usually follow a static crawl-filter-freeze paradigm. They collect candidate samples, filter them once, and freeze the accepted data for training. However, rejected samples are usually discarded, although they often contain useful failure signals such",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 16,
+        "arxiv_id": "2606.31537",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs",
+      "url": "https://huggingface.co/papers/2606.32032",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "Metacognition is a critical component of intelligence that describes the ability to monitor and regulate one's own cognitive processes. Yet LLMs exhibit systemic deficiencies in key metacognitive faculties: they hallucinate with high confidence, fail to recognize knowledge boundaries, and misrepresent their internal uncertainty--undermining trustworthiness and reliability. Since monitoring task performance and adapting behavior accordingly are central to metacognition, we posit that models capab",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 16,
+        "arxiv_id": "2606.32032",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "PhotoQuilt: Training-Free Arbitrary-Resolution Photomosaics via Bootstrapped Tiled Denoising",
+      "url": "https://huggingface.co/papers/2606.30968",
+      "published": "2026-06-28T20:00:00.000Z",
+      "raw_summary": "Photomosaics are large images whose local regions are seen as independent tiles while their overall arrangement forms a coherent scene. Generating them at high resolution, with every tile convincing in its own right, is computationally expensive, since the canvas must hold many detailed tiles at once. We present PhotoQuilt, a training-free framework that generates photomosaics at arbitrary resolution. Diffusion models struggle to satisfy both scales at once, as direct high-resolution generation ",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 12,
+        "arxiv_id": "2606.30968",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "RedVox: Safety and Fairness Gaps in Speech Models Across Languages",
+      "url": "https://huggingface.co/papers/2606.26968",
+      "published": "2026-06-24T20:00:00.000Z",
+      "raw_summary": "Speech-capable models are increasingly deployed in real-world applications across languages. Yet their safety and fairness beyond English settings and under naturalistic conditions remain understudied. We survey safety reporting practices across state-of-the-art speech model releases, finding that only 8% document any multilingual analysis. To address this gap, we introduce RedVox, a multilingual safety and fairness benchmark for audio and speech built on real voices, covering unsafe and unfair ",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 12,
+        "arxiv_id": "2606.26968",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Little Brains, Big Feats: Exploring Compact Language Models",
+      "url": "https://huggingface.co/papers/2606.30062",
+      "published": "2026-06-28T20:00:00.000Z",
+      "raw_summary": "While large language models have been dominating the research landscape recently, small language models remain highly relevant across various domains; yet, they receive far less attention. In this study, we investigate how smaller language models perform during the generation stage within a Retrieval-Augmented Generation (RAG) system. To benchmark these models effectively, we utilised both open-source and proprietary datasets covering diverse subject areas and question types. Our findings demons",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 10,
+        "arxiv_id": "2606.30062",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Are We Measuring Strategy or Phrasing? The Gap Between Surface- and Approach-Level Diversity in LLM Math Reasoning",
+      "url": "https://huggingface.co/papers/2606.29985",
+      "published": "2026-06-28T20:00:00.000Z",
+      "raw_summary": "Diversity in LLM mathematical reasoning is critical for exploration, but common diversity metrics mostly capture surface-level variation rather than differences in how a problem is solved. We address this gap by introducing approach-level diversity: variation in strategies across correct solutions to the same problem. Using a human-calibrated LLM judge framework, we show that prior diversity measures are unreliable proxies for approach-level diversity, and this mismatch carries over to diversity",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 10,
+        "arxiv_id": "2606.29985",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Play2Perfect: What Matters in Dexterous Play Pretraining for Precise Assembly?",
+      "url": "https://huggingface.co/papers/2606.26428",
+      "published": "2026-06-23T20:00:00.000Z",
+      "raw_summary": "Multi-fingered robots promise the speed and dexterity of human hands, yet challenging problems such as precise assembly have remained out of reach. These tasks are contact-rich, making data collection for imitation learning difficult, and sparse-reward, making direct exploration with reinforcement learning (RL) intractable. Consequently, prior work has made progress by structuring the problem with specialized grippers, tool attachments, and environment fixtures. In this work, we argue that befor",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 10,
+        "arxiv_id": "2606.26428",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "QVal: Cheaply Evaluating Dense Supervision Signals for Long-Horizon LLM Agents",
+      "url": "https://huggingface.co/papers/2606.32034",
+      "published": "2026-06-29T20:00:00.000Z",
+      "raw_summary": "LLM agents increasingly act over long horizons, where a single trajectory can contain hundreds or thousands of actions. In these settings, outcome-only rewards provide too sparse guidance, failing to inform the model about the goodness of intermediate actions. Dense supervision methods aim to solve this problem by scoring intermediate steps, from intrinsic confidence to self-distillation and embedding similarities. However, it is common practice to evaluate them by measuring the downstream perfo",
+      "low_confidence": true,
+      "extra": {
+        "upvotes": 9,
+        "arxiv_id": "2606.32034",
+        "fetched_date": "2026-07-01"
+      },
+      "source_name": "huggingface-daily-papers",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Import AI 463: Self-improving robots; a 10k Chinese GPU cluster; and an elegiac essay for the human era",
+      "url": "https://importai.substack.com/p/import-ai-463-self-improving-robots",
+      "published": "2026-06-29T13:03:27Z",
+      "raw_summary": "NVIDIA develops ENPIRE software enabling physical robots to autonomously experiment and improve themselves. Tencent details ARGUS system for managing 10,000+ GPU training clusters. Essay explores inevitable human disempowerment as AI systems become superintelligent.",
+      "low_confidence": false,
+      "source_name": "import-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-30",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Latest open artifacts (#22): Zyphra, Cohere, and Poolside are expanding the breadth of the ecosystem",
+      "url": "https://www.interconnects.ai/p/artifacts-22-zyphra-cohere-and-poolside",
+      "published": "2026-06-28T17:03:07Z",
+      "raw_summary": "Assessment of the open ecosystem and motivations behind releasing models. Discusses three categories of organizations: pure model makers, Big Tech, and product companies. Features releases from NVIDIA Nemotron, Cohere Command A+, GLM-5.2, Zyphra ZAYA1, and Poolside Laguna models.",
+      "low_confidence": false,
+      "source_name": "interconnects",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Banning Open Source AI Would Be A Mistake",
+      "url": "https://www.interconnects.ai/p/banning-open-source-ai-would-be-a",
+      "published": "2026-06-19T13:02:47Z",
+      "raw_summary": "Co-authored op-ed arguing against potential regulation or bans on open-source AI. Discusses historical benefits of open source in education, innovation, and competition. Addresses safety concerns and competitive dynamics with China.",
+      "low_confidence": false,
+      "source_name": "interconnects",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-07-01",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "具身智能Skill时刻！英伟达开源机器人技能库，Jim Fan：范式变了",
+      "url": "https://www.qbitai.com/2026/07/441396.html",
+      "published": "2026-07-01T09:33:05Z",
+      "raw_summary": "全新的持续学习范式",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "OceanBase湖库一体，重新定义AI数据库",
+      "url": "https://www.qbitai.com/2026/07/441386.html",
+      "published": "2026-07-01T09:05:10Z",
+      "raw_summary": "一套技术栈实现离在线统一",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "金融AI武道大会开赛！四道业务真题，出题人：猜不到最优解",
+      "url": "https://www.qbitai.com/2026/07/441246.html",
+      "published": "2026-07-01T07:41:42Z",
+      "raw_summary": "Taste，决定天花板。",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "OpenSquilla 发布 0.4.0：AI 写代码首次能「自我验证」",
+      "url": "https://www.qbitai.com/2026/07/441240.html",
+      "published": "2026-07-01T07:32:23Z",
+      "raw_summary": "OpenSquilla 上线后数周内 GitHub star 增至数千量级",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "群核科技三项成果入选ECCV 2026，联手英伟达等探索物理AI仿真平台",
+      "url": "https://www.qbitai.com/2026/07/441237.html",
+      "published": "2026-07-01T07:29:32Z",
+      "raw_summary": "共同推进物理AI前沿技术探索。",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "Loop世界模型论文登顶Hugging Face，来自中国一家初创，周鸿祎陆奇都投了",
+      "url": "https://www.qbitai.com/2026/07/441225.html",
+      "published": "2026-07-01T07:24:48Z",
+      "raw_summary": "重写「AI如何反复推演世界」",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "卡帕西李飞飞辛顿都投了的Transformer专用芯片，签下10亿美元大单",
+      "url": "https://www.qbitai.com/2026/07/441183.html",
+      "published": "2026-07-01T07:15:29Z",
+      "raw_summary": "已流片",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "大湾区首个200亿具身大脑来了！自变量两个月连融四轮，完成交割",
+      "url": "https://www.qbitai.com/2026/07/441140.html",
+      "published": "2026-07-01T06:26:06Z",
+      "raw_summary": "四大互联网分别领投",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "卖Token也不是稳赚不赔！硅基流动招股书来了",
+      "url": "https://www.qbitai.com/2026/07/441127.html",
+      "published": "2026-07-01T05:52:09Z",
+      "raw_summary": "AI推理时代的Token工厂",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "Om AI联汇发布VLX：全球首个面向物理世界的端侧流式多模态模型",
+      "url": "https://www.qbitai.com/2026/07/441124.html",
+      "published": "2026-07-01T03:46:20Z",
+      "raw_summary": "物理世界AI的下一步",
+      "low_confidence": false,
+      "source_name": "qbitai",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "zh"
+    },
+    {
+      "title": "State of AI Report Compute Index 2026",
+      "url": "https://press.airstreet.com/p/state-of-ai-compute-index-june-2026",
+      "published": "2026-07-01T15:57:26Z",
+      "raw_summary": "Updated AI compute index showing NVIDIA challengers gaining ground but not displacing it. Real shift occurring within NVIDIA, from A100 to H100/H200 and early Blackwell. Open research citations up 10.7% YoY, with Hopper as installed base and Grace-Blackwell mostly pipeline.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "Compute scarcity is an engineering problem",
+      "url": "https://press.airstreet.com/p/angelos-perivolaropoulos-elevenlabs",
+      "published": "2026-06-30T13:07:15Z",
+      "raw_summary": "ElevenLabs demonstrates turning GPU scarcity into engineering solutions: serving 70x more users per GPU through batching, FP8 quantization, speculative decoding and KV-cache compression. Techniques push throughput from one to 140 users per GPU at frontier.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-07-01",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "STARK raises €500M to build Europe's next defense prime",
+      "url": "https://press.airstreet.com/p/stark-500m",
+      "published": "2026-06-26T13:37:24Z",
+      "raw_summary": "German defense company STARK closes €500M funding led by Sequoia and Founders Fund for autonomous unmanned systems. Platforms include Virtus loitering munition, Gambit and Cascade munitions, plus Vanta unmanned surface vessel, with Minerva software coordinating all.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "How Revolut runs AI at scale",
+      "url": "https://press.airstreet.com/p/nikolay-donets-revolut",
+      "published": "2026-06-25T13:06:16Z",
+      "raw_summary": "Nikolay Donets from Revolut discusses running AIR assistant at scale across 70+ million customers in 40+ countries. Emphasizes control plane complexity: governance layers, cost controls, human review, and regulatory compliance within banking infrastructure.",
+      "low_confidence": false,
+      "source_name": "air-street-press",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Redeploying Fable 5",
+      "url": "https://anthropic.com/news/redeploying-fable-5",
+      "published": "2026-06-30",
+      "raw_summary": "Fable 5 returns globally July 1. Anthropic is also proposing an industry-wide framework for scoring jailbreak severity, together with Amazon, Microsoft, Google, and other partners.",
+      "low_confidence": false,
+      "source_name": "anthropic-news",
+      "also_reported_by": [],
+      "re_coverage": false,
+      "previously_kept_in_daily": null,
+      "language": "en"
+    },
+    {
+      "title": "From Brain Waves to Words: Brain2Qwerty Offers a New Path to Communication Without Surgery",
+      "url": "https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/",
+      "published": "2026-06-29",
+      "raw_summary": "Research demonstrating how brain-AI interfaces can enable communication without surgical intervention, advancing assistive technology for individuals with speech and mobility limitations.",
+      "low_confidence": false,
+      "source_name": "meta-ai-blog",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-30",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "Testing Mythos and Fable, Moving Beyond SWE-bench, Nvidia's Open Contender",
+      "url": "https://www.deeplearning.ai/the-batch/issue-358",
+      "published": "2026-06-19",
+      "raw_summary": "The Batch AI News and Insights: Over the last two weeks, both the U.S. Government and Anthropic took significant actions that demonstrated their power to control access to AI.",
+      "low_confidence": false,
+      "source_name": "the-batch",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "从答题到做实验：SciAgentGym让大模型进入科学工作流",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%BB%8E%E7%AD%94%E9%A2%98%E5%88%B0%E5%81%9A%E5%AE%9E%E9%AA%8C%EF%BC%9ASciAgentGym%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BF%9B%E5%85%A5%E7%A7%91%E5%AD%A6%E5%B7%A5%E4%BD%9C%E6%B5%81",
+      "published": "2026-07-01",
+      "raw_summary": "复旦大学NLP实验室提出SciAgentGym，一个为多步科学工具使用而设计的智能体环境。该框架强调类型安全、可复现性和可扩展性，包含259个任务的评测集SciAgentBench，覆盖物理、化学、材料科学和生命科学四个领域。",
+      "low_confidence": true,
+      "source_name": "jiqizhixin",
+      "also_reported_by": [
+        "jiqizhixin"
+      ],
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "language": "zh"
+    },
+    {
+      "title": "State of AI Report 2025",
+      "url": "https://www.stateof.ai/",
+      "published": null,
+      "raw_summary": "[date_missing] The eighth annual State of AI Report, produced by Nathan Benaich and Air Street Capital, analyzes key developments across research, industry, politics, safety, and AI usage trends. Features insights on frontier model competition, reasoning capabilities, scientific AI collaboration, commercial adoption acceleration, and geopolitical dynamics.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "State of AI Report 2025 - Full Slide Deck",
+      "url": "https://docs.google.com/presentation/d/1xiLl0VdrlNMAei8pmaX4ojIOfej6lhvZbOIK7Z6C-Go/edit?usp=sharing",
+      "published": null,
+      "raw_summary": "[date_missing] Complete presentation deck for the 2025 State of AI Report covering research breakthroughs, industry applications, regulatory landscape, safety considerations, practitioner survey results, and predictions for the coming year.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    },
+    {
+      "title": "2025 Report Launch Blog Post",
+      "url": "https://www.stateof.ai/2025-report-launch",
+      "published": null,
+      "raw_summary": "[date_missing] Extended analysis of the 2025 State of AI Report findings, including details on OpenAI's competitive position, reasoning model advances, AI's emerging role in scientific research, and the acceleration of commercial AI adoption across U.S. businesses.",
+      "low_confidence": true,
+      "source_name": "state-of-ai",
+      "re_coverage": true,
+      "previously_kept_in_daily": "2026-06-29",
+      "also_reported_by": [],
+      "language": "en"
+    }
+  ],
+  "discarded": [
+    {
+      "title": "直通ICML 2026！上海AI实验室携百余顶尖岗位，双场人才交流会报名开启",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E7%9B%B4%E9%80%9AICML%202026%EF%BC%81%E4%B8%8A%E6%B5%B7AI%E5%AE%9E%E9%AA%8C%E5%AE%A4%E6%90%BA%E7%99%BE%E4%BD%99%E9%A1%B6%E5%B0%96%E5%B2%97%E4%BD%8D%EF%BC%8C%E5%8F%8C%E5%9C%BA%E4%BA%BA%E6%89%8D%E4%BA%A4%E6%B5%81%E4%BC%9A%E6%8A%A1%E5%90%8D%E5%BC%80%E5%90%AF",
+      "source_name": "jiqizhixin",
+      "reason": "duplicate of http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%BB%8E%E7%AD%94%E9%A2%98%E5%88%B0%E5%81%9A%E5%AE%9E%E9%AA%8C%EF%BC%9ASciAgentGym%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BF%9B%E5%85%A5%E7%A7%91%E5%AD%A6%E5%B7%A5%E4%BD%9C%E6%B5%81 (tier 3 preferred)"
+    },
+    {
+      "title": "一句话生图要过时了？开源图像生成Agent进化出「工具编排」",
+      "url": "http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%94%9F%E5%9B%BE%E8%A6%81%E8%BF%87%E6%97%B6%E4%BA%86%EF%BC%9F%E5%BC%80%E6%BA%90%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90Agent%E8%BF%9B%E5%8C%96%E5%87%BA%E3%80%8C%E5%B7%A5%E5%85%B7%E7%BC%96%E6%8E%92%E3%80%8D",
+      "source_name": "jiqizhixin",
+      "reason": "duplicate of http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%BB%8E%E7%AD%94%E9%A2%98%E5%88%B0%E5%81%9A%E5%AE%9E%E9%AA%8C%EF%BC%9ASciAgentGym%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BF%9B%E5%85%A5%E7%A7%91%E5%AD%A6%E5%B7%A5%E4%BD%9C%E6%B5%81 (tier 3 preferred)"
+    },
+    {
+      "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+      "url": "https://openai.com/index/ai-chemist-improves-reaction",
+      "source_name": "openai-rss",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Unlocking UK house-building with AI-accelerated planning",
+      "url": "https://deepmind.google/blog/unlocking-uk-house-building-with-ai-accelerated-planning/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:16d_old"
+    },
+    {
+      "title": "Securing the future of AI agents",
+      "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:16d_old"
+    },
+    {
+      "title": "DiffusionGemma: 4x faster text generation",
+      "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Investing in multi-agent AI safety research",
+      "url": "https://deepmind.google/blog/investing-in-multi-agent-ai-safety-research/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+      "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:23d_old"
+    },
+    {
+      "title": "Introducing Gemma 4 12B: a unified, encoder-free multimodal model",
+      "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:23d_old"
+    },
+    {
+      "title": "Powering the future of robotics in Europe",
+      "url": "https://deepmind.google/blog/powering-the-future-of-robotics-in-europe/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:23d_old"
+    },
+    {
+      "title": "Measuring the impact of learning with AI in Sierra Leone and beyond",
+      "url": "https://deepmind.google/blog/measuring-the-impact-of-learning-with-ai-in-sierra-leone-and-beyond/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:24d_old"
+    },
+    {
+      "title": "We're launching the Google DeepMind Accelerator program in Asia Pacific to tackle environmental risks",
+      "url": "https://deepmind.google/blog/were-launching-the-google-deepmind-accelerator-program-in-asia-pacific-to-tackle-environmental-risks/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:42d_old"
+    },
+    {
+      "title": "Fast-tracking genetic leads to reverse cellular aging",
+      "url": "https://deepmind.google/blog/fast-tracking-genetic-leads-to-reverse-cellular-aging/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:45d_old"
+    },
+    {
+      "title": "Simulate real-world places with Project Genie and Street View",
+      "url": "https://deepmind.google/blog/simulate-real-world-places-with-project-genie-and-street-view/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Introducing Gemini Omni",
+      "url": "https://deepmind.google/blog/introducing-gemini-omni/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Introducing Google Antigravity 2.0",
+      "url": "https://deepmind.google/blog/introducing-google-antigravity-2-0/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Gemini for Science: AI experiments and tools for a new era of discovery",
+      "url": "https://deepmind.google/blog/gemini-for-science-ai-experiments-and-tools-for-a-new-era-of-discovery/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Making it easier to understand how content was created and edited",
+      "url": "https://deepmind.google/blog/making-it-easier-to-understand-how-content-was-created-and-edited/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:46d_old"
+    },
+    {
+      "title": "Strengthening Singapore's AI Future: A New National Partnership",
+      "url": "https://deepmind.google/blog/strengthening-singapores-ai-future-a-new-national-partnership/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:47d_old"
+    },
+    {
+      "title": "Finding the molecular switches behind new infectious diseases",
+      "url": "https://deepmind.google/blog/finding-the-molecular-switches-behind-new-infectious-diseases/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:47d_old"
+    },
+    {
+      "title": "Opening new paths in aging research",
+      "url": "https://deepmind.google/blog/opening-new-paths-in-aging-research/",
+      "source_name": "deepmind-rss",
+      "reason": "stale:47d_old"
+    },
+    {
+      "title": "Does VLA Even Know the Basics? Measuring Commonsense and World Knowledge Retention in Vision-Language-Action Models",
+      "url": "https://huggingface.co/papers/2606.19297",
+      "source_name": "huggingface-daily-papers",
+      "reason": "stale:16d_old"
+    },
+    {
+      "title": "Import AI 461: \"Alignment is not on track\"; FrontierCode; and synthetic research interns",
+      "url": "https://importai.substack.com/p/import-ai-461-alignment-is-not-on",
+      "source_name": "import-ai",
+      "reason": "stale:17d_old"
+    },
+    {
+      "title": "Import AI 460: Reward hacking society, RSI data from Anthropic; and RL-based quadcopter racing",
+      "url": "https://importai.substack.com/p/import-ai-460-reward-hacking-society",
+      "source_name": "import-ai",
+      "reason": "stale:24d_old"
+    },
+    {
+      "title": "Import AI 459: AI oversight is difficult; scaling laws for protein folding models; and pricing the extinction risk of AI systems",
+      "url": "https://importai.substack.com/p/import-ai-459-ai-oversight-is-difficult",
+      "source_name": "import-ai",
+      "reason": "stale:31d_old"
+    },
+    {
+      "title": "State of the blog, mid-2026",
+      "url": "https://www.interconnects.ai/p/state-of-the-blog-mid-2026",
+      "source_name": "interconnects",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Frontier post-training recipe review with Finbarr Timbers",
+      "url": "https://www.interconnects.ai/p/frontier-post-training-recipe-review",
+      "source_name": "interconnects",
+      "reason": "stale:16d_old"
+    },
+    {
+      "title": "Anthropic opens Seoul office and announces new partnerships across the Korean AI ecosystem",
+      "url": "https://anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem",
+      "source_name": "anthropic-news",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5",
+      "url": "https://anthropic.com/news/fable-mythos-access",
+      "source_name": "anthropic-news",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "Results from the first Anthropic Public Record",
+      "url": "https://anthropic.com/news/anthropic-public-record",
+      "source_name": "anthropic-news",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "TCS and Anthropic partner to bring Claude to regulated industries",
+      "url": "https://anthropic.com/news/tcs-anthropic-partnership",
+      "source_name": "anthropic-news",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "DXC will integrate Claude into the systems banks, airlines, and other regulated industries rely on",
+      "url": "https://anthropic.com/news/dxc-anthropic-alliance",
+      "source_name": "anthropic-news",
+      "reason": "stale:21d_old"
+    },
+    {
+      "title": "Introducing Claude Corps",
+      "url": "https://anthropic.com/news/claude-corps",
+      "source_name": "anthropic-news",
+      "reason": "stale:21d_old"
+    },
+    {
+      "title": "Introducing Muse Spark: Scaling Towards Personal Superintelligence",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:85d_old"
+    },
+    {
+      "title": "Scaling How We Build and Test Our Most Advanced AI",
+      "url": "https://ai.meta.com/blog/scaling-how-we-build-test-advanced-ai/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:85d_old"
+    },
+    {
+      "title": "How Alta Daily Uses Meta's Segment Anything to Reimagine the Digital Closet",
+      "url": "https://ai.meta.com/blog/alta-daily-fashion-app-segment-anything/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:87d_old"
+    },
+    {
+      "title": "SAM 3.1: Faster and More Accessible Real-Time Video Detection and Tracking With Multiplexing and Global Reasoning",
+      "url": "https://ai.meta.com/blog/segment-anything-model-3/",
+      "source_name": "meta-ai-blog",
+      "reason": "stale:97d_old"
+    },
+    {
+      "title": "Mythos Begets Fable, Cursor's Composer 2.5, Agents Building Agents",
+      "url": "https://www.deeplearning.ai/the-batch/issue-357",
+      "source_name": "the-batch",
+      "reason": "stale:20d_old"
+    },
+    {
+      "title": "Qwen3.7-Max Challenges Google for Third Place, AI Saves Whales, Fine-Tuning Breaks Copyright Alignment",
+      "url": "https://www.deeplearning.ai/the-batch/issue-356",
+      "source_name": "the-batch",
+      "reason": "stale:27d_old"
+    },
+    {
+      "title": "Gemini Flash Gets Pricey, AI Act Delays, Agents Drive Online Traffic",
+      "url": "https://www.deeplearning.ai/the-batch/issue-355",
+      "source_name": "the-batch",
+      "reason": "stale:34d_old"
+    },
+    {
+      "title": "Hermes vs. OpenClaw, Cybersecurity Alarms Ring, More-Interactive Conversations, Can Agents Do Human Work?",
+      "url": "https://www.deeplearning.ai/the-batch/issue-354",
+      "source_name": "the-batch",
+      "reason": "stale:41d_old"
+    },
+    {
+      "title": "China Thwarts Meta's Agentic Ambition, U.S. Evaluates Upcoming Models, AI Diagnoses Mammograms",
+      "url": "https://www.deeplearning.ai/the-batch/issue-353",
+      "source_name": "the-batch",
+      "reason": "stale:48d_old"
+    },
+    {
+      "title": "Seedance Makes A Splash, Nvidia's AI-Guided Chip Designs, Helping Robots Not Forget",
+      "url": "https://www.deeplearning.ai/the-batch/issue-352",
+      "source_name": "the-batch",
+      "reason": "stale:55d_old"
+    },
+    {
+      "title": "GPT-5.5 Outperforms (and Hallucinates), Kimi K2.6 Leads Open LLMs, AI Strains Climate Pledges",
+      "url": "https://www.deeplearning.ai/the-batch/issue-351",
+      "source_name": "the-batch",
+      "reason": "stale:62d_old"
+    },
+    {
+      "title": "GLM 5.1 Thinks Strategically, Data-Center Revolt Intensifies, When Helpful LLMs Turn Unhelpful",
+      "url": "https://www.deeplearning.ai/the-batch/issue-350",
+      "source_name": "the-batch",
+      "reason": "stale:69d_old"
+    },
+    {
+      "title": "Meta Pivots From Open Weights, Big Pharma Bets On AI, Regulatory Patchwork, Simulating Human Cohorts",
+      "url": "https://www.deeplearning.ai/the-batch/issue-349",
+      "source_name": "the-batch",
+      "reason": "stale:76d_old"
+    },
+    {
+      "title": "Anthropic's Claude Mythos Problem, Dark DNA Unveiled, Pitfalls for Assistive Models",
+      "url": "https://www.deeplearning.ai/the-batch/issue-348",
+      "source_name": "the-batch",
+      "reason": "stale:83d_old"
+    },
+    {
+      "title": "Claude Code's Source Leaks, OpenAI Exits Video Generation, Gemini Adds Music Generation",
+      "url": "https://www.deeplearning.ai/the-batch/issue-347",
+      "source_name": "the-batch",
+      "reason": "stale:90d_old"
+    },
+    {
+      "title": "Nvidia's Open Salvo, OpenAI's Amazon Deal, Grok Cuts Video Prices, Recursive Language Models",
+      "url": "https://www.deeplearning.ai/the-batch/issue-346",
+      "source_name": "the-batch",
+      "reason": "stale:97d_old"
+    },
+    {
+      "title": "Attacks On Data Centers, Qwen3.5 In All Sizes, DeepSeek's Huawei Play, Apple's Multimodal Tokenizer",
+      "url": "https://www.deeplearning.ai/the-batch/issue-345",
+      "source_name": "the-batch",
+      "reason": "stale:104d_old"
+    },
+    {
+      "title": "Investing in Netris",
+      "url": "https://a16z.com/announcement/investing-in-netris",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Mirendil",
+      "url": "https://a16z.com/announcement/investing-in-mirendil",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Probook",
+      "url": "https://a16z.com/announcement/investing-in-probook",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Prosper AI",
+      "url": "https://a16z.com/announcement/investing-in-prosper-ai",
+      "source_name": "a16z-news-content",
+      "reason": "noise:vc_softpost"
+    },
+    {
+      "title": "Investing in Telepatia",
+      "url": "https://a16z.com/announcement/investing-in-telepatia",
+      "source_name": "a16z-news-content",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Investing in Convey",
+      "url": "https://a16z.com/announcement/investing-in-convey",
+      "source_name": "a16z-news-content",
+      "reason": "stale:15d_old"
+    },
+    {
+      "title": "Late Stage Venture Is About Late Stage Founders",
+      "url": "https://a16z.com/late-stage-venture-is-about-late-stage-founders",
+      "source_name": "a16z-news-content",
+      "reason": "stale:21d_old"
+    },
+    {
+      "title": "Everything is Recorded Now",
+      "url": "https://a16z.com/everything-is-recorded-now",
+      "source_name": "a16z-news-content",
+      "reason": "stale:22d_old"
+    },
+    {
+      "title": "Marc Andreessen on Evaluating Founders and AI's Consumer Surplus",
+      "url": "https://a16z.com/podcast/marc-andreessen-on-evaluating-founders-and-ais-consumer-surplus-2",
+      "source_name": "a16z-news-content",
+      "reason": "stale:24d_old"
+    },
+    {
+      "title": "Building Search for AI Agents with Exa CEO Will Bryk",
+      "url": "https://a16z.com/podcast/building-search-for-ai-agents-with-exa-ceo-will-bryk",
+      "source_name": "a16z-news-content",
+      "reason": "stale:26d_old"
+    },
+    {
+      "title": "AI Agents and the Fight for Customer Data",
+      "url": "https://a16z.com/podcast/ai-agents-and-the-fight-for-customer-data",
+      "source_name": "a16z-news-content",
+      "reason": "stale:27d_old"
+    },
+    {
+      "title": "A16Z Investor Relations is now Global Partnerships",
+      "url": "https://a16z.com/a16z-investor-relations-is-now-global-partnerships",
+      "source_name": "a16z-news-content",
+      "reason": "stale:28d_old"
+    },
+    {
+      "title": "How ChatGPT adoption has expanded",
+      "url": "https://openai.com/index/how-chatgpt-adoption-has-expanded",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-07-01 (overlap=1.00)"
+    },
+    {
+      "title": "Introducing GeneBench-Pro",
+      "url": "https://openai.com/index/introducing-genebench-pro",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-07-01 (overlap=1.00)"
+    },
+    {
+      "title": "Core dump epidemiology: fixing an 18-year-old bug",
+      "url": "https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-07-01 (overlap=1.00)"
+    },
+    {
+      "title": "Mapping Europe's AI Workforce Opportunity",
+      "url": "https://openai.com/index/mapping-ai-jobs-transition-eu",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.74)"
+    },
+    {
+      "title": "HP Inc. launches Frontier strategic partnership with OpenAI",
+      "url": "https://openai.com/index/hp-frontier-partnership",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Previewing GPT-5.6 Sol: a next-generation model",
+      "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "How agents are transforming work",
+      "url": "https://openai.com/index/how-agents-are-transforming-work",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "OpenAI and Broadcom unveil LLM-optimized inference chip",
+      "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "Helping build shared standards for advanced AI",
+      "url": "https://openai.com/index/helping-build-shared-standards-for-advanced-ai",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-28 (overlap=0.00)"
+    },
+    {
+      "title": "How GPT-5 helped immunologist Derya Unutmaz solve a 3-year-old mystery",
+      "url": "https://openai.com/index/gpt-5-immunology-mystery",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "How Omio is building the future of conversational travel",
+      "url": "https://openai.com/index/omio",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Patch the Planet: a Daybreak initiative to support open source maintainers",
+      "url": "https://openai.com/index/patch-the-planet",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Daybreak: Tools for securing every organization in the world",
+      "url": "https://openai.com/index/daybreak-securing-the-world",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-28 (overlap=0.00)"
+    },
+    {
+      "title": "Codex-maxxing for long-running work",
+      "url": "https://openai.com/index/codex-maxxing-long-running-work",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "Samsung Electronics brings ChatGPT and Codex to employees",
+      "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.75)"
+    },
+    {
+      "title": "New usage analytics and updated spend controls for enterprises",
+      "url": "https://openai.com/index/chatgpt-enterprise-spend-controls",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.82)"
+    },
+    {
+      "title": "Using AI to help physicians diagnose rare genetic diseases affecting children",
+      "url": "https://openai.com/index/diagnose-rare-childhood-diseases",
+      "source_name": "openai-rss",
+      "reason": "seen-on-2026-06-30 (overlap=0.61)"
+    },
+    {
+      "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+      "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+      "source_name": "deepmind-rss",
+      "reason": "seen-on-2026-07-01 (overlap=0.00)"
+    },
+    {
+      "title": "Introducing computer use in Gemini 3.5 Flash",
+      "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+      "source_name": "deepmind-rss",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "Import AI 462: Superpersuasion; self-sustaining AI; paths to ASI",
+      "url": "https://importai.substack.com/p/import-ai-462-superpersuasion-self",
+      "source_name": "import-ai",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "GLM-5.2 is the step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "source_name": "interconnects",
+      "reason": "seen-on-2026-06-27 (overlap=0.00)"
+    },
+    {
+      "title": "Introducing Claude Sonnet 5",
+      "url": "https://anthropic.com/news/claude-sonnet-5",
+      "source_name": "anthropic-news",
+      "reason": "seen-on-2026-07-01 (overlap=1.00)"
+    },
+    {
+      "title": "Claude Science, an AI workbench for scientists, is now available",
+      "url": "https://anthropic.com/news/claude-science-ai-workbench",
+      "source_name": "anthropic-news",
+      "reason": "seen-on-2026-07-01 (overlap=1.00)"
+    },
+    {
+      "title": "Introducing Claude Tag",
+      "url": "https://anthropic.com/news/introducing-claude-tag",
+      "source_name": "anthropic-news",
+      "reason": "seen-on-2026-06-29 (overlap=1.00)"
+    },
+    {
+      "title": "A New Generation Studies AI, Apple's Recipe for On-Device Models, GLM5.2 Tackles Open-Ended Problems",
+      "url": "https://www.deeplearning.ai/the-batch/issue-359",
+      "source_name": "the-batch",
+      "reason": "seen-on-2026-06-29 (overlap=0.85)"
+    },
+    {
+      "title": "The World-Building Doors Are Open, Again.",
+      "url": "https://a16z.com/the-world-building-doors-are-open-again",
+      "source_name": "a16z-news-content",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    },
+    {
+      "title": "How to Win a Space War",
+      "url": "https://a16z.com/how-to-win-a-space-war",
+      "source_name": "a16z-news-content",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    },
+    {
+      "title": "New Media, One Year In",
+      "url": "https://a16z.com/what-is-new-media-in-2026",
+      "source_name": "a16z-news-content",
+      "reason": "seen-on-2026-06-29 (overlap=0.00)"
+    }
+  ],
+  "stats": {
+    "input_count": 135,
+    "after_intra_dedup": 133,
+    "after_filter": 73,
+    "after_cross_day": 45,
+    "discarded_count": 90,
+    "stale_discarded": 56,
+    "cross_day_discarded": 28,
+    "cross_day_re_coverage_kept": 13,
+    "seen_urls_pruned": 0
+  },
+  "errors": []
+}
