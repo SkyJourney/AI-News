@@ -1,0 +1,80 @@
+---
+// AInews · Daily 详情内容（`/` 与 `/daily/[slug]` 共用）
+// 从 markdown-rendered <Content /> 渲染主体，前置 Hero + ChipsRail
+import type { CollectionEntry } from 'astro:content'
+import { render } from 'astro:content'
+import HeroSection from '../cards/HeroSection.astro'
+import ChipsRail from '../cards/ChipsRail.astro'
+import AIBadge from '../cards/AIBadge.astro'
+import LuminaBacklinks from '../enhance/LuminaBacklinks.astro'
+
+interface Props {
+  entry: CollectionEntry<'daily'>
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+
+const dateLabel = entry.id
+const createdIso = new Date(entry.data.created).toISOString().slice(0, 10)
+const meta = `${entry.data.entry_count} 条 · ${entry.data.sources_alive} 源存活 · ${entry.data.topics.length} 主题`
+const chips = entry.data.topics.map((slug) => ({ label: slug, slug }))
+---
+
+<article class="daily-content">
+  <div class="daily-content-badge-row">
+    <AIBadge />
+    <span class="daily-content-date">{createdIso}</span>
+  </div>
+
+  <HeroSection
+    eyebrow={`每日简报 · ${dateLabel}`}
+    title={`AI 资讯日报 ${dateLabel}`}
+    subtitle={meta}
+    large={true}
+  />
+
+  {chips.length > 0 && <ChipsRail chips={chips} />}
+
+  {entry.data.previous_daily && (
+    <p class="daily-content-prev">
+      ← 昨日：<a href={`/daily/${entry.data.previous_daily}/`}>{entry.data.previous_daily}</a>
+    </p>
+  )}
+
+  <div class="daily-content-body lumina-reading-well">
+    <Content />
+  </div>
+
+  <LuminaBacklinks backlinks={entry.data.backlinks} />
+</article>
+
+<style>
+  .daily-content {
+    padding-block: 1rem 4rem;
+  }
+  .daily-content-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-header);
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .daily-content-date {
+    display: inline-flex;
+    align-items: center;
+  }
+  .daily-content-prev {
+    margin: 0 0 2rem;
+    color: var(--color-darkgray);
+    font-size: 0.9rem;
+  }
+  .daily-content-body {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+</style>

@@ -1,0 +1,136 @@
+---
+// AInews · Zettel 列表 · 2-col masonry（用 CSS columns 实现）
+// 4 段式摘要预览（用 body 前 160 字）
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import HeroSection from '../../components/cards/HeroSection.astro'
+import AIBadge from '../../components/cards/AIBadge.astro'
+
+// 按 created desc 排序
+const all = await getCollection('zettel')
+all.sort((a, b) => new Date(b.data.created).getTime() - new Date(a.data.created).getTime())
+
+// 从 body 提前 160 字预览（去 wikilink 括号）
+function preview(body: string): string {
+  const clean = body
+    .replace(/^##.*$/gm, '')
+    .replace(/\[\[([^\]|]+)(\|[^\]]+)?\]\]/g, (_m, s) => s.trim())
+    .replace(/\s+/g, ' ')
+    .trim()
+  return clean.length > 160 ? clean.slice(0, 160) + '…' : clean
+}
+
+// 从 slug 派生标题（Zettel 通常无 H1）
+function deriveTitle(slug: string): string {
+  const m = slug.match(/^\d{12}-(.+)$/)
+  if (!m) return slug
+  return m[1].split('-').map((w) => w[0]?.toUpperCase() + w.slice(1)).join(' ')
+}
+
+const topicSet = new Set(all.map((e) => e.data.topic))
+const eyebrow = `${all.length} 张 · ${topicSet.size} 主题`
+---
+
+<BaseLayout
+  title="Zettel · 原子卡片"
+  description="AInews 原子知识卡片 · 一题一卡 · 4 段式结构"
+>
+  <HeroSection
+    eyebrow={eyebrow}
+    title="原子卡片"
+    subtitle="Zettelkasten 方法 · 每张卡片一个概念 · 通过双链构建知识图谱"
+  />
+
+  <div class="zettel-masonry">
+    {all.map((entry) => {
+      const title = deriveTitle(entry.id)
+      const excerpt = preview(entry.body ?? '')
+      const created = new Date(entry.data.created).toISOString().slice(0, 10)
+      return (
+        <a href={`/zettel/${entry.id}/`} class="zettel-card">
+          <div class="zettel-card-top">
+            <AIBadge />
+            <a href={`/topics/${entry.data.topic}/`} class="lumina-chip" onclick="event.stopPropagation()">
+              #{entry.data.topic}
+            </a>
+          </div>
+          <h3 class="zettel-card-title">{title}</h3>
+          <p class="zettel-card-excerpt">{excerpt}</p>
+          <div class="zettel-card-footer">
+            <span>{created}</span>
+            {entry.data.backlinks.length > 0 && (
+              <span class="zettel-card-backlink-count">
+                <span class="material-symbols-outlined" style="font-size: 0.85rem;">arrow_upward</span>
+                {entry.data.backlinks.length}
+              </span>
+            )}
+          </div>
+        </a>
+      )
+    })}
+  </div>
+</BaseLayout>
+
+<style>
+  .zettel-masonry {
+    columns: 2;
+    column-gap: 1rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 640px) {
+    .zettel-masonry { columns: 1; }
+  }
+  .zettel-card {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--color-lightgray);
+    border-left: 3px solid var(--ai-accent);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    color: var(--color-dark);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .zettel-card:hover {
+    box-shadow: var(--shadow-card-hover);
+    border-left-color: var(--ai-accent-dark);
+  }
+  .zettel-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .zettel-card-title {
+    font-family: var(--font-header);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.5rem;
+  }
+  .zettel-card-excerpt {
+    margin: 0 0 1rem;
+    color: var(--color-darkgray);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .zettel-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-header);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--color-gray);
+    text-transform: uppercase;
+  }
+  .zettel-card-backlink-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--color-secondary);
+  }
+</style>

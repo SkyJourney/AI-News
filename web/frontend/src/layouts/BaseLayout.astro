@@ -1,0 +1,80 @@
+---
+// AInews · 基础 Layout · 全站唯一 HTML shell
+// 结构：<html> → <head>（meta + ClientRouter + fonts + global css）→ <body>（Header + slot + Dock）
+// 所有路由都用此 Layout（详情页可用 ArticleLayout 扩展）
+
+import '../styles/global.css'
+import { ClientRouter } from 'astro:transitions'
+import LuminaHeader from '../components/shell/LuminaHeader.astro'
+import LuminaDock from '../components/shell/LuminaDock.tsx'
+
+interface Props {
+  title: string
+  description?: string
+  canonical?: string  // 用于 / landing 指向 /daily/{latest}/
+  ogImage?: string
+}
+
+const {
+  title,
+  description = 'AInews · AI 资讯自动化 vault',
+  canonical,
+  ogImage,
+} = Astro.props
+
+const fullTitle = title === 'AInews' ? title : `${title} · AInews`
+const siteUrl = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321').toString()
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Google Fonts · Geist / Inter / IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <!-- Canonical + OG -->
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:type" content="website" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Astro ClientRouter · SPA 感 + 淡入 view transitions -->
+    <ClientRouter />
+  </head>
+  <body>
+    <LuminaHeader />
+    <main class="lumina-main">
+      <slot />
+    </main>
+    <LuminaDock client:load />
+
+    <style>
+      .lumina-main {
+        max-width: var(--lumina-container-max);
+        margin-inline: auto;
+        padding-inline: var(--lumina-margin-edge);
+        padding-block: 2rem;
+        min-height: 60vh;
+      }
+      @media (max-width: 768px) {
+        .lumina-main {
+          padding-inline: 1rem;
+        }
+      }
+    </style>
+  </body>
+</html>

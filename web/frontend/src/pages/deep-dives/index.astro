@@ -1,0 +1,25 @@
+---
+// AInews · Deep-Dives · v1 空态
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import HeroSection from '../../components/cards/HeroSection.astro'
+import EmptyState from '../../components/cards/EmptyState.astro'
+---
+
+<BaseLayout
+  title="Deep Dives · 深度专题"
+  description="AInews 深度专题（v2 阶段上线）"
+>
+  <HeroSection
+    eyebrow="v2 预留 · 预计 2026-Q3 上线"
+    title="深度专题"
+    subtitle="长文思考与多角度分析。v1 阶段暂无收录，请先看每日简报或主题聚合。"
+  />
+
+  <EmptyState
+    icon="explore"
+    title="本目录为 v2 阶段预留"
+    description="Deep Dives 计划承载 3000+ 字长文深度分析（周报 / 月报 / 主题综述）。v1 阶段收录 0 篇，请关注每日简报或主题聚合。"
+    ctaLabel="查看每日简报"
+    ctaHref="/daily/"
+  />
+</BaseLayout>

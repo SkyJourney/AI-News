@@ -1,0 +1,21 @@
+---
+// AInews · Daily 详情页 /daily/{YYYY-MM-DD}/
+import { getCollection } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import DailyPageContent from '../../components/content/DailyPageContent.astro'
+
+export async function getStaticPaths() {
+  const all = await getCollection('daily')
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const title = `AI 资讯日报 ${entry.id}`
+---
+
+<BaseLayout
+  title={title}
+  description={`AInews ${entry.id} 每日简报：${entry.data.entry_count} 条 · ${entry.data.topics.length} 主题`}
+>
+  <DailyPageContent entry={entry} />
+</BaseLayout>

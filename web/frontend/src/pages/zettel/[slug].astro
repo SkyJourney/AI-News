@@ -1,0 +1,106 @@
+---
+// AInews · Zettel 详情页 /zettel/{id}/
+// 4 段式内容 · AIBadge + topic chip · 右栏 LuminaBacklinks
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import HeroSection from '../../components/cards/HeroSection.astro'
+import AIBadge from '../../components/cards/AIBadge.astro'
+import LuminaBacklinks from '../../components/enhance/LuminaBacklinks.astro'
+
+export async function getStaticPaths() {
+  const all = await getCollection('zettel')
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry } }))
+}
+
+const { entry } = Astro.props
+const { Content } = await render(entry)
+
+// 从 slug 派生标题（Zettel 无 H1）
+function deriveTitle(slug: string): string {
+  const m = slug.match(/^\d{12}-(.+)$/)
+  if (!m) return slug
+  return m[1].split('-').map((w) => w[0]?.toUpperCase() + w.slice(1)).join(' ')
+}
+
+const title = deriveTitle(entry.id)
+const createdIso = new Date(entry.data.created).toISOString().slice(0, 10)
+---
+
+<BaseLayout title={title} description={`AI 原子卡片 · ${entry.data.topic}`}>
+  <article class="zettel-detail">
+    <div class="zettel-detail-badges">
+      <AIBadge />
+      <a href={`/topics/${entry.data.topic}/`} class="lumina-chip">#{entry.data.topic}</a>
+      {entry.data.tags.slice(0, 4).map((t: string) => (
+        <span class="lumina-chip" style="opacity: 0.75;">{t}</span>
+      ))}
+    </div>
+
+    <HeroSection
+      eyebrow={`Zettel · ${createdIso}`}
+      title={title}
+    />
+
+    <div class="zettel-detail-layout">
+      <div class="zettel-detail-body lumina-reading-well">
+        <Content />
+
+        <div class="zettel-detail-source">
+          <div class="lumina-eyebrow">来源</div>
+          <a href={entry.data.source_url} target="_blank" rel="noopener">
+            {entry.data.source_url}
+          </a>
+          <span class="zettel-detail-source-name">· {entry.data.source}</span>
+        </div>
+      </div>
+
+      <aside class="zettel-detail-aside">
+        <LuminaBacklinks backlinks={entry.data.backlinks} />
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .zettel-detail {
+    padding-block: 1rem 4rem;
+  }
+  .zettel-detail-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .zettel-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 900px) {
+    .zettel-detail-layout {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+  .zettel-detail-body {
+    font-size: 1.05rem;
+    line-height: 1.75;
+  }
+  .zettel-detail-source {
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface-container-low);
+    border-radius: var(--radius-lg);
+    font-size: 0.9rem;
+  }
+  .zettel-detail-source > .lumina-eyebrow {
+    margin-bottom: 0.5rem;
+  }
+  .zettel-detail-source a {
+    word-break: break-all;
+  }
+  .zettel-detail-source-name {
+    color: var(--color-gray);
+  }
+</style>

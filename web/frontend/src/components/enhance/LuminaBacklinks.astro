@@ -1,0 +1,140 @@
+---
+// AInews · LuminaBacklinks · 按目录分栏的反向链接
+// 输入：来自 vaultLoader 注入的 backlinks 数组 [{ fromSlug, fromDir }]
+// 输出：Daily / Zettel / Original / Topic / DeepDive 分栏 chips
+import { slugToHref, URL_SEGMENTS, DIR_LABELS } from '../../lib/slug-utils'
+
+interface Backlink {
+  fromSlug: string
+  fromDir: 'daily' | 'topics' | 'zettel' | 'originals' | 'deepDives'
+}
+
+interface Props {
+  backlinks: Backlink[]
+}
+
+const { backlinks } = Astro.props
+
+// 分组：按 fromDir 归类，显示顺序 = Daily → Zettel → Original → Topic → DeepDive
+const ORDER: Backlink['fromDir'][] = ['daily', 'zettel', 'originals', 'topics', 'deepDives']
+
+const bins = new Map<Backlink['fromDir'], Backlink[]>()
+for (const bl of backlinks) {
+  if (!bins.has(bl.fromDir)) bins.set(bl.fromDir, [])
+  bins.get(bl.fromDir)!.push(bl)
+}
+
+const groups = ORDER.filter((d) => bins.has(d)).map((d) => ({
+  dir: d,
+  segment: dirToSegment(d),
+  label: DIR_LABELS[dirToSegment(d)],
+  items: bins.get(d)!,
+}))
+
+function dirToSegment(d: Backlink['fromDir']): keyof typeof URL_SEGMENTS extends never ? never : ReturnType<typeof classifyDir> {
+  return classifyDir(d)
+}
+
+function classifyDir(d: Backlink['fromDir']) {
+  const map: Record<Backlink['fromDir'], keyof typeof URL_SEGMENTS> = {
+    daily: 'daily',
+    topics: 'topics',
+    zettel: 'zettel',
+    originals: 'originals',
+    deepDives: 'deepDives',
+  }
+  return URL_SEGMENTS[map[d]]
+}
+
+const total = backlinks.length
+---
+
+{total === 0 ? (
+  <aside class="lumina-backlinks lumina-backlinks-empty">
+    <h3 class="lumina-backlinks-title">
+      <span class="material-symbols-outlined">arrow_upward</span>
+      反向链接
+    </h3>
+    <p class="lumina-backlinks-empty-text">此内容暂无被引用</p>
+  </aside>
+) : (
+  <aside class="lumina-backlinks">
+    <h3 class="lumina-backlinks-title">
+      <span class="material-symbols-outlined">arrow_upward</span>
+      反向链接
+      <span class="lumina-backlinks-count">{total}</span>
+    </h3>
+    {groups.map((g) => (
+      <section class="lumina-backlinks-group">
+        <div class="lumina-backlinks-group-label">{g.label}</div>
+        <div class="lumina-backlinks-chips">
+          {g.items.map((bl) => (
+            <a href={slugToHref(bl.fromSlug)} class="lumina-chip">
+              {bl.fromSlug}
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </aside>
+)}
+
+<style>
+  .lumina-backlinks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--surface-container-low);
+    border: 1px solid var(--color-lightgray);
+    border-radius: var(--radius-xl);
+    margin-top: 3rem;
+  }
+  .lumina-backlinks-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-header);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-darkgray);
+    margin: 0;
+  }
+  .lumina-backlinks-title .material-symbols-outlined {
+    font-size: 1.15rem;
+    color: var(--color-secondary);
+  }
+  .lumina-backlinks-count {
+    background: var(--surface-container);
+    color: var(--color-secondary);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+  .lumina-backlinks-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .lumina-backlinks-group-label {
+    font-family: var(--font-header);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gray);
+  }
+  .lumina-backlinks-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .lumina-backlinks-empty-text {
+    margin: 0;
+    color: var(--color-gray);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+</style>
