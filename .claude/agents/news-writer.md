@@ -105,10 +105,16 @@ color: pink
   - **<title>** ([[Zettel-ID]])
     <事件描述 2 句话>
     源：[原文](<url>) — `<source_name>`
-  # 情形 D：复盘条目（re_coverage）
+  # 情形 D：复盘条目 + 有旧 Zettel（re_coverage）
   - 🔄 [复盘] **<title>** ([[旧 Zettel-ID]] · [[<original_id>]])
     <re_coverage 条目用 🔄 前缀，标"复盘"；wikilink 指向 _seen-urls 中已记录的 zettel_id 或 Glob 找到的旧 Zettel>
     源：`<source_name>` · 首记于 [[<previously_kept_in_daily>]]
+  # 情形 E：复盘条目 + 未升级 Zettel（re_coverage 但既无旧 Zettel 又不新建）
+  - 🔄 [复盘] **<title>**（未升级 Zettel）(原文 [[<original_id>]])
+    <说明 1 句：本次为何再次收录（新数据/新解读/新语境）却不升级 Zettel>
+    源：`<source_name>` · 首记于 [[<previously_kept_in_daily>]]
+  # ⚠️ 情形 E 关键：即使无 Zettel 也必须挂 (原文 [[<original_id>]]) 双链——只要 entry.original_id 非 null 就一律追加
+  # 若 entry.original_id 为 null（Phase 3.5 崩溃）→ 兜底 (原文 [<url>](<url>))；不允许既无 Zettel 又无原文链接
 
   ### 🛡️ 安全 / 对齐 [[safety-alignment]]
   ...
