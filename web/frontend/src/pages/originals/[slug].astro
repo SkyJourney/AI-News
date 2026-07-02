@@ -6,6 +6,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import AIBadge from '../../components/cards/AIBadge.astro'
 import MetadataBadge from '../../components/cards/MetadataBadge.astro'
 import LuminaBacklinks from '../../components/enhance/LuminaBacklinks.astro'
+import ArticleProgress from '../../components/enhance/ArticleProgress.tsx'
 
 export async function getStaticPaths() {
   const all = await getCollection('originals')
@@ -97,6 +98,8 @@ for (const t of entry.data.related_topics ?? []) {
 
       <!-- 右栏 -->
       <aside class="orig-detail-right">
+        <ArticleProgress client:load />
+
         {headings && headings.length > 0 && (
           <nav class="orig-detail-toc">
             <div class="lumina-eyebrow">目录</div>

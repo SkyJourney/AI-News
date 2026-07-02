@@ -4,6 +4,16 @@
 // 所有路由都用此 Layout（详情页可用 ArticleLayout 扩展）
 
 import '../styles/global.css'
+// 自托管字体（替代 Google Fonts CDN，见 F2.8）
+import '@fontsource/geist-sans/400.css'
+import '@fontsource/geist-sans/500.css'
+import '@fontsource/geist-sans/600.css'
+import '@fontsource/geist-sans/700.css'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/ibm-plex-mono/400.css'
+import '@fontsource/ibm-plex-mono/500.css'
 import { ClientRouter } from 'astro:transitions'
 import LuminaHeader from '../components/shell/LuminaHeader.astro'
 import LuminaDock from '../components/shell/LuminaDock.tsx'
@@ -30,18 +40,20 @@ const siteUrl = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
+
+    <!-- 深色模式 FOUC 防护：必须在任何样式生效前同步执行，赶在首帧绘制前定好 data-theme -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('ainews-theme')
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-
-    <!-- Google Fonts · Geist / Inter / IBM Plex Mono -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
-    />
 
     <!-- Canonical + OG -->
     {canonical && <link rel="canonical" href={canonical} />}
@@ -64,6 +76,7 @@ const siteUrl = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321
 
     <script>
       import '../lib/wikilink-preview-client.ts'
+      import '../lib/theme-toggle-client.ts'
     </script>
 
     <style>
