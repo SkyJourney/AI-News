@@ -17,7 +17,7 @@ aliases: AInews, ai-news, AI 新闻, AI资讯, AI新闻
 | 项目记忆索引 | `.claude/memory/MEMORY.md`（必读 4 件套 + 按需 reference + 历史归档） |
 | **演化跟踪权威** | **`.claude/skills/ai-news/ROADMAP.md`**（Sprint 1/2/3 F1/F2 主线；与 `project_progress.md` 双向同步） |
 | vault 落盘根公约 | `SCHEMA.md`（写盘前 5 项自检） |
-| 采集管道编排 | `.claude/skills/ai-news/SKILL.md`（v2.4，Phase 0-7：Preflight → Fetch → Filter → Cluster → Write → Digest → Log → Git Sync） |
+| 采集管道编排 | `.claude/skills/ai-news/SKILL.md`（v2.4，Phase 0-8：Preflight → Fetch → Filter → Cluster → Write → Digest → Log → Git Sync → Publish） |
 | 信息源单一权威 | `.claude/skills/ai-news/references/sources.md` |
 | 死源黑名单 | `.claude/skills/ai-news/references/blacklist.md` |
 | 过滤/聚类/打标准则 | `.claude/skills/ai-news/references/filter-criteria.md` |

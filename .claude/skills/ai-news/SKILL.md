@@ -10,7 +10,7 @@ argument-hint: "[--date=YYYY-MM-DD] [--dry-run] [--from-cache=<inbox-file>]"
 
 # /ai-news — AI 资讯聚合管道
 
-你正在编排一条 7 阶段的资讯流水线（Phase 0 Preflight + Phase 1-7）。**你只负责调度，不负责具体抓取/过滤/写盘/汇总**——这些都委派给 `.claude/agents/` 里的 7 个 subagent。
+你正在编排一条 8 阶段的资讯流水线（Phase 0 Preflight + Phase 1-8）。**你只负责调度，不负责具体抓取/过滤/写盘/汇总**——这些都委派给 `.claude/agents/` 里的 7 个 subagent。
 
 ## 参数解析
 
@@ -449,6 +449,58 @@ git -C /Volumes/Projects/AInews push origin main 2>&1
 - commit: <COMMIT_SHA>
 - pushed: success | skipped | failed (reason)
 - remote: <origin url>
+```
+
+---
+
+## Phase 8 — Publish（主会话内联，F2.7 新增）
+
+构建/部署 `web/frontend` Astro 静态站点到本地 Docker（LAN-only，无内网穿透）。**独立于 Phase 7**：直接读本地工作区当前内容，不依赖 git push 是否成功——离线也能跑。
+
+**前置条件**——与 Phase 7 相同的内容侧门槛：
+- Phase 0–5 均无异常抛出
+- Phase 4 writer 返回 `errors: []`
+- Phase 5 digester 返回 `errors: []`
+- Phase 6 Log 已写盘且 `partial: false`
+
+任一不满足 → 跳过本 phase，在 Log 末尾追加 `publish: skipped (reason=...)`，不报错。
+
+### 8.1 校验 Docker 可用
+
+```bash
+docker compose version >/dev/null 2>&1 || echo "no-docker"
+```
+
+- 输出 `no-docker`（命令不存在或报错）→ 跳过本 phase，Log 标 `publish: skipped (no docker)`
+
+### 8.2 Build（builder profile，一次性容器）
+
+```bash
+docker compose -f /Volumes/Projects/AInews/web/docker-compose.yml --profile build run --rm builder
+```
+
+- builder 只读挂载 vault 5 目录（10-Daily / 20-Topics / 40-Deep-Dives / 50-Zettel / 60-Originals），容器内跑 `npm run build`（内含 `scripts/sync-assets.mjs` 同步 60-Originals 图片资产到 `public/originals-assets/`）
+- 产物写入具名 volume `site-dist`，与常驻 `web`（nginx）服务共享
+- 退出码非 0 → Log 标 `publish: build_failed`，**不阻断**（vault 内容已在 Phase 7 落盘/推送，只是本次站点构建失败，下次跑会重试）
+
+### 8.3 确保 nginx 服务在跑 + 冒烟测试
+
+```bash
+docker compose -f /Volumes/Projects/AInews/web/docker-compose.yml up -d web
+sleep 1
+curl -sf http://localhost:8801/ >/dev/null && echo ok || echo smoke_failed
+```
+
+- `up -d` 是幂等的：nginx 已在跑则不重启，直接从共享 volume 读最新静态文件生效
+- 冒烟失败 → Log 标 `publish: smoke_failed`
+
+### 8.4 在 Phase 6 Log 末尾追加
+
+```markdown
+## 站点发布
+- build: success | failed | skipped (reason)
+- smoke_test: ok | failed | skipped
+- url: http://localhost:8801/（LAN: http://192.168.50.253:8801/）
 ```
 
 ---

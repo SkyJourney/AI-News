@@ -92,6 +92,7 @@ commit: 83c20b2
 - **F2.4 P4 归档**：`.claude/skills/ai-news/notes/_archive/F2.4-P4-completion-report.md` · `_archive/F2.4-tokens-lumina-to-quartz.md`
 - **F2 Astro 完成报告**：`.claude/skills/ai-news/notes/F2-astro-completion-report.md`
 - **F2 内容质量优化补丁**（commit `83c20b2`）：originals 图片资产接入 build 修复（`scripts/sync-assets.mjs`）· zettel 瀑布流嵌套 `<a>` 布局撕裂修复 · Zettel/Topic 历史内容批量回填（中文标题 59 篇 + 日期倒序重排 11 篇）· D17 conda 环境固定 · D18 域名级 UA override，详见 [[decisions#D17]] / [[decisions#D18]]
+- **F2.7 本地 Docker 部署**（commit tbd）：内网穿透明确划出范围，收窄为纯 LAN 部署。新增 `web/frontend/Dockerfile` + `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻）+ `web/nginx.conf`；SKILL.md 新增 **Phase 8 · Publish**（独立于既有 Phase 7 Git Sync，不依赖 push 结果）。本地验证 137 页 build 通过，`localhost:8801` / LAN `192.168.50.253:8801` 全路由 200
 
 ---
 
@@ -110,11 +111,10 @@ commit: 83c20b2
 - B1：digester 输入结构变化后重构评估
 - A9'：writer 降级二判（F1 后 writer 责任变小）
 
-### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 完成核心 + 内容质量补丁）
+### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 完成核心 + 内容质量补丁 + 本地 Docker 部署）
 - **框架 = Astro 5**（2026-07-02 D16 反转 D15，见 [[decisions#D16]]）
-- **已完成**（M0-M6 + 内容质量优化补丁 `83c20b2`）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承 · 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · 83 页 805ms build · LAN 部署 200 · originals 图片资产 pipeline（`scripts/sync-assets.mjs`）· conda 环境固定（D17）· 域名级 UA override（D18）
+- **已完成**（M0-M6 + 内容质量优化补丁 `83c20b2` + F2.7 Docker 部署）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承 · 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · originals 图片资产 pipeline（`scripts/sync-assets.mjs`）· conda 环境固定（D17）· 域名级 UA override（D18）· **F2.7** `web/docker-compose.yml` + `web/nginx.conf` + `web/frontend/Dockerfile`（LAN-only，内网穿透已划出范围）+ SKILL.md Phase 8 Publish · 137 页 build 通过 · 本地/LAN `8801` 全路由 200
 - **待做**：
-  - F2.7 · Docker Compose + nginx + 内网穿透（frp / cloudflare tunnel）
   - F2.8 · 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · Wikilink broken link 检测）
 
 ### 持续 · 边角优化
