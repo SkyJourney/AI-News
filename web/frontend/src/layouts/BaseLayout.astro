@@ -69,7 +69,7 @@ const siteUrl = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321
   </head>
   <body>
     <LuminaHeader />
-    <main class="lumina-main">
+    <main class="lumina-main" data-pagefind-body>
       <slot />
     </main>
     <LuminaDock client:load />

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "node scripts/sync-assets.mjs && astro dev",
-    "build": "node scripts/sync-assets.mjs && astro build",
+    "build": "node scripts/sync-assets.mjs && astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -23,5 +23,8 @@
     "material-symbols": "^0.45.5",
     "preact": "^10.29.3",
     "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
   }
 }

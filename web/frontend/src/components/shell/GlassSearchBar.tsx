@@ -1,43 +1,172 @@
-// AInews · 顶栏全站搜索触发按钮（Preact island）
-// v1：点击 alert 提示 v2 上线（v2 实现 pagefind 或 fuse.js 索引）
-// 视觉：玻璃拟态 pill 带快捷键 hint
+// AInews · 顶栏全站搜索（Preact island + Pagefind 静态索引）
+// v1 alert 桩 → v2：⌘K 打开浮层，懒加载 /pagefind/pagefind.js（build 后置产物，
+// 不在 Vite 模块图里，用 @vite-ignore 让浏览器在运行时直接 fetch 这条路径）
 
-import { useState, useEffect } from 'preact/hooks'
+import { useState, useEffect, useRef, useCallback } from 'preact/hooks'
+import { createPortal } from 'preact/compat'
+import { DIR_LABELS, type UrlSegment } from '../../lib/slug-utils'
+
+interface PagefindResultData {
+  url: string
+  meta: { title?: string }
+  excerpt: string
+}
+
+interface PagefindResult {
+  data: () => Promise<PagefindResultData>
+}
+
+interface PagefindApi {
+  search: (query: string) => Promise<{ results: PagefindResult[] }>
+  init?: () => void
+}
+
+let pagefindPromise: Promise<PagefindApi> | null = null
+
+function loadPagefind(): Promise<PagefindApi> {
+  if (!pagefindPromise) {
+    // @ts-expect-error pagefind.js 是 build 后置产物路径，Vite 静态分析不到，运行时才存在
+    pagefindPromise = import(/* @vite-ignore */ '/pagefind/pagefind.js').then((mod: PagefindApi) => {
+      mod.init?.() // Pagefind 要求先 init() 再 search()
+      return mod
+    })
+  }
+  return pagefindPromise
+}
+
+function segmentFromUrl(url: string): UrlSegment | null {
+  const seg = url.split('/').filter(Boolean)[0]
+  return seg && seg in DIR_LABELS ? (seg as UrlSegment) : null
+}
+
+/** Pagefind excerpt 里非 <mark> 部分是标准 HTML 实体转义文本，需要解码回明文再当 Preact 文本节点渲染 */
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'")
+    .replace(/&amp;/g, '&') // 必须最后处理，避免把其它实体里的 & 二次解码
+}
+
+/**
+ * 把 Pagefind excerpt（形如 "...文本 <mark>命中词</mark> 文本..."）拆成安全渲染的节点数组，
+ * 不用 dangerouslySetInnerHTML——全程走 Preact 的文本子节点，杜绝任何 HTML 注入面。
+ */
+function renderExcerpt(excerpt: string) {
+  return excerpt.split(/(<mark>.*?<\/mark>)/g).map((part, i) => {
+    const matched = part.match(/^<mark>(.*)<\/mark>$/)
+    return matched ? <mark key={i}>{decodeEntities(matched[1])}</mark> : decodeEntities(part)
+  })
+}
+
+type ResultItem = PagefindResultData & { segment: UrlSegment | null }
 
 export default function GlassSearchBar() {
   const [macOs, setMacOs] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [results, setResults] = useState<ResultItem[]>([])
+  const inputRef = useRef<HTMLInputElement>(null)
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>()
+
   useEffect(() => {
     setMacOs(navigator.platform.toUpperCase().includes('MAC'))
   }, [])
-  const modKey = macOs ? '⌘' : 'Ctrl'
 
-  const onClick = () => {
-    // v2 hook：打开搜索 modal
-    alert('全站搜索计划 v2 上线（v1 请用浏览器 ⌘F）')
-  }
+  const runSearch = useCallback(async (q: string) => {
+    if (!q.trim()) {
+      setResults([])
+      setLoading(false)
+      return
+    }
+    setLoading(true)
+    const pagefind = await loadPagefind()
+    const { results: raw } = await pagefind.search(q)
+    const data = await Promise.all(raw.slice(0, 20).map((r) => r.data()))
+    setResults(data.map((d) => ({ ...d, segment: segmentFromUrl(d.url) })))
+    setLoading(false)
+  }, [])
+
+  useEffect(() => {
+    clearTimeout(debounceRef.current)
+    debounceRef.current = setTimeout(() => runSearch(query), 200)
+    return () => clearTimeout(debounceRef.current)
+  }, [query, runSearch])
+
+  const openModal = useCallback(() => {
+    setOpen(true)
+    loadPagefind() // 打开即预热索引，减少首次输入的等待
+    requestAnimationFrame(() => inputRef.current?.focus())
+  }, [])
+
+  const closeModal = useCallback(() => {
+    setOpen(false)
+    setQuery('')
+    setResults([])
+  }, [])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault()
-        onClick()
+        if (open) closeModal()
+        else openModal()
+      } else if (e.key === 'Escape' && open) {
+        closeModal()
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [])
+  }, [open, openModal, closeModal])
+
+  const modKey = macOs ? '⌘' : 'Ctrl'
 
   return (
-    <button
-      class="lumina-searchbar"
-      onClick={onClick}
-      aria-label="全站搜索（v2）"
-    >
-      <span class="material-symbols-outlined lumina-searchbar-icon">search</span>
-      <span class="lumina-searchbar-hint">
-        <kbd>{modKey}</kbd>
-        <kbd>K</kbd>
-      </span>
+    <>
+      <button class="lumina-searchbar" onClick={openModal} aria-label="全站搜索">
+        <span class="material-symbols-outlined lumina-searchbar-icon">search</span>
+        <span class="lumina-searchbar-hint">
+          <kbd>{modKey}</kbd>
+          <kbd>K</kbd>
+        </span>
+      </button>
+
+      {open &&
+        createPortal(
+          <div class="search-overlay" onClick={closeModal}>
+            <div class="search-modal" onClick={(e) => e.stopPropagation()}>
+              <div class="search-modal-input-row">
+                <span class="material-symbols-outlined">search</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={query}
+                  onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
+                  placeholder="搜索 Daily / Topics / Zettel / Originals…"
+                />
+                <kbd>Esc</kbd>
+              </div>
+              <div class="search-modal-results">
+                {loading && <div class="search-modal-status">搜索中…</div>}
+                {!loading && query.trim() && results.length === 0 && (
+                  <div class="search-modal-status">没有找到匹配结果</div>
+                )}
+                {!loading &&
+                  results.map((r) => (
+                    <a key={r.url} href={r.url} class="search-result">
+                      {r.segment && <span class="search-result-tag">{DIR_LABELS[r.segment]}</span>}
+                      <div class="search-result-title">{r.meta.title ?? r.url}</div>
+                      <div class="search-result-excerpt">{renderExcerpt(r.excerpt)}</div>
+                    </a>
+                  ))}
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
+
       <style>{`
         .lumina-searchbar {
           display: inline-flex;
@@ -74,7 +203,101 @@ export default function GlassSearchBar() {
           font-size: 0.7rem;
           box-shadow: 0 1px 0 var(--color-lightgray);
         }
+
+        .search-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 200;
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          padding-top: 12vh;
+          background: rgba(11, 14, 26, 0.5);
+          backdrop-filter: blur(4px);
+        }
+        .search-modal {
+          width: min(600px, 90vw);
+          max-height: 70vh;
+          display: flex;
+          flex-direction: column;
+          background: var(--surface-container-lowest);
+          border: 1px solid var(--glass-border-card);
+          border-radius: var(--radius-2xl);
+          box-shadow: var(--shadow-featured);
+          overflow: hidden;
+        }
+        .search-modal-input-row {
+          display: flex;
+          align-items: center;
+          gap: 0.65rem;
+          padding: 0.9rem 1.1rem;
+          border-bottom: 1px solid var(--color-lightgray);
+        }
+        .search-modal-input-row input {
+          flex: 1;
+          border: none;
+          outline: none;
+          background: transparent;
+          font-size: 1rem;
+          color: var(--color-dark);
+          font-family: var(--font-body);
+        }
+        .search-modal-input-row kbd {
+          font-family: var(--font-code);
+          font-size: 0.7rem;
+          color: var(--color-gray);
+          background: var(--surface-container-high);
+          padding: 0.1rem 0.4rem;
+          border-radius: var(--radius-sm);
+        }
+        .search-modal-results {
+          overflow-y: auto;
+          padding: 0.5rem;
+        }
+        .search-modal-status {
+          padding: 1.5rem 1rem;
+          text-align: center;
+          color: var(--color-gray);
+          font-size: 0.85rem;
+        }
+        .search-result {
+          display: block;
+          padding: 0.65rem 0.85rem;
+          border-radius: var(--radius-lg);
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.12s ease;
+        }
+        .search-result:hover {
+          background: var(--surface-container-high);
+        }
+        .search-result-tag {
+          display: inline-block;
+          margin-bottom: 0.25rem;
+          font-family: var(--font-header);
+          font-size: 0.65rem;
+          letter-spacing: 0.05em;
+          color: var(--color-secondary);
+          text-transform: uppercase;
+        }
+        .search-result-title {
+          font-family: var(--font-header);
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: var(--color-dark);
+        }
+        .search-result-excerpt {
+          margin-top: 0.15rem;
+          font-size: 0.8rem;
+          color: var(--color-darkgray);
+          line-height: 1.5;
+        }
+        .search-result-excerpt mark {
+          background: var(--color-highlight);
+          color: var(--color-secondary);
+          border-radius: 2px;
+        }
       `}</style>
-    </button>
+    </>
   )
 }
