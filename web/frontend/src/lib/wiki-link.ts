@@ -6,14 +6,31 @@ import { visit } from 'unist-util-visit'
 import type { Root, Text, Link, PhrasingContent } from 'mdast'
 import type { Plugin } from 'unified'
 import { slugToHref } from './slug-utils'
+import { getVaultCache } from './vault-loader.ts'
+
+type VaultCache = Awaited<ReturnType<typeof getVaultCache>>
 
 const WIKI_LINK_RE = /\[\[([^\]]+)\]\]/g
+const EXCERPT_MAX_LEN = 90
+
+/** 从目标条目的原始 markdown body 里抽一段纯文本摘要，供 hover 预览用 */
+function excerptFromBody(body: string): string {
+  const plain = body
+    .replace(/^#+\s+/gm, '') // 标题符号
+    .replace(/\[\[([^\]]+)\]\]/g, (_m, inner: string) => inner.split('|').pop()!.split('#')[0]) // wikilink 只留显示文本
+    .replace(/[*_`>#]/g, '') // 常见 markdown 标记
+    .replace(/\s+/g, ' ')
+    .trim()
+  return plain.length > EXCERPT_MAX_LEN ? `${plain.slice(0, EXCERPT_MAX_LEN)}…` : plain
+}
 
 /**
  * 把一段 text 拆成 (Text | Link)[] —— 每个 [[wiki]] 变 Link 节点
+ * 目标 slug 存在于 vault 缓存 → 合法链接（带 hover 预览 data 属性）
+ * 目标 slug 不存在 → 断链（class="wikilink broken"，href="#"，不可点，title 提示原因）
  * @returns 若无 wikilink 返回 null，否则返回拆分后的节点数组
  */
-function splitTextByWikilink(value: string): PhrasingContent[] | null {
+function splitTextByWikilink(value: string, cache: VaultCache): PhrasingContent[] | null {
   if (!value.includes('[[')) return null
   const parts: PhrasingContent[] = []
   let lastIndex = 0
@@ -30,15 +47,37 @@ function splitTextByWikilink(value: string): PhrasingContent[] | null {
     // section 链接 [[target#heading]]（v1 不支持，剥掉）
     const target = rawTarget.split('#')[0].trim()
     const display = rawDisplay ?? target
-    parts.push({
-      type: 'link',
-      url: slugToHref(target),
-      title: null,
-      children: [{ type: 'text', value: display } as Text],
-      data: {
-        hProperties: { className: ['wikilink'], 'data-wiki-target': target },
-      },
-    } as Link)
+    const matched = cache.entries.find((e) => e.slug === target)
+
+    if (matched) {
+      parts.push({
+        type: 'link',
+        url: slugToHref(target),
+        title: null,
+        children: [{ type: 'text', value: display } as Text],
+        data: {
+          hProperties: {
+            className: ['wikilink'],
+            'data-wiki-target': target,
+            'data-preview-title': String(matched.frontmatter.title ?? target),
+            'data-preview-excerpt': excerptFromBody(matched.body),
+          },
+        },
+      } as Link)
+    } else {
+      parts.push({
+        type: 'link',
+        url: '#',
+        title: `链接目标不存在：${target}`,
+        children: [{ type: 'text', value: display } as Text],
+        data: {
+          hProperties: {
+            className: ['wikilink', 'broken'],
+            'data-wiki-target': target,
+          },
+        },
+      } as Link)
+    }
     lastIndex = m.index + m[0].length
   }
   if (parts.length === 0) return null
@@ -49,15 +88,22 @@ function splitTextByWikilink(value: string): PhrasingContent[] | null {
   return parts
 }
 
-/** remark 插件 · 遍历所有 text 节点，把 [[wiki]] 拆成 link */
+/**
+ * remark 插件 · 遍历所有 text 节点，把 [[wiki]] 拆成 link
+ * 异步插件：每个文件转换前先 await 一次 vault 缓存（getVaultCache 内部按 module 单例
+ * 记忆化，只有第一次调用会触发全库扫描）。不能用同步存取器直接读 vault-loader.ts 的
+ * module-scope 变量——astro.config.mjs 的 import 链与 content.config.ts 的 import 链
+ * 在 Astro/Vite 里可能落进不同的模块实例，同步读会读到"另一份"从未被填充的 cache。
+ */
 export const remarkWikiLink: Plugin<[], Root> = () => {
-  return (tree) => {
+  return async (tree) => {
+    const cache = await getVaultCache()
     visit(tree, 'text', (node, index, parent) => {
       if (!parent || index == null) return
       // 跳过 code / inlineCode 里的 text（visit 默认不进 code，但保险）
       const parentType = (parent as { type: string }).type
       if (parentType === 'code' || parentType === 'inlineCode') return
-      const replacement = splitTextByWikilink((node as Text).value)
+      const replacement = splitTextByWikilink((node as Text).value, cache)
       if (!replacement) return
       ;(parent as { children: PhrasingContent[] }).children.splice(
         index,

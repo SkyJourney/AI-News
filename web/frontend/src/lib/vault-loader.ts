@@ -154,7 +154,11 @@ export function vaultLoader(vaultDir: VaultDir): Loader {
   }
 }
 
-/** 只读缓存 API，用于跨 collection 反查（Backlinks / RelatedIntelligence 组件用） */
+/**
+ * 只读缓存 API，用于跨 collection 反查（Backlinks / RelatedIntelligence 组件、
+ * wiki-link.ts 断链判定 + hover 预览都用这个）。
+ * 内部按 module 单例记忆化，只有第一次调用会触发全库扫描；后续调用直接拿 resolved 值。
+ */
 export async function getVaultCache(): Promise<VaultCache> {
   return loadVaultCache()
 }

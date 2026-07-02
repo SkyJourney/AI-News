@@ -62,6 +62,10 @@ const siteUrl = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost:4321
     </main>
     <LuminaDock client:load />
 
+    <script>
+      import '../lib/wikilink-preview-client.ts'
+    </script>
+
     <style>
       .lumina-main {
         max-width: var(--lumina-container-max);

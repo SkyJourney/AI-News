@@ -121,3 +121,39 @@ th {
   font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   vertical-align: middle;
 }
+
+/* Wikilink hover 预览 popover（wikilink-preview-client.ts 动态定位）*/
+.wikilink-popover {
+  position: absolute;
+  z-index: 100;
+  max-width: 280px;
+  padding: 0.6rem 0.8rem;
+  background: var(--surface-container-highest);
+  border: 1px solid var(--glass-border-panel);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--color-dark);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.wikilink-popover.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wikilink-popover strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-header);
+  color: var(--color-dark);
+}
+
+.wikilink-popover p {
+  margin: 0;
+  color: var(--color-darkgray);
+}
