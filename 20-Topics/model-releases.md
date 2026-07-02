@@ -8,19 +8,67 @@ entry_total: 27
 
 追踪新模型 / 版本发布、参数公布、基准刷新事件。涵盖闭源与开源的大语言模型、多模态模型及 agent 模型。
 
-## 2026-06-27
+## 2026-07-02
 
-- **Previewing GPT-5.6 Sol** ([[202606271430-gpt5-6-sol]])
-  OpenAI 预告 GPT-5.6 Sol，安全性与编码能力双线强化；以"Previewing"形式渐进披露。
+- **Improving health intelligence in ChatGPT**（未升级 Zettel，复盘）
+  🔄 [复盘] GPT-5.5 Instant 健康对话改进功能持续传播第三日。
+  源：`openai-rss` · 首记于 [[2026-06-30]]
+- **开源生态 Artifacts #22：Zyphra、Cohere、Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
+  🔄 [复盘] 开源模型生态多样化综述连续第四日出现，多模型发布评价持续引用。
+  源：`interconnects` · 首记于 [[2026-06-29]]
+- **Om AI联汇发布VLX：全球首个端侧流式多模态模型** ([[202607020933-om-ai-vlx-physical-multimodal]])
+  三段式子模型（Flow/Seek/Go）协同实现端侧持续感知-定位-决策闭环，单路延迟 0.06 秒。
+  源：`qbitai`
+- **Redeploying Fable 5** ([[202607020934-fable-5-redeployment-jailbreak-scoring]])
+  Fable 5 全球重新部署，Anthropic 联合 Amazon/Microsoft/Google 提出业界越狱严重性评分框架。
+  源：`anthropic-news`
+## 2026-07-01
+
+- **Introducing Claude Sonnet 5** ([[202607010922-claude-sonnet-5-release]])
+  Anthropic 发布 Sonnet 5，编码 + Agent 前沿性能定位，强调规模化部署能力，与 Claude Science 同日双线推进。
+  源：`anthropic-news`
+- **开源生态 Artifacts #22：Zyphra、Cohere、Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
+  🔄 [复盘] 开源模型生态多样化持续受关注，GLM-5.2、Command A+、ZAYA1、Laguna-M.1 评估延续。
+  源：`interconnects` · 首记于 [[2026-06-29]]
+- **DeepSeek V4 官方版涨价** (未升级 Zettel)
+  DeepSeek V4 正式版伴随性能提升大幅调价，打破此前超低价策略。
+  源：`qbitai`
+
+## 2026-06-30
+
+- **New usage analytics and updated spend controls for enterprises**（未升级 Zettel）
+  OpenAI 为 ChatGPT Enterprise 推出成本管控与用量分析工具，助力企业规模化 AI 部署。
   源：`openai-rss`
+- **Improving health intelligence in ChatGPT**（未升级 Zettel）
+  GPT-5.5 Instant 增强 ChatGPT 医疗健康回答的推理、上下文与清晰度，含医生评估校准。
+  源：`openai-rss`
+- **Latest open artifacts (#22): Zyphra, Cohere, and Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
+  开源模型生态多样性评述持续传播，三类发布主体动机分析框架继续引发关注。
+  源：`interconnects` · 首记于 [[2026-06-29]]
+- **全球首个：隐空间世界模型，打通长时序双向物理因果链了！**（未升级 Zettel）
+  新融资具身智能公司发布隐空间世界模型，声称登顶具身榜单第一。
+  源：`qbitai`
+- **OceanBase发布AI数据库：以一套引擎融合湖库与多模态数据**（未升级 Zettel）
+  OceanBase 新型 AI 数据库尝试以统一引擎融合湖仓一体与多模态数据处理。
+  源：`qbitai`
 
-- **Introducing computer use in Gemini 3.5 Flash** ([[202606271431-gemini-35-flash-computer-use]])
-  Google DeepMind 为轻量级 Gemini 3.5 Flash 引入 computer use，进入桌面自动化赛道。
-  源：`deepmind-rss`
+## 2026-06-29
 
-- **GLM-5.2 is the step change for open agents** ([[202606271432-glm-52-open-agents]])
-  智谱 AI GLM-5.2 被 Interconnects 评为开源 agent 阶跃突破，缩小与闭源前沿模型的能力差距。
+- **Latest open artifacts (#22): Zyphra, Cohere, and Poolside** ([[202606291408-open-model-artifacts-22]])
+  Interconnects 纵览 5 款开源新模型：Nemotron-3 Ultra / Command A+ / GLM-5.2 / ZAYA1 / Laguna-M.1，分析三类发布动机。
   源：`interconnects`
+- **抱抱脸模型TOP榜，我现在只服yuxinlu1**（未升级 Zettel）
+  HF 模型榜单更新，个人研究者 yuxinlu1 杀入大厂包围圈。
+  源：`qbitai`
+- **GPT-5.6突然发布！Fable5痛失最强基模王座** ([[202606291409-gpt56-three-model-release]])
+  OpenAI 一口气发布三款 GPT-5.6 系列模型，被认为打破 Fable 5 最强基模地位。
+  源：`qbitai`
+- **Introducing Claude Tag**（未升级 Zettel）
+  Claude Tag 发布，为团队协作提供新的 Claude 接入方式。
+  源：`anthropic-news`
+- **The Batch #359: A New Generation Studies AI, Apple's Recipe for On-Device Models**（未升级 Zettel）
+  本期聚焦 GLM-5.2、Apple 端侧模型配方、loop engineering 术语崛起。
+  源：`the-batch`
 
 ## 2026-06-28
 
@@ -52,65 +100,17 @@ entry_total: 27
   管制解除后 Fable 5 部分地区恢复，GPT-5.6 随即跟进，竞争节奏加速。
   源：`qbitai`
 
-## 2026-06-29
+## 2026-06-27
 
-- **Latest open artifacts (#22): Zyphra, Cohere, and Poolside** ([[202606291408-open-model-artifacts-22]])
-  Interconnects 纵览 5 款开源新模型：Nemotron-3 Ultra / Command A+ / GLM-5.2 / ZAYA1 / Laguna-M.1，分析三类发布动机。
+- **Previewing GPT-5.6 Sol** ([[202606271430-gpt5-6-sol]])
+  OpenAI 预告 GPT-5.6 Sol，安全性与编码能力双线强化；以"Previewing"形式渐进披露。
+  源：`openai-rss`
+
+- **Introducing computer use in Gemini 3.5 Flash** ([[202606271431-gemini-35-flash-computer-use]])
+  Google DeepMind 为轻量级 Gemini 3.5 Flash 引入 computer use，进入桌面自动化赛道。
+  源：`deepmind-rss`
+
+- **GLM-5.2 is the step change for open agents** ([[202606271432-glm-52-open-agents]])
+  智谱 AI GLM-5.2 被 Interconnects 评为开源 agent 阶跃突破，缩小与闭源前沿模型的能力差距。
   源：`interconnects`
-- **抱抱脸模型TOP榜，我现在只服yuxinlu1**（未升级 Zettel）
-  HF 模型榜单更新，个人研究者 yuxinlu1 杀入大厂包围圈。
-  源：`qbitai`
-- **GPT-5.6突然发布！Fable5痛失最强基模王座** ([[202606291409-gpt56-three-model-release]])
-  OpenAI 一口气发布三款 GPT-5.6 系列模型，被认为打破 Fable 5 最强基模地位。
-  源：`qbitai`
-- **Introducing Claude Tag**（未升级 Zettel）
-  Claude Tag 发布，为团队协作提供新的 Claude 接入方式。
-  源：`anthropic-news`
-- **The Batch #359: A New Generation Studies AI, Apple's Recipe for On-Device Models**（未升级 Zettel）
-  本期聚焦 GLM-5.2、Apple 端侧模型配方、loop engineering 术语崛起。
-  源：`the-batch`
 
-## 2026-06-30
-
-- **New usage analytics and updated spend controls for enterprises**（未升级 Zettel）
-  OpenAI 为 ChatGPT Enterprise 推出成本管控与用量分析工具，助力企业规模化 AI 部署。
-  源：`openai-rss`
-- **Improving health intelligence in ChatGPT**（未升级 Zettel）
-  GPT-5.5 Instant 增强 ChatGPT 医疗健康回答的推理、上下文与清晰度，含医生评估校准。
-  源：`openai-rss`
-- **Latest open artifacts (#22): Zyphra, Cohere, and Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
-  开源模型生态多样性评述持续传播，三类发布主体动机分析框架继续引发关注。
-  源：`interconnects` · 首记于 [[2026-06-29]]
-- **全球首个：隐空间世界模型，打通长时序双向物理因果链了！**（未升级 Zettel）
-  新融资具身智能公司发布隐空间世界模型，声称登顶具身榜单第一。
-  源：`qbitai`
-- **OceanBase发布AI数据库：以一套引擎融合湖库与多模态数据**（未升级 Zettel）
-  OceanBase 新型 AI 数据库尝试以统一引擎融合湖仓一体与多模态数据处理。
-  源：`qbitai`
-
-## 2026-07-01
-
-- **Introducing Claude Sonnet 5** ([[202607010922-claude-sonnet-5-release]])
-  Anthropic 发布 Sonnet 5，编码 + Agent 前沿性能定位，强调规模化部署能力，与 Claude Science 同日双线推进。
-  源：`anthropic-news`
-- **开源生态 Artifacts #22：Zyphra、Cohere、Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
-  🔄 [复盘] 开源模型生态多样化持续受关注，GLM-5.2、Command A+、ZAYA1、Laguna-M.1 评估延续。
-  源：`interconnects` · 首记于 [[2026-06-29]]
-- **DeepSeek V4 官方版涨价** (未升级 Zettel)
-  DeepSeek V4 正式版伴随性能提升大幅调价，打破此前超低价策略。
-  源：`qbitai`
-
-## 2026-07-02
-
-- **Improving health intelligence in ChatGPT**（未升级 Zettel，复盘）
-  🔄 [复盘] GPT-5.5 Instant 健康对话改进功能持续传播第三日。
-  源：`openai-rss` · 首记于 [[2026-06-30]]
-- **开源生态 Artifacts #22：Zyphra、Cohere、Poolside** ([[202606291408-open-model-artifacts-22]])（复盘）
-  🔄 [复盘] 开源模型生态多样化综述连续第四日出现，多模型发布评价持续引用。
-  源：`interconnects` · 首记于 [[2026-06-29]]
-- **Om AI联汇发布VLX：全球首个端侧流式多模态模型** ([[202607020933-om-ai-vlx-physical-multimodal]])
-  三段式子模型（Flow/Seek/Go）协同实现端侧持续感知-定位-决策闭环，单路延迟 0.06 秒。
-  源：`qbitai`
-- **Redeploying Fable 5** ([[202607020934-fable-5-redeployment-jailbreak-scoring]])
-  Fable 5 全球重新部署，Anthropic 联合 Amazon/Microsoft/Google 提出业界越狱严重性评分框架。
-  源：`anthropic-news`

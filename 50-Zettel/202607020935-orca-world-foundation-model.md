@@ -1,6 +1,7 @@
 ---
 created: 2026-07-02 09:35:00
 status: draft
+title: '北京智源提出 Orca 通用世界基础模型'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.30534
 topic: research-papers

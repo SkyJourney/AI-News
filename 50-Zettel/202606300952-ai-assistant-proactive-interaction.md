@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:52:00
 status: draft
+title: '清华双研究探索 AI 助手从被动到主动交互'
 source: jiqizhixin
 source_url: http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+AI%E5%8A%A9%E6%89%8B%E4%B8%8D%E8%AF%A5%E5%8F%AA%E7%AD%89%E4%BA%BA%E6%8F%90%E9%97%AE
 tags: [agent, nlp, research]

@@ -2,6 +2,8 @@
 created: 2026-07-01 09:30:00
 updated: 2026-07-01 09:30:00
 status: draft
+title: '悲观性悖论：保守离线训练反加剧在线奖励黑客'
+title_original: '悲观性悖论：保守离线训练在推理模型在线自适应中加剧奖励黑客攻击'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30627v1
 topic: safety-alignment

@@ -2,6 +2,7 @@
 created: 2026-07-01 09:19:00
 updated: 2026-07-01 09:19:00
 status: draft
+title: '研究证实优化器选择决定异步流水线并行成败'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30634v1
 topic: infra-hardware

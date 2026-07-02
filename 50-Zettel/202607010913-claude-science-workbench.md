@@ -2,6 +2,7 @@
 created: 2026-07-01 09:13:00
 updated: 2026-07-01 09:13:00
 status: draft
+title: 'Anthropic 推出面向科学家的 Claude Science 工作台'
 source: anthropic-news
 source_url: https://anthropic.com/news/claude-science-ai-workbench
 topic: applications

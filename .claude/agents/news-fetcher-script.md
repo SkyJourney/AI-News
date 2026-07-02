@@ -39,9 +39,9 @@ script_args: --max 15 --detail-limit 15
 
 1. **Bash 执行脚本**：
    ```bash
-   python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/<script> <script_args 若有>
+   ~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/<script> <script_args 若有>
    ```
-   - 用 `python3`（系统 3.9+ 或 conda 3.13，脚本自身负责兼容）
+   - **固定走 `ai-news` conda 环境**（见项目根 `.conda_env`），不要用裸 `python3`——PATH 解析在不同执行环境下会漂移到系统 3.9.6，曾导致脚本语法报错（见 decisions.md D17）
    - stdout 必须是合法 JSON
    - stderr 是诊断信息，不算 fatal
    - 超时建议 90 秒（详情页串行抓 15 个 + 0.5s 间隔 ≈ 15 秒，留余量；若脚本 timeout 长期超 30s 该单独优化）

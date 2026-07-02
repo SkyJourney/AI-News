@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:56:00
 status: draft
+title: '"词元盗用"成 AI 商业化新型安全威胁'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/439746.html
 tags: [safety, llm, policy]

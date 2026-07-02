@@ -120,7 +120,7 @@ FETCH_PATH="/Volumes/Projects/AInews/00-Inbox/${TARGET_DATE}-${HHMM}-fetch.json"
 ### 1.3 调 fetch-merge.py 合并 per-source → 总 fetch.json
 
 ```bash
-python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/fetch-merge.py \
+~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/fetch-merge.py \
   --inbox-dir=/Volumes/Projects/AInews/00-Inbox \
   --target-date=$TARGET_DATE \
   --hhmm=$HHMM \
@@ -164,7 +164,7 @@ SEEN_URLS_PATH=/Volumes/Projects/AInews/00-Inbox/_seen-urls.json
 主会话直接 Bash 调脚本（不再 spawn agent）：
 
 ```bash
-python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/filter-inline.py \
+~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/filter-inline.py \
   --fetch=$FETCH_PATH \
   --out=$FILTERED_PATH \
   --seen-urls=$SEEN_URLS_PATH \
@@ -219,7 +219,7 @@ agent 返回的 JSON 写到临时文件（stdin 通过 pipe 传给 cluster-merge
 
 ```bash
 # 假设 agent 返回的 JSON 已存到主会话变量 AGENT_JSON
-echo "$AGENT_JSON" | python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/cluster-merge.py \
+echo "$AGENT_JSON" | ~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/cluster-merge.py \
   --filtered=$FILTERED_PATH \
   --out=$CLUSTER_PATH \
   --target-date=$TARGET_DATE \

@@ -2,6 +2,8 @@
 dist/
 # generated types
 .astro/
+# 复制自 60-Originals/_assets（scripts/sync-assets.mjs 生成，源头已入 git）
+public/originals-assets/
 
 # dependencies
 node_modules/

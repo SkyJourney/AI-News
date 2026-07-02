@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:51:00
 status: draft
+title: 'AI 担任 CEO 实验致多家公司濒临破产'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/439864.html
 tags: [agent, safety, application]

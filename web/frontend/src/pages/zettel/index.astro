@@ -20,7 +20,7 @@ function preview(body: string): string {
   return clean.length > 160 ? clean.slice(0, 160) + '…' : clean
 }
 
-// 从 slug 派生标题（Zettel 通常无 H1）
+// 兜底：老数据缺 frontmatter title 时从 slug 派生一个近似英文标题
 function deriveTitle(slug: string): string {
   const m = slug.match(/^\d{12}-(.+)$/)
   if (!m) return slug
@@ -38,23 +38,27 @@ const eyebrow = `${all.length} 张 · ${topicSet.size} 主题`
   <HeroSection
     eyebrow={eyebrow}
     title="原子卡片"
-    subtitle="Zettelkasten 方法 · 每张卡片一个概念 · 通过双链构建知识图谱"
+    subtitle="每张卡片聚焦一个核心概念，点开关联标签，串起完整的知识脉络"
   />
 
   <div class="zettel-masonry">
     {all.map((entry) => {
-      const title = deriveTitle(entry.id)
+      const title = entry.data.title ?? deriveTitle(entry.id)
+      const subtitle = entry.data.title_original && entry.data.title_original !== title ? entry.data.title_original : null
       const excerpt = preview(entry.body ?? '')
       const created = new Date(entry.data.created).toISOString().slice(0, 10)
       return (
-        <a href={`/zettel/${entry.id}/`} class="zettel-card">
+        <article class="zettel-card">
           <div class="zettel-card-top">
             <AIBadge />
-            <a href={`/topics/${entry.data.topic}/`} class="lumina-chip" onclick="event.stopPropagation()">
+            <a href={`/topics/${entry.data.topic}/`} class="lumina-chip zettel-card-chip">
               #{entry.data.topic}
             </a>
           </div>
-          <h3 class="zettel-card-title">{title}</h3>
+          <h3 class="zettel-card-title">
+            <a href={`/zettel/${entry.id}/`} class="zettel-card-link">{title}</a>
+          </h3>
+          {subtitle && <p class="zettel-card-subtitle">{subtitle}</p>}
           <p class="zettel-card-excerpt">{excerpt}</p>
           <div class="zettel-card-footer">
             <span>{created}</span>
@@ -65,7 +69,7 @@ const eyebrow = `${all.length} 张 · ${topicSet.size} 主题`
               </span>
             )}
           </div>
-        </a>
+        </article>
       )
     })}
   </div>
@@ -82,6 +86,7 @@ const eyebrow = `${all.length} 张 · ${topicSet.size} 主题`
   }
   .zettel-card {
     display: block;
+    position: relative;
     break-inside: avoid;
     margin-bottom: 1rem;
     padding: 1.25rem 1.5rem;
@@ -89,11 +94,10 @@ const eyebrow = `${all.length} 张 · ${topicSet.size} 主题`
     border: 1px solid var(--color-lightgray);
     border-left: 3px solid var(--ai-accent);
     border-radius: var(--radius-xl);
-    text-decoration: none;
     color: var(--color-dark);
     transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
-  .zettel-card:hover {
+  .zettel-card:has(.zettel-card-link:hover) {
     box-shadow: var(--shadow-card-hover);
     border-left-color: var(--ai-accent-dark);
   }
@@ -104,12 +108,34 @@ const eyebrow = `${all.length} 张 · ${topicSet.size} 主题`
     gap: 0.5rem;
     margin-bottom: 0.75rem;
   }
+  /* topic chip 是独立可点击链接，需高于 stretched-link 伪元素 */
+  .zettel-card-chip {
+    position: relative;
+    z-index: 1;
+  }
   .zettel-card-title {
     font-family: var(--font-header);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.35;
+    margin: 0 0 0.25rem;
+  }
+  .zettel-card-subtitle {
     margin: 0 0 0.5rem;
+    color: var(--color-gray);
+    font-size: 0.75rem;
+    font-style: italic;
+    line-height: 1.4;
+  }
+  /* stretched-link：标题链接用 ::after 撑满整卡，使全卡可点击且不违反 <a> 嵌套规范 */
+  .zettel-card-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .zettel-card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
   }
   .zettel-card-excerpt {
     margin: 0 0 1rem;

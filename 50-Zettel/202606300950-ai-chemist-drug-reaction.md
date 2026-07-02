@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:50:00
 status: draft
+title: 'GPT-5.4 驱动的 AI 化学家改进药物合成关键步骤'
 source: openai-rss
 source_url: https://openai.com/index/ai-chemist-improves-reaction
 tags: [llm, science, openai, agent, release]

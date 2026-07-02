@@ -1,6 +1,7 @@
 ---
 created: 2026-06-27 14:37:00
 status: draft
+title: 'OpenAI 联手 Broadcom 研发专用推理芯片 Jalapeño'
 source: openai-rss
 source_url: https://openai.com/index/openai-broadcom-jalapeno-inference-chip
 topic: infra-hardware

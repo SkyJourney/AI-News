@@ -51,6 +51,9 @@ const zettel = defineCollection({
     created: z.coerce.date(),
     updated: z.coerce.date().optional(),
     status: z.enum(['draft', 'published']).default('draft'),
+    // optional 而非必填：宽容纳入未回填 title 的历史/异常条目，页面侧兜底回退到 slug 派生标题
+    title: z.string().optional(),
+    title_original: z.string().optional(),
     source: z.string(),
     source_url: z.string().url(),
     topic: z.string(),

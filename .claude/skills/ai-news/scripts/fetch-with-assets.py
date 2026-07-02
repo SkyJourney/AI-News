@@ -11,7 +11,7 @@
 - 图片降级：下载失败保留原 URL + alt，加 data-fallback-reason 供 agent 识别
 
 使用：
-    python3 fetch-with-assets.py <URL> \\
+    ~/miniconda3/envs/ai-news/bin/python3 fetch-with-assets.py <URL> \\
       --out-dir /Volumes/Projects/AInews/60-Originals \\
       --id 2026-07-01-0816-openai-gpt5-preview \\
       --date 2026-07-01 \\
@@ -48,13 +48,26 @@ UA_BROWSER = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 )
 UA_PROJECT = "AInews-skill/1.0 (personal-vault; https://github.com/local/ainews)"
+UA_SAFARI = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15"
+)
+
+# ─── 域名级 UA override（已知该域名对默认 UA_BROWSER 返回 4xx 拦截，换 UA 可直接绕过） ───
+# 2026-07-02 实测：ai.meta.com 对 Chrome/Firefox 桌面 UA 一律 http_400（Meta 边缘防护通用
+# 错误页，非真实语义错误）；Safari UA / 自定义 UA 均 200。域名级判定优先于 --ua-mode 参数。
+DOMAIN_UA_OVERRIDES = {
+    "ai.meta.com": UA_SAFARI,
+}
 
 IMAGE_TIMEOUT_SEC = 15
 
-# ─── Jina Reader 兜底（Cloudflare 挑战 / rate limit / timeout 场景） ───
+# ─── Jina Reader 兜底（Cloudflare 挑战 / rate limit / UA 拦截 / timeout 场景） ───
 # 免 auth HTTPS GET，非第三方 MCP，符合 CLAUDE.md D5 边界
+# http_400 纳入触发：非语义错误场景常是站点边缘防护对 UA/请求特征做黑名单拦截（如
+# ai.meta.com），即便已配置 DOMAIN_UA_OVERRIDES，未来新源撞上同类问题时仍有兜底
 JINA_READER_BASE = "https://r.jina.ai/"
-JINA_TRIGGER_ERRORS = {"http_403", "http_429", "http_503", "timeout"}
+JINA_TRIGGER_ERRORS = {"http_400", "http_403", "http_429", "http_503", "timeout"}
 JINA_TIMEOUT_SEC = 45  # Jina 内部跑 headless render，比直连宽松
 
 # 噪声标签（连同内容一并删除）
@@ -397,6 +410,9 @@ def parse_args():
 def main() -> int:
     args = parse_args()
     ua = UA_BROWSER if args.ua_mode == "browser" else UA_PROJECT
+    domain = urllib.parse.urlparse(args.url).netloc
+    if domain in DOMAIN_UA_OVERRIDES:
+        ua = DOMAIN_UA_OVERRIDES[domain]  # 域名级 override 优先于 --ua-mode
     out_dir = Path(args.out_dir)
 
     html_text, err = fetch_html(args.url, args.timeout, ua)

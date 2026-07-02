@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:53:00
 status: draft
+title: 'LifeSciBench：生命科学 AI 能力评测新基准'
 source: openai-rss
 source_url: https://openai.com/index/introducing-life-sci-bench
 tags: [eval, paper, openai, llm]

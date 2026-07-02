@@ -6,7 +6,7 @@
 - 默认抓 cat:cs.AI + cat:cs.LG，sortBy=submittedDate，descending
 
 使用：
-    python3 arxiv-fetch.py --cats cs.AI cs.LG --max 20 --since-days 1
+    ~/miniconda3/envs/ai-news/bin/python3 arxiv-fetch.py --cats cs.AI cs.LG --max 20 --since-days 1
 
 输出（stdout）：
     {"entries":[{"id","title","authors","summary","published","arxiv_id","pdf_url","abs_url"},...],

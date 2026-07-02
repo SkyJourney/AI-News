@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:38:00
 status: draft
+title: 'SciAgentGym：让大模型从答题走向科学实验'
+title_original: '从答题到做实验：SciAgentGym让大模型进入科学工作流'
 source: jiqizhixin
 source_url: http://weixin.sogou.com/weixin?type=2&query=%E6%9C%BA%E5%99%A8%E4%B9%8B%E5%BF%83+%E4%BB%8E%E7%AD%94%E9%A2%98%E5%88%B0%E5%81%9A%E5%AE%9E%E9%AA%8C%EF%BC%9ASciAgentGym%E8%AE%A9%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%BF%9B%E5%85%A5%E7%A7%91%E5%AD%A6%E5%B7%A5%E4%BD%9C%E6%B5%81
 topic: agents

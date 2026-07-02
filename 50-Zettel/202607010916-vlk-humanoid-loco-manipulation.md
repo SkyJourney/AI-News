@@ -2,6 +2,7 @@
 created: 2026-07-01 09:16:00
 updated: 2026-07-01 09:16:00
 status: draft
+title: 'VLK 框架实现人形机器人无标注 sim-to-real 迁移'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30645v1
 topic: research-papers

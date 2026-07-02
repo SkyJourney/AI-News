@@ -2,6 +2,7 @@
 created: 2026-07-01 09:27:00
 updated: 2026-07-01 09:27:00
 status: draft
+title: '研究揭示顶尖 Agent 普遍存在"该停不停"问题'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.28733
 topic: agents

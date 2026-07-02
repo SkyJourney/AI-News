@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:37:00
 status: draft
+title: 'SkillHone：基于决策历史的 Agent 技能持续演进框架'
+title_original: 'SkillHone：通过持久决策历史实现持续智能体技能演进的框架'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.08671
 topic: agents

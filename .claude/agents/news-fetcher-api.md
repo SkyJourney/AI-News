@@ -31,7 +31,7 @@ notes: 按 cat:cs.AI/cs.LG + sortBy=submittedDate 检索...
 ### arxiv-api
 执行：
 ```bash
-python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fetch.py --cats cs.AI cs.LG --max 20 --since-days 2
+~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fetch.py --cats cs.AI cs.LG --max 20 --since-days 2
 ```
 该脚本已封装限流（3 秒/次）。stdout 即标准化 JSON。把脚本输出包一层 wrapper：
 

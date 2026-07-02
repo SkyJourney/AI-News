@@ -1,6 +1,7 @@
 ---
 created: 2026-06-28 12:28:00
 status: draft
+title: 'Anthropic 发布 Fable 5 与 Mythos 5，遭出口管制波及'
 source: anthropic-news
 source_url: https://anthropic.com/news/claude-fable-5-mythos-5
 topic: model-releases

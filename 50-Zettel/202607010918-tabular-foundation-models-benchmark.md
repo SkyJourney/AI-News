@@ -2,6 +2,7 @@
 created: 2026-07-01 09:18:00
 updated: 2026-07-01 09:18:00
 status: draft
+title: 'Beyond IID 基准戳破表格基础模型泛化神话'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.30410
 topic: research-papers

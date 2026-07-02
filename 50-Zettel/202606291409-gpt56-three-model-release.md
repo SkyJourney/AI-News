@@ -1,6 +1,7 @@
 ---
 created: 2026-06-29 14:09:00
 status: draft
+title: 'OpenAI 一次发布三款 GPT-5.6，撼动最强基模格局'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/439027.html
 topic: model-releases

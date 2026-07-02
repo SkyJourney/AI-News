@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:36:00
 status: draft
+title: 'Loop 世界模型论文登顶 HF，周鸿祎陆奇投资'
+title_original: 'Loop世界模型论文登顶Hugging Face，来自中国一家初创，周鸿祎陆奇都投了'
 source: qbitai
 source_url: https://www.qbitai.com/2026/07/441225.html
 topic: research-papers

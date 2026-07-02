@@ -1,6 +1,7 @@
 ---
 created: 2026-06-27 14:31:00
 status: draft
+title: 'Gemini 3.5 Flash 上线电脑操作能力'
 source: deepmind-rss
 source_url: https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/
 topic: model-releases

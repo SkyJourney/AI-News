@@ -1,6 +1,7 @@
 ---
 created: 2026-06-29 14:06:00
 status: draft
+title: 'OpenAI 研究：AI Agent 正扩展人类工作边界'
 source: openai-rss
 source_url: https://openai.com/index/how-agents-are-transforming-work
 topic: agents

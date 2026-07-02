@@ -2,6 +2,8 @@
 created: 2026-07-01 09:15:00
 updated: 2026-07-01 09:15:00
 status: draft
+title: 'OpenAI 发布基因组学评测基准 GeneBench-Pro'
+title_original: '介绍 GeneBench Pro'
 source: openai-rss
 source_url: https://openai.com/index/introducing-genebench-pro
 topic: research-papers

@@ -13,7 +13,7 @@
 3. 输出统一 JSON 给 news-fetcher-script subagent
 
 使用：
-    python3 a16z-fetch.py [--max N] [--detail-limit N]
+    ~/miniconda3/envs/ai-news/bin/python3 a16z-fetch.py [--max N] [--detail-limit N]
     # 默认 max=15（列表页前 15 条），detail-limit=15（全部拉详情）
 
 输出（stdout）：

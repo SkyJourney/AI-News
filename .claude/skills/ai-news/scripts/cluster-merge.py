@@ -11,7 +11,7 @@ news-cluster agent 输出精简 mappings 数组（每条 url + topic_slug + is_n
 v2.3 把 agent 工作瘦身为"判断 + 解释"（不到 5K 输出），主会话内联 merge 字段。
 
 CLI:
-  python3 cluster-merge.py \\
+  ~/miniconda3/envs/ai-news/bin/python3 cluster-merge.py \\
     --filtered=00-Inbox/2026-06-29-1052-filtered.json \\
     --out=00-Inbox/2026-06-29-1052-cluster.json \\
     --target-date=2026-06-29 \\

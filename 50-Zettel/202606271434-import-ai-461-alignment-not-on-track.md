@@ -1,6 +1,7 @@
 ---
 created: 2026-06-27 14:34:00
 status: draft
+title: 'Jack Clark：AI 对齐进度已落后于能力发展'
 source: import-ai
 source_url: https://importai.substack.com/p/import-ai-461-alignment-is-not-on
 topic: safety-alignment

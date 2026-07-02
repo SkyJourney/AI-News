@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:54:00
 status: draft
+title: 'OpenAI 用部署仿真提前预测模型上线行为'
 source: openai-rss
 source_url: https://openai.com/index/deployment-simulation
 tags: [safety, eval, paper, openai]

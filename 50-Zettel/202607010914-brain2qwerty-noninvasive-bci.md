@@ -2,6 +2,8 @@
 created: 2026-07-01 09:14:00
 updated: 2026-07-01 09:14:00
 status: draft
+title: 'Meta Brain2Qwerty：无需手术的脑机打字接口登 Nature'
+title_original: '从脑电波到文字：Brain2Qwerty 提供无需手术的新型沟通方式'
 source: meta-ai-blog
 source_url: https://ai.meta.com/blog/brain2qwerty-brain-ai-human-communication/
 topic: applications

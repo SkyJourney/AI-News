@@ -1,6 +1,7 @@
 ---
 created: 2026-06-29 14:11:00
 status: draft
+title: '前 HF 研究员创立 Macrodata，标准化机器人数据'
 source: air-street-press
 source_url: https://press.airstreet.com/p/macrodata-pre-seed
 topic: opensource-tools

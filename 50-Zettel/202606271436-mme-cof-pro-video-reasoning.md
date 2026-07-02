@@ -1,6 +1,7 @@
 ---
 created: 2026-06-27 14:36:00
 status: draft
+title: '新基准显示视频链式推理能力仍处早期'
 source: jiqizhixin
 source_url: http://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2651041465&idx=3&sn=729dd9680448f8b94858d11d019b3a10
 topic: research-papers

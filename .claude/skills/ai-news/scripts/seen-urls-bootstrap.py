@@ -20,7 +20,7 @@
 - 默认拒绝覆盖已有文件（--force 才覆盖）
 
 使用：
-    python3 seen-urls-bootstrap.py \\
+    ~/miniconda3/envs/ai-news/bin/python3 seen-urls-bootstrap.py \\
       --vault /Volumes/Projects/AInews \\
       --out /Volumes/Projects/AInews/00-Inbox/_seen-urls.json \\
       [--force] \\

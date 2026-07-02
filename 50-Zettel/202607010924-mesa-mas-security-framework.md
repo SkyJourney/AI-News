@@ -2,6 +2,7 @@
 created: 2026-07-01 09:24:00
 updated: 2026-07-01 09:24:00
 status: draft
+title: 'MESA 框架：无需攻击样本评估多智能体安全风险'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30602v1
 topic: agents

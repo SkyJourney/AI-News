@@ -1,6 +1,7 @@
 ---
 created: 2026-06-28 12:29:00
 status: draft
+title: 'Anthropic 首发《公开记录》透明度报告'
 source: anthropic-news
 source_url: https://anthropic.com/news/anthropic-public-record
 topic: safety-alignment

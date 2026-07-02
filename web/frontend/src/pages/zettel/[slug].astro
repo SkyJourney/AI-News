@@ -15,18 +15,19 @@ export async function getStaticPaths() {
 const { entry } = Astro.props
 const { Content } = await render(entry)
 
-// 从 slug 派生标题（Zettel 无 H1）
+// 兜底：老数据缺 frontmatter title 时从 slug 派生一个近似英文标题
 function deriveTitle(slug: string): string {
   const m = slug.match(/^\d{12}-(.+)$/)
   if (!m) return slug
   return m[1].split('-').map((w) => w[0]?.toUpperCase() + w.slice(1)).join(' ')
 }
 
-const title = deriveTitle(entry.id)
+const title = entry.data.title ?? deriveTitle(entry.id)
+const subtitle = entry.data.title_original && entry.data.title_original !== title ? entry.data.title_original : undefined
 const createdIso = new Date(entry.data.created).toISOString().slice(0, 10)
 ---
 
-<BaseLayout title={title} description={`AI 原子卡片 · ${entry.data.topic}`}>
+<BaseLayout title={title} description={subtitle ?? `AI 原子卡片 · ${entry.data.topic}`}>
   <article class="zettel-detail">
     <div class="zettel-detail-badges">
       <AIBadge />
@@ -39,6 +40,7 @@ const createdIso = new Date(entry.data.created).toISOString().slice(0, 10)
     <HeroSection
       eyebrow={`Zettel · ${createdIso}`}
       title={title}
+      subtitle={subtitle}
     />
 
     <div class="zettel-detail-layout">

@@ -2,6 +2,8 @@
 created: 2026-07-01 09:21:00
 updated: 2026-07-01 09:21:00
 status: draft
+title: 'ElevenLabs 工程优化实现单 GPU 效率提升 70 倍'
+title_original: '计算资源稀缺是一个工程问题'
 source: air-street-press
 source_url: https://press.airstreet.com/p/angelos-perivolaropoulos-elevenlabs
 topic: infra-hardware

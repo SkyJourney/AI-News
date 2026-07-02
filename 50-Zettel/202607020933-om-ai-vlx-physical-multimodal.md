@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:33:00
 status: draft
+title: 'Om AI 联汇发布全球首个物理世界端侧流式多模态模型'
+title_original: 'Om AI联汇发布VLX：全球首个面向物理世界的端侧流式多模态模型'
 source: qbitai
 source_url: https://www.qbitai.com/2026/07/441124.html
 topic: model-releases

@@ -2,6 +2,7 @@
 created: 2026-07-01 09:12:00
 updated: 2026-07-01 09:12:00
 status: draft
+title: '虎牙发布 VAM 1.0：一张照片实现 24 小时数字人直播'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/440236.html
 topic: applications

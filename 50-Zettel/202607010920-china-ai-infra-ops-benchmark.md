@@ -2,6 +2,7 @@
 created: 2026-07-01 09:20:00
 updated: 2026-07-01 09:20:00
 status: draft
+title: '信通院发布首个 AI 基础设施运维评测基准'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/440454.html
 topic: infra-hardware

@@ -1,6 +1,7 @@
 ---
 created: 2026-06-28 12:30:00
 status: draft
+title: '美国政府出口管制叫停 Fable 5 与 Mythos 5 访问'
 source: anthropic-news
 source_url: https://anthropic.com/news/fable-mythos-access
 topic: policy-regulation

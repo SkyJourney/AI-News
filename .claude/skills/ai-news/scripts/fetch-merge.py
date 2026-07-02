@@ -15,7 +15,7 @@ schema 与 vault-schema §6.1 一致（fetchers[] / failures[] / stats）。
 中转文件，主会话 Read 文件无大小限制，根治截断 bug（arxiv/the-batch/a16z 历史重灾区）。
 
 CLI:
-  python3 fetch-merge.py \\
+  ~/miniconda3/envs/ai-news/bin/python3 fetch-merge.py \\
     --inbox-dir=/Volumes/Projects/AInews/00-Inbox \\
     --target-date=2026-06-30 \\
     --hhmm=0949 \\

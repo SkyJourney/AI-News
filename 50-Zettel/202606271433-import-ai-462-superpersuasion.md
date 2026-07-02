@@ -1,6 +1,7 @@
 ---
 created: 2026-06-27 14:33:00
 status: draft
+title: '大规模实验证实 AI 说服力已超越人类专家'
 source: import-ai
 source_url: https://importai.substack.com/p/import-ai-462-superpersuasion-self
 topic: safety-alignment

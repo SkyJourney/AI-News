@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:49:00
 status: draft
+title: 'OpenAI 推理模型识别 18 例罕见儿科遗传病'
 source: openai-rss
 source_url: https://openai.com/index/diagnose-rare-childhood-diseases
 tags: [llm, medical, openai, paper, eval]

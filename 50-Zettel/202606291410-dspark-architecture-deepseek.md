@@ -1,6 +1,7 @@
 ---
 created: 2026-06-29 14:10:00
 status: draft
+title: '梁文锋署名 DSpark 论文：工程优化胜于算法突破'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/439548.html
 topic: research-papers

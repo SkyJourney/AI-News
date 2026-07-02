@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:40:00
 status: draft
+title: 'State of AI 计算指数报告揭示算力供需新格局'
+title_original: 'AI 状态报告：计算指数 2026'
 source: air-street-press
 source_url: https://press.airstreet.com/p/state-of-ai-compute-index-june-2026
 topic: infra-hardware

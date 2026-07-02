@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:34:00
 status: draft
+title: 'Fable 5 全球重新部署，联合业界推越狱评分框架'
+title_original: '重新部署 Fable 5'
 source: anthropic-news
 source_url: https://anthropic.com/news/redeploying-fable-5
 topic: model-releases

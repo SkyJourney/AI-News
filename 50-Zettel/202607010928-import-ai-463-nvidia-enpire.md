@@ -2,6 +2,8 @@
 created: 2026-07-01 09:28:00
 updated: 2026-07-01 09:28:00
 status: draft
+title: 'Import AI 463：自改进机器人与万卡 GPU 集群'
+title_original: 'Import AI 463：自我改进的机器人、一万块中国 GPU 集群与人类时代的挽歌'
 source: import-ai
 source_url: https://importai.substack.com/p/import-ai-463-self-improving-robots
 topic: agents

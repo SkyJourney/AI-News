@@ -1,6 +1,8 @@
 ---
 created: 2026-06-29 14:08:00
 status: draft
+title: '开源模型盘点：Nemotron、GLM-5.2 等同期扎堆发布'
+title_original: '最新开源模型成果（#22）：Zyphra、Cohere 与 Poolside 拓展生态版图'
 source: interconnects
 source_url: https://www.interconnects.ai/p/artifacts-22-zyphra-cohere-and-poolside
 topic: model-releases

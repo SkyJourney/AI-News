@@ -34,10 +34,12 @@ color: yellow
 
 ### Step 2 · 调脚本
 
+**固定走 `ai-news` conda 环境**（见项目根 `.conda_env`），不要用裸 `python3`——PATH 解析在不同执行环境下会漂移到系统 3.9.6，曾导致脚本语法报错、触发 WebFetch 兜底质量下降（见 decisions.md D17）。
+
 **arxiv 通道**：
 
 ```bash
-python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fulltext.py \
+~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fulltext.py \
   "<url>" \
   --out-dir /Volumes/Projects/AInews/60-Originals \
   --id "<target_id>" \
@@ -47,7 +49,7 @@ python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/arxiv-fulltext.p
 **通用通道**：
 
 ```bash
-python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/fetch-with-assets.py \
+~/miniconda3/envs/ai-news/bin/python3 /Volumes/Projects/AInews/.claude/skills/ai-news/scripts/fetch-with-assets.py \
   "<url>" \
   --out-dir /Volumes/Projects/AInews/60-Originals \
   --id "<target_id>" \
@@ -160,13 +162,12 @@ tags: [source-original, language-<lang>]
 正文结构：
 
 ```markdown
-# <中文标题>
-
-> 原文：[<原文标题>](<source_url>) · <source_name> · <published_at>
-> 抓取：<fetched_at> · 翻译：<translation_engine or "无（中文原文）"> · <word_count> 字
-
 <正文按原文结构渲染，一二三级标题保留，图片按 Step 5 分级>
 ```
+
+**不要**在正文开头重复写 `# <中文标题>` 或 `> 原文：... / > 抓取：...` 引用块——这些信息 frontmatter 的 `title` / `original_title` / `source_url` / `source_name` / `published_at` / `fetched_at` / `translation_engine` / `word_count` 字段已经完整覆盖，前端详情页单独渲染一份 H1 + 引用条；正文重复写会导致标题/引用信息在页面上出现两次。正文从原文第一个实际内容开始（若原文有一级小标题就从那开始，没有就直接进正文段落）。
+
+
 
 #### YAML 字符串引号规则（防严格 YAML 解析器拒收）
 

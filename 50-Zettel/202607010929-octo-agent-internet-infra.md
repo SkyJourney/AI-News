@@ -2,6 +2,7 @@
 created: 2026-07-01 09:29:00
 updated: 2026-07-01 09:29:00
 status: draft
+title: '明略科技开源 Octo：Agent 互联网级通信基础设施'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/440199.html
 topic: agents

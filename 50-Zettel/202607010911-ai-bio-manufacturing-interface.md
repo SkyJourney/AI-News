@@ -2,6 +2,7 @@
 created: 2026-07-01 09:11:00
 updated: 2026-07-01 09:11:00
 status: draft
+title: 'AI 生物制造瓶颈在接口而非算法'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/440630.html
 topic: applications

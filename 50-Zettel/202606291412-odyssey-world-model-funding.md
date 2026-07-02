@@ -1,6 +1,7 @@
 ---
 created: 2026-06-29 14:12:00
 status: draft
+title: '世界模型公司 Odyssey 完成 3.1 亿美元 B 轮融资'
 source: air-street-press
 source_url: https://press.airstreet.com/p/odyssey-series-b
 topic: funding-investment

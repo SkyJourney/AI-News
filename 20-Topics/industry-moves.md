@@ -8,6 +8,35 @@ entry_total: 15
 
 追踪公司层面的战略动作：合作、收购、扩张、关停、人才流动及战略转向。
 
+## 2026-07-01
+
+- **乐动机器人港股押注物理 AI，打造万亿市场核心基础设施**（未升级 Zettel）
+  港股新贵乐动机器人战略定位物理 AI 基础设施，新一轮资本向具身智能赛道聚拢。
+  源：`qbitai`
+## 2026-06-29
+
+- **HP Inc. launches Frontier strategic partnership with OpenAI**（未升级 Zettel）
+  HP 将 OpenAI Frontier 合作伙伴关系规模化延伸至客户体验、软件开发与企业运营三条业务线。
+  源：`openai-rss`
+- **Patch the Planet: a Daybreak initiative**（未升级 Zettel）
+  OpenAI Daybreak 计划新增开源安全方向，AI 辅助开源维护者发现并修复漏洞。
+  源：`openai-rss`
+- **Anthropic opens Seoul office**（未升级 Zettel）
+  Anthropic 首尔办公室落地，宣布与韩国 AI 生态多家机构达成合作——国际化扩张提速。
+  源：`anthropic-news`
+- **State of AI Report 2025** ([[202606291405-state-of-ai-report-2025]])
+  第八届年度报告发布，覆盖研究/产业/政策/安全四大维度，配套 1,200+ 从业者调查。
+  源：`state-of-ai`
+- **State of AI Report 2025 - Full Slide Deck**（未升级 Zettel）
+  完整幻灯片版辅助参考，与主报告内容一致。
+  源：`state-of-ai`
+- **AI Practitioner Survey 2025**（未升级 Zettel）
+  首届大规模 AI 从业者调查，1,200+ 参与者。
+  源：`state-of-ai`
+- **State of AI Report 2025 Launch**（未升级 Zettel）
+  报告发布博客，与主报告内容重复。
+  源：`state-of-ai`
+
 ## 2026-06-28
 
 - **Introducing Claude Tag**（未升级 Zettel）
@@ -38,32 +67,3 @@ entry_total: 15
   Google DeepMind 头部推理研究员加入 Meta AI，折射两家在前沿推理领域的人才争夺。
   源：`qbitai`
 
-## 2026-06-29
-
-- **HP Inc. launches Frontier strategic partnership with OpenAI**（未升级 Zettel）
-  HP 将 OpenAI Frontier 合作伙伴关系规模化延伸至客户体验、软件开发与企业运营三条业务线。
-  源：`openai-rss`
-- **Patch the Planet: a Daybreak initiative**（未升级 Zettel）
-  OpenAI Daybreak 计划新增开源安全方向，AI 辅助开源维护者发现并修复漏洞。
-  源：`openai-rss`
-- **Anthropic opens Seoul office**（未升级 Zettel）
-  Anthropic 首尔办公室落地，宣布与韩国 AI 生态多家机构达成合作——国际化扩张提速。
-  源：`anthropic-news`
-- **State of AI Report 2025** ([[202606291405-state-of-ai-report-2025]])
-  第八届年度报告发布，覆盖研究/产业/政策/安全四大维度，配套 1,200+ 从业者调查。
-  源：`state-of-ai`
-- **State of AI Report 2025 - Full Slide Deck**（未升级 Zettel）
-  完整幻灯片版辅助参考，与主报告内容一致。
-  源：`state-of-ai`
-- **AI Practitioner Survey 2025**（未升级 Zettel）
-  首届大规模 AI 从业者调查，1,200+ 参与者。
-  源：`state-of-ai`
-- **State of AI Report 2025 Launch**（未升级 Zettel）
-  报告发布博客，与主报告内容重复。
-  源：`state-of-ai`
-
-## 2026-07-01
-
-- **乐动机器人港股押注物理 AI，打造万亿市场核心基础设施**（未升级 Zettel）
-  港股新贵乐动机器人战略定位物理 AI 基础设施，新一轮资本向具身智能赛道聚拢。
-  源：`qbitai`

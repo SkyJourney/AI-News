@@ -1,6 +1,7 @@
 ---
 created: 2026-06-28 12:27:00
 status: draft
+title: '杭州团队称推出全球首个端侧流式多模态模型'
 source: qbitai
 source_url: https://www.qbitai.com/2026/06/439236.html
 topic: model-releases

@@ -63,14 +63,14 @@ case "$FETCH" in
   api)
     if [[ "$SOURCE_NAME" == "arxiv-api" ]]; then
       echo "(arxiv-fetch.py 抽 3 条解析后标题)"
-      python3 "$SCRIPT_DIR/arxiv-fetch.py" --max 3 2>/dev/null \
-        | python3 -c "import json,sys; d=json.load(sys.stdin); [print(f'  [{e[\"published\"][:10]}] {e[\"title\"]}') for e in d.get('entries', [])[:3]]" \
+      "$HOME/miniconda3/envs/ai-news/bin/python3" "$SCRIPT_DIR/arxiv-fetch.py" --max 3 2>/dev/null \
+        | "$HOME/miniconda3/envs/ai-news/bin/python3" -c "import json,sys; d=json.load(sys.stdin); [print(f'  [{e[\"published\"][:10]}] {e[\"title\"]}') for e in d.get('entries', [])[:3]]" \
         || echo "(arxiv-fetch.py 失败)"
     elif [[ "$SOURCE_NAME" == "huggingface-daily-papers" ]]; then
       today=$(date +%F)
       echo "(HF Daily Papers @ ${today}, top 3)"
       curl -sS --max-time 15 -H "User-Agent: $UA" "${URL}?date=${today}" \
-        | python3 -c "import json,sys; d=json.load(sys.stdin); print(f'  count={len(d)}'); [print(f'  - {p.get(\"paper\",{}).get(\"title\",\"?\")}') for p in d[:3]]" 2>/dev/null \
+        | "$HOME/miniconda3/envs/ai-news/bin/python3" -c "import json,sys; d=json.load(sys.stdin); print(f'  count={len(d)}'); [print(f'  - {p.get(\"paper\",{}).get(\"title\",\"?\")}') for p in d[:3]]" 2>/dev/null \
         || echo "(empty or parse error；可能要试 yesterday)"
     else
       echo "(未知 api 类型: $SOURCE_NAME)"

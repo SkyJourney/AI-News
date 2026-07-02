@@ -47,6 +47,20 @@ function extractWikilinks(body: string): string[] {
   return Array.from(set)
 }
 
+/**
+ * originals 正文开头的 H1 标题与 frontmatter.title 冗余（Astro 详情页已单独渲染一份 H1）：
+ * - 旧模板：`# 标题` + `> 原文/抓取` 引用块（agent 曾主动写入，已改模板不再生成，历史文件仍有）
+ * - arxiv 通道：原文 HTML/PDF 结构自带 `# 论文标题`（脚本抓取产物，非 agent 主动添加），无引用块跟随
+ * 两种情况都只 strip 开头这个 H1（及紧跟的引用块，如果有），不影响其后的正文内容
+ * 找不到该模式时原样返回，不影响不以 # 开头的文件
+ */
+function stripOriginalsHeader(body: string): string {
+  // gray-matter 解析出的 content 开头常带一个前导换行，^\s* 兜底吃掉
+  // 引用块（若有）后偶尔跟一条原文自带的 --- 分隔线，不吃掉会让剩余 body 以 --- 开头
+  // 被 Astro markdown processor 误判成新的 YAML frontmatter 块导致 build 崩溃，一并吃掉
+  return body.replace(/^\s*#[^\n]*\n+(?:(?:>.*\n)+\n*(?:---\n+)?)?/, '')
+}
+
 /** 扫描单个 vault 目录，产出 RawEntry[] */
 async function scanVaultDir(vaultDir: VaultDir): Promise<RawEntry[]> {
   const absDir = path.join(VAULT_ROOT, VAULT_DIRS[vaultDir])
@@ -65,13 +79,22 @@ async function scanVaultDir(vaultDir: VaultDir): Promise<RawEntry[]> {
     const raw = await readFile(filePath, 'utf-8')
     const parsed = matter(raw)
     const slug = filePathToSlug(filename)
+    let body = parsed.content
+    if (vaultDir === 'originals') {
+      // 去重：正文开头与 frontmatter 冗余的标题+引用块（详情页已单独渲染）
+      body = stripOriginalsHeader(body)
+      // 图片是相对路径 _assets/YYYY-MM-DD/xxx.ext（相对 60-Originals/ 本身）
+      // sync-assets.mjs 把 _assets/ 物理复制到 public/originals-assets/，这里改写成绝对路径
+      // 避免浏览器按当前详情页 URL（/originals/{slug}/）错误解析相对路径导致 404
+      body = body.replace(/([("])_assets\//g, '$1/originals-assets/')
+    }
     out.push({
       vaultDir,
       slug,
       filePath,
       frontmatter: parsed.data,
-      body: parsed.content,
-      wikilinks: extractWikilinks(parsed.content),
+      body,
+      wikilinks: extractWikilinks(body),
     })
   }
   return out

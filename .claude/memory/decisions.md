@@ -320,6 +320,48 @@ commit: 6d5170f
 
 ---
 
+## D17：originalizer 脚本执行环境固定为独立 conda env `ai-news`，废弃"脚本自身兼容多版本"策略
+
+**决策**（2026-07-02）：新建 conda 环境 `ai-news`（`python=3.13.12`，精确锁定），项目根新增 `.conda_env` 文件记录环境规格。所有调用 `.claude/skills/ai-news/scripts/*.py` 的地方（4 个 agent + `SKILL.md` + `test-fetcher.sh`，共 10 处）从裸 `python3` 改为绝对路径 `~/miniconda3/envs/ai-news/bin/python3`。原先 `news-fetcher-script.md` 里"用 `python3`（系统 3.9+ 或 conda 3.13，脚本自身负责兼容）"的策略被废弃。
+
+**Why**：
+- **根因**：`news-originalizer` 调 `python3 arxiv-fulltext.py` / `fetch-with-assets.py` 时，PATH 解析在不同 subagent 执行环境下会漂移到系统自带的 `/usr/bin/python3`（3.9.6）而非 Miniconda 的 `python3`（3.13.12）。当时脚本用了 Python 3.10+ 才支持的 `str | None` union type 语法，3.9 下直接 TypeError，触发 WebFetch 兜底
+- **"脚本自身兼容多版本"是治标不治本**：2026-07-02 早些时候的 commit `6d5170f` 已经把 `str | None` 改成 `Optional[str]` 兼容 3.9，但这只解决了"这一次"的语法问题——未来任何新脚本、任何第三方库引入，只要用了 3.10+ 特性（不只是 union type，还有 match 语句、更新的 typing 特性等），只要 PATH 漂移到 3.9 就会重演同样的 bug；防御性地要求所有脚本永远兼容两个跨度很大的 Python 版本，长期维护成本高且容易遗漏
+- **实测影响**：2026-07-02 那次跑因为这个 bug，6 篇 60-Originals 文章被迫走 WebFetch 兜底，质量严重下降（2 篇基本等于抓取失败：0 字 / 12 字，其余 4 篇 `images_attempted/saved` 全为 0）
+- **固定环境是标准工程解法**：不依赖"猜哪个 python3 会被 PATH 解析到"，而是显式声明"这个项目的 Python 脚本只认这一个解释器"，从源头消除版本漂移的可能性，比事后加兼容性 patch 更彻底
+- **不用 `conda activate` / `conda run`**：两者都依赖 `conda` 命令本身在执行环境 PATH 里可用；绝对路径 `~/miniconda3/envs/ai-news/bin/python3` 不依赖任何环境初始化，subagent 环境差异不再是变量
+- **不写死 `/Users/sky/...`**：用 `~`（agent markdown 里）或 `$HOME`（shell 脚本变量展开更可靠）保留跨用户可移植性，换一台机器只要同样装 Miniconda 到默认路径 + 跑一次 `.conda_env` 里的 `create_cmd` 即可复现
+
+**How to apply**：
+- **新增任何调用 Python 脚本的地方**（agent / SKILL.md / shell 脚本）→ 必须用 `~/miniconda3/envs/ai-news/bin/python3`（markdown 场景）或 `"$HOME/miniconda3/envs/ai-news/bin/python3"`（shell 脚本场景），不要写裸 `python3`
+- **项目根 `.conda_env`** 是环境规格单一事实来源，改 Python 版本时先改这个文件再同步改环境本身（`conda create` 或 `conda install python=x.x.x -n ai-news`）
+- **脚本代码风格不需要为了兼容旧版本而放弃现代语法**——现有的 `Optional[str]` 写法不用改回 `str | None`，两者在 3.13 下都合法，纯风格问题不属于本决策范围
+- **验证方式**：`~/miniconda3/envs/ai-news/bin/python3 <script>.py --help` 应无 import/语法错误退出码为 0；改动后建议对曾经因这个 bug 失败的文章做一次抽样重跑验证（2026-07-02 已验证 `redeploying-fable-5` 用新环境能完整抓取，此前只有 12 字）
+
+**对应改动**：新建 conda env `ai-news` + `.conda_env` 文件 + 10 处 agent/SKILL 调用点 + 8 处脚本 docstring 用法示例（本次会话，commit 待定）
+
+---
+
+## D18：originals 抓取加域名级 UA override + Jina 兜底扩容 http_400
+
+**决策**（2026-07-02）：`fetch-with-assets.py` 新增 `DOMAIN_UA_OVERRIDES` 字典（域名 → 指定 UA，目前仅 `ai.meta.com: UA_SAFARI`），域名命中时优先于 `--ua-mode` 参数；同时 `JINA_TRIGGER_ERRORS` 加入 `http_400`。
+
+**Why**：
+- **D17 修完 Python 环境 bug 后，`brain2qwerty-brain-ai-human-communication` 这篇仍抓取质量差**（450 字、0 图），排查发现是完全独立的另一个问题：`ai.meta.com` 边缘防护对 Chrome/Firefox 桌面 UA 特征做黑名单拦截，返回 HTTP 400（Meta 通用错误页"Sorry, something went wrong"，不是真实语义错误）；`fetch-with-assets.py` 的默认 `UA_BROWSER` 恰好是 Chrome UA，撞上黑名单
+- **实测验证**：同一 URL，Chrome/Firefox UA → 400（3 次复测稳定复现，非网络抖动）；Safari UA / curl UA / 项目自定义 UA → 200。domain 级黑名单而非全站封禁（`ai.meta.com/blog/` 首页同样规律）
+- **域名 override 优于"制造失败再兜底"**：曾考虑只把 `http_400` 加入 `JINA_TRIGGER_ERRORS`（让失败后自动转 Jina Reader 补救），但用户指出——既然已知 Safari UA 能直接拿到 200，没必要故意走一次注定失败的请求再补救。域名 override 一次直接成功（实测 `direct` 通道 29/29 图片全部下载，质量远高于 Jina markdown 转换）
+- **仍保留 `http_400` → Jina 触发**：域名 override 是"已知问题精确修复"，只覆盖 `ai.meta.com` 一个域名；`http_400` 加入 Jina 触发条件是"面向未来的通用防御"——任何新源撞上类似 UA 黑名单、且还没来得及加 override 时，依然有自动兜底，不会直接判定终态失败
+- **UA 映射表放脚本内部，不放 `sources.md`**：UA 是抓取实现细节，不是源的元数据（tier/perspective/reliability 那一类）；分散维护两处会重蹈 D2 决策警告过的"双写漂移"
+
+**How to apply**：
+- **新源抓取质量差且 fallback_notice 显示 4xx** → 先用 curl 换几种 UA（Chrome/Safari/Firefox/自定义/空）测该域名，确认是否是 UA 黑名单模式（同一 URL 不同 UA 结果不同、且稳定复现）；确认后加一条 `DOMAIN_UA_OVERRIDES` 记录，不要直接改全局 `UA_BROWSER`（会影响其他已正常工作的源）
+- **`JINA_TRIGGER_ERRORS` 只做加法、不做减法**——新错误码只要有"该场景本质是防护拦截而非真实内容不存在"的合理性就可以加入，几乎零副作用（Jina 通道本身已在生产验证多次）
+- **域名 override 判定用 `urllib.parse.urlparse(url).netloc`**，精确匹配域名字符串，不用正则/子串匹配（避免误伤子域名或路径包含域名字符串的情况）
+
+**对应改动**：`.claude/skills/ai-news/scripts/fetch-with-assets.py`（`UA_SAFARI` 常量 + `DOMAIN_UA_OVERRIDES` 字典 + `JINA_TRIGGER_ERRORS` 扩容 + `main()` 域名判定），`brain2qwerty-brain-ai-human-communication` 二次重抓验证（本次会话，commit 待定）
+
+---
+
 ## 相关记忆
 
 - [[project_overview]] — 决策对应的实施位置

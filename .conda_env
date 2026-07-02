@@ -1,0 +1,17 @@
+# AInews 项目专用 Python 执行环境
+# 所有 .claude/skills/ai-news/scripts/*.py 调用一律走本环境，不依赖裸 `python3`（PATH 解析在不同执行环境下会漂移到系统 3.9.6，
+# 曾导致脚本 union type 语法报错、触发 WebFetch 兜底质量下降，见 .claude/memory/decisions.md D17）
+
+env_name: ai-news
+python_version: 3.13.12
+python_bin: ~/miniconda3/envs/ai-news/bin/python3
+
+# 创建（已执行过一次，此处备查/复现用）
+create_cmd: conda create -n ai-news python=3.13.12 -y
+
+# 验证环境存在且版本正确
+verify_cmd: ~/miniconda3/envs/ai-news/bin/python3 --version
+
+# 约定：所有 agent / SKILL.md / scripts/*.sh 里调用 python3 时，
+# 一律写绝对路径 ~/miniconda3/envs/ai-news/bin/python3，不要写裸 `python3`。
+# 用 `~` 而非硬编码用户名路径，保留跨用户可移植性。

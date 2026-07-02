@@ -1,6 +1,8 @@
 ---
 created: 2026-06-29 14:07:00
 status: draft
+title: 'Revolut 分享 7000 万用户规模 AI 部署方法论'
+title_original: '撤出规模运营中 AI 的挑战：Revolut 工程实践'
 source: air-street-press
 source_url: https://press.airstreet.com/p/nikolay-donets-revolut
 topic: applications

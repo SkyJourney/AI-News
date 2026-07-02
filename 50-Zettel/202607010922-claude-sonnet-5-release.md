@@ -2,6 +2,7 @@
 created: 2026-07-01 09:22:00
 updated: 2026-07-01 09:22:00
 status: draft
+title: 'Anthropic 发布 Claude Sonnet 5，主打前沿性能与规模化部署'
 source: anthropic-news
 source_url: https://anthropic.com/news/claude-sonnet-5
 topic: model-releases

@@ -1,6 +1,8 @@
 ---
 created: 2026-07-02 09:39:00
 status: draft
+title: 'RedVox 揭示跨语言语音模型安全与公平性差距'
+title_original: 'RedVox：跨语言语音模型的安全与公平性差距'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.26968
 topic: safety-alignment

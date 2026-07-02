@@ -2,6 +2,7 @@
 created: 2026-07-01 09:17:00
 updated: 2026-07-01 09:17:00
 status: draft
+title: 'LeVo 2 歌曲生成逼近商用系统水准'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30642v1
 topic: research-papers

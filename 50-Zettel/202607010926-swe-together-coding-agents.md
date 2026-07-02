@@ -2,6 +2,7 @@
 created: 2026-07-01 09:26:00
 updated: 2026-07-01 09:26:00
 status: draft
+title: 'SWE-Together 基准评估编码 Agent 协作能力'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.29957
 topic: agents

@@ -68,7 +68,22 @@ tags: [llm, multimodal]               # 自由标签，便于 Obsidian 检索
 ---
 ```
 
-扩展字段按文件类型补充（Zettel 加 `links_in/links_out` 统计；Daily 加 `entry_count`；Log 加 `run_duration_seconds`）。
+扩展字段按文件类型补充（Zettel 加 `title`/`title_original`；Daily 加 `entry_count`；Log 加 `run_duration_seconds`）。
+
+### 50-Zettel 原子卡
+
+```yaml
+---
+created: 2026-06-27 18:00:00
+status: draft
+title: <中文主标题>          # 8-24 字新闻体，从"概念/事件"段落归纳；必填
+title_original: <原文标题>   # 原文标题原样保留（不论中英文），作副标题；查不到/无必要时可省略
+source: openai-rss
+source_url: https://openai.com/news/xxx
+topic: model-releases
+tags: [llm, multimodal]
+---
+```
 
 ### 60-Originals 原文全文（F1 起启用）
 
@@ -101,6 +116,10 @@ tags: [source-original, language-en]
 - `id` 必须与文件名 stem（去 `.md` 后缀）完全一致，充当 wikilink 目标
 - `fallback_notice` 是三态：`null` = 抓取正常、字符串 = 抓失败/降级原因、字段缺失 = 未启用 originalizer
 - `related_*` 三字段模板中永远存在（默认 `[]` / `""`），便于 Bases 视图无 undefined 分支
+
+### 日期聚合排序约定（跨文件类型通用）
+
+任何文件内出现**多条按日期分组/罗列**的结构（Topic 现有的 `## YYYY-MM-DD` 区块，未来 Zettel"更新历史"、Deep-Dives 周报/月报"大事记"等），一律**倒序排列（最新在前）**——正序等于把最新内容埋在最下面。新增此类结构时写入逻辑要一开始就按倒序设计，不要等页面渲染出问题才回头补。
 
 ---
 

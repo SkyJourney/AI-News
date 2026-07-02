@@ -1,6 +1,7 @@
 ---
 created: 2026-06-30 09:55:00
 status: draft
+title: 'PhysisForcing：向世界模型注入物理约束力'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2606.28128
 tags: [cv, paper, rl, inference]

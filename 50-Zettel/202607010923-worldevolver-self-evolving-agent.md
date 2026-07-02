@@ -2,6 +2,8 @@
 created: 2026-07-01 09:23:00
 updated: 2026-07-01 09:23:00
 status: draft
+title: 'WorldEvolver：三模块驱动的自演化世界模型框架'
+title_original: 'LLM 代理规划的自演进世界模型'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30639v1
 topic: agents

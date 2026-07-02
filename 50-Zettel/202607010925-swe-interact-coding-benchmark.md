@@ -2,6 +2,7 @@
 created: 2026-07-01 09:25:00
 updated: 2026-07-01 09:25:00
 status: draft
+title: 'SWE-Interact 揭示顶尖模型交互编码能力短板'
 source: arxiv-api
 source_url: http://arxiv.org/abs/2606.30573v1
 topic: agents

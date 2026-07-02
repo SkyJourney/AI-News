@@ -28,10 +28,10 @@ color: pink
 
 文件路径 `50-Zettel/YYYYMMDDHHmm-<slug>.md`：
 - 时间戳 ID：用本地时区（Asia/Shanghai）当前分钟；同分钟冲突时往后顺延 1 分钟
-- slug：从 title 取关键词，小写连字符 ≤ 50 字符
+- slug：从 entry 原始 title（cluster.json 里的字段，通常是原文标题）取关键词，小写连字符 ≤ 50 字符——与下面 frontmatter `title` 字段（中文归纳标题）是两回事，不要混用
 - **优先**查 _seen-urls.json：若 entry.url 在索引里有 `zettel_id` 字段 → 直接复用该 Zettel ID，不创建新 Zettel
 - 若 _seen-urls 没记录或 zettel_id 为空 → Glob `50-Zettel/*-<slug-prefix>*.md` 检查是否已存在同概念 Zettel；若存在 → 不重建，直接复用旧文件路径
-- frontmatter 按 vault-schema §3 Zettel 段
+- frontmatter 按 vault-schema §3 Zettel 段，**必填 `title`**：从下面"概念/事件"段落归纳一句 8-24 字中文新闻体标题，不是直接照抄 entry.title、也不是从 slug 反推；`title_original` 取 entry 原始 title 原样保留（与 slug 来源一致），若原文本身就是中文且与 `title` 高度重合可省略
 - 正文结构：
   ```
   ## 概念 / 事件
@@ -60,13 +60,17 @@ color: pink
   - cluster `is_new: false` + 文件存在 → Edit append（正常路径）
   - cluster `is_new: false` + 文件不存在（cluster 误判反向） → 改走 Write 创建；在 errors 数组里记 `cluster_is_new_mismatch: <slug>`
 - 新建时按 vault-schema §3 Topic 段写 frontmatter + 首段总览
-- 追加时**绝不重写整文件**（会丢历史），追加格式：
+- 追加时**绝不重写整文件**（会丢历史），但**日期区块必须保持倒序（最新在前）**——不是 append 到文件末尾：
   ```
   ## YYYY-MM-DD
   - **<title>** ([[<Zettel-ID>]] 或纯文本)
     <一句话本日上下文>
     源：`<source_name>`
   ```
+  - 先 Read 文件判断 `## <target_date>` 区块**是否已存在**（同一天可能多次写入）：
+    - **已存在**（当天第二次及以后写入）→ 在该区块内部最后一条 entry 之后追加新 entry，**不**新开区块
+    - **不存在**（新的一天首次写入）→ 定位文件里当前排在最前的 `## YYYY-MM-DD` 标题（倒序状态下即全文最新日期），把新区块整体插入到它**前面**（Edit 的 old_string 锚定该标题行，new_string = 新区块 + 换行 + 该标题行，保留其后内容不动）
+    - 文件刚被 Write 创建、还没有任何日期区块（首次追加）→ 直接接在首段总览之后
 - 更新 frontmatter `updated:` 和 `entry_total:`（用 Edit 把数字 +N）
 
 ### 2.3 写 Daily 简报

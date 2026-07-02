@@ -1,6 +1,7 @@
 ---
 created: 2026-06-27 14:35:00
 status: draft
+title: '多教师在线蒸馏 MOPD：后训练新范式'
 source: interconnects
 source_url: https://www.interconnects.ai/p/frontier-post-training-recipe-review
 topic: research-papers

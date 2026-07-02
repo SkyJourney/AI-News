@@ -1,6 +1,7 @@
 ---
 created: 2026-06-29 14:13:00
 status: draft
+title: 'SingGuard 提出多模态 LLM 安全护栏新方法'
 source: huggingface-daily-papers
 source_url: https://huggingface.co/papers/2026.06.singguard
 topic: safety-alignment
