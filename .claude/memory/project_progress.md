@@ -2,8 +2,8 @@
 name: project_progress
 description: AInews 各阶段进度、当前状态、待办——避免重复已完成工作；后续方向以 ROADMAP.md 为权威基准
 type: project
-last_updated: 2026-07-01
-commit: 9b48c6a
+last_updated: 2026-07-02
+commit: 6d5170f
 ---
 
 # AInews 项目进度
@@ -11,19 +11,17 @@ commit: 9b48c6a
 > 维护原则：阶段按"功能里程碑"划分，不按时间线流水账。已落地内容写"What + Why"，避免与代码现状脱节。
 > **权威基准**：Sprint 1/2/3 待办与执行流水以 `.claude/skills/ai-news/ROADMAP.md` 为准；本文件维护"里程碑历史 + 当前状态快照 + ROADMAP 摘要"。
 
-## 当前状态（2026-07-01）
+## 当前状态（2026-07-02）
 
 - **管道版本**：v2.4（IPC Write 中转架构稳定）
-- **commit 数**：30+，Base = `9b48c6a`
-- **MVP 状态**：✅ **已达成**——2026-06-27 → 2026-07-01 连续 5 天跑通，7-01 跑次 20 Zettel / 9 Topic / 完整 digest
-- **调度状态**：✅ **已自动化**——Mac mini 定时任务 + Claude 非交互会话跑通，无需 launchd 独立配置
-- **vault 状态**：14 alive 源 + 1 degraded；5 天 Daily/Zettel/Topic/Digest 已写入；Log 完整
-- **Sprint 1 全部完成**：F1.1-F1.5 + A4' + F1.6 Phase 3.5 试跑（sampling 11 条真跑：10/11 覆盖率 91% / 6 完美 / 3 openai Fallback B / 1 hf-papers 翻译 bug 现场 / 1 arxiv API stalled 崩溃）+ 4 bug fix（news-originalizer.md Step 4/6/8 + 常见错误清单 + SKILL.md Phase 3.5 retry 机制）全部就绪
-- **F1.6 未跑的 Phase 4/5**：writer/digester 编排文档 F1.4 已定型 + F1.2.4 单元测过，为避免覆盖今天真实 20 Zettel/9 Topic 产出未在 F1.6 真跑；下次 /ai-news 正常触发时会自动测
-- **60-Originals/ 首批产出**：10 篇 + 89 图（作为 F1 首次真跑证据保留）
-- **Sprint 3 · F2.0 完成**（2026-07-01，commit tbd）：**采用 Quartz 5**——三候选 POC 得分 Quartz 38 / Astro 30 / Hugo 26；`web/poc-quartz/` 骨架就绪、`web/poc-astro/` 与 `web/poc-hugo/` 待清理；F2.1-F2.7 因 Quartz 内置省 ~2 天。报告 `.claude/skills/ai-news/notes/F2.0-poc-report.md`
-- **F2.0 副产品**：vault 内容 bug `60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` YAML `original_title` 含冒号未加引号已修；news-originalizer.md 需补"含冒号强制引号"约束（Sprint 1 收尾 or Sprint 2）
-- **下一步**：Sprint 2 · B1 digester 重构评估 + A9' writer 降级二评估（~2h）；或 Sprint 3 剩余 F2.1-F2.7（~2-3 天，Quartz 内置节省 2 天）
+- **commit 数**：33，Base = `6d5170f`
+- **MVP 状态**：✅ **已达成**——2026-06-27 → 2026-07-02 连续 6 天跑通
+- **调度状态**：✅ **已自动化**——Mac mini 定时任务 + Claude 非交互会话跑通
+- **vault 状态**：14 alive 源 + 1 degraded；6 天 Daily/Zettel/Topic/Digest 已写入；Log 完整
+- **Sprint 1 全部完成**：F1.1-F1.6 + A4' + F1 侧 news-writer 情形 E 补齐（复盘/未升级 Zettel 也挂原文双链，见 [[decisions#D16]] 副产品）
+- **60-Originals 累计**：60+ 篇 · 图片资产 660+
+- **Sprint 3 · F2 重启完成**（2026-07-02，commits `e992215` / `6bea330` / `6d5170f`）：**弃用 Quartz 5 · 迁 Astro 5 自主前端**（见 [[decisions#D16]]）——Quartz vendor 200+ 文件全删，`web/frontend/` 独立 Astro 5 项目上线，83 页 build 805ms，11/11 route 200，LAN `192.168.50.253:8801` 部署。F2.4 Lumina 视觉 tokens（49 CSS 变量 + 8 utility class + shell 组件）全部继承。完成报告 `.claude/skills/ai-news/notes/F2-astro-completion-report.md`；F2.4 P4 决策上下文归档 `.claude/skills/ai-news/notes/_archive/`
+- **下一步（v2）**：F2.7 Docker Compose + nginx + 内网穿透；F2.8 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · `60-Originals/_assets/` 图片 pipeline）
 
 ## 已落地阶段
 
@@ -83,6 +81,17 @@ commit: 9b48c6a
 - **7-01 跑次**：20 Zettel / 9 Topic / digest（`5efad3b`）
 - **ROADMAP 重写**（`d421e60`）：结束"MVP 阶段"，进入 **F1/F2 双主线**——见下节
 
+### Stage 11 — F2 前端框架决策反转 · Quartz → Astro（commit `e992215` → `6d5170f`）
+- **F2.0 → F2.4 归档**：F2.0 Quartz 5 POC 决策（见 [[decisions#D15]]）在 F2.4 P4 深度实证阶段被推翻——Quartz 5 架构性 3 层硬约束（renderPage 6-slot 硬编码 + dispatcher pageType.body 硬编码 + config-loader `??` 兜底）导致 override 路径 4500 行 Lumina 组件全废、build 产 216 HTML 大小写重复、trailing-slash 全 404
+- **D16 F2 重启 Astro 5**（见 [[decisions#D16]]）：`web/frontend/` 独立项目，Preact islands + Tailwind 4 + 自建 remark-wiki-link + Content Collections + zod schema + backlinks 反向 map
+- **Milestone 全通**（40 min 完成）：M0 干净回滚 → M1 项目骨架 → M2 vaultLoader → M3 Design tokens + Shell → M4 5 列表页 → M5 5 详情页 + / landing → M6 全站验证
+- **实证结果**：83 页 build 805ms · 11/11 route 200 · LAN `192.168.50.253:8801` 部署
+- **视觉资产**：F2.4 Lumina 49 CSS 变量 + 8 utility class + shell 组件全部继承到 `src/styles/tokens.css` 与 `src/components/shell/`
+- **Sprint 1 副产品**：F2 build 时暴露 news-writer 情形 E 漏洞（复盘/未升级 Zettel 遗漏原文双链），已修 `.claude/agents/news-writer.md`（commit `6bea330`）
+- **协作规范新增**：[[feedback#F11]] 不用 Learning Mode 让用户写代码 · [[feedback#F12]] 不走框架 override 路径（先探清框架 3 类硬约束）
+- **F2.4 P4 归档**：`.claude/skills/ai-news/notes/_archive/F2.4-P4-completion-report.md` · `_archive/F2.4-tokens-lumina-to-quartz.md`
+- **F2 Astro 完成报告**：`.claude/skills/ai-news/notes/F2-astro-completion-report.md`
+
 ---
 
 ## ROADMAP 摘要（权威见 `.claude/skills/ai-news/ROADMAP.md`）
@@ -100,13 +109,12 @@ commit: 9b48c6a
 - B1：digester 输入结构变化后重构评估
 - A9'：writer 降级二判（F1 后 writer 责任变小）
 
-### Sprint 3 · F2 · Vault 前端站点（~2-3 天，压缩自 4-5 天）
-- Mac mini 本地 docker compose + nginx，端口 40801
-- 私有化部署，后续接内网穿透到公网
-- **框架 = Quartz 5**（2026-07-01 F2.0 POC 决策，见 [[decisions#D15]]）
-- 新增 Phase 7 Publish，skill 跑完自动 rebuild
-- 任务：F2.0 ✅ / F2.1-F2.7（含 A7 边角条组件合并、A8 全流程 Log 模板化合并）
-- F2.3/F2.4/F2.5 大幅缩水（wikilink/backlinks/graph/search/dark-mode/RSS/OG 全部 Quartz 内置）
+### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 完成核心）
+- **框架 = Astro 5**（2026-07-02 D16 反转 D15，见 [[decisions#D16]]）
+- **已完成**（M0-M6）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承 · 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · 83 页 805ms build · LAN 部署 200
+- **待做**：
+  - F2.7 · Docker Compose + nginx + 内网穿透（frp / cloudflare tunnel）
+  - F2.8 · 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · `_assets/` 图片 pipeline）
 
 ### 持续 · 边角优化
 - A8'（全流程 Log 模板化，与 F2.6 合并）

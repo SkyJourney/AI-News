@@ -2,10 +2,8 @@
 name: decisions
 description: AInews 关键架构决策与理由——避免重复讨论已决事项，新会话基于既定路径继续
 type: project
-last_updated: 2026-07-01
-commit: 9b48c6a
----
-<!-- 注：F2.0 决策（D15）已增补，等 F2.0 完成 commit 后 last_updated / commit 字段一并更新 -->
+last_updated: 2026-07-02
+commit: 6d5170f
 
 
 # AInews 关键决策
@@ -251,7 +249,9 @@ commit: 9b48c6a
 
 ---
 
-## D15：F2 前端框架采用 Quartz 5
+## D15：F2 前端框架采用 Quartz 5（**已推翻 · 2026-07-02**）
+
+> ⚠️ **本决策已被 D16 推翻**。保留完整正文用作历史决策上下文与"框架 override 陷阱"教训案例。当前实际方案见 [[#D16：F2 弃用 Quartz · 迁 Astro 5 自主前端]]。
 
 **决策**（2026-07-01）：Sprint 3 · F2 · Vault 前端站点采用 **Quartz 5** 作为静态站生成器。Astro / Hugo 淘汰。
 
@@ -277,6 +277,46 @@ commit: 9b48c6a
 **副产品发现**：POC 意外扫出的 vault 内容 bug——`60-Originals/2026-07-01-0901-pessimism-s-paradox-...md` 的 `original_title` 含冒号未加引号，81 md 中唯一 YAML 破格，Quartz 严格 YAML 解析器拒收（Obsidian 宽松所以之前没暴露）；本次 POC 已手工修复该文件，同时新增 news-originalizer 约束（见上）。
 
 **对应改动 commit**：（F2.0 完成后单次提交，含本条 + ROADMAP 更新 + POC 报告 + web/poc-quartz/ 骨架 + 1 个 vault 内容修复）
+
+---
+
+## D16：F2 弃用 Quartz · 迁 Astro 5 自主前端
+
+**决策**（2026-07-02）：推翻 D15。Sprint 3 · F2 · Vault 前端站点改用 **Astro 5** 独立自主前端。Quartz 5 vendor 全撤销，`web/poc-quartz/` 200+ 文件删除。
+
+**Why**：
+- **Quartz 5 的架构性硬约束不适合承载现代设计稿**——F2.4 P4 深度实证：
+  1. `renderPage.tsx` 硬编码 6-slot layout（head/header/beforeBody/pageBody/left/right/afterBody），从 `<html>` 开始都不给你写
+  2. `dispatcher.ts` 硬编码 `pageType.body(undefined)`，byPageType.pageBody 完全无效
+  3. `config-loader.ts` 用 `??` 兜底空数组，导致 header 覆盖失效
+  → 要落地 Bento / Masonry / 3 栏 Reading Well 类现代布局，必须绕 3 层 hack（PageTypeDispatcher swap + byPageType 突变 + QuartzPageTypePlugin unshift），upgrade 不安全且视觉输出仍错乱
+- **实证输出错乱**：F2.4 P4 build 产 216 HTML，其中 `10-daily/` 与 `10-Daily/` 大小写目录并存（Quartz slugify 逻辑与 vault 目录名大小写混用）
+- **本地 static server 全 404**：Quartz 硬编码扁平输出（`10-daily/2026-07-01.html`），trailing-slash URL 都命中 404；`build.format: 'directory'` 类概念在 Quartz 里没有对等
+- **Lumina 设计资产被 Quartz 壳吞没**：3996 行 Lumina 组件（12 shared + 3 shell + 6 body + 4 util + 6 pageType + Backlinks）挤在 Quartz 6-slot 里，"外壳换了、内容区仍是 h1/h2/p"，用户明确反馈"完全没有按设计稿"
+- **依赖复杂度不成比例**：Quartz vendor 200+ 文件 + gitLoader clone 8 个社区 repo + preact SSR + workerpool + esbuild + lightningcss + chokidar；Astro 5 只装必要 npm 包（unified 生态）
+- **Astro 5 一次 build 通过 83 页 805ms**，40 min 完成 M0-M6 全部（vs F2.4 P4 累计工时的 1/10）
+
+**How to apply**：
+- **前端唯一目录 = `web/frontend/`**（Astro 5 项目根）；`web/poc-quartz/` 已删除
+- **技术栈**：Astro 5 + `@astrojs/preact` islands + `@tailwindcss/vite` + strict TypeScript
+- **内容管道**：`src/lib/vault-loader.ts` 自定义 Content Loader，扫 vault 5 目录 + 构造 backlinks 反向 map + 走 Astro `renderMarkdown` API；wikilink 用自建 mini remark plugin（40 行，vault [[slug]] 简单形式够用，无需第三方包）
+- **路由**：文件系统路由 `src/pages/*.astro`；`/` = 最新一天日报（共用 `DailyPageContent` 组件与 `/daily/{latest}/`）
+- **视觉资产**：F2.4 Lumina 49 CSS 变量 + 8 utility class 已迁到 `src/styles/tokens.css`（纯 CSS，去 Sass 语法）；LuminaHeader / LuminaDock / GlassSearchBar 迁到 `src/components/shell/`
+- **不引入 Quartz 任何运行时代码**——只从记忆继承 Lumina 视觉 tokens，其他一律新写
+- **框架深度定制类需求 → 走 [[feedback#F12]]**：先花 30 min 探清框架 3 类硬约束，任何一条阻碍设计 → 换框架不 override
+- **Bases 视图**（`_base-*.base`）v1 不迁，v2 阶段用 Astro `getCollection().filter().sort()` 等价实现
+- **图片资产**（`60-Originals/_assets/`）v1 不接入 Astro `public/`，v2 加 pipeline
+
+**副产品/收获**：
+- F2.4 P4 完成报告归档 `.claude/skills/ai-news/notes/_archive/F2.4-P4-completion-report.md`（Quartz override 陷阱教训）
+- F2.4 tokens 映射归档 `.claude/skills/ai-news/notes/_archive/F2.4-tokens-lumina-to-quartz.md`
+- F2 Astro 完成报告 `.claude/skills/ai-news/notes/F2-astro-completion-report.md`（含关键实证 + 建议 commit 拆分）
+- 静态产物本地 python http.server 8801 --bind 0.0.0.0 直接跑 → LAN `192.168.50.253:8801` 可访
+
+**对应改动 commit**：
+- `e992215` refactor(web): 弃用 Quartz 5 · F2.0-F2.4 全撤销 · 迁 Astro 5 自主前端
+- `6bea330` fix(ai-news): news-writer 情形 E · 复盘/未升级 Zettel 也挂原文双链（副产品：F2 Astro build 时暴露的 Daily 缺链问题）
+- `6d5170f` chore(ai-news): 2026-07-02 跑产出 + F1 侧脚本微调 + 手动补 openai 情形-E 双链
 
 ---
 

@@ -2,8 +2,8 @@
 name: feedback
 description: AInews 协作规范与用户偏好——避免重犯已纠正的错误
 type: feedback
-last_updated: 2026-07-01
-commit: 9b48c6a
+last_updated: 2026-07-02
+commit: 6d5170f
 ---
 
 # AInews 协作规范
@@ -166,6 +166,44 @@ commit: 9b48c6a
 - **每次 memory-sync**：Phase 5 明确检查两处一致性；不一致时以最新 commit 时间为准，另一处对齐
 - **新 Sprint 完成**：在 project_progress.md 追加 Stage N+1 描述 + 在 ROADMAP.md 顶部「已完成」段追加编号总结
 - **单点动作准则**：不要在其他文档（SKILL.md / CLAUDE.md / SCHEMA.md）里重复列 Sprint 任务清单——那些地方只放"指针"（"见 ROADMAP.md"），不放内容副本
+
+---
+
+## F11：不要用 Learning Mode 让用户写代码
+
+**规则**：即便 SessionStart 注入了 `learning` output style，也**不要**把关键 5-10 行代码丢给用户写。Agent 应当自己出完整方案；若方案有分支决策，自己做出推荐并说明取舍，不当选择题机器。
+
+**Why**：
+- 2026-07-02 用户明确反馈："为啥总要让我写，你应该写明白，如果你的方案解决不了就寻找其他路径"
+- 用户是决策者与 review 者，不是代码填空的实习生；重复的 "TODO: 请你写这 5 行" 打断心流也拖慢节奏
+- Learning Mode 的教育性质留给「不熟悉的领域」；AInews 是用户主场项目，他要的是执行者而不是引导者
+- 若第一条方案解决不了问题，Agent 应主动换路径（换库 / 换协议 / 换兜底通道），而不是把决策外包给用户
+
+**How to apply**：
+- 遇到有多种实现路径时：**自己选一条**并说明"我选 X 因为 Y，替代 Z 的代价是 W"，用户可以说"换 Z"，但默认不问
+- 保留 CLAUDE.md 规则 1（抽象设计对齐）、规则 4（改代码前确认）——这些是**方案层**确认，不是**填空题**
+- Learning Mode 的 ★ Insight 可以留，用来解释设计选择、指出 codebase 特定的坑；但**不再**用它包装 "请你写这段"
+- 若首选方案实测失败：直接尝试 fallback（换 lib / 换算法 / 加代理层），不要开会问用户第二方案
+
+---
+
+## F12：不要走"框架 override"路径——先探清框架硬约束
+
+**规则**：接手成熟框架（如 Quartz 5）做深度定制前，**先花 30 min 探清框架 3 类硬约束**：`renderPage` 硬编码布局槽 / dispatcher 硬编码 body 派发 / config 校验会覆盖用户覆盖。**发现任何一条硬约束会阻碍设计稿实现 → 立刻讨论是否换框架，不要走 "override + hack 3 层绕过" 路径**。
+
+**Why**：
+- 2026-07-02 F2.4 P4 实证：为让 Quartz 5 承载 Lumina 设计稿，绕了 3 层 hack（PageTypeDispatcher swap + byPageType 突变 + QuartzPageTypePlugin unshift），最后产出仍错乱（大小写目录重复 + trailing-slash 404），4500 行 Lumina 组件全部作废
+- Astro 5 重启只用 40 min（M0-M6 全通），是 F2.4 P4 累计工时的 1/10 —— 时间损失来自"框架不合适硬要用" 而不是"技术难度"
+- 用户明确反馈："想要效果好，就走全自定义组件接管...不走 override 线路" —— override 路径就是不该走
+
+**How to apply**：
+- 面对新框架深度定制需求，POC 阶段先做 3 项快检：
+  1. **HTML 骨架**：`<html>` 从哪开始？是硬编码在框架文件里还是可以用户完全接管？
+  2. **路由与 body 派发**：body 组件是不是被 dispatcher 硬编码 `pageType.body(undefined)` 传入？byPageType 覆盖是否真正生效（config-loader 有没有兜底 `??` 之类）？
+  3. **视觉替换代价**：若要实现 Bento / Masonry / 3 栏 Reading Well 类现代布局，是插组件即可还是要 override 6 slot layout？
+- 任一快检失败 → **回到 plan 层**讨论"换框架 vs 深度 fork" —— 不要自作主张开 3 层 hack
+- 记住：框架的价值是"惯例胜过配置"，一旦你反着惯例走，价值就归零，剩下的只有约束
+- F2.4 P4 归档在 `.claude/skills/ai-news/notes/_archive/F2.4-P4-completion-report.md`，将来任何"改 Quartz override" 冲动前必读
 
 ---
 
