@@ -457,7 +457,7 @@ git -C /Volumes/Projects/AInews push origin main 2>&1
 
 构建/部署 `web/frontend` Astro 静态站点到本地 nginx（LAN-only，无内网穿透）。**独立于 Phase 7**：直接读本地工作区当前内容，不依赖 git push 是否成功——离线也能跑。
 
-**架构**：build 全在宿主机本地 Node 环境跑（`npm run build`，不进 Docker），产物用 `rsync -a --delete` 同步进 `/Volumes/Docker/data/ainews/`；nginx 是唯一常驻容器（compose 定义在 `/Volumes/Docker/compose/ainews/docker-compose.yml`，不在 AInews 仓库内，与本机其他 Docker 项目同构），只读挂载这个宿主机目录——**更新就是一次 rsync，不涉及镜像构建/容器重启**。`astro build` 每次会自动清空 `dist/` 里的陈旧文件，`rsync --delete` 再兜底同步删除，不会有旧页面残留。
+**架构**：build（`npm run build`，本地 Node，不进 Docker）留在 AInews 仓库自己的事——天然依赖仓库内容（vault、`web/frontend`）。"发布"（rsync 到数据目录 + 确保 nginx 在跑 + 冒烟测试）完全不耦合进仓库/skill：本机部署路径全部封在仓库根 **`.env`**（不进 git，见 `.env.example`）指向的一个外部脚本里，AInews 仓库不硬编码任何 `/Volumes/Docker/...` 路径——换机器只需要重新写一份 `.env`。
 
 **前置条件**——与 Phase 7 相同的内容侧门槛：
 - Phase 0–5 均无异常抛出
@@ -467,13 +467,15 @@ git -C /Volumes/Projects/AInews push origin main 2>&1
 
 任一不满足 → 跳过本 phase，在 Log 末尾追加 `publish: skipped (reason=...)`，不报错。
 
-### 8.1 校验 Node 环境可用
+### 8.1 校验部署脚本已配置
 
 ```bash
-cd /Volumes/Projects/AInews/web/frontend && node -v >/dev/null 2>&1 || echo "no-node"
+cd /Volumes/Projects/AInews
+[ -f .env ] && source .env
+[ -n "${AINEWS_DEPLOY_SCRIPT:-}" ] && [ -x "$AINEWS_DEPLOY_SCRIPT" ] || echo "no-deploy-script"
 ```
 
-- 输出 `no-node`（命令不存在或报错）→ 跳过本 phase，Log 标 `publish: skipped (no node)`
+- 输出 `no-deploy-script`（`.env` 不存在 / 变量未设 / 脚本不存在或不可执行）→ 跳过本 phase，Log 标 `publish: skipped (no deploy script configured)`——这台机器还没配置部署，不是错误
 
 ### 8.2 Build（本地 Node，不进 Docker）
 
@@ -482,19 +484,16 @@ cd /Volumes/Projects/AInews/web/frontend && npm run build
 ```
 
 - `npm run build` 链式跑 `scripts/sync-assets.mjs`（同步 60-Originals 图片资产到 `public/originals-assets/`）→ `astro build` → `pagefind --site dist`（建全文搜索索引）
-- 退出码非 0 → Log 标 `publish: build_failed`，**不阻断**（vault 内容已在 Phase 7 落盘/推送，只是本次站点构建失败，下次跑会重试），**不执行 8.3 的 rsync**（避免用半成品覆盖线上）
+- 退出码非 0 → Log 标 `publish: build_failed`，**不阻断**（vault 内容已在 Phase 7 落盘/推送，只是本次站点构建失败，下次跑会重试），**不执行 8.3**（避免用半成品覆盖线上）
 
-### 8.3 rsync 同步产物 + 确保 nginx 在跑 + 冒烟测试
+### 8.3 调用部署脚本
 
 ```bash
-rsync -a --delete /Volumes/Projects/AInews/web/frontend/dist/ /Volumes/Docker/data/ainews/
-docker compose -f /Volumes/Docker/compose/ainews/docker-compose.yml up -d web
-sleep 1
-curl -sf http://localhost:8801/ >/dev/null && echo ok || echo smoke_failed
+"$AINEWS_DEPLOY_SCRIPT" /Volumes/Projects/AInews/web/frontend/dist
 ```
 
-- `up -d` 是幂等的：nginx 已在跑则不重启，直接从宿主机目录读最新静态文件生效（这一步理论上只有首次部署或宿主机重启后才真正需要）
-- 冒烟失败 → Log 标 `publish: smoke_failed`
+- 脚本自己负责 rsync 到数据目录 + 确保 nginx 常驻服务在跑 + 冒烟测试，具体路径/端口/容器名等本机细节全部封装在脚本内部，SKILL.md 不需要知道
+- 退出码 0（脚本打印 `ok`）→ `publish: success`；非 0 → Log 标 `publish: deploy_failed`（脚本 stderr 里有具体原因，如 `smoke_failed` / dist 目录不存在）
 
 ### 8.4 在 Phase 6 Log 末尾追加
 

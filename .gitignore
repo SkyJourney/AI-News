@@ -13,6 +13,9 @@
 # macOS 噪音
 .DS_Store
 
+# 本机部署配置指针（F2.7，见 .env.example）——路径因机器而异，不入 git
+.env
+
 # 本地实验 / 暂存
 .scratch/
 *.tmp
