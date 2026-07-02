@@ -3,7 +3,7 @@ name: project_progress
 description: AInews 各阶段进度、当前状态、待办——避免重复已完成工作；后续方向以 ROADMAP.md 为权威基准
 type: project
 last_updated: 2026-07-02
-commit: 6d5170f
+commit: 83c20b2
 ---
 
 # AInews 项目进度
@@ -81,7 +81,7 @@ commit: 6d5170f
 - **7-01 跑次**：20 Zettel / 9 Topic / digest（`5efad3b`）
 - **ROADMAP 重写**（`d421e60`）：结束"MVP 阶段"，进入 **F1/F2 双主线**——见下节
 
-### Stage 11 — F2 前端框架决策反转 · Quartz → Astro（commit `e992215` → `6d5170f`）
+### Stage 11 — F2 前端框架决策反转 · Quartz → Astro + 内容质量优化补丁（commit `e992215` → `83c20b2`）
 - **F2.0 → F2.4 归档**：F2.0 Quartz 5 POC 决策（见 [[decisions#D15]]）在 F2.4 P4 深度实证阶段被推翻——Quartz 5 架构性 3 层硬约束（renderPage 6-slot 硬编码 + dispatcher pageType.body 硬编码 + config-loader `??` 兜底）导致 override 路径 4500 行 Lumina 组件全废、build 产 216 HTML 大小写重复、trailing-slash 全 404
 - **D16 F2 重启 Astro 5**（见 [[decisions#D16]]）：`web/frontend/` 独立项目，Preact islands + Tailwind 4 + 自建 remark-wiki-link + Content Collections + zod schema + backlinks 反向 map
 - **Milestone 全通**（40 min 完成）：M0 干净回滚 → M1 项目骨架 → M2 vaultLoader → M3 Design tokens + Shell → M4 5 列表页 → M5 5 详情页 + / landing → M6 全站验证
@@ -91,6 +91,7 @@ commit: 6d5170f
 - **协作规范新增**：[[feedback#F11]] 不用 Learning Mode 让用户写代码 · [[feedback#F12]] 不走框架 override 路径（先探清框架 3 类硬约束）
 - **F2.4 P4 归档**：`.claude/skills/ai-news/notes/_archive/F2.4-P4-completion-report.md` · `_archive/F2.4-tokens-lumina-to-quartz.md`
 - **F2 Astro 完成报告**：`.claude/skills/ai-news/notes/F2-astro-completion-report.md`
+- **F2 内容质量优化补丁**（commit `83c20b2`）：originals 图片资产接入 build 修复（`scripts/sync-assets.mjs`）· zettel 瀑布流嵌套 `<a>` 布局撕裂修复 · Zettel/Topic 历史内容批量回填（中文标题 59 篇 + 日期倒序重排 11 篇）· D17 conda 环境固定 · D18 域名级 UA override，详见 [[decisions#D17]] / [[decisions#D18]]
 
 ---
 
@@ -109,12 +110,12 @@ commit: 6d5170f
 - B1：digester 输入结构变化后重构评估
 - A9'：writer 降级二判（F1 后 writer 责任变小）
 
-### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 完成核心）
+### Sprint 3 · F2 · Vault 前端站点（重启后 · 2026-07-02 完成核心 + 内容质量补丁）
 - **框架 = Astro 5**（2026-07-02 D16 反转 D15，见 [[decisions#D16]]）
-- **已完成**（M0-M6）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承 · 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · 83 页 805ms build · LAN 部署 200
+- **已完成**（M0-M6 + 内容质量优化补丁 `83c20b2`）：`web/frontend/` Astro 5 项目 · Preact islands · Tailwind 4 · vaultLoader + backlinks 反向 map · 5 collection zod schema · Lumina 49 CSS tokens 继承 · 5 列表页 + 5 详情页 + / landing · LuminaBacklinks 分栏 · 83 页 805ms build · LAN 部署 200 · originals 图片资产 pipeline（`scripts/sync-assets.mjs`）· conda 环境固定（D17）· 域名级 UA override（D18）
 - **待做**：
   - F2.7 · Docker Compose + nginx + 内网穿透（frp / cloudflare tunnel）
-  - F2.8 · 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · `_assets/` 图片 pipeline）
+  - F2.8 · 生产化（pagefind 搜索 · dark mode · Article Progress · Wikilink hover preview · @fontsource self-host · Bases 视图迁移 · Wikilink broken link 检测）
 
 ### 持续 · 边角优化
 - A8'（全流程 Log 模板化，与 F2.6 合并）

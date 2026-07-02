@@ -3,7 +3,7 @@ name: decisions
 description: AInews 关键架构决策与理由——避免重复讨论已决事项，新会话基于既定路径继续
 type: project
 last_updated: 2026-07-02
-commit: 6d5170f
+commit: 83c20b2
 
 
 # AInews 关键决策
