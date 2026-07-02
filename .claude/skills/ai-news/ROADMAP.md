@@ -18,7 +18,7 @@
 - **F2.0** 框架 POC（2026-07-01，commit tbd）：~~采用 Quartz 5~~ —— **决策已推翻**（见下 F2 重启小节）。POC 报告仍归档：[`.claude/skills/ai-news/notes/F2.0-poc-report.md`](../../.claude/skills/ai-news/notes/F2.0-poc-report.md)。副产品：news-originalizer.md YAML frontmatter bug（`original_title` 含冒号未加引号）已修。
 - **F2 重启：迁 Astro 5**（2026-07-02，commit `e992215`）：F2.4 Lumina 内容层接管走 Quartz override 路径实证失败（架构性 3 层 hack + 大小写目录重复 + trailing-slash 404 + 视觉严重偏离设计稿），彻底放弃 Quartz 框架，改 Astro 5 独立自主前端。M0-M6 全通：83 页 build 805ms · 11/11 route 200 · LAN `192.168.50.253:8801` 部署 · vault 5 collection + zod schema + backlinks 反向 map + Lumina 49 CSS 变量继承。详见 [`.claude/skills/ai-news/notes/F2-astro-completion-report.md`](../../.claude/skills/ai-news/notes/F2-astro-completion-report.md)。F2.4 决策上下文归档到 [`.claude/skills/ai-news/notes/_archive/`](../../.claude/skills/ai-news/notes/_archive/)。
 - **F2 内容质量优化补丁**（2026-07-02，commit `83c20b2`）：originals 图片资产接入 build（`scripts/sync-assets.mjs` 物理复制 + `vault-loader.ts` 路径重写 `_assets/` → `/originals-assets/`，修复此前图片全部 404）；zettel 瀑布流 `<a>` 嵌套 `<a>` 布局撕裂修复；Zettel frontmatter 加 `title`/`title_original` 中文标题字段并回填 59 篇历史 Zettel；Topic 日期聚合改倒序并重排 11 篇历史文件；**D17** conda 环境固定（独立 env `ai-news`，根治 python3 版本漂移）+ **D18** originals 抓取域名级 UA override。详见 [[decisions#D17]] / [[decisions#D18]]。
-- **F2.7 本地 Docker 部署**（2026-07-02，commit tbd）：内网穿透明确划出范围，收窄为纯 LAN 本地部署。新增 `web/frontend/Dockerfile`（node:22-alpine builder）+ `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻服务）+ `web/nginx.conf`（pretty URL try_files）。SKILL.md 新增 **Phase 8 · Publish**（Phase 7 Git Sync 之后，独立于 git push 结果）。本地验证：137 页 build 通过，`localhost:8801` 与 LAN `192.168.50.253:8801` 全路由 200（含图片资产）。
+- **F2.7 本地 Docker 部署**（2026-07-02，commit `412159b`）：内网穿透明确划出范围，收窄为纯 LAN 本地部署。新增 `web/frontend/Dockerfile`（node:22-alpine builder）+ `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻服务）+ `web/nginx.conf`（pretty URL try_files）。SKILL.md 新增 **Phase 8 · Publish**（Phase 7 Git Sync 之后，独立于 git push 结果）。本地验证：137 页 build 通过，`localhost:8801` 与 LAN `192.168.50.253:8801` 全路由 200（含图片资产）。
 
 ---
 
@@ -194,7 +194,7 @@ Phase 8 独立于 Phase 7（不依赖 git push 是否成功，直接读本地工
 | **F2.7** | ✅ Docker Compose + nginx 本地部署（LAN-only，内网穿透已划出范围）+ SKILL.md Phase 8 Publish 编排 | ~30 min | `web/docker-compose.yml` + `web/nginx.conf` + `web/frontend/Dockerfile`，137 页 build 通过 · 本地/LAN `8801` 全路由 200 |
 | **F2.8** | 生产化：@fontsource self-host + pagefind 搜索 + 深色模式 + Article Progress + Wikilink hover preview + Bases 视图迁移 + Wikilink broken link 检测 | 4 h | v2 二级功能 |
 
-**F2 已完成**：~40 min（重启后）+ 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署（LAN-only，commit tbd）· 剩 F2.8 待做。
+**F2 已完成**：~40 min（重启后）+ 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署（LAN-only，commit `412159b`）· 剩 F2.8 待做。
 
 ---
 
