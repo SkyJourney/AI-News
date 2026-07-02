@@ -18,7 +18,7 @@
 - **F2.0** 框架 POC（2026-07-01，commit tbd）：~~采用 Quartz 5~~ —— **决策已推翻**（见下 F2 重启小节）。POC 报告仍归档：[`.claude/skills/ai-news/notes/F2.0-poc-report.md`](../../.claude/skills/ai-news/notes/F2.0-poc-report.md)。副产品：news-originalizer.md YAML frontmatter bug（`original_title` 含冒号未加引号）已修。
 - **F2 重启：迁 Astro 5**（2026-07-02，commit `e992215`）：F2.4 Lumina 内容层接管走 Quartz override 路径实证失败（架构性 3 层 hack + 大小写目录重复 + trailing-slash 404 + 视觉严重偏离设计稿），彻底放弃 Quartz 框架，改 Astro 5 独立自主前端。M0-M6 全通：83 页 build 805ms · 11/11 route 200 · LAN `192.168.50.253:8801` 部署 · vault 5 collection + zod schema + backlinks 反向 map + Lumina 49 CSS 变量继承。详见 [`.claude/skills/ai-news/notes/F2-astro-completion-report.md`](../../.claude/skills/ai-news/notes/F2-astro-completion-report.md)。F2.4 决策上下文归档到 [`.claude/skills/ai-news/notes/_archive/`](../../.claude/skills/ai-news/notes/_archive/)。
 - **F2 内容质量优化补丁**（2026-07-02，commit `83c20b2`）：originals 图片资产接入 build（`scripts/sync-assets.mjs` 物理复制 + `vault-loader.ts` 路径重写 `_assets/` → `/originals-assets/`，修复此前图片全部 404）；zettel 瀑布流 `<a>` 嵌套 `<a>` 布局撕裂修复；Zettel frontmatter 加 `title`/`title_original` 中文标题字段并回填 59 篇历史 Zettel；Topic 日期聚合改倒序并重排 11 篇历史文件；**D17** conda 环境固定（独立 env `ai-news`，根治 python3 版本漂移）+ **D18** originals 抓取域名级 UA override。详见 [[decisions#D17]] / [[decisions#D18]]。
-- **F2.7 本地 Docker 部署**（2026-07-02，commit `412159b`）：内网穿透明确划出范围，收窄为纯 LAN 本地部署。新增 `web/frontend/Dockerfile`（node:22-alpine builder）+ `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻服务）+ `web/nginx.conf`（pretty URL try_files）。SKILL.md 新增 **Phase 8 · Publish**（Phase 7 Git Sync 之后，独立于 git push 结果）。本地验证：137 页 build 通过，`localhost:8801` 与 LAN `192.168.50.253:8801` 全路由 200（含图片资产）。
+- **F2.7 本地 Docker 部署**（2026-07-02，commit `412159b`）：内网穿透明确划出范围，收窄为纯 LAN 本地部署。首版新增 `web/frontend/Dockerfile`（node:22-alpine builder）+ `web/docker-compose.yml`（builder profile 只读挂载 vault 5 目录 + nginx 常驻服务）+ `web/nginx.conf`（pretty URL try_files）。SKILL.md 新增 **Phase 8 · Publish**（Phase 7 Git Sync 之后，独立于 git push 结果）。本地验证：137 页 build 通过，`localhost:8801` 与 LAN `192.168.50.253:8801` 全路由 200（含图片资产）。**⚠️ 已被下面的部署编排重构取代**：build 阶段的 Docker 化被判断是过度设计，`Dockerfile`/`docker-compose.yml`/`nginx.conf` 三件套已改为「本地 npm run build + rsync 到 `/Volumes/Docker/data/ainews/` + compose 挪到 `/Volumes/Docker/compose/ainews/` 只跑 nginx」，见「部署编排」小节。
 - **F2.8 生产化 6/7 项**（2026-07-02，3 个独立 commit，逐批 build + Docker + Playwright 实测）：
   - 批次1 `a0d5b71`：wikilink 断链检测（`remarkWikiLink` 改异步插件 await 全库缓存判定，命中 tokens.css 里预埋已久但从未接上的 `a.wikilink.broken` 样式）+ hover 预览（内联 `data-preview-title/excerpt`，popover 用安全 DOM 方法拼节点）。踩坑：同步存取器读到了 astro.config.mjs 与 content.config.ts 两条 import 链各自独立的模块实例，改异步 `await getVaultCache()` 才规避
   - 批次2 `3d38682`：深色模式（tokens.css `[data-theme='dark']` 全套覆盖 + FOUC 防护 inline script + document 级事件委托的切换按钮，适配 ClientRouter 每次导航重渲染 Header）+ Article Progress（originals 详情页右栏滚动进度条 Preact island）+ 字体 self-host（`@fontsource/geist-sans` + `@fontsource/inter` + `@fontsource/ibm-plex-mono` + `material-symbols` 取代 Google Fonts CDN）
@@ -170,10 +170,15 @@ F1 落地后 pipeline 输入/输出结构都变了，几个待定项需要重新
 
 **实施时**：先 POC 三个候选各半天，对比 wikilink 解析 + 部署产物 + 主题空间，再定。
 
-### Docker Compose 编排（已实现，见 `web/docker-compose.yml`）
+### 部署编排（已实现，见 `/Volumes/Docker/compose/ainews/docker-compose.yml`）
 
-- `builder`（profile: `build`，一次性容器）：`web/frontend/Dockerfile` 构建 Astro 静态站点；只读挂载 vault 5 目录（10-Daily/20-Topics/40-Deep-Dives/50-Zettel/60-Originals），产物写入具名 volume `site-dist`
-- `web`（`nginx:alpine` 常驻）：只读挂载 `site-dist` + `web/nginx.conf`，端口 `8801:80`
+> **build 不进 Docker**：`npm run build` 直接在宿主机本地 Node 环境跑（跟本次会话里一直在用的方式一样），产物用 `rsync -a --delete` 同步进 `/Volumes/Docker/data/ainews/`。`astro build` 每次自动清空 `dist/` 陈旧文件，`rsync --delete` 兜底同步删除，不会有旧页面残留。
+>
+> **Docker 只用来跑 nginx**：compose 文件 + `nginx.conf` 不放仓库内，统一放本机 Docker 编排目录 `/Volumes/Docker/compose/ainews/`（与其他本机项目同构，如 `panwatch`/`fundval-live`）；数据放 `/Volumes/Docker/data/ainews/`（同样与其他项目同构）。顶层 `name: ainews-web` 钉死 project 名。**更新就是一次 rsync，nginx 容器永远不用重建/重启**（`up -d` 只在首次部署或宿主机重启后才真正生效）。
+>
+> 曾经设计过"builder 容器 + 具名 Docker volume"的方案（`web/frontend/Dockerfile` + `ainews-web-builder` 镜像），实测后判断是过度设计——build 阶段引入 Docker 除了环境隔离没有额外收益，却换来"每次都要过一遍镜像 build/run"的复杂度，已撤销（Dockerfile/.dockerignore 已删）。
+
+- `web`（`nginx:alpine` 常驻，容器名 `ainews-web`）：只读挂载 `/Volumes/Docker/data/ainews:/usr/share/nginx/html` + `nginx.conf`，端口 `8801:80`
 
 **访问方式**：`http://localhost:8801/` / LAN `http://192.168.50.253:8801/`（**范围内不做公网暴露**）
 
@@ -182,7 +187,9 @@ F1 落地后 pipeline 输入/输出结构都变了，几个待定项需要重新
 ```
 Phase 6 Log → Phase 7 Git Sync → Phase 8 Publish
                                        ↓
-                        docker compose --profile build run --rm builder
+                    npm run build（本地 Node，不进 Docker）
+                                       ↓
+        rsync -a --delete dist/ /Volumes/Docker/data/ainews/
                                        ↓
                              curl -sf http://localhost:8801/ >/dev/null
 ```
@@ -196,7 +203,7 @@ Phase 8 独立于 Phase 7（不依赖 git push 是否成功，直接读本地工
 | **F2.0** | ~~框架 POC~~ —— 决策已推翻，见下 | — | 归档到 `notes/F2.0-poc-report.md` |
 | ~~F2.1-F2.4~~ | Quartz 5 vendor + Docker 部署 + wikilink + Lumina 视觉 | — | **全撤销** |
 | **F2 重启 M0-M6** | ✅ Astro 5 独立自主前端 + Preact islands + Tailwind 4 + vaultLoader + 5 collection + 5 列表页 + 5 详情页 + / landing + LuminaBacklinks 分栏 + Lumina 49 tokens | ~40 min（含探索） | `web/frontend/` + 83 页 build + 报告 `notes/F2-astro-completion-report.md` |
-| **F2.7** | ✅ Docker Compose + nginx 本地部署（LAN-only，内网穿透已划出范围）+ SKILL.md Phase 8 Publish 编排 | ~30 min | `web/docker-compose.yml` + `web/nginx.conf` + `web/frontend/Dockerfile`，137 页 build 通过 · 本地/LAN `8801` 全路由 200 |
+| **F2.7** | ✅ nginx 本地部署（LAN-only，内网穿透已划出范围）+ SKILL.md Phase 8 Publish 编排。**重构**：build 去 Docker 化，改本地 `npm run build` + `rsync --delete` 到 `/Volumes/Docker/data/ainews/`；compose 只剩 nginx 一个服务，挪到 `/Volumes/Docker/compose/ainews/` | ~30 min + 重构 ~15 min | `/Volumes/Docker/compose/ainews/docker-compose.yml` + `nginx.conf`，137 页 build 通过 · 本地/LAN `8801` 全路由 200 |
 | **F2.8** | ✅ 生产化 6/7 项：Wikilink broken link 检测 + hover preview（批次1 `a0d5b71`）· 深色模式 + Article Progress + @fontsource self-host（批次2 `3d38682`）· Pagefind 搜索（批次3 `6bc9411`）。~~Bases 视图迁移~~ 降为 v2 之后再看（面向运营的内部视图，非读者站点功能，见下） | ~2.5 h（3 批次） | 3 个独立 commit，逐批 build + Docker + Playwright 实测通过 |
 
 **F2 已完成**：~40 min（重启后）+ 内容质量优化补丁（`83c20b2`）+ F2.7 本地 Docker 部署（LAN-only，commit `412159b`）+ F2.8 生产化 6/7 项（3 批次）· Sprint 3 主线基本收尾，剩 Bases 视图迁移待评估是否值得做。

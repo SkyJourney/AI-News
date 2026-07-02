@@ -455,7 +455,9 @@ git -C /Volumes/Projects/AInews push origin main 2>&1
 
 ## Phase 8 — Publish（主会话内联，F2.7 新增）
 
-构建/部署 `web/frontend` Astro 静态站点到本地 Docker（LAN-only，无内网穿透）。**独立于 Phase 7**：直接读本地工作区当前内容，不依赖 git push 是否成功——离线也能跑。
+构建/部署 `web/frontend` Astro 静态站点到本地 nginx（LAN-only，无内网穿透）。**独立于 Phase 7**：直接读本地工作区当前内容，不依赖 git push 是否成功——离线也能跑。
+
+**架构**：build 全在宿主机本地 Node 环境跑（`npm run build`，不进 Docker），产物用 `rsync -a --delete` 同步进 `/Volumes/Docker/data/ainews/`；nginx 是唯一常驻容器（compose 定义在 `/Volumes/Docker/compose/ainews/docker-compose.yml`，不在 AInews 仓库内，与本机其他 Docker 项目同构），只读挂载这个宿主机目录——**更新就是一次 rsync，不涉及镜像构建/容器重启**。`astro build` 每次会自动清空 `dist/` 里的陈旧文件，`rsync --delete` 再兜底同步删除，不会有旧页面残留。
 
 **前置条件**——与 Phase 7 相同的内容侧门槛：
 - Phase 0–5 均无异常抛出
@@ -465,33 +467,33 @@ git -C /Volumes/Projects/AInews push origin main 2>&1
 
 任一不满足 → 跳过本 phase，在 Log 末尾追加 `publish: skipped (reason=...)`，不报错。
 
-### 8.1 校验 Docker 可用
+### 8.1 校验 Node 环境可用
 
 ```bash
-docker compose version >/dev/null 2>&1 || echo "no-docker"
+cd /Volumes/Projects/AInews/web/frontend && node -v >/dev/null 2>&1 || echo "no-node"
 ```
 
-- 输出 `no-docker`（命令不存在或报错）→ 跳过本 phase，Log 标 `publish: skipped (no docker)`
+- 输出 `no-node`（命令不存在或报错）→ 跳过本 phase，Log 标 `publish: skipped (no node)`
 
-### 8.2 Build（builder profile，一次性容器）
+### 8.2 Build（本地 Node，不进 Docker）
 
 ```bash
-docker compose -f /Volumes/Projects/AInews/web/docker-compose.yml --profile build run --rm builder
+cd /Volumes/Projects/AInews/web/frontend && npm run build
 ```
 
-- builder 只读挂载 vault 5 目录（10-Daily / 20-Topics / 40-Deep-Dives / 50-Zettel / 60-Originals），容器内跑 `npm run build`（内含 `scripts/sync-assets.mjs` 同步 60-Originals 图片资产到 `public/originals-assets/`）
-- 产物写入具名 volume `site-dist`，与常驻 `web`（nginx）服务共享
-- 退出码非 0 → Log 标 `publish: build_failed`，**不阻断**（vault 内容已在 Phase 7 落盘/推送，只是本次站点构建失败，下次跑会重试）
+- `npm run build` 链式跑 `scripts/sync-assets.mjs`（同步 60-Originals 图片资产到 `public/originals-assets/`）→ `astro build` → `pagefind --site dist`（建全文搜索索引）
+- 退出码非 0 → Log 标 `publish: build_failed`，**不阻断**（vault 内容已在 Phase 7 落盘/推送，只是本次站点构建失败，下次跑会重试），**不执行 8.3 的 rsync**（避免用半成品覆盖线上）
 
-### 8.3 确保 nginx 服务在跑 + 冒烟测试
+### 8.3 rsync 同步产物 + 确保 nginx 在跑 + 冒烟测试
 
 ```bash
-docker compose -f /Volumes/Projects/AInews/web/docker-compose.yml up -d web
+rsync -a --delete /Volumes/Projects/AInews/web/frontend/dist/ /Volumes/Docker/data/ainews/
+docker compose -f /Volumes/Docker/compose/ainews/docker-compose.yml up -d web
 sleep 1
 curl -sf http://localhost:8801/ >/dev/null && echo ok || echo smoke_failed
 ```
 
-- `up -d` 是幂等的：nginx 已在跑则不重启，直接从共享 volume 读最新静态文件生效
+- `up -d` 是幂等的：nginx 已在跑则不重启，直接从宿主机目录读最新静态文件生效（这一步理论上只有首次部署或宿主机重启后才真正需要）
 - 冒烟失败 → Log 标 `publish: smoke_failed`
 
 ### 8.4 在 Phase 6 Log 末尾追加
